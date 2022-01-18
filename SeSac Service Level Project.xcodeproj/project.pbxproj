@@ -7,23 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
+		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
+		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
+		88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F32796D801003D5958 /* CommonTextFieldView.swift */; };
 		88F027FD2795495A00390168 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F027FC2795495A00390168 /* AppDelegate.swift */; };
 		88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F027FE2795495A00390168 /* SceneDelegate.swift */; };
-		88F028012795495A00390168 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F028002795495A00390168 /* ViewController.swift */; };
-		88F028042795495A00390168 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88F028022795495A00390168 /* Main.storyboard */; };
+		88F028012795495A00390168 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F028002795495A00390168 /* RegisterViewController.swift */; };
 		88F028062795495E00390168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88F028052795495E00390168 /* Assets.xcassets */; };
 		88F028092795495E00390168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88F028072795495E00390168 /* LaunchScreen.storyboard */; };
+		88F02811279549E200390168 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88F02810279549E200390168 /* GoogleService-Info.plist */; };
+		88F0281427954A9200390168 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 88F0281327954A9200390168 /* SnapKit */; };
+		88F0281727954AC800390168 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0281627954AC800390168 /* RegisterView.swift */; };
+		E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		230AD1F48C96E2FC3466D59C /* Pods-SeSac Service Level Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.debug.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.debug.xcconfig"; sourceTree = "<group>"; };
+		68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.release.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.release.xcconfig"; sourceTree = "<group>"; };
+		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
+		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		88DE49F32796D801003D5958 /* CommonTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextFieldView.swift; sourceTree = "<group>"; };
 		88F027F92795495A00390168 /* SeSac Service Level Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSac Service Level Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F027FC2795495A00390168 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88F027FE2795495A00390168 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		88F028002795495A00390168 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		88F028032795495A00390168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		88F028002795495A00390168 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		88F028052795495E00390168 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88F028082795495E00390168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88F0280A2795495E00390168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88F02810279549E200390168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88F0281627954AC800390168 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSac_Service_Level_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +46,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */,
+				88F0281427954A9200390168 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C152C1F5350E20907248494 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		88DE49EE27965A96003D5958 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				88DE49EC27965A8C003D5958 /* InActiveButton.swift */,
+				88DE49F32796D801003D5958 /* CommonTextFieldView.swift */,
+			);
+			path = CommonViews;
+			sourceTree = "<group>";
+		};
 		88F027F02795495A00390168 = {
 			isa = PBXGroup;
 			children = (
 				88F027FB2795495A00390168 /* SeSac Service Level Project */,
 				88F027FA2795495A00390168 /* Products */,
+				CACCCB752456BE42C8DC4C05 /* Pods */,
+				2C152C1F5350E20907248494 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +92,36 @@
 		88F027FB2795495A00390168 /* SeSac Service Level Project */ = {
 			isa = PBXGroup;
 			children = (
-				88F027FC2795495A00390168 /* AppDelegate.swift */,
-				88F027FE2795495A00390168 /* SceneDelegate.swift */,
-				88F028002795495A00390168 /* ViewController.swift */,
-				88F028022795495A00390168 /* Main.storyboard */,
+				88F0281527954A9E00390168 /* Register */,
 				88F028052795495E00390168 /* Assets.xcassets */,
 				88F028072795495E00390168 /* LaunchScreen.storyboard */,
+				88F027FE2795495A00390168 /* SceneDelegate.swift */,
+				88F027FC2795495A00390168 /* AppDelegate.swift */,
 				88F0280A2795495E00390168 /* Info.plist */,
+				88F02810279549E200390168 /* GoogleService-Info.plist */,
+				88DE49EE27965A96003D5958 /* CommonViews */,
+				88DE49F12796B864003D5958 /* Observable.swift */,
 			);
 			path = "SeSac Service Level Project";
+			sourceTree = "<group>";
+		};
+		88F0281527954A9E00390168 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				88F028002795495A00390168 /* RegisterViewController.swift */,
+				88F0281627954AC800390168 /* RegisterView.swift */,
+				88DE49EF2796B810003D5958 /* RegisterViewModel.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		CACCCB752456BE42C8DC4C05 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				230AD1F48C96E2FC3466D59C /* Pods-SeSac Service Level Project.debug.xcconfig */,
+				68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,15 +131,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88F0280D2795495E00390168 /* Build configuration list for PBXNativeTarget "SeSac Service Level Project" */;
 			buildPhases = (
+				0F014E39C8EAD1E4F86E52F4 /* [CP] Check Pods Manifest.lock */,
 				88F027F52795495A00390168 /* Sources */,
 				88F027F62795495A00390168 /* Frameworks */,
 				88F027F72795495A00390168 /* Resources */,
+				5C6E6EF88400092D73AE1595 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "SeSac Service Level Project";
+			packageProductDependencies = (
+				88F0281327954A9200390168 /* SnapKit */,
+			);
 			productName = "SeSac Service Level Project";
 			productReference = 88F027F92795495A00390168 /* SeSac Service Level Project.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +173,9 @@
 				Base,
 			);
 			mainGroup = 88F027F02795495A00390168;
+			packageReferences = (
+				88F0281227954A9200390168 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 88F027FA2795495A00390168 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,34 +192,73 @@
 			files = (
 				88F028092795495E00390168 /* LaunchScreen.storyboard in Resources */,
 				88F028062795495E00390168 /* Assets.xcassets in Resources */,
-				88F028042795495A00390168 /* Main.storyboard in Resources */,
+				88F02811279549E200390168 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F014E39C8EAD1E4F86E52F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeSac Service Level Project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C6E6EF88400092D73AE1595 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		88F027F52795495A00390168 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88F028012795495A00390168 /* ViewController.swift in Sources */,
+				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
+				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
+				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
+				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
+				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,
 				88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */,
+				88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		88F028022795495A00390168 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				88F028032795495A00390168 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		88F028072795495E00390168 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +388,7 @@
 		};
 		88F0280E2795495E00390168 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 230AD1F48C96E2FC3466D59C /* Pods-SeSac Service Level Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,7 +399,6 @@
 				INFOPLIST_FILE = "SeSac Service Level Project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,6 +416,7 @@
 		};
 		88F0280F2795495E00390168 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,7 +427,6 @@
 				INFOPLIST_FILE = "SeSac Service Level Project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -360,6 +464,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		88F0281227954A9200390168 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		88F0281327954A9200390168 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88F0281227954A9200390168 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 88F027F12795495A00390168 /* Project object */;
 }
