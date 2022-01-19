@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
+		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
+		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -35,6 +38,9 @@
 /* Begin PBXFileReference section */
 		230AD1F48C96E2FC3466D59C /* Pods-SeSac Service Level Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.debug.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.debug.xcconfig"; sourceTree = "<group>"; };
 		68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.release.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.release.xcconfig"; sourceTree = "<group>"; };
+		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
+		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
+		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -80,6 +86,16 @@
 				AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		889EBAD32798372F006C1A6E /* NickNamView */ = {
+			isa = PBXGroup;
+			children = (
+				889EBAD127983714006C1A6E /* NickNameViewController.swift */,
+				889EBAD427983746006C1A6E /* NickNameView.swift */,
+				889EBAD627983755006C1A6E /* NickNameViewModel.swift */,
+			);
+			path = NickNamView;
 			sourceTree = "<group>";
 		};
 		88DE49EE27965A96003D5958 /* CommonViews */ = {
@@ -140,8 +156,9 @@
 				88EA1B5C2797C1E800307111 /* Noto_Sans_KR */,
 				88F0281527954A9E00390168 /* Register */,
 				88EA1B572797B42300307111 /* VerifyPhoneNumberViewController */,
-				88F028072795495E00390168 /* LaunchScreen.storyboard */,
+				889EBAD32798372F006C1A6E /* NickNamView */,
 				88F028052795495E00390168 /* Assets.xcassets */,
+				88F028072795495E00390168 /* LaunchScreen.storyboard */,
 				88F027FE2795495A00390168 /* SceneDelegate.swift */,
 				88F027FC2795495A00390168 /* AppDelegate.swift */,
 				88F0280A2795495E00390168 /* Info.plist */,
@@ -301,8 +318,11 @@
 			files = (
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
+				889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
+				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
+				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
