@@ -10,6 +10,7 @@
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
+		88D651D827985AA9004779CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88D651D727985AA9004779CF /* GoogleService-Info.plist */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -29,7 +30,6 @@
 		88F028012795495A00390168 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F028002795495A00390168 /* RegisterViewController.swift */; };
 		88F028062795495E00390168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88F028052795495E00390168 /* Assets.xcassets */; };
 		88F028092795495E00390168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88F028072795495E00390168 /* LaunchScreen.storyboard */; };
-		88F02811279549E200390168 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88F02810279549E200390168 /* GoogleService-Info.plist */; };
 		88F0281427954A9200390168 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 88F0281327954A9200390168 /* SnapKit */; };
 		88F0281727954AC800390168 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0281627954AC800390168 /* RegisterView.swift */; };
 		E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */; };
@@ -41,6 +41,7 @@
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		88D651D727985AA9004779CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		88F028052795495E00390168 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88F028082795495E00390168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88F0280A2795495E00390168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88F02810279549E200390168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88F0281627954AC800390168 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSac_Service_Level_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -162,7 +162,7 @@
 				88F027FE2795495A00390168 /* SceneDelegate.swift */,
 				88F027FC2795495A00390168 /* AppDelegate.swift */,
 				88F0280A2795495E00390168 /* Info.plist */,
-				88F02810279549E200390168 /* GoogleService-Info.plist */,
+				88D651D727985AA9004779CF /* GoogleService-Info.plist */,
 				88DE49EE27965A96003D5958 /* CommonViews */,
 				88DE49F12796B864003D5958 /* Observable.swift */,
 			);
@@ -261,7 +261,7 @@
 				88EA1B6A2797C1E800307111 /* NotoSansKR-Regular.otf in Resources */,
 				88F028062795495E00390168 /* Assets.xcassets in Resources */,
 				88EA1B642797C1E800307111 /* NotoSansKR-Light.otf in Resources */,
-				88F02811279549E200390168 /* GoogleService-Info.plist in Resources */,
+				88D651D827985AA9004779CF /* GoogleService-Info.plist in Resources */,
 				88EA1B652797C1E800307111 /* NotoSansKR-Bold.otf in Resources */,
 				88EA1B682797C1E800307111 /* NotoSansKR-Black.otf in Resources */,
 			);
@@ -471,7 +471,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XUDFL5KK5Q;
+				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSac Service Level Project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -483,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "yle.SeSac-Service-Level-Project";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memolease.sesac1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -499,7 +499,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XUDFL5KK5Q;
+				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSac Service Level Project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -511,7 +511,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "yle.SeSac-Service-Level-Project";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memolease.sesac1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
