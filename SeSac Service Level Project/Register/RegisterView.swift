@@ -33,7 +33,6 @@ class RegisterView: UIView {
         
         instructionLabel.backgroundColor = .white
         instructionLabel.textColor =  UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
-        instructionLabel.font = UIFont(name: "NotoSansCJKKR-Regular", size: 50)
         
         instructionLabel.numberOfLines = 0
         instructionLabel.lineBreakMode = .byWordWrapping
@@ -51,6 +50,11 @@ class RegisterView: UIView {
         
         getVerificationCodeButton.setTitle("인증 문자 받기", for: .normal)
         phoneNumberView.textField.placeholder = "휴대폰 번호(-없이 숫자만 입력)"
+        
+        
+        // Fonts
+        phoneNumberView.textField.font = UIFont(name: "NotoSansKR-Regular", size: 14)
+        getVerificationCodeButton.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
     }
     
     

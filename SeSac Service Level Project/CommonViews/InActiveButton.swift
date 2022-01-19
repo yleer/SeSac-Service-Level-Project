@@ -45,7 +45,7 @@ class InActiveButton: UIButton {
                 self.setTitleColor(UIColor(named: "grayscalegray3"), for: .normal)
                 self.backgroundColor = UIColor(named: "grayscalegray6")
                 self.layer.borderColor = UIColor(named: "grayscalegray6")?.cgColor
-//                self.isEnabled = false
+                self.isEnabled = false
             }
         }
     }

@@ -79,21 +79,24 @@ class CommonTextFieldView: UIView {
     
     func setUpConstraints() {
         textField.snp.makeConstraints { make in
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
+            make.width.equalToSuperview()
             make.height.equalTo(48)
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         
         focusLine.snp.makeConstraints { make in
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
+            make.width.equalToSuperview()
             make.height.equalTo(1)
             make.top.equalTo(textField.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
         }
         
         infoLabel.snp.makeConstraints { make in
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
+            make.width.equalToSuperview()
             make.top.equalTo(textField.snp.bottom).offset(17)
             make.centerX.equalToSuperview()
         }

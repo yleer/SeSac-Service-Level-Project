@@ -11,6 +11,16 @@
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
 		88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F32796D801003D5958 /* CommonTextFieldView.swift */; };
+		88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA1B552797B40700307111 /* VerifiyPhoneNumberViewController.swift */; };
+		88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA1B582797B44A00307111 /* VerifyPhoneNumberView.swift */; };
+		88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA1B5A2797B45300307111 /* VerifyPhoneNumberViewModel.swift */; };
+		88EA1B642797C1E800307111 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B5D2797C1E800307111 /* NotoSansKR-Light.otf */; };
+		88EA1B652797C1E800307111 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B5E2797C1E800307111 /* NotoSansKR-Bold.otf */; };
+		88EA1B662797C1E800307111 /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B5F2797C1E800307111 /* NotoSansKR-Thin.otf */; };
+		88EA1B672797C1E800307111 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B602797C1E800307111 /* OFL.txt */; };
+		88EA1B682797C1E800307111 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B612797C1E800307111 /* NotoSansKR-Black.otf */; };
+		88EA1B692797C1E800307111 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B622797C1E800307111 /* NotoSansKR-Medium.otf */; };
+		88EA1B6A2797C1E800307111 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88EA1B632797C1E800307111 /* NotoSansKR-Regular.otf */; };
 		88F027FD2795495A00390168 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F027FC2795495A00390168 /* AppDelegate.swift */; };
 		88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F027FE2795495A00390168 /* SceneDelegate.swift */; };
 		88F028012795495A00390168 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F028002795495A00390168 /* RegisterViewController.swift */; };
@@ -29,6 +39,16 @@
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		88DE49F32796D801003D5958 /* CommonTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextFieldView.swift; sourceTree = "<group>"; };
+		88EA1B552797B40700307111 /* VerifiyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiyPhoneNumberViewController.swift; sourceTree = "<group>"; };
+		88EA1B582797B44A00307111 /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
+		88EA1B5A2797B45300307111 /* VerifyPhoneNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewModel.swift; sourceTree = "<group>"; };
+		88EA1B5D2797C1E800307111 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		88EA1B5E2797C1E800307111 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		88EA1B5F2797C1E800307111 /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		88EA1B602797C1E800307111 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		88EA1B612797C1E800307111 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		88EA1B622797C1E800307111 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		88EA1B632797C1E800307111 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		88F027F92795495A00390168 /* SeSac Service Level Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSac Service Level Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F027FC2795495A00390168 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88F027FE2795495A00390168 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +91,31 @@
 			path = CommonViews;
 			sourceTree = "<group>";
 		};
+		88EA1B572797B42300307111 /* VerifyPhoneNumberViewController */ = {
+			isa = PBXGroup;
+			children = (
+				88EA1B552797B40700307111 /* VerifiyPhoneNumberViewController.swift */,
+				88EA1B582797B44A00307111 /* VerifyPhoneNumberView.swift */,
+				88EA1B5A2797B45300307111 /* VerifyPhoneNumberViewModel.swift */,
+			);
+			path = VerifyPhoneNumberViewController;
+			sourceTree = "<group>";
+		};
+		88EA1B5C2797C1E800307111 /* Noto_Sans_KR */ = {
+			isa = PBXGroup;
+			children = (
+				88EA1B5D2797C1E800307111 /* NotoSansKR-Light.otf */,
+				88EA1B5E2797C1E800307111 /* NotoSansKR-Bold.otf */,
+				88EA1B5F2797C1E800307111 /* NotoSansKR-Thin.otf */,
+				88EA1B602797C1E800307111 /* OFL.txt */,
+				88EA1B612797C1E800307111 /* NotoSansKR-Black.otf */,
+				88EA1B622797C1E800307111 /* NotoSansKR-Medium.otf */,
+				88EA1B632797C1E800307111 /* NotoSansKR-Regular.otf */,
+			);
+			name = Noto_Sans_KR;
+			path = ../../../Downloads/Noto_Sans_KR;
+			sourceTree = "<group>";
+		};
 		88F027F02795495A00390168 = {
 			isa = PBXGroup;
 			children = (
@@ -92,9 +137,11 @@
 		88F027FB2795495A00390168 /* SeSac Service Level Project */ = {
 			isa = PBXGroup;
 			children = (
+				88EA1B5C2797C1E800307111 /* Noto_Sans_KR */,
 				88F0281527954A9E00390168 /* Register */,
-				88F028052795495E00390168 /* Assets.xcassets */,
+				88EA1B572797B42300307111 /* VerifyPhoneNumberViewController */,
 				88F028072795495E00390168 /* LaunchScreen.storyboard */,
+				88F028052795495E00390168 /* Assets.xcassets */,
 				88F027FE2795495A00390168 /* SceneDelegate.swift */,
 				88F027FC2795495A00390168 /* AppDelegate.swift */,
 				88F0280A2795495E00390168 /* Info.plist */,
@@ -190,9 +237,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88EA1B672797C1E800307111 /* OFL.txt in Resources */,
+				88EA1B662797C1E800307111 /* NotoSansKR-Thin.otf in Resources */,
 				88F028092795495E00390168 /* LaunchScreen.storyboard in Resources */,
+				88EA1B692797C1E800307111 /* NotoSansKR-Medium.otf in Resources */,
+				88EA1B6A2797C1E800307111 /* NotoSansKR-Regular.otf in Resources */,
 				88F028062795495E00390168 /* Assets.xcassets in Resources */,
+				88EA1B642797C1E800307111 /* NotoSansKR-Light.otf in Resources */,
 				88F02811279549E200390168 /* GoogleService-Info.plist in Resources */,
+				88EA1B652797C1E800307111 /* NotoSansKR-Bold.otf in Resources */,
+				88EA1B682797C1E800307111 /* NotoSansKR-Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +302,9 @@
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
+				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
+				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
+				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
 				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,

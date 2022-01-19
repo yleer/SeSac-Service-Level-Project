@@ -24,9 +24,7 @@ class RegisterViewController: UIViewController {
         binding()
     }
     
-    
-    
-    
+
     // binding 문제가 있긴 한데. 이거 안해도 작동은 다 함.
     func binding() {
         viewModel.phoneNumber.bind { text in
@@ -34,14 +32,12 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    
-    
+  
     func addTargets() {
         mainView.getVerificationCodeButton.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         mainView.phoneNumberView.textField.addTarget(self, action: #selector(phoneNumberChanged), for: .editingChanged)
     }
     
-
     
     @objc func phoneNumberChanged(_ textField: UITextField) {
         print(viewModel.phoneNumber.value)
@@ -59,12 +55,15 @@ class RegisterViewController: UIViewController {
         default:
             print("")
         }
-        
     }
     
     @objc func changeState() {
-        view.endEditing(true)
-        print(viewModel.getInternationalPhoneNum())
+
+        // 1. 문자 보내고
+        viewModel.sendMessage()
+        // 2. 화면 전환 해야됨
+        let vc = VerifiyPhoneNumberViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func format(with mask: String, phone: String) -> String {
@@ -86,8 +85,6 @@ class RegisterViewController: UIViewController {
         }
         return result
     }
-    
-    
 }
 
 extension RegisterViewController: UITextFieldDelegate {
@@ -95,9 +92,6 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         mainView.phoneNumberView.stateOfTextField = .focus
     }
-    
-    
-    
     //
 //    func textFieldDidEndEditing(_ textField: UITextField) {
 //        let status = viewModel.checkTextFieldState()

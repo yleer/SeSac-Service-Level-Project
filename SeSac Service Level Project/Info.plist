@@ -9,9 +9,18 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.344189903128-6u9o18nlr8pc05fq1re9d6qmpsafruhe</string>
+				<string>com.googleusercontent.apps.947020079272-ofh2n0q4ljruqjc94tt43jl21hhqc94c</string>
 			</array>
 		</dict>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansKR-Light.otf</string>
+		<string>NotoSansKR-Black.otf</string>
+		<string>NotoSansKR-Medium.otf</string>
+		<string>NotoSansKR-Regular.otf</string>
+		<string>NotoSansKR-Bold.otf</string>
+		<string>NotoSansKR-Thin.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
