@@ -50,11 +50,6 @@ class RegisterView: UIView {
         
         getVerificationCodeButton.setTitle("인증 문자 받기", for: .normal)
         phoneNumberView.textField.placeholder = "휴대폰 번호(-없이 숫자만 입력)"
-        
-        
-        // Fonts
-        phoneNumberView.textField.font = UIFont(name: "NotoSansKR-Regular", size: 14)
-        getVerificationCodeButton.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
     }
     
     

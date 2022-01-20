@@ -9,4 +9,13 @@ import Foundation
 
 class NickNameViewModel {
     
+    var nickName: Observalble<String> = Observalble("")
+    
+    func checkNickName() -> Bool {
+        if nickName.value.count > 0 && nickName.value.count <= 10 {
+            return true
+        }else {
+            return false
+        }
+    }
 }

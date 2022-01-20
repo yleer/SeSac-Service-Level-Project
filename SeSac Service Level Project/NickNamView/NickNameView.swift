@@ -37,9 +37,6 @@ class NickNameView: UIView {
         
         nickNameTextFieldView.textField.placeholder = "10자 이내로 입력"
         toNextButon.setTitle("다음", for: .normal)
-        nickNameTextFieldView.textField.font = UIFont(name: "NotoSansKR-Regular", size: 14)
-        toNextButon.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
-        
     }
     
     func setUpConstraints() {
@@ -53,8 +50,8 @@ class NickNameView: UIView {
         nickNameTextFieldView.snp.makeConstraints { make in
             make.leading.equalTo(28)
             make.height.equalTo(48)
-            make.width.equalTo(263)
-            make.top.equalTo(titleLabel.snp.bottom).offset(97)
+            make.width.equalTo(343)
+            make.top.equalTo(titleLabel.snp.bottom).offset(80)
         }
         
         toNextButon.snp.makeConstraints { make in

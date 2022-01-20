@@ -63,8 +63,6 @@ class VerifyPhoneNumberView: UIView {
         infoLabel.font = UIFont(name: "NotoSansKR-Medium", size: 16)
         resendButton.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
         timerLabel.font = UIFont(name: "NotoSansKR-Medium", size: 14)
-        verificationCodeView.textField.font = UIFont(name: "NotoSansKR-Regular", size: 14)
-        verifyAndStartButton.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
     }
     
     func setUpConstraints() {

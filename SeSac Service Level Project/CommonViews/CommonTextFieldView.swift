@@ -74,6 +74,7 @@ class CommonTextFieldView: UIView {
         addSubview(focusLine)
         addSubview(infoLabel)
         
+        textField.font = UIFont(name: "NotoSansKR-Regular", size: 14)
         stateOfTextField = .inActive
     }
     

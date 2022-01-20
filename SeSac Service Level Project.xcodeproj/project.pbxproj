@@ -10,7 +10,6 @@
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
-		88D651D827985AA9004779CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88D651D727985AA9004779CF /* GoogleService-Info.plist */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -32,6 +31,19 @@
 		88F028092795495E00390168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88F028072795495E00390168 /* LaunchScreen.storyboard */; };
 		88F0281427954A9200390168 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 88F0281327954A9200390168 /* SnapKit */; };
 		88F0281727954AC800390168 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0281627954AC800390168 /* RegisterView.swift */; };
+		88F90CF12798EC0C00E518DC /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90CF02798EC0C00E518DC /* BirthViewController.swift */; };
+		88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90CF32798EC1B00E518DC /* BirthViewModel.swift */; };
+		88F90CF62798EC2000E518DC /* BirthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90CF52798EC2000E518DC /* BirthView.swift */; };
+		88F90CFF2798FB5200E518DC /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90CFE2798FB5200E518DC /* DatePickerView.swift */; };
+		88F90D012798FE2000E518DC /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D002798FE2000E518DC /* EmailViewController.swift */; };
+		88F90D042798FE3800E518DC /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D032798FE3800E518DC /* EmailView.swift */; };
+		88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D052798FE3F00E518DC /* EmailViewModel.swift */; };
+		88F90D08279909CE00E518DC /* GenderSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D07279909CE00E518DC /* GenderSelectionViewController.swift */; };
+		88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D0A279909F400E518DC /* GenderSelectionViewModel.swift */; };
+		88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D0C27990A0100E518DC /* GenderSelectionView.swift */; };
+		88F90D112799205700E518DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88F90D102799205700E518DC /* GoogleService-Info.plist */; };
+		88F90D13279921A400E518DC /* BirthDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D12279921A400E518DC /* BirthDateView.swift */; };
+		88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F90D14279988EE00E518DC /* GenderCustomButtonView.swift */; };
 		E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +53,6 @@
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
-		88D651D727985AA9004779CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -64,6 +75,19 @@
 		88F028082795495E00390168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88F0280A2795495E00390168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88F0281627954AC800390168 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		88F90CF02798EC0C00E518DC /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
+		88F90CF32798EC1B00E518DC /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
+		88F90CF52798EC2000E518DC /* BirthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthView.swift; sourceTree = "<group>"; };
+		88F90CFE2798FB5200E518DC /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		88F90D002798FE2000E518DC /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		88F90D032798FE3800E518DC /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		88F90D052798FE3F00E518DC /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
+		88F90D07279909CE00E518DC /* GenderSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionViewController.swift; sourceTree = "<group>"; };
+		88F90D0A279909F400E518DC /* GenderSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionViewModel.swift; sourceTree = "<group>"; };
+		88F90D0C27990A0100E518DC /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
+		88F90D102799205700E518DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88F90D12279921A400E518DC /* BirthDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDateView.swift; sourceTree = "<group>"; };
+		88F90D14279988EE00E518DC /* GenderCustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderCustomButtonView.swift; sourceTree = "<group>"; };
 		AFCF7A27F9A757CCBE8262B8 /* Pods_SeSac_Service_Level_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSac_Service_Level_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -157,12 +181,15 @@
 				88F0281527954A9E00390168 /* Register */,
 				88EA1B572797B42300307111 /* VerifyPhoneNumberViewController */,
 				889EBAD32798372F006C1A6E /* NickNamView */,
-				88F028052795495E00390168 /* Assets.xcassets */,
+				88F90CF22798EC1100E518DC /* BirthView */,
+				88F90D022798FE2E00E518DC /* EmailView */,
+				88F90D09279909E700E518DC /* GenderSelectionView */,
 				88F028072795495E00390168 /* LaunchScreen.storyboard */,
 				88F027FE2795495A00390168 /* SceneDelegate.swift */,
 				88F027FC2795495A00390168 /* AppDelegate.swift */,
+				88F028052795495E00390168 /* Assets.xcassets */,
 				88F0280A2795495E00390168 /* Info.plist */,
-				88D651D727985AA9004779CF /* GoogleService-Info.plist */,
+				88F90D102799205700E518DC /* GoogleService-Info.plist */,
 				88DE49EE27965A96003D5958 /* CommonViews */,
 				88DE49F12796B864003D5958 /* Observable.swift */,
 			);
@@ -177,6 +204,39 @@
 				88DE49EF2796B810003D5958 /* RegisterViewModel.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		88F90CF22798EC1100E518DC /* BirthView */ = {
+			isa = PBXGroup;
+			children = (
+				88F90CF02798EC0C00E518DC /* BirthViewController.swift */,
+				88F90CF32798EC1B00E518DC /* BirthViewModel.swift */,
+				88F90CF52798EC2000E518DC /* BirthView.swift */,
+				88F90CFE2798FB5200E518DC /* DatePickerView.swift */,
+				88F90D12279921A400E518DC /* BirthDateView.swift */,
+			);
+			path = BirthView;
+			sourceTree = "<group>";
+		};
+		88F90D022798FE2E00E518DC /* EmailView */ = {
+			isa = PBXGroup;
+			children = (
+				88F90D002798FE2000E518DC /* EmailViewController.swift */,
+				88F90D032798FE3800E518DC /* EmailView.swift */,
+				88F90D052798FE3F00E518DC /* EmailViewModel.swift */,
+			);
+			path = EmailView;
+			sourceTree = "<group>";
+		};
+		88F90D09279909E700E518DC /* GenderSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				88F90D07279909CE00E518DC /* GenderSelectionViewController.swift */,
+				88F90D0A279909F400E518DC /* GenderSelectionViewModel.swift */,
+				88F90D0C27990A0100E518DC /* GenderSelectionView.swift */,
+				88F90D14279988EE00E518DC /* GenderCustomButtonView.swift */,
+			);
+			path = GenderSelectionView;
 			sourceTree = "<group>";
 		};
 		CACCCB752456BE42C8DC4C05 /* Pods */ = {
@@ -261,7 +321,7 @@
 				88EA1B6A2797C1E800307111 /* NotoSansKR-Regular.otf in Resources */,
 				88F028062795495E00390168 /* Assets.xcassets in Resources */,
 				88EA1B642797C1E800307111 /* NotoSansKR-Light.otf in Resources */,
-				88D651D827985AA9004779CF /* GoogleService-Info.plist in Resources */,
+				88F90D112799205700E518DC /* GoogleService-Info.plist in Resources */,
 				88EA1B652797C1E800307111 /* NotoSansKR-Bold.otf in Resources */,
 				88EA1B682797C1E800307111 /* NotoSansKR-Black.otf in Resources */,
 			);
@@ -317,19 +377,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
+				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
 				889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */,
+				88F90CF62798EC2000E518DC /* BirthView.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
+				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
 				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
+				88F90D042798FE3800E518DC /* EmailView.swift in Sources */,
+				88F90D08279909CE00E518DC /* GenderSelectionViewController.swift in Sources */,
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
+				88F90CFF2798FB5200E518DC /* DatePickerView.swift in Sources */,
+				88F90D012798FE2000E518DC /* EmailViewController.swift in Sources */,
 				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
+				88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */,
+				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,
+				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
+				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,
 				88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */,
 				88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */,
+				88F90CF12798EC0C00E518DC /* BirthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -69,7 +69,7 @@ class VerifyPhoneNumberViewModel {
     }
     
     
-    func verifyCodeFromFirebase() {
+    func verifyCodeFromFirebase(completion: @escaping (AuthDataResult?, Error?) -> Void) {
         let verificationCode = verifyCode.value
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
         
@@ -78,13 +78,16 @@ class VerifyPhoneNumberViewModel {
           verificationCode: verificationCode
         )
 
-        Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-                print("eeror", error)
-                return
-            }
-            print("good ", authResult)
-        }
+//        Auth.auth().signIn(with: credential) { authResult, error in
+//            if let error = error {
+//                print("eeror", error)
+//                return false
+//            }
+//            print("good code ")
+//            return true
+//        }
+//
+        Auth.auth().signIn(with: credential, completion: completion)
     }
     
     func sendMessage() {

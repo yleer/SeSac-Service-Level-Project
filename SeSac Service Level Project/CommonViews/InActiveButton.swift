@@ -63,6 +63,7 @@ class InActiveButton: UIButton {
     func setUp() {
         self.layer.cornerRadius = 10
         self.layer.borderWidth = 1
-        self.stateOfButton = .disable
+        self.stateOfButton = .cancel
+        self.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
     }
 }

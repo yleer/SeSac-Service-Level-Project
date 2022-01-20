@@ -45,7 +45,14 @@ class VerifiyPhoneNumberViewController: UIViewController {
     }
     
     @objc func verifyButtonClicked() {
-        viewModel.verifyCodeFromFirebase()
+        viewModel.verifyCodeFromFirebase { authResult, error in
+            if let error = error {
+                print("eeror", error)
+                return
+            }
+            let vc = NickNameViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func binding() {
