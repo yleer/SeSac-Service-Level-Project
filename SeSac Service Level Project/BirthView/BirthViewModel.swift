@@ -9,15 +9,23 @@ import Foundation
 
 class BirthViewModel {
     
-    var bornDate: Observalble<Date> = Observalble(Date()){
-        didSet{
-            print(bornDate.value)
-        }
-    }
-    var allowed = false
     var bornYear: Observalble<String> = Observalble("")
     var bornMonth: Observalble<String> = Observalble("")
     var bornDay: Observalble<String> = Observalble("")
+    
+    var bornDate: Observalble<Date> = Observalble(Date()){
+        didSet{
+            oldEnough()
+            print(bornDate.value)
+        }
+    }
+    var allowed = false{
+        didSet{
+            if allowed {
+                UserDefaults.standard.set("\(bornDate.value)", forKey: "age")
+            }
+        }
+    }
     
     
     func updateDate() -> ButtonState {
@@ -51,13 +59,3 @@ class BirthViewModel {
     }
 }
 
-
-extension Calendar {
-    func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
-        let fromDate = startOfDay(for: from) // <1>
-        let toDate = startOfDay(for: to) // <2>
-        let numberOfDays = dateComponents([.day], from: fromDate, to: toDate) // <3>
-        
-        return numberOfDays.day!
-    }
-}

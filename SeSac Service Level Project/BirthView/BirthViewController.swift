@@ -23,6 +23,22 @@ class BirthViewController: UIViewController {
         addTargets()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let dateString = UserDefaults.standard.string(forKey: "age") {
+            let a = dateString[0]! + dateString[1]! + dateString[2]! + dateString[3]! + dateString[4]! + dateString[5]! + dateString[6]! + dateString[7]! + dateString[8]! + dateString[9]!
+            
+            mainView.datePickerView.datePicker.setDate(a.toDate()!, animated: true)
+            mainView.toNextButon.stateOfButton = .fill
+            
+            viewModel.bornYear.value = dateString[0]! + dateString[1]! + dateString[2]! + dateString[3]!
+            viewModel.bornMonth.value = dateString[5]! + dateString[6]!
+            viewModel.bornDay.value = dateString[8]! + dateString[9]!
+            viewModel.bornDate.value = a.toDate()!
+            viewModel.updateDate()
+        }
+    }
+    
     func binding() {
         viewModel.bornYear.bind { text in
             self.mainView.birthLabelView.bornYearLabel.text = text
@@ -57,7 +73,6 @@ class BirthViewController: UIViewController {
     
     @objc func toNextButtonClicked(_ sender: UIButton) {
         if viewModel.allowed {
-            UserDefaults.standard.set("\(viewModel.bornDate)", forKey: "age")
             let vc = EmailViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -88,3 +103,23 @@ class BirthViewController: UIViewController {
     }
     
 }
+
+extension String {
+    func toDate() -> Date? {
+        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        if let date = dateFormatter.date(from: self) {
+            return date
+            
+        } else {
+            return nil
+            
+        }
+        
+    }
+    
+}
+
+

@@ -67,3 +67,7 @@ class InActiveButton: UIButton {
         self.titleLabel?.font = UIFont(name: "NotoSansKR-Regular", size: 14)
     }
 }
+
+
+
+

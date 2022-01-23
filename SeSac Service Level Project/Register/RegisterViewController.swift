@@ -24,15 +24,12 @@ class RegisterViewController: UIViewController {
         binding()
     }
     
-
-    // binding 문제가 있긴 한데. 이거 안해도 작동은 다 함.
     func binding() {
         viewModel.phoneNumber.bind { text in
             self.mainView.phoneNumberView.textField.text = text
         }
     }
     
-  
     func addTargets() {
         mainView.getVerificationCodeButton.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         mainView.phoneNumberView.textField.addTarget(self, action: #selector(phoneNumberChanged), for: .editingChanged)
@@ -40,10 +37,11 @@ class RegisterViewController: UIViewController {
     
     
     @objc func phoneNumberChanged(_ textField: UITextField) {
-        print(viewModel.phoneNumber.value)
         viewModel.phoneNumber.value = textField.text ?? ""
         mainView.getVerificationCodeButton.stateOfButton = viewModel.checkPhoneNumberState()
-        let formattedPhoneNumber = format(with:  "XXX-XXXX-XXXX", phone: textField.text ?? "")
+        
+        
+        let formattedPhoneNumber = textField.text?.format(with:  "XXX-XXXX-XXXX")
         textField.text = formattedPhoneNumber
         
         let textFieldState = viewModel.checkTextFieldState()
@@ -58,32 +56,11 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func changeState() {
-
         // 1. 문자 보내고
-        viewModel.sendMessage()
-        // 2. 화면 전환 해야됨
+        FireBaseService.sendMessage(phoneNumber: viewModel.getInternationalPhoneNum())
+        // 2. 화면 전환
         let vc = VerifiyPhoneNumberViewController()
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func format(with mask: String, phone: String) -> String {
-        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-        var result = ""
-        var index = numbers.startIndex // numbers iterator
-        // iterate over the mask characters until the iterator of numbers ends
-        for ch in mask where index < numbers.endIndex {
-            if ch == "X" {
-                // mask requires a number in this place, so take the next one
-                result.append(numbers[index])
-
-                // move numbers iterator to the next index
-                index = numbers.index(after: index)
-
-            } else {
-                result.append(ch) // just append a mask character
-            }
-        }
-        return result
     }
 }
 
@@ -92,32 +69,5 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         mainView.phoneNumberView.stateOfTextField = .focus
     }
-    //
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        let status = viewModel.checkTextFieldState()
-//        switch status {
-//        case .inActive:
-//            <#code#>
-//        case .focus:
-//            <#code#>
-//        case .active:
-//            <#code#>
-//        case .disable:
-//            <#code#>
-//        case .error(let text):
-//            <#code#>
-//        case .success(let text):
-//            <#code#>
-//        }
-//    }
 }
 
-extension String {
-    subscript(idx: Int) -> String? {
-        guard (0..<count).contains(idx) else {
-            return nil
-        }
-        let result = index(startIndex, offsetBy: idx)
-        return String(self[result])
-    }
-}

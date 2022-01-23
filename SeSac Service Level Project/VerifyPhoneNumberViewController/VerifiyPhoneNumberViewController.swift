@@ -15,16 +15,17 @@ class VerifiyPhoneNumberViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view = mainView
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.testMain()
         addTargets()
         binding()
         mainView.verificationCodeView.textField.delegate = self
+        
+        viewModel.testMain()
     }
+    
     
     func addTargets() {
         mainView.resendButton.addTarget(self, action: #selector(resendButtonCliked), for: .touchUpInside)
@@ -40,18 +41,24 @@ class VerifiyPhoneNumberViewController: UIViewController {
     @objc func resendButtonCliked() {
         // 재전송 성공 alert 보여주자 .
         view.endEditing(true)
-        viewModel.sendMessage()
-        viewModel.testMain()
+        if let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") {
+            FireBaseService.sendMessage(phoneNumber: phoneNumber)
+            viewModel.startTimer()
+        }
     }
     
     @objc func verifyButtonClicked() {
-        viewModel.verifyCodeFromFirebase { authResult, error in
-            if let error = error {
-                print("eeror", error)
-                return
+        
+        viewModel.verifyCodeFromFireBase { message, vc in
+            if let message = message {
+                self.view.makeToast(message)
+            }else {
+                if let vc = vc as? NickNameViewController{
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else {
+                    print("홈 화면으로 이동해야됨.")
+                }
             }
-            let vc = NickNameViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

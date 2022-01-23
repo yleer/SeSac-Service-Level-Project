@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import FirebaseAuth
-import Firebase
+import UIKit
 
 class VerifyPhoneNumberViewModel {
     
@@ -68,40 +67,45 @@ class VerifyPhoneNumberViewModel {
         }
     }
     
-    
-    func verifyCodeFromFirebase(completion: @escaping (AuthDataResult?, Error?) -> Void) {
-        let verificationCode = verifyCode.value
-        let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-        
-        let credential = PhoneAuthProvider.provider().credential(
-          withVerificationID: verificationID!,
-          verificationCode: verificationCode
-        )
+    func verifyCodeFromFireBase(completion: @escaping (String?, UIViewController?) -> Void) {
+        FireBaseService.verifyCodeFromFirebase(verificationCode: verifyCode.value) { authResult, error in
+            if let error = error {
+                // TODO: 번호 인증 실패 시 alert 보여주기.
+                // error 처리 필요.
+                print("eeror", error)
+                return
+            }
+            
+            FireBaseService.getIdToken()
+            
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                    if error == nil {
+                        if statusCode == 200 {
+                        // home 화면으로
+//                            completion(nil, vc)
+                            print("홈화면으로 이동")
+                        }else {
+                            // 닉네임 화면으로
+                            let vc = NickNameViewController()
+                            completion(nil, vc)
+                        }
+                        
+                    }else {
+                        if statusCode == 401 {
+                            completion("나중에 다시 시도해 주세요", nil)
+                        }else if statusCode == 500 {
+                            completion("서버 에러", nil)
+                        }else if statusCode == 501 {
+                            completion("사용자 에러", nil)
+                        }
+                    }
+                }
 
-//        Auth.auth().signIn(with: credential) { authResult, error in
-//            if let error = error {
-//                print("eeror", error)
-//                return false
-//            }
-//            print("good code ")
-//            return true
-//        }
-//
-        Auth.auth().signIn(with: credential, completion: completion)
-    }
-    
-    func sendMessage() {
-        if let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") {
-            print(phoneNumber)
-            PhoneAuthProvider.provider()
-              .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-                  if let error = error {
-                    print(error.localizedDescription)
-                    return
-                  }else{
-                      UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-                  }
-              }
+            }
+            
+            
         }
     }
+    
 }

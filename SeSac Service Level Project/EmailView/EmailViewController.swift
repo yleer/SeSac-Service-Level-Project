@@ -27,6 +27,11 @@ class EmailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.emailTextFieldView.textField.becomeFirstResponder()
+        
+        if let email = UserDefaults.standard.string(forKey: "email") {
+            viewModel.email.value = email
+            mainView.toNextButton.stateOfButton = .fill
+        }
     }
     
     func bindings() {
@@ -37,7 +42,6 @@ class EmailViewController: UIViewController {
     
     func addTargets() {
         mainView.emailTextFieldView.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
-        
         mainView.toNextButton.addTarget(self, action: #selector(toNextButtonClicked), for: .touchUpInside)
     }
     
@@ -54,7 +58,6 @@ class EmailViewController: UIViewController {
     
     @objc func toNextButtonClicked() {
         if viewModel.isValidEmail() {
-            UserDefaults.standard.set(viewModel.email.value, forKey: "email")
             let vc = GenderSelectionViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -65,7 +68,6 @@ class EmailViewController: UIViewController {
             
         }
     }
-    
 }
 
 extension EmailViewController: UITextFieldDelegate {

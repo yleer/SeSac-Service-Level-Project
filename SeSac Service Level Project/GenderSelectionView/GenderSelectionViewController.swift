@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class GenderSelectionViewController: UIViewController {
     
@@ -22,6 +23,24 @@ class GenderSelectionViewController: UIViewController {
         bindings()
         addTargets()
         
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.selectedGender.value = UserDefaults.standard.integer(forKey: "gender")
+        mainView.toNextButton.stateOfButton = .fill
+    }
+    
+    @objc func addTapped() {
+        let idToekn = UserDefaults.standard.string(forKey: "idToken")
+        ApiService.deleteUser(idToken: idToekn!) { error, statusCode in
+                print(error)
+            print(statusCode)
+        }
     }
     
     func bindings() {
@@ -73,7 +92,35 @@ class GenderSelectionViewController: UIViewController {
     
     
     @objc func toNextbuttonClicked() {
-        // 내일
+        viewModel.getUserInfo { message, success in
+            
+            DispatchQueue.main.async {
+                if success {
+                    guard let message = message else {
+                        print("success")
+                        return
+                    }
+                    // toast message ->
+                    
+                    self.view.makeToast("사용 불가능한 닉네임입니다22" + message)
+                    
+                    guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                    
+                    for viewController in viewControllerStack {
+                        if let nickNameVc = viewController as? NickNameViewController {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                nickNameVc.notAbleNickName = true
+                                self.navigationController?.popToViewController(nickNameVc, animated: true)
+                            }
+                        }
+                        
+                    }
+                }else {
+                    guard let message = message else { return }
+                    self.view.makeToast(message)
+                }
+            }
+        }
     }
     
 }

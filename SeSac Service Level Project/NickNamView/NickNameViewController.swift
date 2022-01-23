@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Toast
+
 
 class NickNameViewController: UIViewController {
     
     let mainView = NickNameView()
     let viewModel = NickNameViewModel()
+    var notAbleNickName = false
     
     override func loadView() {
         super.loadView()
@@ -20,13 +23,22 @@ class NickNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindings()
+        FireBaseService.getIdToken()
         addTargets()
         mainView.nickNameTextFieldView.textField.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.nickNameTextFieldView.textField.becomeFirstResponder()
+        
+        if notAbleNickName {
+            self.view.makeToast("해당 닉네임은 사용할 수 없습니다")
+            mainView.nickNameTextFieldView.textField.text = ""
+            notAbleNickName = false
+        }
+        
     }
     
     func bindings() {
@@ -51,7 +63,6 @@ class NickNameViewController: UIViewController {
     
     @objc func toNextButtonClicked() {
         if viewModel.checkNickName() {
-            UserDefaults.standard.set(viewModel.nickName.value, forKey: "nickName")
             let vc = BirthViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -59,9 +70,8 @@ class NickNameViewController: UIViewController {
             let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             alertVC.addAction(cancelButton)
             present(alertVC, animated: true, completion: nil)
-            
+
         }
-        
     }
     
 }

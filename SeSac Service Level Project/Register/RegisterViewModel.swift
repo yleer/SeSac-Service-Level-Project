@@ -7,9 +7,6 @@
 
 import Foundation
 
-import FirebaseAuth
-import Firebase
-
 class RegisterViewModel {
     
     var phoneNumber: Observalble<String> = Observalble("")
@@ -18,8 +15,6 @@ class RegisterViewModel {
     
     func checkPhoneNumberState() -> ButtonState {
         phoneNumber.value = phoneNumber.value.replacingOccurrences(of: "-", with: "")
-//        print(phoneNumber.value)
-
         if phoneNumber.value.count >= 11 {
             let textFieldStatus = checkTextFieldState()
 
@@ -55,19 +50,5 @@ class RegisterViewModel {
         }else{
             return .error(text: "11자리 핸드폰 번호를 입력해 주세요")
         }
-    }
-    
-    func sendMessage() {
-        let phoneNumber = getInternationalPhoneNum()
-        print(phoneNumber)
-        PhoneAuthProvider.provider()
-          .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-              if let error = error {
-                print(error.localizedDescription)
-                return
-              }else{
-                  UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-              }
-          }
     }
 }

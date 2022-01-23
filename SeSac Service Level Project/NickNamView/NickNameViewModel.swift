@@ -13,6 +13,7 @@ class NickNameViewModel {
     
     func checkNickName() -> Bool {
         if nickName.value.count > 0 && nickName.value.count <= 10 {
+            UserDefaults.standard.set(nickName.value, forKey: "nickName")
             return true
         }else {
             return false
