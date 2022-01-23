@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RegisterViewModel {
+final class RegisterViewModel {
     
     var phoneNumber: Observalble<String> = Observalble("")
     
@@ -17,17 +17,16 @@ class RegisterViewModel {
         phoneNumber.value = phoneNumber.value.replacingOccurrences(of: "-", with: "")
         if phoneNumber.value.count >= 11 {
             let textFieldStatus = checkTextFieldState()
-
             switch textFieldStatus {
             case .error:
-                return .disable
+                return .cancel
             case .success:
                 return .fill
             default:
-                return .disable
+                return .cancel
             }
         }else {
-            return .disable
+            return .cancel
         }
     }
     

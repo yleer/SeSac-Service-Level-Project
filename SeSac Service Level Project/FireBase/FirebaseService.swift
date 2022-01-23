@@ -36,7 +36,7 @@ class FireBaseService{
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
           if let error = error {
-            print(error)
+            print(error.localizedDescription)
             return
           }
             UserDefaults.standard.set(idToken!, forKey: "idToken")

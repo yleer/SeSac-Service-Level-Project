@@ -42,7 +42,8 @@ class OnboardingViewController: UIViewController {
     @objc private func startButtonClicked(_ sender: UIButton) {
         let current = mainView.pageControl.currentPage
         if current == 2 {
-            print("need to segue")
+            let vc = RegisterViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }else {
             mainView.scrollView.setContentOffset(CGPoint(x: CGFloat(current + 1) * mainView.scrollView.frame.size.width, y: 0), animated: true)
         }

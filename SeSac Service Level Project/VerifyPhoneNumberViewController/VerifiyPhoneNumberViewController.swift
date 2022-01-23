@@ -7,10 +7,10 @@
 
 import UIKit
 
-class VerifiyPhoneNumberViewController: UIViewController {
+final class VerifiyPhoneNumberViewController: UIViewController {
     
-    let viewModel = VerifyPhoneNumberViewModel()
-    let mainView = VerifyPhoneNumberView()
+    private let viewModel = VerifyPhoneNumberViewModel()
+    private let mainView = VerifyPhoneNumberView()
     
     override func loadView() {
         super.loadView()
@@ -22,12 +22,11 @@ class VerifiyPhoneNumberViewController: UIViewController {
         addTargets()
         binding()
         mainView.verificationCodeView.textField.delegate = self
-        
         viewModel.testMain()
     }
     
     
-    func addTargets() {
+    private func addTargets() {
         mainView.resendButton.addTarget(self, action: #selector(resendButtonCliked), for: .touchUpInside)
         mainView.verifyAndStartButton.addTarget(self, action: #selector(verifyButtonClicked), for: .touchUpInside)
         mainView.verificationCodeView.textField.addTarget(self, action: #selector(verificationCodeChanged), for: .editingChanged)
@@ -62,7 +61,7 @@ class VerifiyPhoneNumberViewController: UIViewController {
         }
     }
     
-    func binding() {
+    private func binding() {
         viewModel.timeLeft.bind { text in
             self.mainView.timerLabel.text = text
         }

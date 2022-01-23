@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Toast
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
 
-    let mainView = RegisterView()
-    let viewModel = RegisterViewModel()
+    private let mainView = RegisterView()
+    private let viewModel = RegisterViewModel()
     
     override func loadView() {
         super.loadView()
@@ -24,13 +25,13 @@ class RegisterViewController: UIViewController {
         binding()
     }
     
-    func binding() {
+    private func binding() {
         viewModel.phoneNumber.bind { text in
             self.mainView.phoneNumberView.textField.text = text
         }
     }
     
-    func addTargets() {
+    private func addTargets() {
         mainView.getVerificationCodeButton.addTarget(self, action: #selector(changeState), for: .touchUpInside)
         mainView.phoneNumberView.textField.addTarget(self, action: #selector(phoneNumberChanged), for: .editingChanged)
     }
@@ -39,10 +40,7 @@ class RegisterViewController: UIViewController {
     @objc func phoneNumberChanged(_ textField: UITextField) {
         viewModel.phoneNumber.value = textField.text ?? ""
         mainView.getVerificationCodeButton.stateOfButton = viewModel.checkPhoneNumberState()
-        
-        
-        let formattedPhoneNumber = textField.text?.format(with:  "XXX-XXXX-XXXX")
-        textField.text = formattedPhoneNumber
+        textField.text = textField.text?.format(with:  "XXX-XXXX-XXXX")
         
         let textFieldState = viewModel.checkTextFieldState()
         switch textFieldState {
@@ -56,16 +54,17 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func changeState() {
-        // 1. 문자 보내고
-        FireBaseService.sendMessage(phoneNumber: viewModel.getInternationalPhoneNum())
-        // 2. 화면 전환
-        let vc = VerifiyPhoneNumberViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if mainView.getVerificationCodeButton.stateOfButton == .cancel {
+            self.view.makeToast("잘못된 번호 형식입니다")
+        }else {
+            FireBaseService.sendMessage(phoneNumber: viewModel.getInternationalPhoneNum())
+            let vc = VerifiyPhoneNumberViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
 extension RegisterViewController: UITextFieldDelegate {
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         mainView.phoneNumberView.stateOfTextField = .focus
     }

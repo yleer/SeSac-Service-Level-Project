@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class VerifyPhoneNumberViewModel {
+final class VerifyPhoneNumberViewModel {
     
     var timeLeft: Observalble<String> = Observalble("")
     var verifyCode: Observalble<String> = Observalble("")
@@ -77,7 +77,6 @@ class VerifyPhoneNumberViewModel {
             }
             
             FireBaseService.getIdToken()
-            
             if let idToken = UserDefaults.standard.string(forKey: "idToken") {
                 ApiService.getUserInfo(idToken: idToken) { error, statusCode in
                     if error == nil {
@@ -103,8 +102,6 @@ class VerifyPhoneNumberViewModel {
                 }
 
             }
-            
-            
         }
     }
     

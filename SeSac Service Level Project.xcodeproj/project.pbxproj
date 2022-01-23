@@ -141,6 +141,14 @@
 			path = OneBoardingView;
 			sourceTree = "<group>";
 		};
+		885C238A279D4FD100FF658E /* FireBase */ = {
+			isa = PBXGroup;
+			children = (
+				88820D57279C090C00E8FCD4 /* FirebaseService.swift */,
+			);
+			path = FireBase;
+			sourceTree = "<group>";
+		};
 		885F016F279A7F550049856B /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +251,7 @@
 				88DE49F12796B864003D5958 /* Observable.swift */,
 				885F016F279A7F550049856B /* Api */,
 				88820D4F279BADE200E8FCD4 /* Extensions */,
-				88820D57279C090C00E8FCD4 /* FirebaseService.swift */,
+				885C238A279D4FD100FF658E /* FireBase */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
