@@ -6,31 +6,30 @@
 //
 
 import Foundation
-import UIKit
 
 final class VerifyPhoneNumberViewModel {
     
     var timeLeft: Observalble<String> = Observalble("")
     var verifyCode: Observalble<String> = Observalble("")
     
-    var intCount = 300
+    var intCount = 25
         
         func testMain(){
             // 실시간 반복 작업 시작 실시
             stopTimer()
-            intCount = 300
+            intCount = 25
             startTimer()
         }
     
         // [실시간 반복 작업 시작 호출]
-        var timer : Timer?
+        private var timer : Timer?
     
         func startTimer(){
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
         }
     
         // [실시간 반복 작업 수행 부분]
-        @objc func timerCallback() {
+        @objc private func timerCallback() {
             let minute = (intCount % 3600 ) / 60
             let second = (intCount % 3600 ) % 60
             
@@ -47,11 +46,13 @@ final class VerifyPhoneNumberViewModel {
                 stopTimer() // 타이머 종료 실시
                 timeLeft.value = "0:00"
                 print("done")
+                
+                NotificationCenter.default.post(name: NSNotification.Name("time done"), object: self)
             }
         }
     
         // [실시간 반복 작업 정지 호출]
-        func stopTimer(){
+        private func stopTimer(){
             // [실시간 반복 작업 중지]
             if timer != nil && timer!.isValid {
                 timer!.invalidate()
@@ -63,16 +64,15 @@ final class VerifyPhoneNumberViewModel {
         if verifyCode.value.count >= 6 {
             return .fill
         }else {
-            return .disable
+            return .cancel
         }
     }
     
-    func verifyCodeFromFireBase(completion: @escaping (String?, UIViewController?) -> Void) {
+    func verifyCodeFromFireBase(completion: @escaping (Error?, Int?) -> Void) {
         FireBaseService.verifyCodeFromFirebase(verificationCode: verifyCode.value) { authResult, error in
             if let error = error {
-                // TODO: 번호 인증 실패 시 alert 보여주기.
-                // error 처리 필요.
                 print("eeror", error)
+                completion(error, nil)
                 return
             }
             
@@ -82,21 +82,19 @@ final class VerifyPhoneNumberViewModel {
                     if error == nil {
                         if statusCode == 200 {
                         // home 화면으로
-//                            completion(nil, vc)
+//                            completion(nil, 200)
                             print("홈화면으로 이동")
                         }else {
-                            // 닉네임 화면으로
-                            let vc = NickNameViewController()
-                            completion(nil, vc)
+                            completion(nil, 201)
                         }
                         
                     }else {
                         if statusCode == 401 {
-                            completion("나중에 다시 시도해 주세요", nil)
+                            completion(APIError.firebaseTokenError(errorContent: "나중에 다시 시도해 주세요"),401)
                         }else if statusCode == 500 {
-                            completion("서버 에러", nil)
+                            completion(APIError.serverError(errorContent: "서버 에러"), 500)
                         }else if statusCode == 501 {
-                            completion("사용자 에러", nil)
+                            completion(APIError.clientError(errorContent: "사용자 에러"), 501)
                         }
                     }
                 }

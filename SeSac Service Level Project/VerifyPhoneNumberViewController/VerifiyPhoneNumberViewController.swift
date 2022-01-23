@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 final class VerifiyPhoneNumberViewController: UIViewController {
     
@@ -17,12 +18,19 @@ final class VerifiyPhoneNumberViewController: UIViewController {
         self.view = mainView
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargets()
         binding()
         mainView.verificationCodeView.textField.delegate = self
         viewModel.testMain()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(timeDone), name: NSNotification.Name("time done"), object: nil)
+    }
+    
+    @objc func timeDone() {
+        self.view.makeToast("전화번호 인증 실패")
     }
     
     
@@ -42,20 +50,25 @@ final class VerifiyPhoneNumberViewController: UIViewController {
         view.endEditing(true)
         if let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") {
             FireBaseService.sendMessage(phoneNumber: phoneNumber)
-            viewModel.startTimer()
+            viewModel.testMain()
         }
     }
     
     @objc func verifyButtonClicked() {
-        
-        viewModel.verifyCodeFromFireBase { message, vc in
-            if let message = message {
-                self.view.makeToast(message)
-            }else {
-                if let vc = vc as? NickNameViewController{
-                    self.navigationController?.pushViewController(vc, animated: true)
+        viewModel.verifyCodeFromFireBase { error, statusCode in
+            if let error = error {
+                if let _ = error as? APIError {
+                    self.view.makeToast("잠시 후 다시 실행해 주세요")
                 }else {
-                    print("홈 화면으로 이동해야됨.")
+                    self.view.makeToast("전화번호 인증 실패")
+                }
+                
+            }else {
+                if statusCode! == 200 {
+                    // 홈 화면으로 이동
+                    print("홈화면으로 이동")
+                }else {
+                    self.navigationController?.pushViewController(NickNameViewController(), animated: true)
                 }
             }
         }
