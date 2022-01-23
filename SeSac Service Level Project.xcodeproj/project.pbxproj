@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		885C2384279D211800FF658E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2383279D211800FF658E /* OnboardingViewController.swift */; };
 		885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2386279D26C800FF658E /* OnBoardingView.swift */; };
-		885C2389279D2C2100FF658E /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2388279D2C2100FF658E /* OnBoardingViewModel.swift */; };
 		885F016B279A7C380049856B /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F016A279A7C380049856B /* ApiService.swift */; };
 		885F016E279A7C630049856B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 885F016D279A7C630049856B /* Alamofire */; };
 		885F0171279A7F770049856B /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F0170279A7F770049856B /* ApiData.swift */; };
@@ -63,7 +62,6 @@
 		68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.release.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.release.xcconfig"; sourceTree = "<group>"; };
 		885C2383279D211800FF658E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		885C2386279D26C800FF658E /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
-		885C2388279D2C2100FF658E /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		885F016A279A7C380049856B /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		885F0170279A7F770049856B /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
 		885F0172279A8DA10049856B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			children = (
 				885C2383279D211800FF658E /* OnboardingViewController.swift */,
 				885C2386279D26C800FF658E /* OnBoardingView.swift */,
-				885C2388279D2C2100FF658E /* OnBoardingViewModel.swift */,
 			);
 			path = OneBoardingView;
 			sourceTree = "<group>";
@@ -437,7 +434,6 @@
 			files = (
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
-				885C2389279D2C2100FF658E /* OnBoardingViewModel.swift in Sources */,
 				88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
 				889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */,
