@@ -18,13 +18,13 @@ class FireBaseService{
                 print(error.localizedDescription)
                 return
               }else{
-                  UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+                  UserDefaults.standard.set(verificationID, forKey: UserDefaults.myKey.authVerificationID.rawValue)
               }
           }
     }
     
     static func verifyCodeFromFirebase(verificationCode: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
-        let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
+        let verificationID = UserDefaults.standard.string(forKey: UserDefaults.myKey.authVerificationID.rawValue)
         let credential = PhoneAuthProvider.provider().credential(
           withVerificationID: verificationID!,
           verificationCode: verificationCode
@@ -39,7 +39,7 @@ class FireBaseService{
             print(error.localizedDescription)
             return
           }
-            UserDefaults.standard.set(idToken!, forKey: "idToken")
+            UserDefaults.standard.set(idToken!, forKey: UserDefaults.myKey.idToken.rawValue)
         }
     }
 }

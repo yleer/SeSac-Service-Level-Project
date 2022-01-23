@@ -82,8 +82,7 @@ final class VerifyPhoneNumberViewModel {
                     if error == nil {
                         if statusCode == 200 {
                         // home 화면으로
-//                            completion(nil, 200)
-                            print("홈화면으로 이동")
+                            completion(nil, 200)
                         }else {
                             completion(nil, 201)
                         }

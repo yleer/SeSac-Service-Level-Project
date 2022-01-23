@@ -7,8 +7,9 @@
 
 
 import UIKit
+import Toast
 
-class EmailViewController: UIViewController {
+final class EmailViewController: UIViewController {
     
     let mainView = EmailView()
     let viewModel = EmailViewModel()
@@ -17,6 +18,7 @@ class EmailViewController: UIViewController {
         super.loadView()
         self.view = mainView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindings()
@@ -27,26 +29,22 @@ class EmailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.emailTextFieldView.textField.becomeFirstResponder()
-        
-        if let email = UserDefaults.standard.string(forKey: "email") {
-            viewModel.email.value = email
-            mainView.toNextButton.stateOfButton = .fill
-        }
+        mainView.toNextButton.stateOfButton = viewModel.checkForPreviousData()
     }
     
-    func bindings() {
+    private func bindings() {
         viewModel.email.bind { text in
             self.mainView.emailTextFieldView.textField.text = text
         }
     }
     
-    func addTargets() {
+    private func addTargets() {
         mainView.emailTextFieldView.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
         mainView.toNextButton.addTarget(self, action: #selector(toNextButtonClicked), for: .touchUpInside)
     }
     
     
-    @objc func emailChanged(_ textField: UITextField) {
+    @objc private func emailChanged(_ textField: UITextField) {
         viewModel.email.value = textField.text ?? ""
         
         if viewModel.isValidEmail(){
@@ -56,16 +54,12 @@ class EmailViewController: UIViewController {
         }
     }
     
-    @objc func toNextButtonClicked() {
+    @objc private func toNextButtonClicked() {
         if viewModel.isValidEmail() {
             let vc = GenderSelectionViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            let alertVC = UIAlertController(title: "이메일 형식이 올바르지 않습니다", message: "", preferredStyle: .alert)
-            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alertVC.addAction(cancelButton)
-            present(alertVC, animated: true, completion: nil)
-            
+            self.view.makeToast(ToastMessage.notValidEmail.rawValue)
         }
     }
 }
@@ -75,3 +69,5 @@ extension EmailViewController: UITextFieldDelegate {
         mainView.emailTextFieldView.stateOfTextField = .focus
     }
 }
+
+

@@ -15,11 +15,19 @@ class EmailViewModel {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         
         if emailTest.evaluate(with: email.value) {
-            UserDefaults.standard.set(email.value, forKey: "email")
+            UserDefaults.standard.set(email.value, forKey: UserDefaults.myKey.email.rawValue)
             return true
         } else{
             return false
         }
-        
    }
+    
+    
+    func checkForPreviousData() -> ButtonState {
+        if let email = UserDefaults.standard.string(forKey: UserDefaults.myKey.email.rawValue) {
+            self.email.value = email
+            return .fill
+        }
+        return .cancel
+    }
 }

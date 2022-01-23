@@ -66,7 +66,8 @@ final class VerifiyPhoneNumberViewController: UIViewController {
             }else {
                 if statusCode! == 200 {
                     // 홈 화면으로 이동
-                    print("홈화면으로 이동")
+                    self.navigationController?.pushViewController(NickNameViewController(), animated: true)
+                    print("홈화면으로 이동222")
                 }else {
                     self.navigationController?.pushViewController(NickNameViewController(), animated: true)
                 }

@@ -101,19 +101,12 @@ class GenderSelectionViewController: UIViewController {
                         return
                     }
                     // toast message ->
-                    
-                    self.view.makeToast("사용 불가능한 닉네임입니다22" + message)
-                    
                     guard let viewControllerStack = self.navigationController?.viewControllers else { return }
-                    
                     for viewController in viewControllerStack {
                         if let nickNameVc = viewController as? NickNameViewController {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                nickNameVc.notAbleNickName = true
-                                self.navigationController?.popToViewController(nickNameVc, animated: true)
-                            }
+                            nickNameVc.notAbleNickName = true
+                            self.navigationController?.popToViewController(nickNameVc, animated: true)
                         }
-                        
                     }
                 }else {
                     guard let message = message else { return }

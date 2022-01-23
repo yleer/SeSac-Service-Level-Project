@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Toast
 
 class BirthViewController: UIViewController {
     
-    let mainView = BirthView()
-    let viewModel = BirthViewModel()
+    private let mainView = BirthView()
+    private let viewModel = BirthViewModel()
     
     override func loadView() {
         super.loadView()
@@ -25,21 +26,14 @@ class BirthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let dateString = UserDefaults.standard.string(forKey: "age") {
-            let a = dateString[0]! + dateString[1]! + dateString[2]! + dateString[3]! + dateString[4]! + dateString[5]! + dateString[6]! + dateString[7]! + dateString[8]! + dateString[9]!
-            
-            mainView.datePickerView.datePicker.setDate(a.toDate()!, animated: true)
+        
+        if let date = viewModel.checkForPreiousData(){
+            mainView.datePickerView.datePicker.setDate(date, animated: true)
             mainView.toNextButon.stateOfButton = .fill
-            
-            viewModel.bornYear.value = dateString[0]! + dateString[1]! + dateString[2]! + dateString[3]!
-            viewModel.bornMonth.value = dateString[5]! + dateString[6]!
-            viewModel.bornDay.value = dateString[8]! + dateString[9]!
-            viewModel.bornDate.value = a.toDate()!
-            viewModel.updateDate()
         }
     }
     
-    func binding() {
+    private func binding() {
         viewModel.bornYear.bind { text in
             self.mainView.birthLabelView.bornYearLabel.text = text
         }
@@ -53,7 +47,7 @@ class BirthViewController: UIViewController {
         }
     }
     
-    func addTargets() {
+    private func addTargets() {
         mainView.datePickerView.datePicker.addTarget(self, action: #selector(selectedDate), for: .valueChanged)
         mainView.toNextButon.addTarget(self, action: #selector(toNextButtonClicked), for: .touchUpInside)
         
@@ -71,24 +65,20 @@ class BirthViewController: UIViewController {
         view.addGestureRecognizer(hideGesture)
     }
     
-    @objc func toNextButtonClicked(_ sender: UIButton) {
+    @objc private func toNextButtonClicked(_ sender: UIButton) {
         if viewModel.allowed {
-            let vc = EmailViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(EmailViewController(), animated: true)
         } else {
-            let alertVC = UIAlertController(title: "만 17 이하는 사용할 수 없습니다", message: "18세 이상이 되었을때 이용해주세요", preferredStyle: .alert)
-            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alertVC.addAction(cancelButton)
-            present(alertVC, animated: true, completion: nil)
             
+            self.view.makeToast(ToastMessage.notValidAge.rawValue)
         }
     }
     
-    @objc func hideDatePicker() {
+    @objc private func hideDatePicker() {
         mainView.datePickerView.isHidden = true
     }
     
-    @objc func targetViewDidTapped() {
+    @objc private func targetViewDidTapped() {
         if mainView.datePickerView.isHidden {
             mainView.datePickerView.isHidden = false
         }else{
@@ -96,30 +86,12 @@ class BirthViewController: UIViewController {
         }
     }
     
-    @objc func selectedDate(_ sender: UIDatePicker) {
+    @objc private func selectedDate(_ sender: UIDatePicker) {
         viewModel.bornDate.value = sender.date
         let state = viewModel.updateDate()
         mainView.toNextButon.stateOfButton = state
     }
-    
 }
 
-extension String {
-    func toDate() -> Date? {
-        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        if let date = dateFormatter.date(from: self) {
-            return date
-            
-        } else {
-            return nil
-            
-        }
-        
-    }
-    
-}
 
 
