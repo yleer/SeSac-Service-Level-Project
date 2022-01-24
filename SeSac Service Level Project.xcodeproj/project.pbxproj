@@ -27,6 +27,15 @@
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
 		88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */; };
 		88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEF279E4FD300828537 /* MyInfoView.swift */; };
+		88CC7EF2279E50EE00828537 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */; };
+		88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF3279E56DD00828537 /* MyInfoSettingCell.swift */; };
+		88CC7EF6279E5AC700828537 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF5279E5AC700828537 /* MyInfoViewModel.swift */; };
+		88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF7279E63C900828537 /* ImageNames.swift */; };
+		88CC7EFA279E9C3E00828537 /* ManageMyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF9279E9C3E00828537 /* ManageMyInfoViewController.swift */; };
+		88CC7EFD279E9C6F00828537 /* ManageMyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EFC279E9C6F00828537 /* ManageMyInfoView.swift */; };
+		88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */; };
+		88CC7F01279EB3A700828537 /* ManageMyInfoImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */; };
+		88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F02279EB50700828537 /* MyGenderCell.swift */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -82,6 +91,15 @@
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		88CC7EEF279E4FD300828537 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		88CC7EF3279E56DD00828537 /* MyInfoSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoSettingCell.swift; sourceTree = "<group>"; };
+		88CC7EF5279E5AC700828537 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
+		88CC7EF7279E63C900828537 /* ImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNames.swift; sourceTree = "<group>"; };
+		88CC7EF9279E9C3E00828537 /* ManageMyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoViewController.swift; sourceTree = "<group>"; };
+		88CC7EFC279E9C6F00828537 /* ManageMyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoView.swift; sourceTree = "<group>"; };
+		88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoPersonalInfoCell.swift; sourceTree = "<group>"; };
+		88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoImageCell.swift; sourceTree = "<group>"; };
+		88CC7F02279EB50700828537 /* MyGenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGenderCell.swift; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -149,6 +167,7 @@
 			children = (
 				88DE49F12796B864003D5958 /* Observable.swift */,
 				8819F72D279D86EE0075F656 /* Enums.swift */,
+				88CC7EF7279E63C900828537 /* ImageNames.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -205,8 +224,23 @@
 			children = (
 				88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */,
 				88CC7EEF279E4FD300828537 /* MyInfoView.swift */,
+				88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */,
+				88CC7EF3279E56DD00828537 /* MyInfoSettingCell.swift */,
+				88CC7EF5279E5AC700828537 /* MyInfoViewModel.swift */,
 			);
 			path = MyInfoView;
+			sourceTree = "<group>";
+		};
+		88CC7EFB279E9C5A00828537 /* ManageMyInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				88CC7EF9279E9C3E00828537 /* ManageMyInfoViewController.swift */,
+				88CC7EFC279E9C6F00828537 /* ManageMyInfoView.swift */,
+				88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */,
+				88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */,
+				88CC7F02279EB50700828537 /* MyGenderCell.swift */,
+			);
+			path = ManageMyInfoView;
 			sourceTree = "<group>";
 		};
 		88DE49EE27965A96003D5958 /* CommonViews */ = {
@@ -284,6 +318,7 @@
 				88820D4F279BADE200E8FCD4 /* Extensions */,
 				885C238A279D4FD100FF658E /* FireBase */,
 				88CC7EEE279E4FC700828537 /* MyInfoView */,
+				88CC7EFB279E9C5A00828537 /* ManageMyInfoView */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -475,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CC7EF6279E5AC700828537 /* MyInfoViewModel.swift in Sources */,
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
 				88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */,
@@ -487,27 +523,35 @@
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
+				88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */,
 				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
 				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
 				88F90D042798FE3800E518DC /* EmailView.swift in Sources */,
+				88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */,
 				88F90D08279909CE00E518DC /* GenderSelectionViewController.swift in Sources */,
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
 				88F90CFF2798FB5200E518DC /* DatePickerView.swift in Sources */,
+				88CC7EFD279E9C6F00828537 /* ManageMyInfoView.swift in Sources */,
 				88F90D012798FE2000E518DC /* EmailViewController.swift in Sources */,
 				88820D53279BC03600E8FCD4 /* EndPoints.swift in Sources */,
 				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
 				88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */,
+				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
 				885F0171279A7F770049856B /* ApiData.swift in Sources */,
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
+				88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,
 				88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */,
+				88CC7EFA279E9C3E00828537 /* ManageMyInfoViewController.swift in Sources */,
+				88CC7F01279EB3A700828537 /* ManageMyInfoImageCell.swift in Sources */,
 				88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */,
+				88CC7EF2279E50EE00828537 /* MyInfoTableViewCell.swift in Sources */,
 				88F90CF12798EC0C00E518DC /* BirthViewController.swift in Sources */,
 				885C2384279D211800FF658E /* OnboardingViewController.swift in Sources */,
 				88820D51279BB20000E8FCD4 /* Calendar + extensions.swift in Sources */,
