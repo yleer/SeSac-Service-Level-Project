@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8819F72C279D85840075F656 /* Userdefault + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72B279D85840075F656 /* Userdefault + extension.swift */; };
 		8819F72E279D86EE0075F656 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72D279D86EE0075F656 /* Enums.swift */; };
+		8819F732279D8CF10075F656 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F731279D8CF10075F656 /* RxCocoa */; };
+		8819F734279D8CF10075F656 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F733279D8CF10075F656 /* RxSwift */; };
 		885C2384279D211800FF658E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2383279D211800FF658E /* OnboardingViewController.swift */; };
 		885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2386279D26C800FF658E /* OnBoardingView.swift */; };
 		885F016B279A7C380049856B /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F016A279A7C380049856B /* ApiService.swift */; };
@@ -23,6 +25,8 @@
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
+		88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */; };
+		88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEF279E4FD300828537 /* MyInfoView.swift */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -76,6 +80,8 @@
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		88CC7EEF279E4FD300828537 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -118,8 +124,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8819F734279D8CF10075F656 /* RxSwift in Frameworks */,
 				88820D56279BDC8600E8FCD4 /* Toast in Frameworks */,
 				885F016E279A7C630049856B /* Alamofire in Frameworks */,
+				8819F732279D8CF10075F656 /* RxCocoa in Frameworks */,
 				E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */,
 				88F0281427954A9200390168 /* SnapKit in Frameworks */,
 			);
@@ -190,6 +198,15 @@
 				889EBAD627983755006C1A6E /* NickNameViewModel.swift */,
 			);
 			path = NickNamView;
+			sourceTree = "<group>";
+		};
+		88CC7EEE279E4FC700828537 /* MyInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */,
+				88CC7EEF279E4FD300828537 /* MyInfoView.swift */,
+			);
+			path = MyInfoView;
 			sourceTree = "<group>";
 		};
 		88DE49EE27965A96003D5958 /* CommonViews */ = {
@@ -266,6 +283,7 @@
 				885F016F279A7F550049856B /* Api */,
 				88820D4F279BADE200E8FCD4 /* Extensions */,
 				885C238A279D4FD100FF658E /* FireBase */,
+				88CC7EEE279E4FC700828537 /* MyInfoView */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -344,6 +362,8 @@
 				88F0281327954A9200390168 /* SnapKit */,
 				885F016D279A7C630049856B /* Alamofire */,
 				88820D55279BDC8600E8FCD4 /* Toast */,
+				8819F731279D8CF10075F656 /* RxCocoa */,
+				8819F733279D8CF10075F656 /* RxSwift */,
 			);
 			productName = "SeSac Service Level Project";
 			productReference = 88F027F92795495A00390168 /* SeSac Service Level Project.app */;
@@ -377,6 +397,7 @@
 				88F0281227954A9200390168 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				885F016C279A7C630049856B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				88820D54279BDC8600E8FCD4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				8819F730279D8CF10075F656 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 88F027FA2795495A00390168 /* Products */;
 			projectDirPath = "";
@@ -458,9 +479,11 @@
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
 				88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
+				88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */,
 				889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */,
 				88F90CF62798EC2000E518DC /* BirthView.swift in Sources */,
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
+				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
@@ -703,6 +726,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8819F730279D8CF10075F656 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		885F016C279A7C630049856B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -730,6 +761,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8819F731279D8CF10075F656 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8819F730279D8CF10075F656 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		8819F733279D8CF10075F656 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8819F730279D8CF10075F656 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
 		885F016D279A7C630049856B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 885F016C279A7C630049856B /* XCRemoteSwiftPackageReference "Alamofire" */;
