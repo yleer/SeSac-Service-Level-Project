@@ -15,42 +15,41 @@ import SnapKit
 class ManageMyInfoPersonalInfoCell: UITableViewCell {
     
     static let identifier = "ManageMyInfoPersonalInfoCell"
-    
-    var full = false
-    {
-        didSet {
+
+    var full = false {
+        didSet{
             if full {
-                print("full")
-                setUpConstraints()
-                containerView.isHidden = false
+                subTitle.isHidden = false
+                colletionView.isHidden = false
+                sesacReviewLabel.isHidden = false
+                waitingForeReiview.isHidden = false
+                
+                setUpConstraintsWhenFull()
             }else {
-                print("not full")
-                setUpWhenNotFull()
-                containerView.isHidden = true
+                subTitle.isHidden = true
+                colletionView.isHidden = true
+                sesacReviewLabel.isHidden = true
+                waitingForeReiview.isHidden = true
+                
+                setUpConstraintsWhenFolded()
             }
-            
         }
     }
-
+    
     let nameLabel = UILabel()
     let moreButton = UIButton()
-    
-    let containerView = UIView()
     let subTitle = UILabel()
-    
-    let containerStack = UIStackView()
-    let firstHoriznontalStack = UIStackView()
-    let secondHorizontalStack = UIStackView()
-    let thirdHorizontalStack = UIStackView()
-    
-    let goodMannerButton = UIButton()
-    let rightTimeButton = UIButton()
-    
-    let quickResponse = UIButton()
-    let nicePerson = UIButton()
-    
-    let goodHobby = UIButton()
-    let goodTime = UIButton()
+    let colletionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+
+        return cv
+    }()
     
     let sesacReviewLabel = UILabel()
     let waitingForeReiview = UILabel()
@@ -59,9 +58,7 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
-        setUpWhenNotFull()
-        setUpStack()
-        setUpContainerViewConstraints()
+        setUpConstraintsWhenFolded()
     }
     
     
@@ -69,52 +66,16 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    private func setUpStack() {
-        
-        firstHoriznontalStack.addArrangedSubview(goodMannerButton)
-        firstHoriznontalStack.addArrangedSubview(rightTimeButton)
-
-        firstHoriznontalStack.distribution = .fillEqually
-        firstHoriznontalStack.axis = .horizontal
-        firstHoriznontalStack.spacing = 8
-        firstHoriznontalStack.backgroundColor = .blue
-
-        secondHorizontalStack.addArrangedSubview(quickResponse)
-        secondHorizontalStack.addArrangedSubview(nicePerson)
-
-
-        secondHorizontalStack.backgroundColor = .red
-        secondHorizontalStack.distribution = .fillEqually
-        secondHorizontalStack.axis = .horizontal
-        secondHorizontalStack.spacing = 8
-
-        thirdHorizontalStack.addArrangedSubview(goodHobby)
-        thirdHorizontalStack.addArrangedSubview(goodTime)
-
-        thirdHorizontalStack.distribution = .fillEqually
-        thirdHorizontalStack.axis = .horizontal
-        thirdHorizontalStack.spacing = 8
-
-        containerStack.addArrangedSubview(firstHoriznontalStack)
-        containerStack.addArrangedSubview(secondHorizontalStack)
-        containerStack.addArrangedSubview(thirdHorizontalStack)
-
-        containerStack.distribution = .fillEqually
-        containerStack.axis = .vertical
-        containerStack.spacing = 8
-    }
     
     private func setUp() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(moreButton)
-        contentView.addSubview(containerView)
-        containerView.addSubview(containerStack)
-        
-//        setUpStack()
-        containerView.addSubview(subTitle)
-        containerView.addSubview(sesacReviewLabel)
-        nameLabel.backgroundColor = .black
-        containerView.addSubview(waitingForeReiview)
+        contentView.addSubview(subTitle)
+        contentView.addSubview(colletionView)
+        contentView.addSubview(sesacReviewLabel)
+        contentView.addSubview(waitingForeReiview)
+        colletionView.register(ManageCollectionViewCell.self, forCellWithReuseIdentifier: ManageCollectionViewCell.identifier)
+
         subTitle.text = "새싹 타이틀"
         nameLabel.text = "ASDF"
         sesacReviewLabel.text = "새싹 리뷰"
@@ -122,84 +83,70 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         waitingForeReiview.text = "첫 리뷰를 기다리는 중"
     }
     
-    private func setUpConstraints() {
+    private func setUpConstraintsWhenFolded() {
         nameLabel.snp.removeConstraints()
         moreButton.snp.removeConstraints()
-        containerStack.snp.removeConstraints()
-
+        subTitle.snp.removeConstraints()
+        colletionView.snp.removeConstraints()
+        sesacReviewLabel.snp.removeConstraints()
+        waitingForeReiview.snp.removeConstraints()
+        
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
-            make.height.equalTo(26)
         }
-
+        
         moreButton.snp.makeConstraints { make in
-            make.height.equalTo(6)
-            make.width.equalTo(12)
-            make.top.equalToSuperview().offset(26)
+            make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-18)
+            make.width.equalTo(12)
+            make.height.equalTo(6)
+        }
+    
+    }
+    
+    private func setUpConstraintsWhenFull() {
+        
+        nameLabel.snp.removeConstraints()
+        moreButton.snp.removeConstraints()
+        
+        nameLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(32.5)
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        moreButton.snp.makeConstraints { make in
+            make.centerY.equalTo(32.5)
+            make.trailing.equalToSuperview().offset(-18)
+            make.width.equalTo(12)
+            make.height.equalTo(6)
         }
 
-        containerView.snp.makeConstraints { make in
+        subTitle.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(250)
-//            make.bottom.equalToSuperview()
-        }
-    }
-    private func setUpWhenNotFull() {
-        nameLabel.snp.removeConstraints()
-        moreButton.snp.removeConstraints()
-        containerStack.snp.removeConstraints()
-        
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-//            make.height.equalTo(26)
-        }
-        
-        moreButton.snp.makeConstraints { make in
-            make.height.equalTo(6)
-            make.width.equalTo(12)
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-18)
-        }
-    }
-    
-    
-    private func setUpContainerViewConstraints() {
-        subTitle.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.top.equalToSuperview()
             make.height.equalTo(18)
         }
-
-        containerStack.snp.makeConstraints { make in
-            make.top.equalTo(subTitle.snp.bottom).offset(16)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+        
+        colletionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
             make.height.equalTo(112)
+            make.trailing.equalToSuperview().offset(-16)
         }
+        
         sesacReviewLabel.snp.makeConstraints { make in
-            make.top.equalTo(containerStack.snp.bottom).offset(24)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.top.equalTo(colletionView.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(16)
             make.height.equalTo(18)
         }
+        
         waitingForeReiview.snp.makeConstraints { make in
             make.top.equalTo(sesacReviewLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(24)
-
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
+    
+        
+    
 }
-
-
-// 예전에 view 만들 때 protocol 만들어서 setUp이랑 setUpConstraints 강제 시켰는데, 이렇게 프로토콜로 강제하는 의미가 무엇인가?
-
-// 정보 관리텝 cell 높이. 절대값?
-

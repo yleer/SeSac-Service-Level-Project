@@ -54,8 +54,36 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ManageMyInfoViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if indexPath.row == 0{
+            let vc = ManageMyInfoViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.row == 1{
+            FireBaseService.getIdToken()
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                print(idToken)
+                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                    if error == nil {
+                        if statusCode == 200 {
+                        // home 화면으로
+                       
+                        }else {
+                         
+                        }
+                    }else {
+                        if statusCode == 401 {
+                            
+                        }else if statusCode == 500 {
+                           
+                        }else if statusCode == 501 {
+                         
+                        }
+                    }
+                }
+
+            }
+        }else {
+            print(UserInfo.current.user)
+        }
+        
     }
 }
-

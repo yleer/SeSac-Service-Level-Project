@@ -16,6 +16,9 @@ class MyGenderCell: UITableViewCell {
     let stackView = UIStackView()
     let maleButton = InActiveButton()
     let femaleButton = InActiveButton()
+    let textFieldView = UITextField()
+    let phoneSwitch = UISwitch()
+//    let textf = CommonTextFieldView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,12 +33,23 @@ class MyGenderCell: UITableViewCell {
     
     private func setUp() {
         addSubview(settingTitle)
-        addSubview(stackView)
+        
+        contentView.addSubview(stackView)
+        contentView.addSubview(phoneSwitch)
+        contentView.addSubview(textFieldView)
+        textFieldView.textAlignment = .right
+        
         
         settingTitle.text = "내 성별"
+        textFieldView.placeholder = "취미를 입력해주세요"
+        
         
         stackView.addArrangedSubview(maleButton)
         stackView.addArrangedSubview(femaleButton)
+        
+        stackView.isHidden = true
+        phoneSwitch.isHidden = true
+        textFieldView.isHidden = true
     }
     
     private func setUpStackView() {
@@ -44,7 +58,7 @@ class MyGenderCell: UITableViewCell {
         stackView.spacing = 8
         
         maleButton.setTitle("남자", for: .normal)
-        maleButton.setTitle("여자", for: .normal)
+        femaleButton.setTitle("여자", for: .normal)
     }
     
     private func setUpConstraints() {
@@ -58,6 +72,17 @@ class MyGenderCell: UITableViewCell {
             make.trailing.equalToSuperview()
             make.height.equalTo(48)
             make.width.equalTo(120)
+        }
+        
+        phoneSwitch.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        textFieldView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.width.equalTo(165)
         }
     }
     

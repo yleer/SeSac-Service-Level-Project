@@ -28,10 +28,13 @@ class ManageMyInfoView: UIView {
         tableView.register(ManageMyInfoPersonalInfoCell.self, forCellReuseIdentifier: ManageMyInfoPersonalInfoCell.identifier)
         tableView.register(ManageMyInfoImageCell.self, forCellReuseIdentifier: ManageMyInfoImageCell.identifier)
         tableView.register(MyGenderCell.self, forCellReuseIdentifier: MyGenderCell.identifier)
+        tableView.register(ManageMyInfoAgeRangeCell.self, forCellReuseIdentifier: ManageMyInfoAgeRangeCell.identifier)
         tableView.allowsSelection = false
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 130
+        tableView.showsVerticalScrollIndicator = false
+        
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 130
     }
     
     private func setUpConstraints() {
@@ -41,7 +44,5 @@ class ManageMyInfoView: UIView {
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
-        
     }
-    
 }

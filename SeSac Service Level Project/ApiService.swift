@@ -19,11 +19,20 @@ class ApiService {
     static func getUserInfo(idToken: String, completion: @escaping (APIError?, Int) -> Void) {
         let headers: HTTPHeaders = ["idtoken": idToken]
         
-        AF.request(EndPoint.getUserInfo.url, method: .get, headers: headers).responseString { response in
+        AF.request(EndPoint.getUserInfo.url, method: .get, headers: headers).responseData { response in
             switch response.result {
-            case .success(_):
+            case .success(let value):
                 guard let statusCode = response.response?.statusCode else { return }
                 if statusCode == 200 {
+                    let decoder = JSONDecoder()
+                    
+                    do {
+                        let result = try decoder.decode(User.self, from: value)
+                        UserInfo.current.user = result
+                    }catch { error 
+                        print("Sadf", error)
+                    }
+                    
                     print("good to go")
                     completion(nil, 200)
                 }else if statusCode == 201 {
@@ -63,6 +72,29 @@ class ApiService {
                 
             case .failure(let error):
                 print("error", error)
+            }
+        }
+    }
+    
+    static func updateUserInfo(searchable: Int, min: Int, max: Int, gender: Int, hobby:String?, idToken: String) {
+        
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        
+        let parameter = MyInfoUpdateParameter(
+            searchable: searchable,
+            ageMin: min,
+            ageMax: max,
+            gender: gender,
+            hobby: hobby
+        )
+        
+        AF.request(EndPoint.updateMypage.url, method: .post, parameters: parameter, headers: headers).responseData { response in
+            switch response.result {
+            case .success(_):
+                
+                print("changed successly", response.request?.httpBody)
+            case .failure(_):
+                print("error")
             }
         }
     }

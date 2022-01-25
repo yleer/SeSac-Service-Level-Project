@@ -11,6 +11,8 @@
 		8819F72E279D86EE0075F656 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72D279D86EE0075F656 /* Enums.swift */; };
 		8819F732279D8CF10075F656 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F731279D8CF10075F656 /* RxCocoa */; };
 		8819F734279D8CF10075F656 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F733279D8CF10075F656 /* RxSwift */; };
+		883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883C8B8A27A041DD007BCA20 /* ColorNames.swift */; };
+		883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883C8B8C27A04330007BCA20 /* FontNames.swift */; };
 		885C2384279D211800FF658E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2383279D211800FF658E /* OnboardingViewController.swift */; };
 		885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2386279D26C800FF658E /* OnBoardingView.swift */; };
 		885F016B279A7C380049856B /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F016A279A7C380049856B /* ApiService.swift */; };
@@ -25,6 +27,10 @@
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
+		88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */; };
+		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
+		88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */; };
+		88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */; };
 		88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */; };
 		88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEF279E4FD300828537 /* MyInfoView.swift */; };
 		88CC7EF2279E50EE00828537 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */; };
@@ -77,6 +83,8 @@
 		68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.release.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.release.xcconfig"; sourceTree = "<group>"; };
 		8819F72B279D85840075F656 /* Userdefault + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault + extension.swift"; sourceTree = "<group>"; };
 		8819F72D279D86EE0075F656 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		883C8B8A27A041DD007BCA20 /* ColorNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNames.swift; sourceTree = "<group>"; };
+		883C8B8C27A04330007BCA20 /* FontNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontNames.swift; sourceTree = "<group>"; };
 		885C2383279D211800FF658E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		885C2386279D26C800FF658E /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		885F016A279A7C380049856B /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -89,6 +97,10 @@
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoAgeRangeCell.swift; sourceTree = "<group>"; };
+		88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
+		88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUpdateData.swift; sourceTree = "<group>"; };
+		88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangeCollectionViewCell.swift; sourceTree = "<group>"; };
 		88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		88CC7EEF279E4FD300828537 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -168,6 +180,8 @@
 				88DE49F12796B864003D5958 /* Observable.swift */,
 				8819F72D279D86EE0075F656 /* Enums.swift */,
 				88CC7EF7279E63C900828537 /* ImageNames.swift */,
+				883C8B8A27A041DD007BCA20 /* ColorNames.swift */,
+				883C8B8C27A04330007BCA20 /* FontNames.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -239,6 +253,10 @@
 				88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */,
 				88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */,
 				88CC7F02279EB50700828537 /* MyGenderCell.swift */,
+				88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */,
+				88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */,
+				88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */,
+				88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */,
 			);
 			path = ManageMyInfoView;
 			sourceTree = "<group>";
@@ -511,8 +529,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CC7EF6279E5AC700828537 /* MyInfoViewModel.swift in Sources */,
+				883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */,
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
+				88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */,
 				88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
 				88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */,
@@ -522,17 +542,20 @@
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
+				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
 				88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */,
 				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
 				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
 				88F90D042798FE3800E518DC /* EmailView.swift in Sources */,
+				88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */,
 				88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */,
 				88F90D08279909CE00E518DC /* GenderSelectionViewController.swift in Sources */,
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
+				883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
 				88F90CFF2798FB5200E518DC /* DatePickerView.swift in Sources */,
 				88CC7EFD279E9C6F00828537 /* ManageMyInfoView.swift in Sources */,
@@ -540,6 +563,7 @@
 				88820D53279BC03600E8FCD4 /* EndPoints.swift in Sources */,
 				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
 				88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */,
+				88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */,
 				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
 				885F0171279A7F770049856B /* ApiData.swift in Sources */,
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,

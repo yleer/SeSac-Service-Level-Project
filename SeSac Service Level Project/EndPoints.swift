@@ -15,6 +15,7 @@ enum EndPoint {
     case withdraw
     case updateFcmToken
     case updateMypage
+    
 }
 
 extension EndPoint {

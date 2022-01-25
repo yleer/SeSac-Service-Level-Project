@@ -29,30 +29,30 @@ class CommonTextFieldView: UIView {
         didSet {
             switch stateOfTextField {
             case .inActive:
-                focusLine.backgroundColor = UIColor(named: "grayscalegray3")
-                textField.textColor = UIColor(named: "grayscalegray7")
+                focusLine.backgroundColor = UIColor(named: ColorNames.gray3)
+                textField.textColor = UIColor(named: ColorNames.gray7)
                 infoLabel.text = ""
             case .focus:
-                focusLine.backgroundColor = UIColor(named: "systemfocus")
+                focusLine.backgroundColor = UIColor(named: ColorNames.focusColor)
                 textField.textColor = .black
                 infoLabel.text = ""
             case .active:
-                focusLine.backgroundColor = UIColor(named: "grayscalegray3")
+                focusLine.backgroundColor = UIColor(named: ColorNames.gray3)
                 textField.textColor = .black
                 infoLabel.text = ""
             case .disable:
-                backgroundColor = UIColor(named: "grayscalegray3")
-                textField.textColor = UIColor(named: "grayscalegray7")
+                backgroundColor = UIColor(named: ColorNames.gray3)
+                textField.textColor = UIColor(named: ColorNames.gray7)
                 infoLabel.text = ""
             case .error(let text):
-                focusLine.backgroundColor = UIColor(named: "systemerror")
+                focusLine.backgroundColor = UIColor(named: ColorNames.errorColor)
                 textField.textColor = .black
-                infoLabel.textColor = UIColor(named: "systemerror")
+                infoLabel.textColor = UIColor(named: ColorNames.errorColor)
                 infoLabel.text = text
             case .success(let text):
-                focusLine.backgroundColor = UIColor(named: "systemsuccess")
+                focusLine.backgroundColor = UIColor(named: ColorNames.successColor)
                 textField.textColor = .black
-                infoLabel.textColor = UIColor(named: "systemsuccess")
+                infoLabel.textColor = UIColor(named: ColorNames.successColor)
                 infoLabel.text = text
             }
         }
@@ -74,8 +74,8 @@ class CommonTextFieldView: UIView {
         addSubview(focusLine)
         addSubview(infoLabel)
         
-        textField.font = UIFont(name: "NotoSansKR-Regular", size: 14)
-        stateOfTextField = .inActive
+        textField.font = UIFont(name: FontNames.regular, size: 14)
+        stateOfTextField = .focus
     }
     
     func setUpConstraints() {
