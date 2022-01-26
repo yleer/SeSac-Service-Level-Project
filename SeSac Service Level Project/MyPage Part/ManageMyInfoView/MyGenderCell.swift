@@ -18,6 +18,7 @@ final class MyGenderCell: UITableViewCell {
     let femaleButton = InActiveButton()
     let textFieldView = UITextField()
     let phoneSwitch = UISwitch()
+    let deleteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,6 +38,7 @@ final class MyGenderCell: UITableViewCell {
         stackView.isHidden = true
         phoneSwitch.isHidden = true
         textFieldView.isHidden = true
+        deleteButton.isHidden = true
         
         switch type {
         case .gender:
@@ -46,7 +48,7 @@ final class MyGenderCell: UITableViewCell {
         case .searchable:
             phoneSwitch.isHidden = false
         case .withdrawl:
-            return
+            deleteButton.isHidden = false
         }
     }
     
@@ -69,6 +71,7 @@ final class MyGenderCell: UITableViewCell {
         contentView.addSubview(stackView)
         contentView.addSubview(phoneSwitch)
         contentView.addSubview(textFieldView)
+        contentView.addSubview(deleteButton)
         textFieldView.textAlignment = .right
         
         
@@ -115,6 +118,9 @@ final class MyGenderCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
             make.width.equalTo(165)
+        }
+        deleteButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

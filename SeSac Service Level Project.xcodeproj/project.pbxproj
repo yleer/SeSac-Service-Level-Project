@@ -45,6 +45,9 @@
 		88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */; };
 		88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */; };
 		88DCEA3B27A12A6200BDB530 /* UIColor + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */; };
+		88DCEA3D27A175E300BDB530 /* DeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3C27A175E300BDB530 /* DeleteViewController.swift */; };
+		88DCEA3F27A1761200BDB530 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3E27A1761200BDB530 /* DeleteView.swift */; };
+		88DCEA4127A190DF00BDB530 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA4027A190DE00BDB530 /* HomeView.swift */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -118,6 +121,9 @@
 		88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extensions.swift"; sourceTree = "<group>"; };
+		88DCEA3C27A175E300BDB530 /* DeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteViewController.swift; sourceTree = "<group>"; };
+		88DCEA3E27A1761200BDB530 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
+		88DCEA4027A190DE00BDB530 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -285,6 +291,8 @@
 		88DCEA3127A0F93100BDB530 /* MyPage Part */ = {
 			isa = PBXGroup;
 			children = (
+				88DCEA3C27A175E300BDB530 /* DeleteViewController.swift */,
+				88DCEA3E27A1761200BDB530 /* DeleteView.swift */,
 				88CC7EEE279E4FC700828537 /* MyInfoView */,
 				88CC7EFB279E9C5A00828537 /* ManageMyInfoView */,
 			);
@@ -362,6 +370,7 @@
 				88F0280A2795495E00390168 /* Info.plist */,
 				88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */,
 				88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */,
+				88DCEA4027A190DE00BDB530 /* HomeView.swift */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -560,6 +569,7 @@
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
 				88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */,
 				88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */,
+				88DCEA4127A190DF00BDB530 /* HomeView.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
 				88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */,
 				889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */,
@@ -570,11 +580,13 @@
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
+				88DCEA3F27A1761200BDB530 /* DeleteView.swift in Sources */,
 				88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */,
 				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
 				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
 				88F90D042798FE3800E518DC /* EmailView.swift in Sources */,
+				88DCEA3D27A175E300BDB530 /* DeleteViewController.swift in Sources */,
 				88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */,
 				88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */,
 				88F90D08279909CE00E518DC /* GenderSelectionViewController.swift in Sources */,

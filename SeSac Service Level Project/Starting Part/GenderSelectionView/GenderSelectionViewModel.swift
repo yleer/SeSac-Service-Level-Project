@@ -29,6 +29,8 @@ class GenderSelectionViewModel {
                     completion(errorContent, false)
                 case .clientError(let errorContent):
                     completion(errorContent, false)
+                default:
+                    print("error")
                 }
             }else{
                 // No error

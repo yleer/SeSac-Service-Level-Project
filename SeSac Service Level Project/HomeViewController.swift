@@ -6,16 +6,25 @@
 //
 
 import UIKit
+import MapKit
 
 class HomeViewController: UIViewController {
     
+    let mainView = HomeView()
+    
     override func loadView() {
         super.loadView()
+        self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+//        view.backgroundColor = .brandGreen
+        
     }
+    
+}
+
+extension HomeViewController: CLLocationManagerDelegate {
     
 }

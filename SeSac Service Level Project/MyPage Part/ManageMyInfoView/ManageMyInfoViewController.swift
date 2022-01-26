@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 import RangeSeekSlider
 
 class ManageMyInfoViewController: UIViewController {
@@ -24,34 +25,27 @@ class ManageMyInfoViewController: UIViewController {
         super.viewDidLoad()
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
-        
         title = "정보 관리"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(navButtonClicked))
     }
 
     
-    
     @objc func navButtonClicked() {
         print(viewModel.updatedData.value)
  
         if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-            ApiService.updateUserInfo(searchable: viewModel.updatedData.value.searchable, min: viewModel.updatedData.value.ageMin, max: viewModel.updatedData.value.ageMax, gender: viewModel.updatedData.value.gender, hobby: viewModel.updatedData.value.hobby, idToken: idToken)
-            
-            ApiService.getUserInfo(idToken: idToken) { error, statusCode in
-                if error == nil {
-                    if statusCode == 200 {
-                    // home 화면으로
-                   
-                    }else {
-                     
-                    }
-                }else {
-                    if statusCode == 401 {
-                        
-                    }else if statusCode == 500 {
-                       
-                    }else if statusCode == 501 {
-                     
+            let user = viewModel.updatedData.value
+            ApiService.updateUserInfo(searchable: user.searchable, min: user.ageMin, max: user.ageMax, gender: user.gender, hobby: user.hobby, idToken: idToken) { error, statusCode in
+                if let error = error {
+                    switch error {
+                    case .firebaseTokenError(let errorContent):
+                        self.view.makeToast(errorContent)
+                    case .serverError(let errorContent):
+                        self.view.makeToast(errorContent)
+                    case .clientError(let errorContent):
+                        self.view.makeToast(errorContent)
+                    default:
+                        return
                     }
                 }
             }
@@ -111,9 +105,16 @@ extension ManageMyInfoViewController: UITableViewDelegate, UITableViewDataSource
                 cell.phoneSwitch.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
             }else if indexPath.row == 6 {
                 cell.configureFromCellForRowAt(title: "회원탈퇴", type: .withdrawl)
+                cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
             }
             return cell
         }
+    }
+    
+    @objc func deleteButtonClicked() {
+        let vc = DeleteViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func maleButtonClicked() {
