@@ -36,6 +36,11 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         }
     }
     
+//    func configureFromCellForRowAt<T: UICollectionViewDelegate>(vc: T) {
+//        colletionView.delegate = T
+//        colletionView.dataSource = T
+//    }
+    
     let nameLabel = UILabel()
     let moreButton = UIButton()
     let subTitle = UILabel()
@@ -74,6 +79,8 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         contentView.addSubview(colletionView)
         contentView.addSubview(sesacReviewLabel)
         contentView.addSubview(waitingForeReiview)
+        
+        
         colletionView.register(ManageCollectionViewCell.self, forCellWithReuseIdentifier: ManageCollectionViewCell.identifier)
 
         subTitle.text = "새싹 타이틀"
@@ -102,7 +109,6 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
             make.width.equalTo(12)
             make.height.equalTo(6)
         }
-    
     }
     
     private func setUpConstraintsWhenFull() {
@@ -146,7 +152,4 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
             make.bottom.equalToSuperview().offset(-16)
         }
     }
-    
-        
-    
 }

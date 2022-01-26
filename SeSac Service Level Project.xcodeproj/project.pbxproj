@@ -44,7 +44,7 @@
 		88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F02279EB50700828537 /* MyGenderCell.swift */; };
 		88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */; };
 		88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */; };
-		88DCEA3927A0FFC000BDB530 /* MyPageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3827A0FFC000BDB530 /* MyPageNavigationController.swift */; };
+		88DCEA3B27A12A6200BDB530 /* UIColor + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -117,7 +117,7 @@
 		88CC7F02279EB50700828537 /* MyGenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGenderCell.swift; sourceTree = "<group>"; };
 		88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		88DCEA3827A0FFC000BDB530 /* MyPageNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNavigationController.swift; sourceTree = "<group>"; };
+		88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extensions.swift"; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -225,6 +225,7 @@
 				88820D4D279BADDD00E8FCD4 /* String + extensions.swift */,
 				88820D50279BB20000E8FCD4 /* Calendar + extensions.swift */,
 				8819F72B279D85840075F656 /* Userdefault + extension.swift */,
+				88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,7 +287,6 @@
 			children = (
 				88CC7EEE279E4FC700828537 /* MyInfoView */,
 				88CC7EFB279E9C5A00828537 /* ManageMyInfoView */,
-				88DCEA3827A0FFC000BDB530 /* MyPageNavigationController.swift */,
 			);
 			path = "MyPage Part";
 			sourceTree = "<group>";
@@ -581,8 +581,8 @@
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
-				88DCEA3927A0FFC000BDB530 /* MyPageNavigationController.swift in Sources */,
 				883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */,
+				88DCEA3B27A12A6200BDB530 /* UIColor + extensions.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
 				88F90CFF2798FB5200E518DC /* DatePickerView.swift in Sources */,
 				88CC7EFD279E9C6F00828537 /* ManageMyInfoView.swift in Sources */,

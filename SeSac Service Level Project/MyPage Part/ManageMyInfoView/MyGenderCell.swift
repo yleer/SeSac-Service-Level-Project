@@ -8,17 +8,16 @@
 import UIKit
 import SnapKit
 
-class MyGenderCell: UITableViewCell {
+final class MyGenderCell: UITableViewCell {
     
     static let identifier = "MyGenderCell"
     
-    let settingTitle = UILabel()
-    let stackView = UIStackView()
+    private let settingTitle = UILabel()
+    private let stackView = UIStackView()
     let maleButton = InActiveButton()
     let femaleButton = InActiveButton()
     let textFieldView = UITextField()
     let phoneSwitch = UISwitch()
-//    let textf = CommonTextFieldView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,6 +28,39 @@ class MyGenderCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    
+    func configureFromCellForRowAt(title: String, type: ManageCellType) {
+        settingTitle.text = title
+        
+        stackView.isHidden = true
+        phoneSwitch.isHidden = true
+        textFieldView.isHidden = true
+        
+        switch type {
+        case .gender:
+            stackView.isHidden = false
+        case .hobby:
+            textFieldView.isHidden = false
+        case .searchable:
+            phoneSwitch.isHidden = false
+        case .withdrawl:
+            return
+        }
+    }
+    
+    func genderButton(gender: Int) {
+        if gender == 0 {
+            femaleButton.backgroundColor = .brandGreen
+            maleButton.backgroundColor = .white
+        }else if gender == 1{
+            maleButton.backgroundColor = .brandGreen
+            femaleButton.backgroundColor = .white
+        }else {
+            maleButton.backgroundColor = .white
+            femaleButton.backgroundColor = .white
+        }
     }
     
     private func setUp() {
@@ -85,8 +117,15 @@ class MyGenderCell: UITableViewCell {
             make.width.equalTo(165)
         }
     }
-    
-    
-    
-    
 }
+
+
+enum ManageCellType {
+    case gender
+    case hobby
+    case searchable
+    case withdrawl
+}
+
+
+

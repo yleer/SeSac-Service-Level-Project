@@ -28,6 +28,7 @@ struct ImageNames {
     
     struct ManageTableViewImageCell {
         static let profileImage = "sesac_bg_01"
+        static let sessacImage = "sesac_face_2"
     }
     
     struct TabBarController {

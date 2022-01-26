@@ -18,16 +18,11 @@ class ManageViewModel {
         return 7
     }
     
-    
     func heightForRowAt(indexPath: IndexPath) -> Float {
         if indexPath.row == 0 {
             return 194
         }else if indexPath.row == 1 {
-            if open {
-                return 300
-            }else {
-                return 65
-            }
+            return open ? 300 : 65
         }else if indexPath.row == 5 {
             return 120
         }else {
@@ -35,13 +30,13 @@ class ManageViewModel {
         }
     }
     
-    
-    
-    let sectiontitleLabels = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
+    private let sectiontitleLabels = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
     
     func cellForItemAt(indexPath: IndexPath) -> String {
         return sectiontitleLabels[indexPath.row]
-        
     }
     
+    var numberOfItemsInSection: Int {
+        return 6
+    }
 }

@@ -13,7 +13,7 @@ class ManageMyInfoAgeRangeCell: UITableViewCell {
     
     static let identifier = "ManageMyInfoAgeRangeCell"
     
-    let settingTitle = UILabel()
+    private let settingTitle = UILabel()
     let selectedAgeRangeLabel = UILabel()
     let rangeSeeker = RangeSeekSlider()
     
@@ -27,7 +27,13 @@ class ManageMyInfoAgeRangeCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    func setUp() {
+    func configureFromCellForRowAt(min: CGFloat, max: CGFloat, text: String) {
+        rangeSeeker.selectedMinValue = min
+        rangeSeeker.selectedMaxValue = max
+        selectedAgeRangeLabel.text = text
+    }
+    
+    private func setUp() {
         contentView.addSubview(settingTitle)
         contentView.addSubview(selectedAgeRangeLabel)
         contentView.addSubview(rangeSeeker)
@@ -36,7 +42,7 @@ class ManageMyInfoAgeRangeCell: UITableViewCell {
         selectedAgeRangeLabel.text = "15-35"
     }
     
-    func setUpConstarints() {
+    private func setUpConstarints() {
         
         settingTitle.snp.makeConstraints { make in
             make.centerY.equalTo(34)
