@@ -9,10 +9,12 @@
 import UIKit
 import SnapKit
 
-class MyInfoSettingCell: UITableViewCell {
+final class MyInfoSettingCell: UITableViewCell {
     
-    let settingImage = UIImageView()
-    let settingLabel = UILabel()
+    static let identifier = "MyInfoSettingCell"
+    
+    private let settingImage = UIImageView()
+    private let settingLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,25 +26,28 @@ class MyInfoSettingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUp() {
+    func configureFromCellForRowAt(image: UIImage, text: String) {
+        settingImage.image = image
+        settingLabel.text = text
+    }
+    
+    private func setUp() {
         addSubview(settingImage)
         addSubview(settingLabel)
     }
     
-    func setUpConstraints() {
+    private func setUpConstraints() {
         
         settingImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(2)
             make.size.equalTo(20)
             make.centerY.equalToSuperview()
-            
         }
         
         settingLabel.snp.makeConstraints { make in
             make.leading.equalTo(settingImage.snp.trailing).offset(14)
             make.centerY.equalTo(settingImage.snp.centerY)
             make.trailing.equalToSuperview().offset(-2)
-            
         }
     }
 }

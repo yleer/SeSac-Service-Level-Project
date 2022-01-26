@@ -34,23 +34,21 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = viewModel.cellForRowAt(cellForRowAt: indexPath)
+        
         if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyInfoTableViewCell", for: indexPath) as? MyInfoTableViewCell else  { return UITableViewCell() }
-            
-            cell.profileImage.image = UIImage(named: data.0)
-            cell.nameLabel.text = data.1
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyInfoTableViewCell.identifier, for: indexPath) as? MyInfoTableViewCell else  { return UITableViewCell() }
+            cell.configureFromCellForRowAt(image: UIImage(named: data.0)!, text: data.1)
             return cell
         }else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyInfoSettingCell", for: indexPath) as? MyInfoSettingCell else { return UITableViewCell() }
-            
-            cell.settingImage.image = UIImage(named: data.0)
-            cell.settingLabel.text = data.1
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyInfoSettingCell.identifier, for: indexPath) as? MyInfoSettingCell else { return UITableViewCell() }
+            cell.configureFromCellForRowAt(image: UIImage(named: data.0)!, text: data.1)
             return cell
         }
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        72
+        return CGFloat(viewModel.heightForRowAt)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

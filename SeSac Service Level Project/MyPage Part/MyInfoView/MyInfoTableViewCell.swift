@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import SnapKit
 
 class MyInfoTableViewCell: UITableViewCell {
     
-    let profileImage = UIImageView()
-    let nameLabel = UILabel()
-    let moreImage = UIImageView()
+    static let identifier = "MyInfoTableViewCell"
+    
+    private let profileImage = UIImageView()
+    private let nameLabel = UILabel()
+    private let moreImage = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,7 +26,12 @@ class MyInfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUp() {
+    func configureFromCellForRowAt(image: UIImage, text: String) {
+        profileImage.image = image
+        nameLabel.text = text
+    }
+    
+    private func setUp() {
         addSubview(profileImage)
         addSubview(nameLabel)
         addSubview(moreImage)
@@ -35,7 +43,7 @@ class MyInfoTableViewCell: UITableViewCell {
         moreImage.image = UIImage(named: ImageNames.MyInfoTableViewCell.myInfoTableViewCellMore)
     }
     
-    func setUpConstraints() {
+    private func setUpConstraints() {
         profileImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(2)
             make.centerY.equalToSuperview()
