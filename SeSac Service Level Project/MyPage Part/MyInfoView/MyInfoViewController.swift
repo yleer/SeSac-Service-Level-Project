@@ -21,7 +21,7 @@ final class MyInfoViewController: UIViewController {
         super.viewDidLoad()
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
-        title = "내 정보"
+        self.navigationController?.navigationBar.topItem?.title = "내 정보"
     }
 }
 

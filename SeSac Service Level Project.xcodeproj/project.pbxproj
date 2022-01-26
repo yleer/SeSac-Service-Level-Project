@@ -42,6 +42,9 @@
 		88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */; };
 		88CC7F01279EB3A700828537 /* ManageMyInfoImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */; };
 		88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F02279EB50700828537 /* MyGenderCell.swift */; };
+		88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */; };
+		88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */; };
+		88DCEA3927A0FFC000BDB530 /* MyPageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3827A0FFC000BDB530 /* MyPageNavigationController.swift */; };
 		88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EC27965A8C003D5958 /* InActiveButton.swift */; };
 		88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49EF2796B810003D5958 /* RegisterViewModel.swift */; };
 		88DE49F22796B864003D5958 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE49F12796B864003D5958 /* Observable.swift */; };
@@ -112,6 +115,9 @@
 		88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoPersonalInfoCell.swift; sourceTree = "<group>"; };
 		88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoImageCell.swift; sourceTree = "<group>"; };
 		88CC7F02279EB50700828537 /* MyGenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGenderCell.swift; sourceTree = "<group>"; };
+		88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		88DCEA3827A0FFC000BDB530 /* MyPageNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNavigationController.swift; sourceTree = "<group>"; };
 		88DE49EC27965A8C003D5958 /* InActiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActiveButton.swift; sourceTree = "<group>"; };
 		88DE49EF2796B810003D5958 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		88DE49F12796B864003D5958 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -261,6 +267,30 @@
 			path = ManageMyInfoView;
 			sourceTree = "<group>";
 		};
+		88DCEA3027A0F91D00BDB530 /* Starting Part */ = {
+			isa = PBXGroup;
+			children = (
+				885C2385279D211D00FF658E /* OneBoardingView */,
+				88F0281527954A9E00390168 /* Register */,
+				88EA1B572797B42300307111 /* VerifyPhoneNumberViewController */,
+				889EBAD32798372F006C1A6E /* NickNamView */,
+				88F90CF22798EC1100E518DC /* BirthView */,
+				88F90D022798FE2E00E518DC /* EmailView */,
+				88F90D09279909E700E518DC /* GenderSelectionView */,
+			);
+			path = "Starting Part";
+			sourceTree = "<group>";
+		};
+		88DCEA3127A0F93100BDB530 /* MyPage Part */ = {
+			isa = PBXGroup;
+			children = (
+				88CC7EEE279E4FC700828537 /* MyInfoView */,
+				88CC7EFB279E9C5A00828537 /* ManageMyInfoView */,
+				88DCEA3827A0FFC000BDB530 /* MyPageNavigationController.swift */,
+			);
+			path = "MyPage Part";
+			sourceTree = "<group>";
+		};
 		88DE49EE27965A96003D5958 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,26 +347,21 @@
 			isa = PBXGroup;
 			children = (
 				88EA1B5C2797C1E800307111 /* Noto_Sans_KR */,
-				885C2385279D211D00FF658E /* OneBoardingView */,
-				88F0281527954A9E00390168 /* Register */,
-				88EA1B572797B42300307111 /* VerifyPhoneNumberViewController */,
-				889EBAD32798372F006C1A6E /* NickNamView */,
-				88F90CF22798EC1100E518DC /* BirthView */,
-				88F90D022798FE2E00E518DC /* EmailView */,
-				88F90D09279909E700E518DC /* GenderSelectionView */,
+				88DCEA3027A0F91D00BDB530 /* Starting Part */,
+				88DCEA3127A0F93100BDB530 /* MyPage Part */,
+				88DE49EE27965A96003D5958 /* CommonViews */,
+				885F016F279A7F550049856B /* Api */,
+				88820D4F279BADE200E8FCD4 /* Extensions */,
+				885C238A279D4FD100FF658E /* FireBase */,
+				8819F72F279D86F20075F656 /* Datas */,
 				88F028072795495E00390168 /* LaunchScreen.storyboard */,
 				88F027FE2795495A00390168 /* SceneDelegate.swift */,
 				88F027FC2795495A00390168 /* AppDelegate.swift */,
 				88F028052795495E00390168 /* Assets.xcassets */,
 				885F0172279A8DA10049856B /* GoogleService-Info.plist */,
 				88F0280A2795495E00390168 /* Info.plist */,
-				88DE49EE27965A96003D5958 /* CommonViews */,
-				8819F72F279D86F20075F656 /* Datas */,
-				885F016F279A7F550049856B /* Api */,
-				88820D4F279BADE200E8FCD4 /* Extensions */,
-				885C238A279D4FD100FF658E /* FireBase */,
-				88CC7EEE279E4FC700828537 /* MyInfoView */,
-				88CC7EFB279E9C5A00828537 /* ManageMyInfoView */,
+				88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */,
+				88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -530,6 +555,7 @@
 			files = (
 				88CC7EF6279E5AC700828537 /* MyInfoViewModel.swift in Sources */,
 				883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */,
+				88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */,
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
 				88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */,
@@ -555,6 +581,7 @@
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
+				88DCEA3927A0FFC000BDB530 /* MyPageNavigationController.swift in Sources */,
 				883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
 				88F90CFF2798FB5200E518DC /* DatePickerView.swift in Sources */,
@@ -569,6 +596,7 @@
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
+				88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */,
 				88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,
 				88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */,

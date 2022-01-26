@@ -30,4 +30,15 @@ struct ImageNames {
         static let profileImage = "sesac_bg_01"
     }
     
+    struct TabBarController {
+        static let FriendActivate = "FriendActivate"
+        static let FriendInActivate = "FriendInActivate"
+        static let HomeActiviate = "HomeActiviate"
+        static let HomeInActivate = "HomeInActivate"
+        static let MyInfoActivate = "MyInfoActivate"
+        static let MyInfoInActivate = "MyInfoInActivate"
+        static let ShopActivate = "ShopActivate"
+        static let ShopInActivate = "ShopInActivate"
+    }
+    
 }
