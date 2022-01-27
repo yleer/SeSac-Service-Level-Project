@@ -31,6 +31,9 @@
 		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
 		88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */; };
 		88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */; };
+		88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */; };
+		88C94AC927A2BFAB000A01E1 /* HobbySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */; };
+		88C94ACC27A2BFD0000A01E1 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */; };
 		88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */; };
 		88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEF279E4FD300828537 /* MyInfoView.swift */; };
 		88CC7EF2279E50EE00828537 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */; };
@@ -107,6 +110,10 @@
 		88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
 		88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUpdateData.swift; sourceTree = "<group>"; };
 		88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangeCollectionViewCell.swift; sourceTree = "<group>"; };
+		88C94AC427A2705B000A01E1 /* SeSac Service Level Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SeSac Service Level Project.entitlements"; sourceTree = "<group>"; };
+		88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacAnnotation.swift; sourceTree = "<group>"; };
+		88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchViewController.swift; sourceTree = "<group>"; };
+		88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchView.swift; sourceTree = "<group>"; };
 		88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		88CC7EEF279E4FD300828537 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +253,25 @@
 			path = NickNamView;
 			sourceTree = "<group>";
 		};
+		88C94AC527A27723000A01E1 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				88DCEA4027A190DE00BDB530 /* HomeView.swift */,
+				88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */,
+				88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		88C94ACA27A2BFBF000A01E1 /* HobbySearchView */ = {
+			isa = PBXGroup;
+			children = (
+				88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */,
+				88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */,
+			);
+			path = HobbySearchView;
+			sourceTree = "<group>";
+		};
 		88CC7EEE279E4FC700828537 /* MyInfoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +380,7 @@
 		88F027FB2795495A00390168 /* SeSac Service Level Project */ = {
 			isa = PBXGroup;
 			children = (
+				88C94AC427A2705B000A01E1 /* SeSac Service Level Project.entitlements */,
 				88EA1B5C2797C1E800307111 /* Noto_Sans_KR */,
 				88DCEA3027A0F91D00BDB530 /* Starting Part */,
 				88DCEA3127A0F93100BDB530 /* MyPage Part */,
@@ -368,9 +395,9 @@
 				88F028052795495E00390168 /* Assets.xcassets */,
 				885F0172279A8DA10049856B /* GoogleService-Info.plist */,
 				88F0280A2795495E00390168 /* Info.plist */,
-				88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */,
+				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
+				88C94AC527A27723000A01E1 /* HomeView */,
 				88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */,
-				88DCEA4027A190DE00BDB530 /* HomeView.swift */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -576,6 +603,7 @@
 				88F90CF62798EC2000E518DC /* BirthView.swift in Sources */,
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
+				88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
@@ -606,12 +634,14 @@
 				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
 				885F0171279A7F770049856B /* ApiData.swift in Sources */,
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,
+				88C94ACC27A2BFD0000A01E1 /* HobbySearchView.swift in Sources */,
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
 				88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */,
 				88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,
 				88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */,
+				88C94AC927A2BFAB000A01E1 /* HobbySearchViewController.swift in Sources */,
 				88CC7EFA279E9C3E00828537 /* ManageMyInfoViewController.swift in Sources */,
 				88CC7F01279EB3A700828537 /* ManageMyInfoImageCell.swift in Sources */,
 				88DE49ED27965A8C003D5958 /* InActiveButton.swift in Sources */,
@@ -760,6 +790,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SeSac Service Level Project/SeSac Service Level Project.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
@@ -788,6 +819,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SeSac Service Level Project/SeSac Service Level Project.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;

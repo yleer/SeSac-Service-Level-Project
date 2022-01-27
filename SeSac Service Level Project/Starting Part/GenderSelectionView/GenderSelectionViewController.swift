@@ -97,7 +97,12 @@ class GenderSelectionViewController: UIViewController {
             DispatchQueue.main.async {
                 if success {
                     guard let message = message else {
-                        print("success")
+                        
+                        
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainTabBarController())
+                        windowScene.windows.first?.makeKeyAndVisible()
                         return
                     }
                     // toast message ->

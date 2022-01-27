@@ -23,7 +23,7 @@ class NickNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindings()
-        FireBaseService.getIdToken()
+        FireBaseService.getIdToken(completion: nil)
         addTargets()
         mainView.nickNameTextFieldView.textField.delegate = self
         

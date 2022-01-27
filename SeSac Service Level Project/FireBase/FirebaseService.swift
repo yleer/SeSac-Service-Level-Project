@@ -32,7 +32,7 @@ class FireBaseService{
         Auth.auth().signIn(with: credential, completion: completion)
     }
     
-    static func getIdToken() {
+    static func getIdToken(completion: (() -> Void)?) {
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
           if let error = error {
@@ -40,6 +40,7 @@ class FireBaseService{
             return
           }
             UserDefaults.standard.set(idToken!, forKey: UserDefaults.myKey.idToken.rawValue)
+            completion?()
         }
     }
 }

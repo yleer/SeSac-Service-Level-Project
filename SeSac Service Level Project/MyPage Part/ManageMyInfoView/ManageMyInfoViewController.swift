@@ -25,8 +25,13 @@ class ManageMyInfoViewController: UIViewController {
         super.viewDidLoad()
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        configureNavBar()
+    }
+    
+    private func configureNavBar() {
         title = "정보 관리"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(navButtonClicked))
+        self.navigationController?.navigationBar.tintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(navButtonClicked))
     }
 
     
@@ -47,6 +52,12 @@ class ManageMyInfoViewController: UIViewController {
                     default:
                         return
                     }
+                }else {
+                    self.view.makeToast("수정이 완료 되었습니다.")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
                 }
             }
         }
@@ -96,8 +107,7 @@ extension ManageMyInfoViewController: UITableViewDelegate, UITableViewDataSource
                 cell.maleButton.addTarget(self, action: #selector(maleButtonClicked), for: .touchUpInside)
                 cell.femaleButton.addTarget(self, action: #selector(femaleButtonClicked), for: .touchUpInside)
             }else if indexPath.row == 3{
-                cell.configureFromCellForRowAt(title: "자주 하는 취미", type: .hobby)
-                cell.textFieldView.text = user.hobby
+                cell.configureFromCellForRowAt(title: "자주 하는 취미", type: .hobby(hobby: user.hobby))
                 cell.textFieldView.addTarget(self, action: #selector(hobbyTextfiledChagned), for: .editingChanged)
             }else if indexPath.row == 4 {
                 cell.configureFromCellForRowAt(title: "내 번호 검색 허용", type: .searchable)

@@ -38,8 +38,15 @@ class ManageMyInfoAgeRangeCell: UITableViewCell {
         contentView.addSubview(selectedAgeRangeLabel)
         contentView.addSubview(rangeSeeker)
         
+        settingTitle.font = UIFont(name: FontNames.regular, size: 14)
         settingTitle.text = "상대방 연령대"
+        selectedAgeRangeLabel.textColor = .brandGreen
+        selectedAgeRangeLabel.font = UIFont(name: FontNames.medium, size: 14)
         selectedAgeRangeLabel.text = "15-35"
+        rangeSeeker.minValue = 18
+        rangeSeeker.maxValue = 65
+        rangeSeeker.handleColor = .brandGreen
+        rangeSeeker.tintColor = .brandGreen
     }
     
     private func setUpConstarints() {

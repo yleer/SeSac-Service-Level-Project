@@ -33,6 +33,7 @@ final class MyGenderCell: UITableViewCell {
     
     
     func configureFromCellForRowAt(title: String, type: ManageCellType) {
+        settingTitle.font = UIFont(name: FontNames.regular, size: 14)
         settingTitle.text = title
         
         stackView.isHidden = true
@@ -43,8 +44,9 @@ final class MyGenderCell: UITableViewCell {
         switch type {
         case .gender:
             stackView.isHidden = false
-        case .hobby:
+        case .hobby(let hobby):
             textFieldView.isHidden = false
+            textFieldView.text = hobby
         case .searchable:
             phoneSwitch.isHidden = false
         case .withdrawl:
@@ -128,7 +130,7 @@ final class MyGenderCell: UITableViewCell {
 
 enum ManageCellType {
     case gender
-    case hobby
+    case hobby(hobby: String)
     case searchable
     case withdrawl
 }

@@ -24,7 +24,7 @@ class GenderSelectionViewModel {
                 case .firebaseTokenError(let errorContent):
                     completion(errorContent, false)
                     
-                    FireBaseService.getIdToken()
+                    FireBaseService.getIdToken(completion: nil)
                 case .serverError(let errorContent):
                     completion(errorContent, false)
                 case .clientError(let errorContent):

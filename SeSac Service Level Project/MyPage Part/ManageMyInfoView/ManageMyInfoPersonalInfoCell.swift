@@ -23,23 +23,18 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
                 colletionView.isHidden = false
                 sesacReviewLabel.isHidden = false
                 waitingForeReiview.isHidden = false
-                
+                moreButton.setImage(UIImage(named: ImageNames.ManageTableViewCell.manageTableVectortUp), for: .normal)
                 setUpConstraintsWhenFull()
             }else {
                 subTitle.isHidden = true
                 colletionView.isHidden = true
                 sesacReviewLabel.isHidden = true
                 waitingForeReiview.isHidden = true
-                
+                moreButton.setImage(UIImage(named: ImageNames.ManageTableViewCell.manageTableVectortDown), for: .normal)
                 setUpConstraintsWhenFolded()
             }
         }
     }
-    
-//    func configureFromCellForRowAt<T: UICollectionViewDelegate>(vc: T) {
-//        colletionView.delegate = T
-//        colletionView.dataSource = T
-//    }
     
     let nameLabel = UILabel()
     let moreButton = UIButton()
@@ -73,6 +68,10 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
     
     
     private func setUp() {
+        self.layer.cornerRadius = 15
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.gray3?.cgColor
+        
         contentView.addSubview(nameLabel)
         contentView.addSubview(moreButton)
         contentView.addSubview(subTitle)
@@ -83,10 +82,15 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         
         colletionView.register(ManageCollectionViewCell.self, forCellWithReuseIdentifier: ManageCollectionViewCell.identifier)
 
+        nameLabel.font = UIFont(name: FontNames.medium, size: 16)
+        subTitle.font = UIFont(name: FontNames.regular, size: 12)
         subTitle.text = "새싹 타이틀"
         nameLabel.text = "ASDF"
         sesacReviewLabel.text = "새싹 리뷰"
-        moreButton.setImage(UIImage(named: ImageNames.ManageTableViewCell.manageTableViewCellMore), for: .normal)
+        sesacReviewLabel.font = UIFont(name: FontNames.regular, size: 12)
+        waitingForeReiview.font = UIFont(name: FontNames.regular, size: 14)
+        waitingForeReiview.textColor = .gray4
+        moreButton.setImage(UIImage(named: ImageNames.ManageTableViewCell.manageTableVectortDown), for: .normal)
         waitingForeReiview.text = "첫 리뷰를 기다리는 중"
     }
     

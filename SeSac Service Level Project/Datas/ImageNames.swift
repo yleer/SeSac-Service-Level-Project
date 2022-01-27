@@ -15,7 +15,8 @@ struct ImageNames {
     }
     
     struct ManageTableViewCell {
-        static let manageTableViewCellMore = "Vector down"
+        static let manageTableVectortDown = "Vector down"
+        static let manageTableVectortUp = "Vector up"
     }
     
     struct MyInfoSettingCell {
