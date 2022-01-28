@@ -14,6 +14,7 @@ class SeSacAnnotation: NSObject, MKAnnotation {
     let discipline: String?
     let coordinate: CLLocationCoordinate2D
     
+    
     init(discipline: String?,
                   coordinate: CLLocationCoordinate2D) {
         self.discipline = discipline

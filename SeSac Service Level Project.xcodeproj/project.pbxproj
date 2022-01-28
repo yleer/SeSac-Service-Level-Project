@@ -34,6 +34,7 @@
 		88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */; };
 		88C94AC927A2BFAB000A01E1 /* HobbySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */; };
 		88C94ACC27A2BFD0000A01E1 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */; };
+		88C94ACE27A2E7B0000A01E1 /* SizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94ACD27A2E7B0000A01E1 /* SizingCell.swift */; };
 		88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */; };
 		88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EEF279E4FD300828537 /* MyInfoView.swift */; };
 		88CC7EF2279E50EE00828537 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */; };
@@ -114,6 +115,7 @@
 		88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacAnnotation.swift; sourceTree = "<group>"; };
 		88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchViewController.swift; sourceTree = "<group>"; };
 		88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchView.swift; sourceTree = "<group>"; };
+		88C94ACD27A2E7B0000A01E1 /* SizingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizingCell.swift; sourceTree = "<group>"; };
 		88CC7EEC279E4FC000828537 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		88CC7EEF279E4FD300828537 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		88CC7EF1279E50EE00828537 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			children = (
 				88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */,
 				88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */,
+				88C94ACD27A2E7B0000A01E1 /* SizingCell.swift */,
 			);
 			path = HobbySearchView;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */,
 				88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */,
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
+				88C94ACE27A2E7B0000A01E1 /* SizingCell.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
 				88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */,
 				88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */,

@@ -17,4 +17,6 @@ extension UIColor {
     static let gray5 = UIColor(named: ColorNames.gray5)
     static let gray6 = UIColor(named: ColorNames.gray6)
     static let gray7 = UIColor(named: ColorNames.gray7)
+    static let errorRed = UIColor(named: ColorNames.errorColor)
+    
 }

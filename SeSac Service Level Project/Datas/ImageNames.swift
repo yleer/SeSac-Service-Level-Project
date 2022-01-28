@@ -43,4 +43,8 @@ struct ImageNames {
         static let ShopInActivate = "ShopInActivate"
     }
     
+    struct HobbySearchController {
+        static let close_small = "close_small"
+    }
+    
 }

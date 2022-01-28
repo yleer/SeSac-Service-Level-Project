@@ -11,6 +11,8 @@ import MapKit
 class HomeViewController: UIViewController {
     
     let mainView = HomeView()
+    let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.51818789942772, longitude: 126.88541765534976)
+    let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
     let locationManager = CLLocationManager()
     
     override func loadView() {
@@ -18,77 +20,100 @@ class HomeViewController: UIViewController {
         self.view = mainView
     }
     
+    
+    private func startingPoint() {
+        let status = locationManager.authorizationStatus
+        checkCurrentLocationAuth(status)
+//        let a1 = MKPointAnnotation()
+//        a1.coordinate = center2
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         locationManager.delegate = self
         mainView.mapView.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
+    
         let center = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
-        mainView.mapView.region = MKCoordinateRegion(center: center, span: span)
+        let center2 = CLLocationCoordinate2D(latitude: 38.51781936468269, longitude: 126.8864731707474)
+        let center3 = CLLocationCoordinate2D(latitude: 38.51781936468079, longitude: 121.8864731707471)
         
-        let a1 = SeSacAnnotation(discipline: "kiki", coordinate: center)
+        
+        
+        mainView.mapView.region = MKCoordinateRegion(center: center2, span: defaultSpan)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        
+        
+        
+        
+//        let a1 = SeSacAnnotation(discipline: "kiki", coordinate: center2)
+        let a1 = MKPointAnnotation()
+        a1.coordinate = center2
         let a2 = MKPointAnnotation()
-        let a3 = MKMarkerAnnotationView()
-//        MKdrag
-        a3.coordinateSpace
+        let a3 = SeSacAnnotation(discipline: nil, coordinate: center3)
         a2.coordinate = center
+//        mainView.mapView.addAnnotations([a2,a1,a3])
         
-        mainView.mapView.addAnnotation(a2)
+    }
+    @objc func addTapped() {
+        navigationController?.pushViewController(HobbySearchViewController(), animated: true)
     }
     
 }
 
 extension HomeViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("mark selected")
+        print("mark selected", view.isDraggable)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? SeSacAnnotation else {
-          return nil
+            print("dd")
+            let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
+            view.isDraggable = true
+            view.pinTintColor = .red
+          return view
         }
         // 3
-        let identifier = "artwork"
-        var view: MKMarkerAnnotationView
-        // 4
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(
-          withIdentifier: identifier) as? MKMarkerAnnotationView {
-          dequeuedView.annotation = annotation
-          view = dequeuedView
+    
+        var annotationView = self.mainView.mapView.dequeueReusableAnnotationView(withIdentifier: "SeSacAnnotation")
+        if annotationView == nil {
+            //없으면 하나 만들어 주시고
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAnnotation")
+            
+            annotationView?.isDraggable = true
+
+
+            let miniButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            miniButton.setImage(UIImage(systemName: "person"), for: .normal)
+            miniButton.tintColor = .blue
+            annotationView?.rightCalloutAccessoryView = miniButton
+            
         } else {
-          // 5
-          view = MKMarkerAnnotationView(
-            annotation: annotation,
-            reuseIdentifier: identifier)
-//          view.canShowCallout = true
-//          view.calloutOffset = CGPoint(x: -5, y: 5)
-//          view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            let a = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            a.isDraggable = true
-        return a
+            //있으면 등록된 걸 쓰시면 됩니다.
+            annotationView?.annotation = annotation
         }
-        let a = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-        a.isDraggable = true
+        print("aa")
+        annotationView?.image = UIImage(named: ImageNames.MyInfoTableViewCell.myInfoTableViewCellUser)
         
-//        a.annotation?.setCoordinate(<#T##CLLocationCoordinate2D#>)
-    return a
-        view.isDraggable = true
-        return view
-        
-        
+        return nil
       }
 
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-        print("ASdffads")
-        switch newState {
-            case .starting:
-                view.dragState = .dragging
-            case .ending, .canceling:
-                view.dragState = .none
-            default: break
+
+        if (newState == MKAnnotationView.DragState.ending){
+            let droppedAt = view.annotation?.coordinate
+            print("dropped at : ", droppedAt?.latitude ?? 0.0, droppedAt?.longitude ?? 0.0);
+            view.setDragState(.none, animated: true)
+        }
+        if (newState == .canceling )
+        {
+            view.setDragState(.none, animated: true)
         }
     }
 }
@@ -101,13 +126,12 @@ extension HomeViewController: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate{
             let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
             let region = MKCoordinateRegion(center: coordinate, span: span)
-            let newPin = MKAnnotationView(annotation: nil, reuseIdentifier: "")
-                
-//            MKAnnotation(
-            newPin.isDraggable = true
             mainView.mapView.setRegion(region, animated: true)
-//            mainView.mapView.addAnnotation(newPin)
             
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            mainView.mapView.addAnnotation(annotation)
+            locationManager.stopUpdatingLocation()
         }else{
             print("not good")
         }
@@ -146,31 +170,16 @@ extension HomeViewController: CLLocationManagerDelegate {
         case .notDetermined:
             locationManager.startUpdatingLocation()
             locationManager.requestWhenInUseAuthorization()
-            print("not determined")
         case .restricted, .denied:
-            print("denied , 설정으로 유도")
-            let alertVC = UIAlertController(title: "위치 권한이 거부되었습니다.", message: "정확한 서비스를 위하여 위치 권한을 허용해주세요.", preferredStyle: .alert)
+            mainView.mapView.region = MKCoordinateRegion(center: defaultCoordinate, span: defaultSpan)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = defaultCoordinate
+            mainView.mapView.addAnnotation(annotation)
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
             
-            let goToSetting = UIAlertAction(title: "설정으로", style: .default) { _ in
-                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                        return
-                    }
-
-                    if UIApplication.shared.canOpenURL(settingsUrl) {
-                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                            print("Settings opened: \(success)")
-                        })
-                    }
-            }
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-            alertVC.addAction(cancelAction)
-            alertVC.addAction(goToSetting)
-            self.present(alertVC, animated: true, completion: nil)
-        case .authorizedAlways:
-            locationManager.startUpdatingLocation()
-            print("always")
-        case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
+            
+            
         @unknown default:
             print("default")
         }
