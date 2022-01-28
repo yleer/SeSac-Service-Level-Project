@@ -36,7 +36,7 @@ class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
 
 class HobbySearchView: UIView {
     
-    let findFreindsButton = UIButton()
+    let findFreindsButton = InActiveButton()
     let firstSection = UILabel()
     let secondSection = UILabel()
     let collectionView : UICollectionView = {
@@ -72,7 +72,7 @@ class HobbySearchView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
-        setUpConstraints()
+        setUpNormalConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -92,9 +92,22 @@ class HobbySearchView: UIView {
         firstSection.text = "지금 주변에는"
         secondSection.font = UIFont(name: FontNames.regular, size: 12)
         secondSection.text = "내가 하고 싶은"
+        findFreindsButton.setTitle("새싹 찾기", for: .normal)
+        findFreindsButton.stateOfButton = .fill
     }
     
-    func setUpConstraints() {
+    private func removeAllConstraints() {
+        firstSection.snp.removeConstraints()
+        collectionView.snp.removeConstraints()
+        secondSection.snp.removeConstraints()
+        secondCollectionView.snp.removeConstraints()
+        findFreindsButton.snp.removeConstraints()
+    }
+    
+    
+    func setUpNormalConstraints() {
+        removeAllConstraints()
+        findFreindsButton.layer.cornerRadius = 10
         firstSection.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(32)
             make.height.equalTo(18)
@@ -121,6 +134,51 @@ class HobbySearchView: UIView {
             make.trailing.equalToSuperview()
             make.top.equalTo(secondSection.snp.bottom).offset(16)
             make.height.equalTo(150)
+        }
+        
+        findFreindsButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
+        }
+    }
+    
+    func setUpWhenKeyBoardConstraints(keyBoardHeight: CGFloat) {
+        removeAllConstraints()
+        findFreindsButton.layer.cornerRadius = 0
+        firstSection.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(32)
+            make.height.equalTo(18)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalTo(firstSection.snp.bottom).offset(16)
+            make.height.equalTo(150)
+        }
+        
+        secondSection.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom).offset(24)
+            make.height.equalTo(18)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        secondCollectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalTo(secondSection.snp.bottom).offset(16)
+            make.height.equalTo(150)
+        }
+        bringSubviewToFront(findFreindsButton)
+        findFreindsButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(48)
+            make.bottom.equalToSuperview().offset(-keyBoardHeight)
         }
     }
     

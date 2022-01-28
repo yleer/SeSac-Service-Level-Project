@@ -96,7 +96,7 @@ class ManageMyInfoViewController: UIViewController {
 }
 extension ManageMyInfoViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
+        print("sdf")
         return true
     }
 }

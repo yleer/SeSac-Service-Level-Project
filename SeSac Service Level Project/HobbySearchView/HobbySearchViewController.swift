@@ -32,10 +32,46 @@ class HobbySearchViewController: UIViewController {
         self.navigationItem.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
+        
+        mainView.findFreindsButton.addTarget(self, action: #selector(findButtonCilcked), for: .touchUpInside)
+    }
+    
+    @objc func findButtonCilcked() {
+        print("Hello")
+    }
+
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            searchBar.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
+
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        print("heool")
+        var keyboardHeight: CGFloat = 0
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            
+            keyboardHeight = keyboardRect.height
+            
+        }
+        mainView.setUpWhenKeyBoardConstraints(keyBoardHeight: keyboardHeight)
+    }
+    @objc func keyboardWillHide() {
+        print("by")
+        mainView.setUpNormalConstraints()
     }
     
     @objc func addTapped() {
         print(searchBar.text)
+//        view.endEditing(true)
+        searchBar.endEditing(true)
     }
     
 }
