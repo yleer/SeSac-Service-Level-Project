@@ -13,6 +13,15 @@ final class RegisterViewController: UIViewController {
     private let mainView = RegisterView()
     private let viewModel = RegisterViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.phoneNumberView.textField.becomeFirstResponder()
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
     override func loadView() {
         super.loadView()
         self.view = mainView

@@ -15,6 +15,10 @@ class NickNameViewController: UIViewController {
     let viewModel = NickNameViewModel()
     var notAbleNickName = false
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
+    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -32,7 +36,7 @@ class NickNameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.nickNameTextFieldView.textField.becomeFirstResponder()
-        
+    
         if notAbleNickName {
             self.view.makeToast("해당 닉네임은 사용할 수 없습니다")
             mainView.nickNameTextFieldView.textField.text = ""

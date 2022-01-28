@@ -13,6 +13,16 @@ final class VerifiyPhoneNumberViewController: UIViewController {
     private let viewModel = VerifyPhoneNumberViewModel()
     private let mainView = VerifyPhoneNumberView()
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.verificationCodeView.textField.becomeFirstResponder()
+        
+    }
+    
     override func loadView() {
         super.loadView()
         self.view = mainView

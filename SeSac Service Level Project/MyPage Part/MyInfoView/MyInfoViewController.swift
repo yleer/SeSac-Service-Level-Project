@@ -24,6 +24,9 @@ final class MyInfoViewController: UIViewController {
         mainView.tableView.dataSource = self
         self.navigationController?.navigationBar.topItem?.title = "내 정보"
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
 }
 
 extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -55,31 +58,34 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
             
-            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
-                    
-                    guard let error = error else {
-                        if statusCode == 200 {
-                            let vc = ManageMyInfoViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+            FireBaseService.getIdToken {
+                if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                    ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                        
+                        guard let error = error else {
+                            if statusCode == 200 {
+                                let vc = ManageMyInfoViewController()
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                            return
                         }
-                        return
+                        
+                        switch error {
+                        case .firebaseTokenError(let errorContent):
+                            FireBaseService.getIdToken(completion: nil)
+                            self.view.makeToast(errorContent)
+                        case .serverError(let errorContent):
+                            self.view.makeToast(errorContent)
+                        case .clientError(let errorContent):
+                            self.view.makeToast(errorContent)
+                        case .alreadyWithdrawl(let errorContent):
+                            self.view.makeToast(errorContent)
+                        }
                     }
-                    
-                    switch error {
-                    case .firebaseTokenError(let errorContent):
-                        FireBaseService.getIdToken(completion: nil)
-                        self.view.makeToast(errorContent)
-                    case .serverError(let errorContent):
-                        self.view.makeToast(errorContent)
-                    case .clientError(let errorContent):
-                        self.view.makeToast(errorContent)
-                    case .alreadyWithdrawl(let errorContent):
-                        self.view.makeToast(errorContent)
-                    }
-                }
 
+                }
             }
+            
         }
     }
 }

@@ -26,7 +26,38 @@ class ManageMyInfoViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         configureNavBar()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
     }
+
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true)
+        }
+        sender.cancelsTouchesInView = false
+    }
+
+   
+    @objc func keyboardWillShow(_ sender: Notification) {
+        var keyboardHeight: CGFloat = 0
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            
+            keyboardHeight = keyboardRect.height
+        }
+        if viewModel.open {
+            mainView.setUpKeyBoardConstraints(keyboardHeight: keyboardHeight)
+        }else {
+            mainView.setUpNormalConstraints()
+        }
+        print(keyboardHeight)
+        
+    }
+    @objc func keyboardWillHide() {
+        mainView.setUpNormalConstraints()
+    }
+    
     
     private func configureNavBar() {
         title = "정보 관리"
@@ -63,9 +94,18 @@ class ManageMyInfoViewController: UIViewController {
         }
     }
 }
+extension ManageMyInfoViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+}
 
 extension ManageMyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRowInSection
     }
@@ -109,6 +149,7 @@ extension ManageMyInfoViewController: UITableViewDelegate, UITableViewDataSource
             }else if indexPath.row == 3{
                 cell.configureFromCellForRowAt(title: "자주 하는 취미", type: .hobby(hobby: user.hobby))
                 cell.textFieldView.addTarget(self, action: #selector(hobbyTextfiledChagned), for: .editingChanged)
+                cell.textFieldView.delegate = self
             }else if indexPath.row == 4 {
                 cell.configureFromCellForRowAt(title: "내 번호 검색 허용", type: .searchable)
                 cell.phoneSwitch.isOn = user.searchable == 0 ? false : true

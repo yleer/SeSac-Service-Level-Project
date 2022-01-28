@@ -14,7 +14,7 @@ class ManageMyInfoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
-        setUpConstraints()
+        setUpNormalConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -37,12 +37,23 @@ class ManageMyInfoView: UIView {
 //        tableView.estimatedRowHeight = 130
     }
     
-    private func setUpConstraints() {
+    func setUpNormalConstraints() {
+        tableView.snp.removeConstraints()
         tableView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(safeAreaLayoutGuide)
+        }
+    }
+    
+    func setUpKeyBoardConstraints(keyboardHeight: CGFloat) {
+        tableView.snp.removeConstraints()
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-keyboardHeight)
         }
     }
 }
