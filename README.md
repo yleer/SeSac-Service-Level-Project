@@ -18,4 +18,6 @@ ManageMyInfo view에 있는 table view는 각 cell 마다 다른 cell로 dequeue
 노티피케이션 코드를 이용하여 키도드가 올라가고 내려갈때에 대응 할 수 있음.
 textfield들에서는 view.endEditing(true)를 사용하면 키보드가 내려갔지만 searchbar에서는 이코드를 사용해도 키보드가 내려가지 않음. 그 대신 resignFirstResponder()를 사용하면 내려가는 것을 파악.
 심지어 searchbar에서는 노티피케이션도 안되는 거 같음
+https://stackoverflow.com/questions/29925373/how-to-make-keyboard-dismiss-when-i-press-out-of-searchbar-on-swift 나와 같은 문제를 갖고 있음.
+
 https://stackoverflow.com/questions/29882775/resignfirstresponder-vs-endediting-for-keyboard-dismissal/29882945 에서 차이 공부해보자.
