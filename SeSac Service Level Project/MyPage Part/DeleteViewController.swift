@@ -20,8 +20,10 @@ class DeleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-        view.isOpaque = false
+
+        view.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        
+//        view.isOpaque = true
         view.addSubview(mainView)
         mainView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()

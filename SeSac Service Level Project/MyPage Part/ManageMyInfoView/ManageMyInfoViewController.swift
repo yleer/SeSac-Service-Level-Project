@@ -164,7 +164,7 @@ extension ManageMyInfoViewController: UITableViewDelegate, UITableViewDataSource
     
     @objc func deleteButtonClicked() {
         let vc = DeleteViewController()
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

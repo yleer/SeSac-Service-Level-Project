@@ -16,6 +16,8 @@ enum EndPoint {
     case updateFcmToken
     case updateMypage
     
+    case requestToFindFirends
+    
 }
 
 extension EndPoint {
@@ -31,6 +33,8 @@ extension EndPoint {
             return .makeEndPoint("/user/update_fcm_token")
         case .updateMypage:
             return .makeEndPoint("/user/update/mypage")
+        case .requestToFindFirends:
+            return .makeEndPoint("/queue")
             
             
             

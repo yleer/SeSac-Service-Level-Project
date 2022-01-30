@@ -31,7 +31,7 @@ class GenderSelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.selectedGender.value = UserDefaults.standard.integer(forKey: "gender")
+//        viewModel.selectedGender.value = UserDefaults.standard.integer(forKey: "gender")
         mainView.toNextButton.stateOfButton = .fill
     }
     

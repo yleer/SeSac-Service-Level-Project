@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Toast
 
 class HobbySearchViewController: UIViewController {
     
+    let viewModel = HobbySeachViewModel()
     let mainView = HobbySearchView()
     let data = ["아무거나","SeSAC", "코딩","맛집탐방","공원산책","독서모임","다육이", "쓰레기줍기"]
-    
+
     let searchBar = UISearchBar()
     
     override func loadView() {
@@ -42,6 +44,14 @@ class HobbySearchViewController: UIViewController {
     
     @objc func findButtonCilcked() {
         print("Hello")
+//        FireBaseService.getIdToken {
+        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            print(idToken)
+            print(viewModel.requestParameter!)
+            ApiService.requestToFindFriends(idToken: idToken, parameter: self.viewModel.requestParameter!) { error, statusCode in
+                print(error, statusCode)
+            }
+        }
     }
 
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -69,8 +79,16 @@ class HobbySearchViewController: UIViewController {
     }
     
     @objc func addTapped() {
-        print(searchBar.text)
-//        view.endEditing(true)
+        if viewModel.myInterestHobbies.count < 8 {
+            if let text = searchBar.text, text.count >= 1, text.count < 9 {
+                viewModel.newSearchKeywords(keyWords: text)
+                mainView.secondCollectionView.reloadData()
+            }else {
+                self.view.makeToast("최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
+            }
+        }else {
+            self.view.makeToast("취미를 더 이상 추가할 수 없습니다")
+        }
         searchBar.endEditing(true)
     }
     
@@ -81,21 +99,30 @@ extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewD
         if collectionView == mainView.collectionView  {
            return data.count
         }
-        return 2
+        return viewModel.myInterestHobbies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SizingCell.identifier, for: indexPath) as? SizingCell else {return UICollectionViewCell()}
         
-        cell.hobbyLabel.text = data[indexPath.row]
-        if indexPath.row == 2 {
-            cell.cellType = .myHobby
-        }
         
-        if indexPath.row == 1 {
-            cell.cellType = .nearBySpecial
+        
+        if collectionView == mainView.collectionView {
+            cell.hobbyLabel.text = data[indexPath.item]
+        }else {
+            cell.hobbyLabel.text = viewModel.myInterestHobbies[indexPath.item]
+            cell.cellType = .myHobby
+            
         }
         return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == mainView.secondCollectionView {
+            viewModel.myInterestHobbies.remove(at: indexPath.item)
+            mainView.secondCollectionView.reloadData()
+        }
     }
 }
 

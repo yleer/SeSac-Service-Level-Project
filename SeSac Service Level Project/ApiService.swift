@@ -31,6 +31,7 @@ class ApiService {
                     let decoder = JSONDecoder()
                     do {
                         let result = try decoder.decode(User.self, from: value)
+                        print(result)
                         UserInfo.current.user = result
                     }catch {
                         print("user info decoding error : ", error)
@@ -87,6 +88,7 @@ class ApiService {
     
     static func register(phoneNumber: String, fcmToken: String, nickName: String, birth: String, email: String, gender: Int, idToken: String, completion: @escaping (APIError?, Int) -> Void) {
         
+        print(gender, "from apiService")
         let parameter = RegisterParameter(
             phoneNumber: phoneNumber,
             FCMtoken: fcmToken, nick: nickName, birth: birth,
@@ -106,6 +108,36 @@ class ApiService {
         }
     }
     
+    static func requestToFindFriends(idToken: String, parameter: FindRequestParameter, completion: @escaping (APIError?, Int) -> Void) {
+        
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        
+        let p = FindRequestParameter(type: 2, region: 1274830692, lat: 37.48511640269022, long: 126.92947109241517, hf: ["aa"])
+        
+    
+        AF.request(EndPoint.requestToFindFirends.url, method: .post, parameters: p,encoder: .urlEncodedForm() ,headers: headers).responseData { response in
+            switch response.result {
+            case .success(_):
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                if statusCode == 201{
+                    completion(nil, statusCode)
+                }else if statusCode == 203{
+                    completion(nil, statusCode)
+                }else if statusCode == 204{
+                    completion(nil, statusCode)
+                }else if statusCode == 205{
+                    completion(nil, statusCode)
+                }else if statusCode == 206{
+                    completion(nil, statusCode)
+                }
+                handlePostCall(statusCode: statusCode, completion: completion)
+            case .failure(_):
+                print("error")
+            }
+        }
+    }
+    
     static func handlePostCall(statusCode: Int, completion: @escaping (APIError?, Int) -> Void) {
         switch statusCode {
         case 200:
@@ -117,7 +149,7 @@ class ApiService {
         case 400...599:
             handleErrorCodes(statusCode: statusCode, completion: completion)
         default:
-            print("zz")
+            print(statusCode)
         }
     }
     
@@ -132,7 +164,7 @@ class ApiService {
         case 501:
             completion(.clientError(errorContent: "클라이언트 오류"), statusCode)
         default:
-            print("zz")
+            print(statusCode)
         }
     }
 }

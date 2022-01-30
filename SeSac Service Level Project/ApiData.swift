@@ -16,6 +16,15 @@ struct RegisterParameter: Encodable {
     let gender: Int
 }
 
+
+struct FindRequestParameter: Encodable {
+    let type: Int
+    let region: Int
+    let lat: Double
+    let long: Double
+    let hf: [String]
+}
+
 struct MyInfoUpdateParameter: Encodable {
     let searchable: Int
     let ageMin: Int

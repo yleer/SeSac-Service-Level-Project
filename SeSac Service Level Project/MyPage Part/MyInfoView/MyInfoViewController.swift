@@ -27,6 +27,37 @@ final class MyInfoViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
          self.view.endEditing(true)
    }
+    
+    func getInfo() {
+        FireBaseService.getIdToken {
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                    
+                    guard let error = error else {
+                        if statusCode == 200 {
+                            let vc = ManageMyInfoViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                        print(statusCode, "sdafaf")
+                        return
+                    }
+                    
+                    switch error {
+                    case .firebaseTokenError(let errorContent):
+                        FireBaseService.getIdToken(completion: nil)
+                        self.view.makeToast(errorContent)
+                    case .serverError(let errorContent):
+                        self.view.makeToast(errorContent)
+                    case .clientError(let errorContent):
+                        self.view.makeToast(errorContent)
+                    case .alreadyWithdrawl(let errorContent):
+                        self.view.makeToast(errorContent)
+                    }
+                }
+
+            }
+        }
+    }
 }
 
 extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -58,33 +89,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
             
-            FireBaseService.getIdToken {
-                if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-                    ApiService.getUserInfo(idToken: idToken) { error, statusCode in
-                        
-                        guard let error = error else {
-                            if statusCode == 200 {
-                                let vc = ManageMyInfoViewController()
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            }
-                            return
-                        }
-                        
-                        switch error {
-                        case .firebaseTokenError(let errorContent):
-                            FireBaseService.getIdToken(completion: nil)
-                            self.view.makeToast(errorContent)
-                        case .serverError(let errorContent):
-                            self.view.makeToast(errorContent)
-                        case .clientError(let errorContent):
-                            self.view.makeToast(errorContent)
-                        case .alreadyWithdrawl(let errorContent):
-                            self.view.makeToast(errorContent)
-                        }
-                    }
-
-                }
-            }
+            getInfo()
             
         }
     }

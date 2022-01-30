@@ -9,7 +9,7 @@ import Foundation
 
 class GenderSelectionViewModel {
     
-    var selectedGender: Observalble<Int> = Observalble(2)
+    var selectedGender: Observalble<Int> = Observalble(-1)
 
     func getUserInfo(completion: @escaping (String?, Bool) -> Void) {
         
@@ -19,6 +19,7 @@ class GenderSelectionViewModel {
 
         ApiService.register(phoneNumber: phone, fcmToken: fcmToken, nickName: nick, birth: age, email: email, gender: selectedGender.value, idToken: idToken) { error, statusCode in
             print(statusCode)
+            print(self.selectedGender.value)
             if let error = error {
                 switch error {
                 case .firebaseTokenError(let errorContent):

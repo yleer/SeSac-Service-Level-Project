@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8815B4EB27A66BED00F32627 /* HobbySeachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8815B4EA27A66BED00F32627 /* HobbySeachViewModel.swift */; };
 		8819F72C279D85840075F656 /* Userdefault + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72B279D85840075F656 /* Userdefault + extension.swift */; };
 		8819F72E279D86EE0075F656 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72D279D86EE0075F656 /* Enums.swift */; };
 		8819F732279D8CF10075F656 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F731279D8CF10075F656 /* RxCocoa */; };
@@ -46,6 +47,8 @@
 		88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */; };
 		88CC7F01279EB3A700828537 /* ManageMyInfoImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */; };
 		88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC7F02279EB50700828537 /* MyGenderCell.swift */; };
+		88D26C4C27A5631C00D956B8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D26C4B27A5631C00D956B8 /* HomeViewModel.swift */; };
+		88D26C4E27A56E9F00D956B8 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D26C4D27A56E9F00D956B8 /* ChattingViewController.swift */; };
 		88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */; };
 		88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */; };
 		88DCEA3B27A12A6200BDB530 /* UIColor + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */; };
@@ -91,6 +94,7 @@
 /* Begin PBXFileReference section */
 		230AD1F48C96E2FC3466D59C /* Pods-SeSac Service Level Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.debug.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.debug.xcconfig"; sourceTree = "<group>"; };
 		68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.release.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.release.xcconfig"; sourceTree = "<group>"; };
+		8815B4EA27A66BED00F32627 /* HobbySeachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySeachViewModel.swift; sourceTree = "<group>"; };
 		8819F72B279D85840075F656 /* Userdefault + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault + extension.swift"; sourceTree = "<group>"; };
 		8819F72D279D86EE0075F656 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		883C8B8A27A041DD007BCA20 /* ColorNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNames.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 		88CC7EFE279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoPersonalInfoCell.swift; sourceTree = "<group>"; };
 		88CC7F00279EB3A700828537 /* ManageMyInfoImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoImageCell.swift; sourceTree = "<group>"; };
 		88CC7F02279EB50700828537 /* MyGenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGenderCell.swift; sourceTree = "<group>"; };
+		88D26C4B27A5631C00D956B8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		88D26C4D27A56E9F00D956B8 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		88DCEA3A27A12A6200BDB530 /* UIColor + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extensions.swift"; sourceTree = "<group>"; };
@@ -261,6 +267,7 @@
 				88DCEA4027A190DE00BDB530 /* HomeView.swift */,
 				88DCEA3427A0F9C700BDB530 /* HomeViewController.swift */,
 				88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */,
+				88D26C4B27A5631C00D956B8 /* HomeViewModel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -271,6 +278,7 @@
 				88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */,
 				88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */,
 				88C94ACD27A2E7B0000A01E1 /* SizingCell.swift */,
+				8815B4EA27A66BED00F32627 /* HobbySeachViewModel.swift */,
 			);
 			path = HobbySearchView;
 			sourceTree = "<group>";
@@ -401,6 +409,7 @@
 				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
 				88C94AC527A27723000A01E1 /* HomeView */,
 				88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */,
+				88D26C4D27A56E9F00D956B8 /* ChattingViewController.swift */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -595,6 +604,7 @@
 				88CC7EF6279E5AC700828537 /* MyInfoViewModel.swift in Sources */,
 				883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */,
 				88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */,
+				88D26C4C27A5631C00D956B8 /* HomeViewModel.swift in Sources */,
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88C94ACE27A2E7B0000A01E1 /* SizingCell.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,
@@ -609,9 +619,11 @@
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
+				8815B4EB27A66BED00F32627 /* HobbySeachViewModel.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
+				88D26C4E27A56E9F00D956B8 /* ChattingViewController.swift in Sources */,
 				88DCEA3F27A1761200BDB530 /* DeleteView.swift in Sources */,
 				88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */,
 				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,

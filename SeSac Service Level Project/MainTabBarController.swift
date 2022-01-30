@@ -16,6 +16,7 @@ class MainTabBarController: UITabBarController {
         self.tabBar.backgroundColor = .white
 
         let homeVC = UINavigationController(rootViewController: HomeViewController())
+//        let homeVC = HomeViewController()
         homeVC.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.HomeActiviate)
         homeVC.tabBarItem.image = UIImage(named: ImageNames.TabBarController.HomeInActivate)
         homeVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)
@@ -33,7 +34,8 @@ class MainTabBarController: UITabBarController {
         sesacFriendsVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)
         
 //        let myPageNavController = UINavigationController(rootViewController: MyInfoViewController())
-        let myPageNavController = MyInfoViewController()
+        
+        let myPageNavController = UINavigationController(rootViewController: MyInfoViewController())
 //        myPageNavController.view.backgroundColor = .white
         myPageNavController.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.MyInfoActivate)
         myPageNavController.tabBarItem.image = UIImage(named: ImageNames.TabBarController.MyInfoInActivate)

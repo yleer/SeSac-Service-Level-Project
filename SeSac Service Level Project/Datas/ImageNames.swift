@@ -43,6 +43,14 @@ struct ImageNames {
         static let ShopInActivate = "ShopInActivate"
     }
     
+    
+    struct HomeViewController {
+        static let search = "place"
+        static let main_status_button = "main_status_button"
+        static let main_status_button1 = "main_status_button-1"
+        static let main_status_button2 = "main_status_button-2"
+    }
+    
     struct HobbySearchController {
         static let close_small = "close_small"
     }

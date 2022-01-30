@@ -12,8 +12,8 @@ class DeleteView: UIView {
     let title = UILabel()
     let subTitle = UILabel()
     
-    let cancelButton = UIButton()
-    let deleteButton = UIButton()
+    let cancelButton = InActiveButton()
+    let deleteButton = InActiveButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +26,7 @@ class DeleteView: UIView {
     }
     
     private func setUp() {
-        backgroundColor = .gray
+        backgroundColor = .white
         addSubview(title)
         addSubview(subTitle)
         
@@ -37,9 +37,18 @@ class DeleteView: UIView {
         subTitle.text = "탈퇴하시면 세싹프렌즈를 사용하실 수 없어요 ㅠ"
         
         title.textAlignment = .center
+        title.font = UIFont(name: FontNames.medium, size: 16)
         subTitle.textAlignment = .center
+        subTitle.font = UIFont(name: FontNames.medium, size: 14)
         cancelButton.setTitle("취소", for: .normal)
         deleteButton.setTitle("확인", for: .normal)
+        
+        cancelButton.layer.cornerRadius = 8
+        deleteButton.layer.cornerRadius = 8
+        
+        deleteButton.stateOfButton = .fill
+        cancelButton.stateOfButton = .cancel
+        self.layer.cornerRadius = 16
     }
     
     private func setUpCosntraints() {
