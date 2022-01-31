@@ -21,3 +21,19 @@ textfield들에서는 view.endEditing(true)를 사용하면 키보드가 내려�
 https://stackoverflow.com/questions/29925373/how-to-make-keyboard-dismiss-when-i-press-out-of-searchbar-on-swift 나와 같은 문제를 갖고 있음.
 
 https://stackoverflow.com/questions/29882775/resignfirstresponder-vs-endediting-for-keyboard-dismissal/29882945 에서 차이 공부해보자.
+
+
+1/30 일지
+오늘은 /queue콜을 보내기 위해 alamofire를 통해 post콜을 보내려 했다. 하지만 평소에 사용하던 post콜과는 달리 계속 client 에러가 발생하였다. 
+<img width="225" alt="스크린샷 2022-01-30 오후 11 58 08" src="https://user-images.githubusercontent.com/48948578/151704965-a6b390f4-a70b-43db-b747-a4f8a048b084.png">
+이 사진은 파라메터로 받는 명시된 값이다.
+
+<img width="485" alt="스크린샷 2022-01-30 오후 11 59 35" src="https://user-images.githubusercontent.com/48948578/151705007-5af79589-b2ea-4349-b85f-fc7ec7a989e5.png">
+평소와 같이 파라메터에 대응하는 구조체를 만들어 post 콜을 보냈는데 계속 에러가 발생하였다. 
+
+그래서 결국 서버측에 물어보니 내가 보낸 request의 값이 다른 값들은 다 잘 들어 갔지만 String 배열의 값이 다음과 같이 이상하게 들어가는것을 알 수 있었다.<img width="122" alt="스크린샷 2022-01-30 오후 8 45 08" src="https://user-images.githubusercontent.com/48948578/151705120-84ad5c71-3093-4952-a50a-d95d22b0dd6c.png">
+이를 통해 내가 보낸 파라메터의 값이 잘못 보내진것을 확인하였다. 그래서 검색을 통해 alamofire는 배열을 파라메터로 보낼때 인코딩 형식의 따라 다르게 보내진다는 것을 알게 되었고, 
+
+<img width="445" alt="스크린샷 2022-01-31 오전 12 03 59" src="https://user-images.githubusercontent.com/48948578/151705172-728b6bbf-0295-413b-8323-9a529c736407.png">
+이 인코딩 방법으로 문제를 해결할 수 있었다.
+
