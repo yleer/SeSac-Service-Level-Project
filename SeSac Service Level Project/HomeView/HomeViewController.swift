@@ -23,15 +23,7 @@ class HomeViewController: UIViewController {
         super.loadView()
         self.view = mainView
     }
-    
-    
-    private func startingPoint() {
-        let status = locationManager.authorizationStatus
-        checkCurrentLocationAuth(status)
-//        let a1 = MKPointAnnotation()
-//        a1.coordinate = center2
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         if let token = UserDefaults.standard.string(forKey: "idtoken"){
@@ -55,23 +47,7 @@ class HomeViewController: UIViewController {
             print("helo ",self.viewModel.nearFriends)
         }
         
-        
-        
-    
-        let center = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
-        let center2 = CLLocationCoordinate2D(latitude: 38.51781936468269, longitude: 126.8864731707474)
-        let center3 = CLLocationCoordinate2D(latitude: 38.51781936468079, longitude: 121.8864731707471)
-        
-        mainView.mapView.region = MKCoordinateRegion(center: center2, span: defaultSpan)
-        
-//        let a1 = SeSacAnnotation(discipline: "kiki", coordinate: center2)
-        let a1 = MKPointAnnotation()
-        a1.coordinate = center2
-        let a2 = MKPointAnnotation()
-        let a3 = SeSacAnnotation(discipline: nil, coordinate: center3)
-        a2.coordinate = center
-//        mainView.mapView.addAnnotations([a2,a1,a3])
-        
+        mainView.mapView.region = MKCoordinateRegion(center: defaultCoordinate, span: defaultSpan)
         addTargets()
     }
     
@@ -124,6 +100,7 @@ class HomeViewController: UIViewController {
     
     
     @objc func findMyPlaceButtonClciked() {
+        
         let status = locationManager.authorizationStatus
         switch status {
         case .notDetermined:
@@ -145,6 +122,7 @@ class HomeViewController: UIViewController {
     
     
     @objc func genderButtonClicked(_ sender: UIButton) {
+        
         if let title = sender.titleLabel?.text{
             if title == "전체" {
                 mainView.selected = .all
