@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import SwiftUI
 
 enum APIError: Error {
     case firebaseTokenError(errorContent: String)
@@ -20,9 +19,7 @@ class ApiService {
     
     // MARK: Get
     static func getUserInfo(idToken: String, completion: @escaping (APIError?, Int) -> Void) {
-        
         let headers: HTTPHeaders = ["idtoken": idToken]
-        
         AF.request(EndPoint.getUserInfo.url, method: .get, headers: headers).responseData { response in
             switch response.result {
             case .success(let value):
@@ -200,6 +197,7 @@ class ApiService {
     static func handleErrorCodes(statusCode: Int, completion: @escaping (APIError?, Int) -> Void) {
         switch statusCode {
         case 401:
+            FireBaseService.getIdToken(completion: nil)
             completion(.firebaseTokenError(errorContent: "에러가 발생했습니다. 잠시 후 다시 실행해주세요."), statusCode)
         case 406:
             completion(.alreadyWithdrawl(errorContent: "이미 탈퇴된 회원"), statusCode)

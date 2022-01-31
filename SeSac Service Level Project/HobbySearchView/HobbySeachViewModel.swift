@@ -15,6 +15,8 @@ class HobbySeachViewModel {
     var recommendationHobbies: [String] = []
     var nearByHobbies: [String] = []
     
+    
+    
     var myInterestHobbies: [String] = [] {
         didSet{
             if requestParameter != nil {
