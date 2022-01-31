@@ -9,16 +9,44 @@ import Foundation
 
 class HobbySeachViewModel {
     
-    var myInterestHobbies: [String] = ["dd"] {
+    lazy var requestParameter: FindRequestParameter! = nil
+    
+    var allHobbies: [String] = []
+    var recommendationHobbies: [String] = []
+    var nearByHobbies: [String] = []
+    
+    var myInterestHobbies: [String] = [] {
         didSet{
             if requestParameter != nil {
-//                requestParameter!.hf = myInterestHobbies
+                requestParameter!.hf = myInterestHobbies
             }
         }
     }
     
-    lazy var requestParameter: FindRequestParameter? = nil
-    
+
+    func getNeighborHobbies(completion: @escaping () -> Void) {
+        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            
+            ApiService.onqueue(idToken: idToken, region: requestParameter.region, lat: requestParameter.lat, long: requestParameter.long) { error, statusCode, data in
+                guard let data = data else { return }
+        
+                self.recommendationHobbies = data.fromRecommend
+                
+                let b = data.fromQueueDBRequested
+                let a = data.fromQueueDB
+                for b in b {
+                    self.nearByHobbies += b.hf
+                }
+                
+                for a in a {
+                    self.nearByHobbies += a.hf
+                }
+                
+                self.allHobbies = self.recommendationHobbies + self.nearByHobbies
+                completion()
+            }
+        }
+    }
     
     func newSearchKeywords(keyWords: String) {
         let a = keyWords.components(separatedBy: " ")

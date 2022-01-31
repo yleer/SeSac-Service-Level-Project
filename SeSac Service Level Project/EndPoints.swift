@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 enum EndPoint {
     case register
     case getUserInfo
@@ -17,6 +15,7 @@ enum EndPoint {
     case updateMypage
     
     case requestToFindFirends
+    case onqueue
     
 }
 
@@ -33,31 +32,14 @@ extension EndPoint {
             return .makeEndPoint("/user/update_fcm_token")
         case .updateMypage:
             return .makeEndPoint("/user/update/mypage")
+            
         case .requestToFindFirends:
             return .makeEndPoint("/queue")
+        case .onqueue:
+            return .makeEndPoint("/queue/onqueue")
             
-            
-            
-//        case .login:
-//            return .makeEndPoint("auth/local")
-//        case .board(id: let id):
-//            if let id = id {
-//                return .makeEndPoint("posts/\(id)")
-//            }else{
-//                return .makeEndPoint("posts")
-//            }
-//
-//        case .comments(id: let id):
-//            if let id = id {
-//                return .makeEndPoint("comments/\(id)")
-//            }
-//            return .makeEndPoint("comments")
-//
-//        case .changePassword:
-//            return .makeEndPoint("custom/change-password")
-//        case .boardPageing(start: let start, limit: let limit):
-//            return .makeEndPoint("posts?_sort=created_at:desc&_start=\(start)&_limit=\(limit)")
         }
+     
     }
 }
 

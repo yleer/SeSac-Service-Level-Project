@@ -108,14 +108,58 @@ class ApiService {
         }
     }
     
+    static func onqueue(idToken: String, region: Int, lat: Double, long: Double, completion: @escaping (APIError?, Int, OnqueueData?) -> Void) {
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        
+        let p: Parameters = [
+            "region": region,
+            "lat": lat,
+            "long": long
+        ]
+        
+        AF.request(
+            EndPoint.onqueue.url,
+            method: .post,
+            parameters: p,
+            headers: headers
+        ).responseData { response in
+            
+            
+            switch response.result {
+            case .success(let value):
+                guard let statusCode = response.response?.statusCode else { return }
+                if statusCode == 200 {
+            
+                    let decoder = JSONDecoder()
+                    let data = try! decoder.decode(OnqueueData.self, from: value)
+                    completion(nil, statusCode, data)
+                }else {
+//                    handlePostCall(statusCode: statusCode, completion: completion)
+                }
+            case .failure(let error):
+                print("what kind of error", error)
+            }
+        }
+    }
+    
     static func requestToFindFriends(idToken: String, parameter: FindRequestParameter, completion: @escaping (APIError?, Int) -> Void) {
         
         let headers: HTTPHeaders = ["idtoken": idToken]
-        
-        let p = FindRequestParameter(type: 2, region: 1274830692, lat: 37.48511640269022, long: 126.92947109241517, hf: ["aa"])
-        
+        let p: Parameters = [
+            "type": 2,
+            "region": parameter.region,
+            "lat": parameter.lat,
+            "long": parameter.long,
+            "hf": parameter.hf
+        ]
     
-        AF.request(EndPoint.requestToFindFirends.url, method: .post, parameters: p,encoder: .urlEncodedForm() ,headers: headers).responseData { response in
+        AF.request(
+            EndPoint.requestToFindFirends.url,
+            method: .post,
+            parameters: p,
+            encoding: URLEncoding(arrayEncoding: .noBrackets) ,
+            headers: headers
+        ).responseData { response in
             switch response.result {
             case .success(_):
                 guard let statusCode = response.response?.statusCode else { return }
@@ -132,8 +176,8 @@ class ApiService {
                     completion(nil, statusCode)
                 }
                 handlePostCall(statusCode: statusCode, completion: completion)
-            case .failure(_):
-                print("error")
+            case .failure(let error):
+                print("what kind of error", error)
             }
         }
     }

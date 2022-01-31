@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct RegisterParameter: Encodable {
+
+struct OnqueueData: Codable {
+    let fromQueueDB, fromQueueDBRequested: [FromQueueDB]
+    let fromRecommend: [String]
+}
+
+// MARK: - FromQueueDB
+struct FromQueueDB: Codable {
+    let uid, nick: String
+    let lat, long: Double
+    let reputation: [Int]
+    let hf, reviews: [String]
+    let gender, type, sesac, background: Int
+}
+
+struct RegisterParameter: Codable {
     let phoneNumber: String
     let FCMtoken: String
     let nick: String
@@ -17,15 +32,15 @@ struct RegisterParameter: Encodable {
 }
 
 
-struct FindRequestParameter: Encodable {
+struct FindRequestParameter: Codable {
     let type: Int
     let region: Int
     let lat: Double
     let long: Double
-    let hf: [String]
+    var hf: [String]
 }
 
-struct MyInfoUpdateParameter: Encodable {
+struct MyInfoUpdateParameter: Codable {
     let searchable: Int
     let ageMin: Int
     let ageMax: Int
