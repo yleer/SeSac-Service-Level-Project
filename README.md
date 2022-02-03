@@ -37,3 +37,6 @@ https://stackoverflow.com/questions/29882775/resignfirstresponder-vs-endediting-
 <img width="445" alt="스크린샷 2022-01-31 오전 12 03 59" src="https://user-images.githubusercontent.com/48948578/151705172-728b6bbf-0295-413b-8323-9a529c736407.png">
 이 인코딩 방법으로 문제를 해결할 수 있었다.
 
+
+1/31일지
+HobbySearchVc 완성하였다. 이제 코드들을 네트워크 통신 콜들을 리팩토링하려고 하는데 컴플리션 핸들링이 너무 많아 해깔린다. 이스케이핑 핸들링 어떻게 더 편하게 할 수 있는지 생각해봐야겠다 앞으로.
