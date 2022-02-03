@@ -14,8 +14,8 @@ enum UserState {
 }
 
 class HomeViewModel {
-    
     var currentUserState = UserState.basic
+    
     var defaultCoordinate: (Double,Double) = (37.51818789942772, 126.88541765534976)
     var nearFriends: [FromQueueDB] = []
     
@@ -26,9 +26,10 @@ class HomeViewModel {
     
     init() {
         checkCurrentUserState()
+        
     }
     
-    private func checkCurrentUserState() {
+    func checkCurrentUserState() {
         let stateNum = UserDefaults.standard.integer(forKey: "CurrentUserState")
         if stateNum == 0 {
             currentUserState = .basic
@@ -55,8 +56,15 @@ class HomeViewModel {
         if let idToken = UserDefaults.standard.string(forKey: "idToken") {
             
             ApiService.onqueue(idToken: idToken, region: region , lat: defaultCoordinate.0, long: defaultCoordinate.1 ) { error, statusCode, data in
-                guard let data = data else { return }
+                guard let data = data else {
+                    
+                    print("error ", error, statusCode)
+                    return
+                    
+                }
+                print(data," chekc")
                 self.nearFriends = data.fromQueueDB + data.fromQueueDBRequested
+                completion()
                 
             }
         }

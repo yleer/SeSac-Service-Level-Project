@@ -14,6 +14,10 @@
 		8819F734279D8CF10075F656 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F733279D8CF10075F656 /* RxSwift */; };
 		883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883C8B8A27A041DD007BCA20 /* ColorNames.swift */; };
 		883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883C8B8C27A04330007BCA20 /* FontNames.swift */; };
+		8858132E27A917750059F72D /* NearUserPageMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858132D27A917750059F72D /* NearUserPageMenuController.swift */; };
+		8858133027A917970059F72D /* NearUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858132F27A917970059F72D /* NearUserView.swift */; };
+		8858133B27A9465E0059F72D /* NearUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858133A27A9465E0059F72D /* NearUserViewController.swift */; };
+		8858133E27A94D4A0059F72D /* RecivedReqiestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858133D27A94D4A0059F72D /* RecivedReqiestViewController.swift */; };
 		885C2384279D211800FF658E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2383279D211800FF658E /* OnboardingViewController.swift */; };
 		885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C2386279D26C800FF658E /* OnBoardingView.swift */; };
 		885F016B279A7C380049856B /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F016A279A7C380049856B /* ApiService.swift */; };
@@ -99,6 +103,10 @@
 		8819F72D279D86EE0075F656 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		883C8B8A27A041DD007BCA20 /* ColorNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNames.swift; sourceTree = "<group>"; };
 		883C8B8C27A04330007BCA20 /* FontNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontNames.swift; sourceTree = "<group>"; };
+		8858132D27A917750059F72D /* NearUserPageMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserPageMenuController.swift; sourceTree = "<group>"; };
+		8858132F27A917970059F72D /* NearUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserView.swift; sourceTree = "<group>"; };
+		8858133A27A9465E0059F72D /* NearUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserViewController.swift; sourceTree = "<group>"; };
+		8858133D27A94D4A0059F72D /* RecivedReqiestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecivedReqiestViewController.swift; sourceTree = "<group>"; };
 		885C2383279D211800FF658E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		885C2386279D26C800FF658E /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		885F016A279A7C380049856B /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -211,6 +219,28 @@
 				883C8B8C27A04330007BCA20 /* FontNames.swift */,
 			);
 			path = Datas;
+			sourceTree = "<group>";
+		};
+		8858132C27A9173B0059F72D /* HomeViewPart */ = {
+			isa = PBXGroup;
+			children = (
+				88D26C4D27A56E9F00D956B8 /* ChattingViewController.swift */,
+				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
+				88C94AC527A27723000A01E1 /* HomeView */,
+				8858132D27A917750059F72D /* NearUserPageMenuController.swift */,
+				8858133D27A94D4A0059F72D /* RecivedReqiestViewController.swift */,
+				8858133C27A94D000059F72D /* NearUserView */,
+			);
+			path = HomeViewPart;
+			sourceTree = "<group>";
+		};
+		8858133C27A94D000059F72D /* NearUserView */ = {
+			isa = PBXGroup;
+			children = (
+				8858133A27A9465E0059F72D /* NearUserViewController.swift */,
+				8858132F27A917970059F72D /* NearUserView.swift */,
+			);
+			path = NearUserView;
 			sourceTree = "<group>";
 		};
 		885C2385279D211D00FF658E /* OneBoardingView */ = {
@@ -406,10 +436,8 @@
 				88F028052795495E00390168 /* Assets.xcassets */,
 				885F0172279A8DA10049856B /* GoogleService-Info.plist */,
 				88F0280A2795495E00390168 /* Info.plist */,
-				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
-				88C94AC527A27723000A01E1 /* HomeView */,
+				8858132C27A9173B0059F72D /* HomeViewPart */,
 				88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */,
-				88D26C4D27A56E9F00D956B8 /* ChattingViewController.swift */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -618,8 +646,10 @@
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */,
+				8858133027A917970059F72D /* NearUserView.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
 				8815B4EB27A66BED00F32627 /* HobbySeachViewModel.swift in Sources */,
+				8858132E27A917750059F72D /* NearUserPageMenuController.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
@@ -654,7 +684,9 @@
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
 				88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */,
+				8858133E27A94D4A0059F72D /* RecivedReqiestViewController.swift in Sources */,
 				88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */,
+				8858133B27A9465E0059F72D /* NearUserViewController.swift in Sources */,
 				88F027FD2795495A00390168 /* AppDelegate.swift in Sources */,
 				88F027FF2795495A00390168 /* SceneDelegate.swift in Sources */,
 				88C94AC927A2BFAB000A01E1 /* HobbySearchViewController.swift in Sources */,

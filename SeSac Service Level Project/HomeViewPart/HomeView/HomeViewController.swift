@@ -13,10 +13,12 @@ class HomeViewController: UIViewController {
     
     let mainView = HomeView()
     let viewModel = HomeViewModel()
-    
-    lazy var defaultCoordinate = CLLocationCoordinate2D(latitude: viewModel.defaultCoordinate.0, longitude: viewModel.defaultCoordinate.1)
-    
+    var friendsAnnotations: [MKPointAnnotation] = []
+    var draggableAnnotation = MKPointAnnotation()
+  
+    lazy var defaultCoordinate = CLLocationCoordinate2D(latitude: viewModel.defaultCoordinate.0, longitude: viewModel.defaultCoordinate.1) 
     let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
+    
     let locationManager = CLLocationManager()
     
     override func loadView() {
@@ -36,20 +38,63 @@ class HomeViewController: UIViewController {
         locationManager.delegate = self
         mainView.mapView.delegate = self
         
-        // 현재 유저 상태에 따라 플롯팅 버튼 이미지 설정.
-        mainView.bottomFloatingButton.setImage(UIImage(named: viewModel.checkCurrentStateImage()), for: .normal)
-        
-        
         // 현재 유저에 맞게 위치 설정.
         locationManager.requestWhenInUseAuthorization()
-        
-        viewModel.getNeighborHobbies {
-            print("helo ",self.viewModel.nearFriends)
-        }
-        
-        mainView.mapView.region = MKCoordinateRegion(center: defaultCoordinate, span: defaultSpan)
         addTargets()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCurrentUserState()
+    }
+    
+    private func updateCurrentUserState() {
+        
+        viewModel.checkCurrentUserState()
+        mainView.bottomFloatingButton.setImage(UIImage(named: viewModel.checkCurrentStateImage()), for: .normal)
+        
+        let status = locationManager.authorizationStatus
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            mainView.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude), latitudinalMeters: 700, longitudinalMeters: 700), animated: false)
+        case .authorizedAlways, .authorizedWhenInUse, .authorized:
+            locationManager.startUpdatingLocation()
+            mainView.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude), latitudinalMeters: 700, longitudinalMeters: 700), animated: false)
+            mainView.mapView.removeAnnotation(draggableAnnotation)
+            draggableAnnotation.coordinate = defaultCoordinate
+            mainView.mapView.addAnnotation(draggableAnnotation)
+        @unknown default:
+            print("not coverd yet")
+        }
+        
+        viewModel.getNeighborHobbies {
+            self.friendsAnnotations = []
+            for friend in self.viewModel.nearFriends {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                self.friendsAnnotations.append(annotation)
+            }
+            print(self.viewModel.nearFriends)
+            
+            let a1 = CLLocationCoordinate2D(latitude:  37.50530512029964, longitude: 126.99848526587533)
+            let a2 = CLLocationCoordinate2D(latitude: 37.499176838581135, longitude: 126.98415154111608)
+            let a3 = CLLocationCoordinate2D(latitude: 37.5015430958333, longitude: 126.97769278193901)
+            let a11 = MKPointAnnotation()
+            a11.coordinate = a1
+            
+            let a22 = MKPointAnnotation()
+            a22.coordinate = a2
+            
+            let a33 = MKPointAnnotation()
+            a33.coordinate = a3
+            
+            self.mainView.mapView.addAnnotations(self.friendsAnnotations)
+            self.mainView.mapView.addAnnotations([a11,a22,a33])
+        }
+    }
+   
     
     
     func addTargets() {
@@ -94,20 +139,33 @@ class HomeViewController: UIViewController {
     // MARK: 기본 상태일때 취미 검색화면으로 넘어갈때 정보 넘겨주는 것
     private func makeCurrentInfo() -> FindRequestParameter {
         
-        let region = Int(String(Int((defaultCoordinate.latitude + 90) * 100)) + String(Int((defaultCoordinate.longitude + 180) * 100)))!
-        return FindRequestParameter(type: 2, region: region, lat: defaultCoordinate.latitude, long: defaultCoordinate.longitude, hf: [])
+        let region = Int(String(Int((draggableAnnotation.coordinate.latitude + 90) * 100)) + String(Int((draggableAnnotation.coordinate.longitude + 180) * 100)))!
+        return FindRequestParameter(type: 2, region: region, lat: draggableAnnotation.coordinate.latitude, long: draggableAnnotation.coordinate.longitude, hf: [])
     }
     
     
     @objc func findMyPlaceButtonClciked() {
-        
+        updateCurrentUserState()
         let status = locationManager.authorizationStatus
         switch status {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied:
             let alertVC = UIAlertController(title: "위치권한이 거부되어 있습니다", message: "위치권한을 허용해주세요", preferredStyle: .alert)
-            let cancelButton = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            let cancelButton = UIAlertAction(title: "확인", style: .cancel, handler: {_ in
+                print("denied , 설정으로 유도")
+                
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                    return
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        print("Settings opened: \(success)")
+                    })
+                }
+                
+            })
             alertVC.addAction(cancelButton)
             present(alertVC, animated: true, completion: nil)
         case .authorizedAlways, .authorizedWhenInUse, .authorized:
@@ -122,26 +180,38 @@ class HomeViewController: UIViewController {
     
     
     @objc func genderButtonClicked(_ sender: UIButton) {
-        
+        updateCurrentUserState()
         if let title = sender.titleLabel?.text{
             if title == "전체" {
                 mainView.selected = .all
+                mainView.mapView.removeAnnotations(friendsAnnotations)
+                self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
-                    // annotation 추가
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                    self.friendsAnnotations.append(annotation)
                 }
             }else if title == "남자"{
                 mainView.selected = .male
+                mainView.mapView.removeAnnotations(friendsAnnotations)
+                self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
                     if friend.gender == 1 {
-                        // annotation 추가
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                        self.friendsAnnotations.append(annotation)
                     }
                 }
                 
             }else {
                 mainView.selected = .female
+                mainView.mapView.removeAnnotations(friendsAnnotations)
+                self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
                     if friend.gender == 0 {
-                        // annotation 추가
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                        self.friendsAnnotations.append(annotation)
                     }
                 }
             }
@@ -164,12 +234,12 @@ extension HomeViewController: MKMapViewDelegate {
           return view
         }
         // 3
-    
+
         var annotationView = self.mainView.mapView.dequeueReusableAnnotationView(withIdentifier: "SeSacAnnotation")
         if annotationView == nil {
             //없으면 하나 만들어 주시고
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAnnotation")
-            
+
             annotationView?.isDraggable = true
 
 
@@ -177,20 +247,21 @@ extension HomeViewController: MKMapViewDelegate {
             miniButton.setImage(UIImage(systemName: "person"), for: .normal)
             miniButton.tintColor = .blue
             annotationView?.rightCalloutAccessoryView = miniButton
-            
+
         } else {
             //있으면 등록된 걸 쓰시면 됩니다.
             annotationView?.annotation = annotation
         }
         print("aa")
         annotationView?.image = UIImage(named: ImageNames.MyInfoTableViewCell.myInfoTableViewCellUser)
-        
+
         return nil
       }
 
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
 
+        print(draggableAnnotation.coordinate)
         if (newState == MKAnnotationView.DragState.ending){
             let droppedAt = view.annotation?.coordinate
             print("dropped at : ", droppedAt?.latitude ?? 0.0, droppedAt?.longitude ?? 0.0);
@@ -202,6 +273,10 @@ extension HomeViewController: MKMapViewDelegate {
         }
     }
     
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        updateCurrentUserState()
+    }
+    
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -210,17 +285,9 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("updating")
         if let coordinate = locations.last?.coordinate{
-            let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
-            let region = MKCoordinateRegion(center: coordinate, span: span)
-            mainView.mapView.setRegion(region, animated: true)
             defaultCoordinate = coordinate
-            
-            
+            updateCurrentUserState()
             viewModel.defaultCoordinate = (Double(coordinate.latitude) , Double(coordinate.longitude))
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            mainView.mapView.addAnnotation(annotation)
             locationManager.stopUpdatingLocation()
         }else{
             print("not good")
@@ -234,10 +301,12 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkCLAuthStatus()
+        updateCurrentUserState()
     }
     // 14 미만
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkCLAuthStatus()
+        updateCurrentUserState()
     }
     
     func checkCLAuthStatus() {
