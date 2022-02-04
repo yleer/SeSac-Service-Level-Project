@@ -76,20 +76,24 @@ final class VerifyPhoneNumberViewModel {
                 return
             }
             
-            FireBaseService.getIdToken {
                 if let idToken = UserDefaults.standard.string(forKey: "idToken") {
                     ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                        print(error, statusCode,"from check")
                         if error == nil {
                             if statusCode == 200 {
                             // home 화면으로
                                 completion(nil, 200)
-                            }else {
+                            }else if statusCode == 201{
                                 completion(nil, 201)
+                            }else if statusCode == 406 {
+                                completion(nil, 406)
                             }
                             
                         }else {
                             if statusCode == 401 {
                                 completion(APIError.firebaseTokenError(errorContent: "나중에 다시 시도해 주세요"),401)
+                            }else if statusCode == 406 {
+                                completion(nil, 406)
                             }else if statusCode == 500 {
                                 completion(APIError.serverError(errorContent: "서버 에러"), 500)
                             }else if statusCode == 501 {
@@ -101,7 +105,7 @@ final class VerifyPhoneNumberViewModel {
                 }
             }
             
-        }
     }
-    
 }
+    
+

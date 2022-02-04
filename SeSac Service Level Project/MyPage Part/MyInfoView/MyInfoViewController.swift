@@ -92,6 +92,26 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             getInfo()
             
         }
+        else {
+            
+            FireBaseService.getIdToken {
+                if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                    ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                        
+                        print(idToken)
+                        guard let error = error else {
+                            if statusCode == 200 {
+                                print("good")
+                            }
+                            print(statusCode, "sdafaf")
+                            return
+                        }
+                    }
+                }
+            }
+            print(UserInfo.current.user)
+            
+        }
     }
 }
 

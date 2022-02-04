@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     
     let mainView = HomeView()
     let viewModel = HomeViewModel()
+    
     var friendsAnnotations: [MKPointAnnotation] = []
     var draggableAnnotation = MKPointAnnotation()
   
@@ -46,11 +47,33 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCurrentUserState()
+        FireBaseService.getIdToken {
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                    if error == nil {
+                        if statusCode == 200 {
+                            return
+                        }
+                    }else {
+                        if statusCode == 401 {
+                            self.view.makeToast("나중에 다시 시도해 주세요")
+                        }else if statusCode == 500 {
+                            self.view.makeToast("서버 에러")
+                        }else if statusCode == 501 {
+                            self.view.makeToast("사용자 에러")
+                            
+                        }
+                    }
+                }
+
+            }
+        }
     }
+
+    var initial = true
     
     private func updateCurrentUserState() {
-        
-        viewModel.checkCurrentUserState()
+        viewModel.checkCurrentState()
         mainView.bottomFloatingButton.setImage(UIImage(named: viewModel.checkCurrentStateImage()), for: .normal)
         
         let status = locationManager.authorizationStatus
@@ -60,11 +83,10 @@ class HomeViewController: UIViewController {
         case .restricted, .denied:
             mainView.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude), latitudinalMeters: 700, longitudinalMeters: 700), animated: false)
         case .authorizedAlways, .authorizedWhenInUse, .authorized:
+            
             locationManager.startUpdatingLocation()
             mainView.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude), latitudinalMeters: 700, longitudinalMeters: 700), animated: false)
-            mainView.mapView.removeAnnotation(draggableAnnotation)
-            draggableAnnotation.coordinate = defaultCoordinate
-            mainView.mapView.addAnnotation(draggableAnnotation)
+            
         @unknown default:
             print("not coverd yet")
         }
@@ -76,20 +98,19 @@ class HomeViewController: UIViewController {
                 annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
                 self.friendsAnnotations.append(annotation)
             }
-            print(self.viewModel.nearFriends)
-            
+
             let a1 = CLLocationCoordinate2D(latitude:  37.50530512029964, longitude: 126.99848526587533)
             let a2 = CLLocationCoordinate2D(latitude: 37.499176838581135, longitude: 126.98415154111608)
             let a3 = CLLocationCoordinate2D(latitude: 37.5015430958333, longitude: 126.97769278193901)
             let a11 = MKPointAnnotation()
             a11.coordinate = a1
-            
+
             let a22 = MKPointAnnotation()
             a22.coordinate = a2
-            
+
             let a33 = MKPointAnnotation()
             a33.coordinate = a3
-            
+
             self.mainView.mapView.addAnnotations(self.friendsAnnotations)
             self.mainView.mapView.addAnnotations([a11,a22,a33])
         }
@@ -109,15 +130,17 @@ class HomeViewController: UIViewController {
     @objc func touchedFloatingButton() {
         
         let status = locationManager.authorizationStatus
+        
         if status == .authorizedWhenInUse || status == .authorizedAlways {
-            if UserInfo.current.user?.gender != -1 {
+            if UserInfo.current.user!.gender != -1 {
                 switch viewModel.currentUserState {
                 case .basic:
                     let vc = HobbySearchViewController()
                     vc.viewModel.requestParameter = makeCurrentInfo()
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .waiting:
-                    print("waiting")
+                    let vc = NearUserPageMenuController()
+                    self.navigationController?.pushViewController(vc, animated: true)
                 case .matched:
                     self.navigationController?.pushViewController(ChattingViewController(), animated: true)
                 }
@@ -180,17 +203,14 @@ class HomeViewController: UIViewController {
     
     
     @objc func genderButtonClicked(_ sender: UIButton) {
+        
         updateCurrentUserState()
+        
         if let title = sender.titleLabel?.text{
             if title == "전체" {
+
                 mainView.selected = .all
                 mainView.mapView.removeAnnotations(friendsAnnotations)
-                self.friendsAnnotations = []
-                for friend in viewModel.nearFriends {
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
-                    self.friendsAnnotations.append(annotation)
-                }
             }else if title == "남자"{
                 mainView.selected = .male
                 mainView.mapView.removeAnnotations(friendsAnnotations)
@@ -202,7 +222,6 @@ class HomeViewController: UIViewController {
                         self.friendsAnnotations.append(annotation)
                     }
                 }
-                
             }else {
                 mainView.selected = .female
                 mainView.mapView.removeAnnotations(friendsAnnotations)
@@ -215,6 +234,7 @@ class HomeViewController: UIViewController {
                     }
                 }
             }
+            self.mainView.mapView.addAnnotations(friendsAnnotations)
         }
     }
 }
@@ -227,7 +247,7 @@ extension HomeViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? SeSacAnnotation else {
-            print("dd")
+//            print("dd")
             let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
             view.isDraggable = true
             view.pinTintColor = .red
@@ -274,7 +294,7 @@ extension HomeViewController: MKMapViewDelegate {
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        updateCurrentUserState()
+//        updateCurrentUserState()
     }
     
 }
@@ -289,6 +309,13 @@ extension HomeViewController: CLLocationManagerDelegate {
             updateCurrentUserState()
             viewModel.defaultCoordinate = (Double(coordinate.latitude) , Double(coordinate.longitude))
             locationManager.stopUpdatingLocation()
+            if initial {
+                print("hello wor", defaultCoordinate)
+                mainView.mapView.removeAnnotation(draggableAnnotation)
+                draggableAnnotation.coordinate = defaultCoordinate
+                mainView.mapView.addAnnotation(draggableAnnotation)
+                initial = false
+            }
         }else{
             print("not good")
         }
@@ -327,7 +354,6 @@ extension HomeViewController: CLLocationManagerDelegate {
     func checkCurrentLocationAuth(_ status : CLAuthorizationStatus){
         switch status {
         case .notDetermined:
-            locationManager.startUpdatingLocation()
             locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied:
             mainView.mapView.region = MKCoordinateRegion(center: defaultCoordinate, span: defaultSpan)

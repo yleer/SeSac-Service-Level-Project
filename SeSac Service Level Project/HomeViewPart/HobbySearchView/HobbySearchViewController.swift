@@ -70,7 +70,9 @@ class HobbySearchViewController: UIViewController {
                     if statusCode == 200 {
                         // 화면 전환 해야 됨
                         // 화면(1_3_near_user & 1_4_accept)으로 전환합니다.
-                        // user state 검색중으로 바꿔야 함
+                        UserDefaults.standard.set(1, forKey: "CurrentUserState")
+                        let vc = NearUserPageMenuController()
+                        self.navigationController?.pushViewController(vc, animated: true)
                         print("성공")
                     }else if statusCode == 201 {
                         self.view.makeToast("신고가 누적되어 이용하실 수 없습니다")

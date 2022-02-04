@@ -28,19 +28,16 @@ class HobbySeachViewModel {
 
     func getNeighborHobbies(completion: @escaping () -> Void) {
         if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-            
             ApiService.onqueue(idToken: idToken, region: requestParameter.region, lat: requestParameter.lat, long: requestParameter.long) { error, statusCode, data in
                 guard let data = data else { return }
         
                 self.recommendationHobbies = data.fromRecommend
-                
-                let b = data.fromQueueDBRequested
-                let a = data.fromQueueDB
-                for b in b {
+                self.nearByHobbies = []
+                for b in data.fromQueueDBRequested {
                     self.nearByHobbies += b.hf
                 }
                 
-                for a in a {
+                for a in data.fromQueueDB {
                     self.nearByHobbies += a.hf
                 }
                 

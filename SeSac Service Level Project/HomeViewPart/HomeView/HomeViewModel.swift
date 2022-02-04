@@ -25,11 +25,10 @@ class HomeViewModel {
     }
     
     init() {
-        checkCurrentUserState()
-        
+        checkCurrentState()
     }
     
-    func checkCurrentUserState() {
+    func checkCurrentState() {
         let stateNum = UserDefaults.standard.integer(forKey: "CurrentUserState")
         if stateNum == 0 {
             currentUserState = .basic
@@ -39,6 +38,9 @@ class HomeViewModel {
             currentUserState = .matched
         }
     }
+    
+    
+    
     
     // MARK: 현재 상태에 맞는 플롯팅 버튼 이미지 설정.
     func checkCurrentStateImage() -> String {
