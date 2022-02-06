@@ -46,6 +46,8 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UserDefaults.standard.set(0, forKey: "CurrentUserState")
+        
         updateCurrentUserState()
         FireBaseService.getIdToken {
             if let idToken = UserDefaults.standard.string(forKey: "idToken") {
@@ -61,7 +63,6 @@ class HomeViewController: UIViewController {
                             self.view.makeToast("서버 에러")
                         }else if statusCode == 501 {
                             self.view.makeToast("사용자 에러")
-                            
                         }
                     }
                 }
@@ -74,9 +75,12 @@ class HomeViewController: UIViewController {
     
     private func updateCurrentUserState() {
         viewModel.checkCurrentState()
+        
         mainView.bottomFloatingButton.setImage(UIImage(named: viewModel.checkCurrentStateImage()), for: .normal)
         
+        
         let status = locationManager.authorizationStatus
+        
         switch status {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -91,6 +95,26 @@ class HomeViewController: UIViewController {
             print("not coverd yet")
         }
         
+        mainView.mapView.removeAnnotations(self.friendsAnnotations)
+        
+        
+        
+        let a1 = CLLocationCoordinate2D(latitude:  37.50530512029964, longitude: 126.99848526587533)
+        let a2 = CLLocationCoordinate2D(latitude: 37.499176838581135, longitude: 126.98415154111608)
+        let a3 = CLLocationCoordinate2D(latitude: 37.5015430958333, longitude: 126.97769278193901)
+        let a11 = MKPointAnnotation()
+        a11.coordinate = a1
+
+        let a22 = MKPointAnnotation()
+        a22.coordinate = a2
+
+        let a33 = MKPointAnnotation()
+        a33.coordinate = a3
+        mainView.mapView.removeAnnotations([a11,a22,a33])
+        
+        
+        
+        
         viewModel.getNeighborHobbies {
             self.friendsAnnotations = []
             for friend in self.viewModel.nearFriends {
@@ -99,18 +123,10 @@ class HomeViewController: UIViewController {
                 self.friendsAnnotations.append(annotation)
             }
 
-            let a1 = CLLocationCoordinate2D(latitude:  37.50530512029964, longitude: 126.99848526587533)
-            let a2 = CLLocationCoordinate2D(latitude: 37.499176838581135, longitude: 126.98415154111608)
-            let a3 = CLLocationCoordinate2D(latitude: 37.5015430958333, longitude: 126.97769278193901)
-            let a11 = MKPointAnnotation()
-            a11.coordinate = a1
+           
 
-            let a22 = MKPointAnnotation()
-            a22.coordinate = a2
-
-            let a33 = MKPointAnnotation()
-            a33.coordinate = a3
-
+            
+            
             self.mainView.mapView.addAnnotations(self.friendsAnnotations)
             self.mainView.mapView.addAnnotations([a11,a22,a33])
         }
@@ -136,7 +152,14 @@ class HomeViewController: UIViewController {
                 switch viewModel.currentUserState {
                 case .basic:
                     let vc = HobbySearchViewController()
-                    vc.viewModel.requestParameter = makeCurrentInfo()
+                    
+                    // 이 부분 singleton으로 처리하자 귀찮다 계속 오기.
+                    let parameter = makeCurrentInfo()
+                    vc.viewModel.requestParameter = parameter
+                    UserInfo.current.onqueueParameter = parameter
+                    
+                    
+                    
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .waiting:
                     let vc = NearUserPageMenuController()
@@ -156,7 +179,6 @@ class HomeViewController: UIViewController {
         }else {
             self.view.makeToast("위치 권한을 허용해주세요")
         }
-       
     }
     
     // MARK: 기본 상태일때 취미 검색화면으로 넘어갈때 정보 넘겨주는 것

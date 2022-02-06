@@ -25,11 +25,16 @@ class NearUserView: UIView {
     
     func setUp() {
         addSubview(tableView)
+        tableView.register(ManageMyInfoPersonalInfoCell.self, forCellReuseIdentifier: ManageMyInfoPersonalInfoCell.identifier)
+        tableView.register(ManageMyInfoImageCell.self, forCellReuseIdentifier: ManageMyInfoImageCell.identifier)
     }
     
     func setUpConstraints() {
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
     

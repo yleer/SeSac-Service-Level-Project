@@ -8,6 +8,13 @@
 import Foundation
 
 
+struct UserMatchingState: Codable {
+    let dodged, matched, reviewed: Int
+    let matchedNick, matchedUid: String
+//    var matchedNick, matchedUid: String?
+}
+
+
 struct OnqueueData: Codable {
     let fromQueueDB, fromQueueDBRequested: [FromQueueDB]
     let fromRecommend: [String]
@@ -51,6 +58,7 @@ struct MyInfoUpdateParameter: Codable {
 class UserInfo {
     static let current = UserInfo()
     var user: User?
+    var onqueueParameter: FindRequestParameter?
 }
 
 

@@ -43,6 +43,10 @@ struct ImageNames {
         static let ShopInActivate = "ShopInActivate"
     }
     
+    struct NearByViewController {
+        static let emptyLeaf = "emptyLeaf"
+        static let refresh = "refresh"
+    }
     
     struct HomeViewController {
         static let search = "place"

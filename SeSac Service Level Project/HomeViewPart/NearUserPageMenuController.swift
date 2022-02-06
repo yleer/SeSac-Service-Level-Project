@@ -14,19 +14,21 @@ class NearUserPageMenuController: UIViewController {
         super.loadView()
     }
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         title = "새싹 찾기"
-        let firstViewController = OnboardingViewController()
-        let secondViewController = RegisterViewController()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopMathcingButtonClicked))
+        
+        
+        
+        let firstViewController = NearUserViewController()
+        let secondViewController = RecivedReqiestViewController()
+        
         
         firstViewController.title = "주변 새싹"
         secondViewController.title = "받은 요청"
-        
-        
-        
         
         let pagingViewController = PagingViewController(viewControllers: [
             firstViewController,
@@ -37,14 +39,6 @@ class NearUserPageMenuController: UIViewController {
         pagingViewController.selectedTextColor = .brandGreen!
         pagingViewController.textColor = .gray6!
         pagingViewController.indicatorColor = .brandGreen!
-        
-
-        
-        
-        
-        
-        
-        
         pagingViewController.menuItemSize = .fixed(width: 200, height: 44)
         
         pagingViewController.sizeDelegate = self
@@ -65,6 +59,33 @@ class NearUserPageMenuController: UIViewController {
         ])
     
     }
+    
+    @objc func stopMathcingButtonClicked() {
+        FireBaseService.getIdToken {
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
+                    if let error = error {
+                        switch error {
+                        case .firebaseTokenError(let errorContent), .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                            self.view.makeToast(errorContent)
+                        }
+                    }else {
+                        
+                        if statusCode == 200 {
+                            UserDefaults.standard.set(0, forKey: "CurrentUserState")
+                            self.navigationController?.popToRootViewController(animated: true)
+                            
+                        }else if statusCode == 201 {
+                            self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!")
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    
 }
 
 extension NearUserPageMenuController: PagingViewControllerSizeDelegate {

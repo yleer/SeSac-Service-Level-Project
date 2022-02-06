@@ -101,7 +101,7 @@ class GenderSelectionViewController: UIViewController {
                         
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                         
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainTabBarController())
+                        windowScene.windows.first?.rootViewController = MainTabBarController()
                         windowScene.windows.first?.makeKeyAndVisible()
                         return
                     }

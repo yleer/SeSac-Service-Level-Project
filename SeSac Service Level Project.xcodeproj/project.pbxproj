@@ -24,6 +24,10 @@
 		885F016E279A7C630049856B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 885F016D279A7C630049856B /* Alamofire */; };
 		885F0171279A7F770049856B /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F0170279A7F770049856B /* ApiData.swift */; };
 		885F0173279A8DA10049856B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885F0172279A8DA10049856B /* GoogleService-Info.plist */; };
+		8867835727AE487C0017520C /* HomeApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835627AE487C0017520C /* HomeApiService.swift */; };
+		8867835927AE4F830017520C /* NearUserEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835827AE4F820017520C /* NearUserEmptyView.swift */; };
+		8867835C27AE7BC00017520C /* RecivedRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835B27AE7BC00017520C /* RecivedRequestViewModel.swift */; };
+		8867835E27AE7BE50017520C /* NearUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835D27AE7BE50017520C /* NearUserViewModel.swift */; };
 		88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D4D279BADDD00E8FCD4 /* String + extensions.swift */; };
 		88820D51279BB20000E8FCD4 /* Calendar + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D50279BB20000E8FCD4 /* Calendar + extensions.swift */; };
 		88820D53279BC03600E8FCD4 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D52279BC03600E8FCD4 /* EndPoints.swift */; };
@@ -112,6 +116,10 @@
 		885F016A279A7C380049856B /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		885F0170279A7F770049856B /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
 		885F0172279A8DA10049856B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8867835627AE487C0017520C /* HomeApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeApiService.swift; sourceTree = "<group>"; };
+		8867835827AE4F820017520C /* NearUserEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserEmptyView.swift; sourceTree = "<group>"; };
+		8867835B27AE7BC00017520C /* RecivedRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecivedRequestViewModel.swift; sourceTree = "<group>"; };
+		8867835D27AE7BE50017520C /* NearUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserViewModel.swift; sourceTree = "<group>"; };
 		88820D4D279BADDD00E8FCD4 /* String + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + extensions.swift"; sourceTree = "<group>"; };
 		88820D50279BB20000E8FCD4 /* Calendar + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar + extensions.swift"; sourceTree = "<group>"; };
 		88820D52279BC03600E8FCD4 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
@@ -228,7 +236,7 @@
 				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
 				88C94AC527A27723000A01E1 /* HomeView */,
 				8858132D27A917750059F72D /* NearUserPageMenuController.swift */,
-				8858133D27A94D4A0059F72D /* RecivedReqiestViewController.swift */,
+				8867835A27AE7B260017520C /* ReceivedRequestView */,
 				8858133C27A94D000059F72D /* NearUserView */,
 			);
 			path = HomeViewPart;
@@ -239,6 +247,8 @@
 			children = (
 				8858133A27A9465E0059F72D /* NearUserViewController.swift */,
 				8858132F27A917970059F72D /* NearUserView.swift */,
+				8867835827AE4F820017520C /* NearUserEmptyView.swift */,
+				8867835D27AE7BE50017520C /* NearUserViewModel.swift */,
 			);
 			path = NearUserView;
 			sourceTree = "<group>";
@@ -266,8 +276,18 @@
 				885F016A279A7C380049856B /* ApiService.swift */,
 				885F0170279A7F770049856B /* ApiData.swift */,
 				88820D52279BC03600E8FCD4 /* EndPoints.swift */,
+				8867835627AE487C0017520C /* HomeApiService.swift */,
 			);
 			name = Api;
+			sourceTree = "<group>";
+		};
+		8867835A27AE7B260017520C /* ReceivedRequestView */ = {
+			isa = PBXGroup;
+			children = (
+				8858133D27A94D4A0059F72D /* RecivedReqiestViewController.swift */,
+				8867835B27AE7BC00017520C /* RecivedRequestViewModel.swift */,
+			);
+			path = ReceivedRequestView;
 			sourceTree = "<group>";
 		};
 		88820D4F279BADE200E8FCD4 /* Extensions */ = {
@@ -646,10 +666,12 @@
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */,
+				8867835E27AE7BE50017520C /* NearUserViewModel.swift in Sources */,
 				8858133027A917970059F72D /* NearUserView.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
 				8815B4EB27A66BED00F32627 /* HobbySeachViewModel.swift in Sources */,
 				8858132E27A917750059F72D /* NearUserPageMenuController.swift in Sources */,
+				8867835727AE487C0017520C /* HomeApiService.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
@@ -657,6 +679,7 @@
 				88DCEA3F27A1761200BDB530 /* DeleteView.swift in Sources */,
 				88CC7F03279EB50700828537 /* MyGenderCell.swift in Sources */,
 				889EBAD527983746006C1A6E /* NickNameView.swift in Sources */,
+				8867835C27AE7BC00017520C /* RecivedRequestViewModel.swift in Sources */,
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
 				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
 				88F90D042798FE3800E518DC /* EmailView.swift in Sources */,
@@ -677,6 +700,7 @@
 				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
 				88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */,
 				88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */,
+				8867835927AE4F830017520C /* NearUserEmptyView.swift in Sources */,
 				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
 				885F0171279A7F770049856B /* ApiData.swift in Sources */,
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,

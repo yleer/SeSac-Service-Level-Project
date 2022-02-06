@@ -21,6 +21,7 @@ class HobbySeachViewModel {
         didSet{
             if requestParameter != nil {
                 requestParameter!.hf = myInterestHobbies
+                UserInfo.current.onqueueParameter?.hf = myInterestHobbies
             }
         }
     }
