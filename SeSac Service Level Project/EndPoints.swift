@@ -17,7 +17,8 @@ enum EndPoint {
     case requestToFindFirends
     case onqueue
     case myQueueState
-    
+    case requestFreind
+    case acceptRequest
 }
 
 extension EndPoint {
@@ -41,6 +42,11 @@ extension EndPoint {
             return .makeEndPoint("/queue/onqueue")
         case .myQueueState:
             return .makeEndPoint("/queue/myQueueState")
+    
+        case .requestFreind:
+            return .makeEndPoint("/queue/hobbyrequest")
+        case .acceptRequest:
+            return .makeEndPoint("/queue/hobbyaccept")
         }
     }
 }

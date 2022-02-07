@@ -10,6 +10,73 @@ import Alamofire
 
 
 class HomeApiService {
+    
+    static func acceptRequest(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        AF.request(
+            EndPoint.acceptRequest.url,
+            method: .post,
+            headers: headers
+        ).responseData { response in
+            switch response.result {
+            case .success(let value):
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                if statusCode == 200{
+                    
+                }else if statusCode == 201 {
+                    
+                }else if statusCode == 202 {
+                    
+                }else if statusCode == 401 {
+                    print(statusCode)
+                }else if statusCode == 406 {
+                    print(statusCode)
+                }else if statusCode == 500 {
+                    print(statusCode)
+                }else if statusCode == 501 {
+                    print(statusCode)
+                }
+              
+            case .failure(let error):
+                print("what kind of error", error)
+            }
+        }
+    }
+    
+    static func requestFriend(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        AF.request(
+            EndPoint.requestFreind.url,
+            method: .post,
+            headers: headers
+        ).responseData { response in
+            switch response.result {
+            case .success(let value):
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                if statusCode == 200{
+                    
+                }else if statusCode == 201 {
+                    
+                }else if statusCode == 202 {
+                    
+                }else if statusCode == 401 {
+                    print(statusCode)
+                }else if statusCode == 406 {
+                    print(statusCode)
+                }else if statusCode == 500 {
+                    print(statusCode)
+                }else if statusCode == 501 {
+                    print(statusCode)
+                }
+              
+            case .failure(let error):
+                print("what kind of error", error)
+            }
+        }
+        
+    }
 
     
     static func myQueueState(idToken: String, completion: @escaping (APIError?, Int) -> Void) {

@@ -8,12 +8,19 @@
 import UIKit
 import SnapKit
 
+enum ImageCellType {
+    case noButton
+    case requestButton
+    case confirmButton
+}
 
 class ManageMyInfoImageCell: UITableViewCell {
     
     
     static let identifier = "ManageMyInfoImageCell"
+    var cellType = ImageCellType.noButton
     
+    let button = InActiveButton()
     let profileImage = UIImageView()
     let sesacImage = UIImageView()
     
@@ -21,6 +28,21 @@ class ManageMyInfoImageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
         setUpConstraints()
+        
+        checkButtonState()
+    }
+    
+    func checkButtonState() {
+        switch cellType {
+        case .noButton:
+            button.isHidden = true
+        case .requestButton:
+            button.isHidden = false
+            button.stateOfButton = .fill
+        case .confirmButton:
+            button.isHidden = false
+            button.stateOfButton = .fill
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -28,8 +50,10 @@ class ManageMyInfoImageCell: UITableViewCell {
     }
     
     func setUp() {
-        addSubview(profileImage)
-        addSubview(sesacImage)
+        contentView.addSubview(profileImage)
+        contentView.addSubview(sesacImage)
+        contentView.addSubview(button)
+
         profileImage.image = UIImage(named: ImageNames.ManageTableViewImageCell.profileImage)
         sesacImage.image = UIImage(named: ImageNames.ManageTableViewImageCell.sessacImage)
         self.clipsToBounds = true
@@ -47,6 +71,13 @@ class ManageMyInfoImageCell: UITableViewCell {
             make.height.equalTo(profileImage.snp.height)
             make.width.equalTo(sesacImage.snp.height)
             
+        }
+        
+        button.snp.makeConstraints { make in
+            make.width.equalTo(80)
+            make.height.equalTo(40)
+            make.trailing.equalToSuperview().offset(-12)
+            make.top.equalToSuperview().offset(12)
         }
     }
     

@@ -94,11 +94,17 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.queueDB.count * 3
     }
+    
+    @objc func requestButtonTapped() {
+        print("Hell")
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 3 == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ManageMyInfoImageCell.identifier, for: indexPath) as? ManageMyInfoImageCell else { return UITableViewCell() }
-
+            cell.cellType = .requestButton
+            cell.checkButtonState()
+            cell.button.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
             return cell
         }else if indexPath.row % 3 == 1 {
 
