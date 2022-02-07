@@ -9,14 +9,12 @@ import UIKit
 import SnapKit
 
 
-
-
 class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
    let cellSpacing: CGFloat = 8
 
    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
        self.minimumLineSpacing = 8
-       self.sectionInset = UIEdgeInsets(top: 0, left: 16.0, bottom: 0.0, right: 100)
+       self.sectionInset = UIEdgeInsets(top: 0, left: 16.0, bottom: 0.0, right: 30)
        
        let attributes = super.layoutAttributesForElements(in: rect)
 
@@ -33,7 +31,10 @@ class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
        return attributes
    }
 }
-
+//"<SnapKit.LayoutConstraint:0x6000022efc00@SizingCell.swift#71 UILabel:0x7fee631bda10.height == 32.0>",
+//"<SnapKit.LayoutConstraint:0x6000022edc20@SizingCell.swift#74 UILabel:0x7fee631bda10.top == UIView:0x7fee631c5600.top + 5.0>",
+//"<SnapKit.LayoutConstraint:0x6000022eff60@SizingCell.swift#75 UILabel:0x7fee631bda10.bottom == UIView:0x7fee631c5600.bottom - 5.0>",
+//"<NSLayoutConstraint:0x6000025b31b0 'UIView-Encapsulated-Layout-Height' UIView:0x7fee631c5600.height == 50   (active)>"
 class HobbySearchView: UIView {
     
     let findFreindsButton = InActiveButton()
@@ -59,12 +60,15 @@ class HobbySearchView: UIView {
         let layout = CollectionViewLeftAlignFlowLayout()
 //        let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        layout.estimatedItemSize = CGSize(width: UICollectionViewFlowLayout.automaticSize.width, height: 32)
+        
+        
         
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         
         let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
-        
+//        cv.frame =  CGRect(x: 0, y: 0, width: 0, height: 0)
         cv.register(SizingCell.self, forCellWithReuseIdentifier: SizingCell.identifier)
         return cv
     }()
@@ -133,7 +137,7 @@ class HobbySearchView: UIView {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.top.equalTo(secondSection.snp.bottom).offset(16)
-            make.height.equalTo(150)
+            make.height.equalTo(120)
         }
         
         findFreindsButton.snp.makeConstraints { make in

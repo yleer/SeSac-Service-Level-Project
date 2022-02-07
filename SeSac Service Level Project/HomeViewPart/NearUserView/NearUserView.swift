@@ -31,11 +31,11 @@ class NearUserView: UIView {
     
     func setUpConstraints() {
         tableView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-16)
+//            make.leading.equalToSuperview().offset(16)
+//            make.trailing.equalToSuperview().offset(-16)
+//            make.top.equalToSuperview().offset(16)
+//            make.bottom.equalToSuperview().offset(-16)
+            make.edges.equalToSuperview()
         }
     }
-    
 }

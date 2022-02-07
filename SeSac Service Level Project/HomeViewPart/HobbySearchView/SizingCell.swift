@@ -67,11 +67,16 @@ class SizingCell: UICollectionViewCell {
         deleteButton.snp.removeConstraints()
         hobbyLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-//            make.trailing.equalToSuperview().offset(-16)
+            
+            make.height.equalTo(22).priority(750)
+            
+            
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
-            make.height.equalTo(32)
+            
         }
+        print(hobbyLabel.frame)
+        
         deleteButton.isHidden = false
         deleteButton.snp.makeConstraints { make in
             make.leading.equalTo(hobbyLabel.snp.trailing).offset(5)
@@ -88,9 +93,9 @@ class SizingCell: UICollectionViewCell {
         hobbyLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(5).priority(950)
             make.bottom.equalToSuperview().offset(-5)
-            make.height.equalTo(32)
+            make.height.equalTo(22)
         }
     }
 }

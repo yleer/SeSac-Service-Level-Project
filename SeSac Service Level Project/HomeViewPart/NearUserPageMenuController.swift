@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Parchment
 
 class NearUserPageMenuController: UIViewController {
@@ -52,12 +53,17 @@ class NearUserPageMenuController: UIViewController {
         pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-          pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
           pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
           pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
           pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     
+        
+//        pagingViewController.view.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
+        
     }
     
     @objc func stopMathcingButtonClicked() {

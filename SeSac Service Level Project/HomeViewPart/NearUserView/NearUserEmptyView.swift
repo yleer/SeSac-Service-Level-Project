@@ -73,15 +73,17 @@ class NearUserEmptyView: UIView {
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-12)
             make.height.equalTo(48)
             make.leading.equalToSuperview().offset(12)
-            make.trailing.equalTo(refreshButton.snp.leading).offset(-8)
+            make.trailing.equalTo(refreshButton.snp.leading).offset(-8).priority(750)
         }
         
         refreshButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-12)
             make.height.equalTo(48)
-            make.width.equalTo(48)
+            make.width.equalTo(48).priority(750)
             make.trailing.equalToSuperview().offset(-12)
         }
+//        refreshButton.widthAnchor.constraint(equalToConstant: <#T##CGFloat#>)
+//        trailingAnchor.priority = UILayoutPriority(rawValue: 750)
     }
     
 }
