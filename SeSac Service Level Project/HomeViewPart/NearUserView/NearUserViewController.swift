@@ -95,8 +95,13 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.queueDB.count * 3
     }
     
-    @objc func requestButtonTapped() {
+    @objc func requestButtonTapped(_ sender: UIButton) {
         print("Hell")
+        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            HomeApiService.requestFriend(idToken: idToken, otherUid: viewModel.queueDB[sender.tag / 3].uid) { error, statusCode in
+                print(statusCode)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,7 +110,9 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cellType = .requestButton
             cell.checkButtonState()
             cell.button.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
+            cell.tag = indexPath.row
             return cell
+            
         }else if indexPath.row % 3 == 1 {
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ManageMyInfoPersonalInfoCell.identifier, for: indexPath) as? ManageMyInfoPersonalInfoCell else  { return UITableViewCell() }
@@ -119,6 +126,7 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             cell.wantHobbies.tag = (indexPath.row - 1) * 3 + 1
             cell.wantHobbies.delegate = self
             cell.wantHobbies.dataSource = self
+            
             
             cell.moreButton.tag = indexPath.row
 

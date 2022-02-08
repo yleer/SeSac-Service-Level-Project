@@ -13,29 +13,36 @@ class HomeApiService {
     
     static func acceptRequest(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
         let headers: HTTPHeaders = ["idtoken": idToken]
+        let p: Parameters = [
+            "otheruid": otherUid
+        ]
         AF.request(
             EndPoint.acceptRequest.url,
             method: .post,
+            parameters: p,
             headers: headers
         ).responseData { response in
             switch response.result {
             case .success(let value):
                 guard let statusCode = response.response?.statusCode else { return }
                 
+                print(statusCode)
+                
+                
                 if statusCode == 200{
-                    
+                    completion(nil, statusCode)
                 }else if statusCode == 201 {
-                    
+                    completion(nil, statusCode)
                 }else if statusCode == 202 {
-                    
+                    completion(nil, statusCode)
                 }else if statusCode == 401 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 406 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 500 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 501 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }
               
             case .failure(let error):
@@ -46,29 +53,33 @@ class HomeApiService {
     
     static func requestFriend(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
         let headers: HTTPHeaders = ["idtoken": idToken]
+        let p: Parameters = [
+            "otheruid": otherUid
+        ]
         AF.request(
             EndPoint.requestFreind.url,
             method: .post,
+            parameters: p,
             headers: headers
         ).responseData { response in
             switch response.result {
             case .success(let value):
                 guard let statusCode = response.response?.statusCode else { return }
-                
+                print(statusCode)
                 if statusCode == 200{
-                    
+                    completion(nil, statusCode)
                 }else if statusCode == 201 {
-                    
+                    completion(nil, statusCode)
                 }else if statusCode == 202 {
-                    
+                    completion(nil, statusCode)
                 }else if statusCode == 401 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 406 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 500 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 501 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }
               
             case .failure(let error):
