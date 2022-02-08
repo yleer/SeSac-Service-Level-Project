@@ -98,19 +98,20 @@ class HomeApiService {
             EndPoint.myQueueState.url,
             method: .get,
             headers: headers
-        ).responseData { response in
+        ).responseString { response in
             switch response.result {
             case .success(let value):
                 guard let statusCode = response.response?.statusCode else { return }
                 
+                print(value, "hello")
                 if statusCode == 200{
                     let decoder = JSONDecoder()
-                    do {
-                        let result = try decoder.decode(UserMatchingState.self, from: value)
-                        print(result)
-                    }catch {
-                        print("user info decoding error : ", error)
-                    }
+//                    do {
+//                        let result = try decoder.decode(UserMatchingState.self, from: value)
+//                        print(result)
+//                    }catch {
+//                        print("user info decoding error : ", error)
+//                    }
                 }else if statusCode == 201 {
                     // 매칭 대기 상태가 아닌 상태, 매칭이 되지 않아 종료된 상태 -> toast 필요
                     

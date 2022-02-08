@@ -8,6 +8,7 @@
 import Foundation
 
 
+//user info decoding error :  keyNotFound(CodingKeys(stringValue: "matchedNick", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"matchedNick\", intValue: nil) (\"matchedNick\").", underlyingError: nil))
 struct UserMatchingState: Codable {
     let dodged, matched, reviewed: Int
     let matchedNick, matchedUid: String

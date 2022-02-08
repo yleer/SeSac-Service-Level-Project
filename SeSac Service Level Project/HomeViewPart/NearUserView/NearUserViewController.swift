@@ -22,10 +22,7 @@ class NearUserViewController: UIViewController {
                 }else{
                     self.view = self.emptyView
                 }
-    
-    //            mainView.frame.height.prio
             }
-    
     }
 
     lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
@@ -39,9 +36,6 @@ class NearUserViewController: UIViewController {
         super.viewDidLoad()
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
-        
-        
-        
         addTargets()
     }
     
@@ -52,8 +46,6 @@ class NearUserViewController: UIViewController {
     
     
     @objc func changeHobbyButtonClicked() {
-        UserDefaults.standard.set(0, forKey: "CurrentUserState")
-        
         if let idToken = UserDefaults.standard.string(forKey: "idToken") {
             HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
                 if let error = error {
@@ -87,7 +79,6 @@ class NearUserViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
