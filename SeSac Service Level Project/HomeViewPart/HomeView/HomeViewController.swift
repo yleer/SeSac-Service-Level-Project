@@ -207,15 +207,18 @@ class HomeViewController: UIViewController {
         
         updateCurrentUserState()
         
+        
+        
+        
         if let title = sender.titleLabel?.text{
             if title == "전체" {
-
                 mainView.selected = .all
-                mainView.mapView.removeAnnotations(friendsAnnotations)
+                mainView.mapView.addAnnotations(friendsAnnotations)
+//                mainView.mapView.removeAnnotations(friendsAnnotations)
             }else if title == "남자"{
                 mainView.selected = .male
                 mainView.mapView.removeAnnotations(friendsAnnotations)
-                self.friendsAnnotations = []
+//                self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
                     if friend.gender == 1 {
                         let annotation = SeSacAnnotation(discipline: "A", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
@@ -225,7 +228,7 @@ class HomeViewController: UIViewController {
             }else {
                 mainView.selected = .female
                 mainView.mapView.removeAnnotations(friendsAnnotations)
-                self.friendsAnnotations = []
+//                self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
                     if friend.gender == 0 {
                         let annotation = SeSacAnnotation(discipline: "a", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
@@ -233,7 +236,17 @@ class HomeViewController: UIViewController {
                     }
                 }
             }
+            print(friendsAnnotations, "checking")
+            
+            
+            for co in friendsAnnotations {
+                print(co.coordinate)
+            }
+            print("/////")
+            
+            
             self.mainView.mapView.addAnnotations(friendsAnnotations)
+            self.mainView.mapView.reloadInputViews()
         }
     }
 }
@@ -275,10 +288,7 @@ extension HomeViewController: MKMapViewDelegate {
         }
     }
     
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-//        updateCurrentUserState()
-    }
-    
+
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -290,7 +300,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             defaultCoordinate = coordinate
             updateCurrentUserState()
             viewModel.defaultCoordinate = (Double(coordinate.latitude) , Double(coordinate.longitude))
-            locationManager.stopUpdatingLocation()
+//            locationManager.stopUpdatingLocation()
             if initial {
                 print("hello wor", defaultCoordinate)
                 mainView.mapView.removeAnnotation(draggableAnnotation)
@@ -298,6 +308,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 mainView.mapView.addAnnotation(draggableAnnotation)
                 initial = false
             }
+            locationManager.stopUpdatingLocation()
         }else{
             print("not good")
         }

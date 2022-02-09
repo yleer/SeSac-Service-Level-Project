@@ -64,7 +64,6 @@ class HomeViewModel {
                     return
                     
                 }
-                print(data," chekc")
                 self.nearFriends = data.fromQueueDB + data.fromQueueDBRequested
                 completion()
                 
