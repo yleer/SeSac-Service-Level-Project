@@ -13,6 +13,8 @@ enum ButtonState {
     case outline
     case cancel
     case disable
+    case blueButton
+    case redButton
 }
 
 
@@ -46,6 +48,16 @@ class InActiveButton: UIButton {
                 self.backgroundColor = UIColor(named: ColorNames.gray6)
                 self.layer.borderColor = UIColor(named: ColorNames.gray6)?.cgColor
                 self.isEnabled = false
+            case .blueButton:
+                self.setTitleColor(.white, for: .normal)
+                self.backgroundColor = .brandBlue
+//                self.layer.borderColor = UIColor(named: ColorNames.gray6)?.cgColor
+                self.isEnabled = true
+            case .redButton:
+                self.setTitleColor(.white, for: .normal)
+                self.backgroundColor = .errorRed
+//                self.layer.borderColor = UIColor(named: ColorNames.gray6)?.cgColor
+                self.isEnabled = true
             }
         }
     }

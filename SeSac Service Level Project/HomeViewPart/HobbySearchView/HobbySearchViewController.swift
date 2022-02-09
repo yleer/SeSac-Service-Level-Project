@@ -150,11 +150,6 @@ extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewD
         return viewModel.myInterestHobbies.count
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        
-//        return CGSize(width: collectionView.cellForItem(at: indexPath)!.frame.width, height: 32)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SizingCell.identifier, for: indexPath) as? SizingCell else {return UICollectionViewCell()}

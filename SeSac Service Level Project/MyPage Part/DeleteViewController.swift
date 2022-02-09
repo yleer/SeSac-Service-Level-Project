@@ -40,7 +40,49 @@ class DeleteViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
+    
+    var idToken: String!
+    var uid: String!
+    
+    var completion: ((Int, String) -> Void)?
+    
     @objc func confurmButtonClicked() {
+        
+        switch mainView.viewType {
+
+        case .basic:
+            buttonForBasic()
+        case .request:
+            HomeApiService.requestFriend(idToken: idToken, otherUid: uid) { error, statusCode in
+                if let error = error {
+                    switch error {
+                    case .firebaseTokenError(let errorContent):
+                        FireBaseService.getIdToken(completion: nil)
+                    case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                        self.view.makeToast(errorContent)
+                    }
+                }else {
+                    self.completion?(statusCode, self.uid)
+                }
+            }
+        case .accept:
+            HomeApiService.acceptRequest(idToken: idToken, otherUid:uid) { error, statusCode in
+                if let error = error {
+                    switch error {
+                    case .firebaseTokenError(let errorContent):
+                        FireBaseService.getIdToken(completion: nil)
+                    case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                        self.view.makeToast(errorContent)
+                    }
+                } else {
+                    self.completion?(statusCode, self.uid)
+                }
+            }
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func buttonForBasic() {
         let idToekn = UserDefaults.standard.string(forKey: "idToken")
         ApiService.deleteUser(idToken: idToekn!) { error, statusCode in
             if let error = error {
@@ -61,7 +103,9 @@ class DeleteViewController: UIViewController {
             
             windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnboardingViewController())
             windowScene.windows.first?.makeKeyAndVisible()
-        }
     }
+    }
+
+
     
 }

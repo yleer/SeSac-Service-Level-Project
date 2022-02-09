@@ -13,14 +13,16 @@ class SeSacAnnotation: NSObject, MKAnnotation {
     let locationName: String?
     let discipline: String?
     let coordinate: CLLocationCoordinate2D
+    let image: UIImage?
     
     
     init(discipline: String?,
-                  coordinate: CLLocationCoordinate2D) {
+         coordinate: CLLocationCoordinate2D, image2: UIImage) {
         self.discipline = discipline
         self.coordinate = coordinate
-        self.title = "good"
-        self.locationName = "123"
+        self.title = ""
+        self.locationName = ""
+        self.image = image2
         super.init()
     }
     

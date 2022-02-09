@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     let mainView = HomeView()
     let viewModel = HomeViewModel()
     
-    var friendsAnnotations: [MKPointAnnotation] = []
+    var friendsAnnotations: [SeSacAnnotation] = []
     var draggableAnnotation = MKPointAnnotation()
   
     lazy var defaultCoordinate = CLLocationCoordinate2D(latitude: viewModel.defaultCoordinate.0, longitude: viewModel.defaultCoordinate.1) 
@@ -29,46 +29,49 @@ class HomeViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let token = UserDefaults.standard.string(forKey: "idtoken"){
-            print("saaa")
-            ApiService.getUserInfo(idToken: token) { _, _ in
-                print("saaa")
-            }
-        }
-        
         locationManager.delegate = self
         mainView.mapView.delegate = self
-        
+        draggableAnnotation.title = "h"
         // 현재 유저에 맞게 위치 설정.
         locationManager.requestWhenInUseAuthorization()
         addTargets()
+//        FireBaseService.getIdToken {
+//            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+//                print(idToken)
+//                HomeApiService.myQueueState(idToken: idToken) { err, int in
+//                    print("helo")
+//                }
+//
+//            }
+//        }
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UserDefaults.standard.set(0, forKey: "CurrentUserState")
+//        UserDefaults.standard.set(0, forKey: "CurrentUserState")
         
         updateCurrentUserState()
-        FireBaseService.getIdToken {
-            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
-                    if error == nil {
-                        if statusCode == 200 {
-                            return
-                        }
-                    }else {
-                        if statusCode == 401 {
-                            self.view.makeToast("나중에 다시 시도해 주세요")
-                        }else if statusCode == 500 {
-                            self.view.makeToast("서버 에러")
-                        }else if statusCode == 501 {
-                            self.view.makeToast("사용자 에러")
-                        }
-                    }
-                }
-
-            }
-        }
+//        FireBaseService.getIdToken {
+//            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+//                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+//                    if error == nil {
+//                        if statusCode == 200 {
+//                            return
+//                        }
+//                    }else {
+//                        if statusCode == 401 {
+//                            self.view.makeToast("나중에 다시 시도해 주세요")
+//                        }else if statusCode == 500 {
+//                            self.view.makeToast("서버 에러")
+//                        }else if statusCode == 501 {
+//                            self.view.makeToast("사용자 에러")
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
     var initial = true
@@ -97,38 +100,14 @@ class HomeViewController: UIViewController {
         
         mainView.mapView.removeAnnotations(self.friendsAnnotations)
         
-        
-        
-        let a1 = CLLocationCoordinate2D(latitude:  37.50530512029964, longitude: 126.99848526587533)
-        let a2 = CLLocationCoordinate2D(latitude: 37.499176838581135, longitude: 126.98415154111608)
-        let a3 = CLLocationCoordinate2D(latitude: 37.5015430958333, longitude: 126.97769278193901)
-        let a11 = MKPointAnnotation()
-        a11.coordinate = a1
-
-        let a22 = MKPointAnnotation()
-        a22.coordinate = a2
-
-        let a33 = MKPointAnnotation()
-        a33.coordinate = a3
-        mainView.mapView.removeAnnotations([a11,a22,a33])
-        
-        
-        
-        
         viewModel.getNeighborHobbies {
             self.friendsAnnotations = []
             for friend in self.viewModel.nearFriends {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                let annotation = SeSacAnnotation(discipline: "a", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
+                
                 self.friendsAnnotations.append(annotation)
             }
-
-           
-
-            
-            
             self.mainView.mapView.addAnnotations(self.friendsAnnotations)
-            self.mainView.mapView.addAnnotations([a11,a22,a33])
         }
     }
    
@@ -239,8 +218,7 @@ class HomeViewController: UIViewController {
                 self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
                     if friend.gender == 1 {
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                        let annotation = SeSacAnnotation(discipline: "A", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
                         self.friendsAnnotations.append(annotation)
                     }
                 }
@@ -250,8 +228,7 @@ class HomeViewController: UIViewController {
                 self.friendsAnnotations = []
                 for friend in viewModel.nearFriends {
                     if friend.gender == 0 {
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long)
+                        let annotation = SeSacAnnotation(discipline: "a", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
                         self.friendsAnnotations.append(annotation)
                     }
                 }
@@ -268,36 +245,17 @@ extension HomeViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
         guard let annotation = annotation as? SeSacAnnotation else {
-//            print("dd")
             let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
             view.isDraggable = true
             view.pinTintColor = .red
+            view.image = UIImage(named: "Draggable")
           return view
         }
-        // 3
-
-        var annotationView = self.mainView.mapView.dequeueReusableAnnotationView(withIdentifier: "SeSacAnnotation")
-        if annotationView == nil {
-            //없으면 하나 만들어 주시고
-            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAnnotation")
-
-            annotationView?.isDraggable = true
-
-
-            let miniButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            miniButton.setImage(UIImage(systemName: "person"), for: .normal)
-            miniButton.tintColor = .blue
-            annotationView?.rightCalloutAccessoryView = miniButton
-
-        } else {
-            //있으면 등록된 걸 쓰시면 됩니다.
-            annotationView?.annotation = annotation
-        }
-        print("aa")
-        annotationView?.image = UIImage(named: ImageNames.MyInfoTableViewCell.myInfoTableViewCellUser)
-
-        return nil
+        let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
+        view.image = UIImage(named: "sesacFace1")
+        return view
       }
 
     
@@ -308,10 +266,12 @@ extension HomeViewController: MKMapViewDelegate {
             let droppedAt = view.annotation?.coordinate
             print("dropped at : ", droppedAt?.latitude ?? 0.0, droppedAt?.longitude ?? 0.0);
             view.setDragState(.none, animated: true)
+            view.image = UIImage(named: "Draggable")
         }
         if (newState == .canceling )
         {
             view.setDragState(.none, animated: true)
+            view.image = UIImage(named: "Draggable")
         }
     }
     

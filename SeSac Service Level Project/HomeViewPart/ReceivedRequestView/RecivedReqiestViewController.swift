@@ -77,8 +77,6 @@ class RecivedReqiestViewController: UIViewController {
                 print(Code)
             }
         }
-        
-        
         viewModel.onqueueCall {
             if self.viewModel.queueDB.count > 0 {
                 self.view = self.mainView
@@ -97,16 +95,30 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func acceptRequestButtonTapped(_ sender: UIButton) {
-        print("Hell")
-        
-        
+        let vc = DeleteViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.mainView.viewType = .accept
         if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-            HomeApiService.acceptRequest(idToken: idToken, otherUid: viewModel.queueDB[sender.tag / 3].uid) { error, statusCode in
-                print(statusCode)
-            }
-            
-          
+            vc.idToken = idToken
         }
+        vc.completion = { statusCode, uid in
+            if statusCode == 200 {
+                UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                let vc = ChattingViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else if statusCode == 201 {
+                self.view.makeToast("상대방이 이미 다른 사람과 취미를 함께하는 중입니다")
+            }else if statusCode == 202 {
+                self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다")
+            }else if statusCode == 203 {
+                self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요")
+                self.viewModel.onqueueCall {
+                    self.mainView.tableView.reloadData()
+                }
+            }
+        }
+        vc.uid = viewModel.queueDB[sender.tag / 3].uid
+        self.present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

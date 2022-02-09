@@ -38,10 +38,10 @@ class ManageMyInfoImageCell: UITableViewCell {
             button.isHidden = true
         case .requestButton:
             button.isHidden = false
-            button.stateOfButton = .fill
+            button.stateOfButton = .redButton
         case .confirmButton:
             button.isHidden = false
-            button.stateOfButton = .fill
+            button.stateOfButton = .blueButton
         }
     }
     

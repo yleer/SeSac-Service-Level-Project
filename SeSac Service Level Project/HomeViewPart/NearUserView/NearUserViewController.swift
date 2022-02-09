@@ -15,6 +15,7 @@ class NearUserViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("hll")
             viewModel.onqueueCall{
                 if self.viewModel.queueDB.count > 0 {
                     self.view = self.mainView
@@ -87,12 +88,37 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func requestButtonTapped(_ sender: UIButton) {
-        print("Hell")
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-            HomeApiService.requestFriend(idToken: idToken, otherUid: viewModel.queueDB[sender.tag / 3].uid) { error, statusCode in
-                print(statusCode)
+
+        let vc = DeleteViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.mainView.viewType = .request
+        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        vc.idToken = idToken
+        vc.completion = { statusCode, uid in
+            if statusCode == 200 {
+                self.view.makeToast("취미 함께 하기 요청을 보냈습니다")
+                self.mainView.tableView.reloadData()
+            }else if statusCode == 201 {
+                HomeApiService.acceptRequest(idToken: idToken, otherUid: uid) { error, statusCode2 in
+                    if statusCode2 == 200 {
+                        UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                        self.view.makeToast("상대방도 취미 함께 하기를 요청했습니다. 채팅방으로 이동합니다")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            let vc = ChattingViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                    
+                        
+                }
+                
+            }else if statusCode == 202 {
+                self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다")
             }
         }
+        vc.uid = viewModel.queueDB[sender.tag / 3].uid
+        self.present(vc, animated: true, completion: nil)
+        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
