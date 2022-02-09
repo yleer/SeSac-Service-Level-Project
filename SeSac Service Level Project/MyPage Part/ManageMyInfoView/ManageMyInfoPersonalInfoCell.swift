@@ -39,8 +39,8 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
                 case .myInfo:
                     setUpConstraintsWhenFull()
                 case .hobby:
-//                    setUpIncludeingHobbiesFull()
-                    setUpConstraintsWhenFull()
+                    setUpIncludeingHobbiesFull()
+//                    setUpConstraintsWhenFull()
                 }
             }else {
                 subTitle.isHidden = true
@@ -72,6 +72,7 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
     
     let sesacReviewLabel = UILabel()
     let waitingForeReiview = UILabel()
+    let moreButtonForReview = UIButton()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -115,9 +116,10 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         contentView.addSubview(waitingForeReiview)
         contentView.addSubview(wantHobbies)
         contentView.addSubview(wantHobbyLabel)
+        contentView.addSubview(moreButtonForReview)
         
-//        wantHobbies.backgroundColor = .black
         
+        moreButtonForReview.setImage(UIImage(named: "Vector 49"), for: .normal)
         colletionView.register(ManageCollectionViewCell.self, forCellWithReuseIdentifier: ManageCollectionViewCell.identifier)
 
         nameLabel.font = UIFont(name: FontNames.medium, size: 16)
@@ -141,6 +143,7 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         colletionView.snp.removeConstraints()
         sesacReviewLabel.snp.removeConstraints()
         waitingForeReiview.snp.removeConstraints()
+        moreButtonForReview.snp.removeConstraints()
         
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -245,6 +248,13 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
             make.top.equalTo(wantHobbies.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.height.equalTo(18)
+        }
+        
+        moreButtonForReview.snp.makeConstraints { make in
+            make.height.equalTo(12)
+            make.width.equalTo(6)
+            make.trailing.equalToSuperview().offset(-16)
+            make.centerY.equalTo(sesacReviewLabel)
         }
         
         waitingForeReiview.snp.makeConstraints { make in

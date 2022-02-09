@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880CE7E927B4099D002AF244 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880CE7E827B4099D002AF244 /* ReviewViewController.swift */; };
+		880CE7EC27B409C6002AF244 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880CE7EB27B409C6002AF244 /* ReviewView.swift */; };
+		880CE7EE27B40B1D002AF244 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880CE7ED27B40B1D002AF244 /* ReviewCell.swift */; };
+		880CE7F027B40BF5002AF244 /* NoReviewVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880CE7EF27B40BF5002AF244 /* NoReviewVIew.swift */; };
 		8815B4EB27A66BED00F32627 /* HobbySeachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8815B4EA27A66BED00F32627 /* HobbySeachViewModel.swift */; };
 		8819F72C279D85840075F656 /* Userdefault + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72B279D85840075F656 /* Userdefault + extension.swift */; };
 		8819F72E279D86EE0075F656 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72D279D86EE0075F656 /* Enums.swift */; };
@@ -102,6 +106,10 @@
 /* Begin PBXFileReference section */
 		230AD1F48C96E2FC3466D59C /* Pods-SeSac Service Level Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.debug.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.debug.xcconfig"; sourceTree = "<group>"; };
 		68EF1A1A56691D9BC1B1886E /* Pods-SeSac Service Level Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSac Service Level Project.release.xcconfig"; path = "Target Support Files/Pods-SeSac Service Level Project/Pods-SeSac Service Level Project.release.xcconfig"; sourceTree = "<group>"; };
+		880CE7E827B4099D002AF244 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		880CE7EB27B409C6002AF244 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		880CE7ED27B40B1D002AF244 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		880CE7EF27B40BF5002AF244 /* NoReviewVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoReviewVIew.swift; sourceTree = "<group>"; };
 		8815B4EA27A66BED00F32627 /* HobbySeachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySeachViewModel.swift; sourceTree = "<group>"; };
 		8819F72B279D85840075F656 /* Userdefault + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault + extension.swift"; sourceTree = "<group>"; };
 		8819F72D279D86EE0075F656 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -217,6 +225,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		880CE7EA27B409B9002AF244 /* ReviewView */ = {
+			isa = PBXGroup;
+			children = (
+				880CE7E827B4099D002AF244 /* ReviewViewController.swift */,
+				880CE7EB27B409C6002AF244 /* ReviewView.swift */,
+				880CE7ED27B40B1D002AF244 /* ReviewCell.swift */,
+				880CE7EF27B40BF5002AF244 /* NoReviewVIew.swift */,
+			);
+			path = ReviewView;
+			sourceTree = "<group>";
+		};
 		8819F72F279D86F20075F656 /* Datas */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +257,7 @@
 				8858132D27A917750059F72D /* NearUserPageMenuController.swift */,
 				8867835A27AE7B260017520C /* ReceivedRequestView */,
 				8858133C27A94D000059F72D /* NearUserView */,
+				880CE7EA27B409B9002AF244 /* ReviewView */,
 			);
 			path = HomeViewPart;
 			sourceTree = "<group>";
@@ -666,6 +686,7 @@
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */,
+				880CE7E927B4099D002AF244 /* ReviewViewController.swift in Sources */,
 				8867835E27AE7BE50017520C /* NearUserViewModel.swift in Sources */,
 				8858133027A917970059F72D /* NearUserView.swift in Sources */,
 				88DE49F02796B811003D5958 /* RegisterViewModel.swift in Sources */,
@@ -687,7 +708,9 @@
 				88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */,
 				88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */,
 				88F90D08279909CE00E518DC /* GenderSelectionViewController.swift in Sources */,
+				880CE7F027B40BF5002AF244 /* NoReviewVIew.swift in Sources */,
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
+				880CE7EC27B409C6002AF244 /* ReviewView.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */,
@@ -723,6 +746,7 @@
 				88820D51279BB20000E8FCD4 /* Calendar + extensions.swift in Sources */,
 				8819F72E279D86EE0075F656 /* Enums.swift in Sources */,
 				8819F72C279D85840075F656 /* Userdefault + extension.swift in Sources */,
+				880CE7EE27B40B1D002AF244 /* ReviewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

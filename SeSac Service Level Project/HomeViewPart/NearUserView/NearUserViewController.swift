@@ -38,6 +38,8 @@ class NearUserViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         addTargets()
+        
+        mainView.tableView.rowHeight = UITableView.automaticDimension
     }
     
     func addTargets() {
@@ -143,6 +145,8 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             cell.wantHobbies.tag = (indexPath.row - 1) * 3 + 1
             cell.wantHobbies.delegate = self
             cell.wantHobbies.dataSource = self
+            cell.moreButtonForReview.isHidden = true
+
             
             
             cell.moreButton.tag = indexPath.row
@@ -157,30 +161,10 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ManageMyInfoPersonalInfoCell else {
             return
         }
-//        print()
         cell.full = !cell.full
         isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
         mainView.tableView.reloadData()
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row % 3 == 0 {
-            return 194
-        }else if indexPath.row % 3 == 1 {
-
-            if isFull[indexPath.item - 1] {
-                return 300
-            }else {
-                return 65
-            }
-
-//            return cell.full ? 300 : 65
-        }else {
-            return 50
-        }
-    }
-
-
 }
 
 
@@ -204,14 +188,10 @@ extension NearUserViewController: UICollectionViewDelegate, UICollectionViewData
         }else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SizingCell.identifier, for: indexPath) as? SizingCell else { return UICollectionViewCell() }
             cell.cellType = .defaultType
-            print(viewModel.queueDB[(collectionView.tag - 1) / 2].hf[indexPath.item])
             cell.hobbyLabel.text = viewModel.queueDB[(collectionView.tag - 1) / 2].hf[indexPath.item]
 
             return cell
         }
-//        print(self.viewModel.queueDB[0])
-//        print(self.viewModel.queueDB[0].hf)
-
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -219,6 +199,8 @@ extension NearUserViewController: UICollectionViewDelegate, UICollectionViewData
             return CGSize(width: collectionView.frame.width / 2 - 8, height: 32)
         }else {
             return CGSize(width: collectionView.frame.width / 2 - 8, height: 32)
+//            return UICollectionViewFlowLayout.automaticSize
+//            layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
 
     }

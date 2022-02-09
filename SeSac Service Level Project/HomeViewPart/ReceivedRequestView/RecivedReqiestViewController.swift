@@ -38,6 +38,7 @@ class RecivedReqiestViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         addTargets()
+        mainView.tableView.rowHeight = UITableView.automaticDimension
     }
     
     private func addTargets() {
@@ -143,8 +144,9 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
             cell.wantHobbies.tag = (indexPath.row - 1) * 3 + 1
             cell.wantHobbies.delegate = self
             cell.wantHobbies.dataSource = self
+            cell.moreButtonForReview.addTarget(self, action: #selector(reviewButtonClicked), for: .touchUpInside)
             
-            
+            cell.moreButtonForReview.tag = indexPath.row
             cell.moreButton.tag = indexPath.row
 
             return cell
@@ -154,31 +156,19 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    @objc func reviewButtonClicked(_ sender: UIButton) {
+        let vc = ReviewViewController()
+        vc.reviews = self.viewModel.queueDB[sender.tag - 1].reviews
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func moreButtonClicked(_ sedner: UIButton) {
         guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ManageMyInfoPersonalInfoCell else {
             return
         }
-//        print()
         cell.full = !cell.full
         isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
         mainView.tableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row % 3 == 0 {
-            return 194
-        }else if indexPath.row % 3 == 1 {
-
-            if isFull[indexPath.item - 1] {
-                return 300
-            }else {
-                return 65
-            }
-
-//            return cell.full ? 300 : 65
-        }else {
-            return 50
-        }
     }
 }
 
@@ -202,7 +192,6 @@ extension RecivedReqiestViewController: UICollectionViewDelegate, UICollectionVi
         }else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SizingCell.identifier, for: indexPath) as? SizingCell else { return UICollectionViewCell() }
             cell.cellType = .defaultType
-            print(viewModel.queueDB[(collectionView.tag - 1) / 2].hf[indexPath.item])
             cell.hobbyLabel.text = viewModel.queueDB[(collectionView.tag - 1) / 2].hf[indexPath.item]
 
             return cell
@@ -217,6 +206,7 @@ extension RecivedReqiestViewController: UICollectionViewDelegate, UICollectionVi
             return CGSize(width: collectionView.frame.width / 2 - 8, height: 32)
         }else {
             return CGSize(width: collectionView.frame.width / 2 - 8, height: 32)
+//            return UICollectionViewFlowLayout.automaticSize
         }
 
     }
