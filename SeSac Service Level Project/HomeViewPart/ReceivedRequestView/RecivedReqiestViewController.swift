@@ -170,7 +170,7 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         }else if indexPath.row % 3 == 1 {
 
             if isFull[indexPath.item - 1] {
-                return 400
+                return 300
             }else {
                 return 65
             }

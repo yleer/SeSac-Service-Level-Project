@@ -101,7 +101,7 @@ class HomeViewController: UIViewController {
         mainView.mapView.removeAnnotations(self.friendsAnnotations)
         
         viewModel.getNeighborHobbies {
-            self.friendsAnnotations = []
+//            self.friendsAnnotations = []
             for friend in self.viewModel.nearFriends {
                 let annotation = SeSacAnnotation(discipline: "a", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
                 
@@ -206,10 +206,7 @@ class HomeViewController: UIViewController {
     @objc func genderButtonClicked(_ sender: UIButton) {
         
         updateCurrentUserState()
-        
-        
-        
-        
+        mainView.mapView.removeAnnotations(friendsAnnotations)
         if let title = sender.titleLabel?.text{
             if title == "전체" {
                 mainView.selected = .all
