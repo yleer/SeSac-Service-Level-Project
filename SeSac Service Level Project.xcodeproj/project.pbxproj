@@ -16,6 +16,10 @@
 		8819F72E279D86EE0075F656 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8819F72D279D86EE0075F656 /* Enums.swift */; };
 		8819F732279D8CF10075F656 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F731279D8CF10075F656 /* RxCocoa */; };
 		8819F734279D8CF10075F656 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8819F733279D8CF10075F656 /* RxSwift */; };
+		881B50C927B52D980067B5DE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881B50C827B52D980067B5DE /* ChatView.swift */; };
+		881B50CC27B557CF0067B5DE /* ChatMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881B50CB27B557CF0067B5DE /* ChatMenuView.swift */; };
+		881B50CE27B5580D0067B5DE /* ChatMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881B50CD27B5580D0067B5DE /* ChatMenuViewController.swift */; };
+		881B50D027B562050067B5DE /* ChatMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881B50CF27B562050067B5DE /* ChatMenuViewModel.swift */; };
 		883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883C8B8A27A041DD007BCA20 /* ColorNames.swift */; };
 		883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883C8B8C27A04330007BCA20 /* FontNames.swift */; };
 		8858132E27A917750059F72D /* NearUserPageMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858132D27A917750059F72D /* NearUserPageMenuController.swift */; };
@@ -113,6 +117,10 @@
 		8815B4EA27A66BED00F32627 /* HobbySeachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySeachViewModel.swift; sourceTree = "<group>"; };
 		8819F72B279D85840075F656 /* Userdefault + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault + extension.swift"; sourceTree = "<group>"; };
 		8819F72D279D86EE0075F656 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		881B50C827B52D980067B5DE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		881B50CB27B557CF0067B5DE /* ChatMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuView.swift; sourceTree = "<group>"; };
+		881B50CD27B5580D0067B5DE /* ChatMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewController.swift; sourceTree = "<group>"; };
+		881B50CF27B562050067B5DE /* ChatMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewModel.swift; sourceTree = "<group>"; };
 		883C8B8A27A041DD007BCA20 /* ColorNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNames.swift; sourceTree = "<group>"; };
 		883C8B8C27A04330007BCA20 /* FontNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontNames.swift; sourceTree = "<group>"; };
 		8858132D27A917750059F72D /* NearUserPageMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserPageMenuController.swift; sourceTree = "<group>"; };
@@ -248,10 +256,22 @@
 			path = Datas;
 			sourceTree = "<group>";
 		};
-		8858132C27A9173B0059F72D /* HomeViewPart */ = {
+		881B50CA27B557AD0067B5DE /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
 				88D26C4D27A56E9F00D956B8 /* ChattingViewController.swift */,
+				881B50C827B52D980067B5DE /* ChatView.swift */,
+				881B50CB27B557CF0067B5DE /* ChatMenuView.swift */,
+				881B50CD27B5580D0067B5DE /* ChatMenuViewController.swift */,
+				881B50CF27B562050067B5DE /* ChatMenuViewModel.swift */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
+		8858132C27A9173B0059F72D /* HomeViewPart */ = {
+			isa = PBXGroup;
+			children = (
+				881B50CA27B557AD0067B5DE /* ChatView */,
 				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
 				88C94AC527A27723000A01E1 /* HomeView */,
 				8858132D27A917750059F72D /* NearUserPageMenuController.swift */,
@@ -693,6 +713,7 @@
 				8815B4EB27A66BED00F32627 /* HobbySeachViewModel.swift in Sources */,
 				8858132E27A917750059F72D /* NearUserPageMenuController.swift in Sources */,
 				8867835727AE487C0017520C /* HomeApiService.swift in Sources */,
+				881B50CE27B5580D0067B5DE /* ChatMenuViewController.swift in Sources */,
 				88F90CF42798EC1B00E518DC /* BirthViewModel.swift in Sources */,
 				88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */,
 				885C2387279D26C800FF658E /* OnBoardingView.swift in Sources */,
@@ -704,6 +725,7 @@
 				88EA1B592797B44A00307111 /* VerifyPhoneNumberView.swift in Sources */,
 				889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */,
 				88F90D042798FE3800E518DC /* EmailView.swift in Sources */,
+				881B50C927B52D980067B5DE /* ChatView.swift in Sources */,
 				88DCEA3D27A175E300BDB530 /* DeleteViewController.swift in Sources */,
 				88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */,
 				88CC7EFF279E9EA100828537 /* ManageMyInfoPersonalInfoCell.swift in Sources */,
@@ -713,6 +735,7 @@
 				880CE7EC27B409C6002AF244 /* ReviewView.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
+				881B50CC27B557CF0067B5DE /* ChatMenuView.swift in Sources */,
 				883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */,
 				88DCEA3B27A12A6200BDB530 /* UIColor + extensions.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
@@ -731,6 +754,7 @@
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
 				88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */,
+				881B50D027B562050067B5DE /* ChatMenuViewModel.swift in Sources */,
 				8858133E27A94D4A0059F72D /* RecivedReqiestViewController.swift in Sources */,
 				88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */,
 				8858133B27A9465E0059F72D /* NearUserViewController.swift in Sources */,

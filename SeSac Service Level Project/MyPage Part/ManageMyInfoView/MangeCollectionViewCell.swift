@@ -12,7 +12,7 @@ final class ManageCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ManageCollectionViewCell"
     
-    private let titleLabel = UILabel()
+    let titleLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

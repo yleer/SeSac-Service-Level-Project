@@ -35,15 +35,15 @@ class HomeViewController: UIViewController {
         // 현재 유저에 맞게 위치 설정.
         locationManager.requestWhenInUseAuthorization()
         addTargets()
-//        FireBaseService.getIdToken {
-//            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-//                print(idToken)
-//                HomeApiService.myQueueState(idToken: idToken) { err, int in
-//                    print("helo")
-//                }
-//
-//            }
-//        }
+        FireBaseService.getIdToken {
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                print(idToken)
+                HomeApiService.myQueueState(idToken: idToken) { err, int in
+                    print("helo")
+                }
+
+            }
+        }
        
     }
     

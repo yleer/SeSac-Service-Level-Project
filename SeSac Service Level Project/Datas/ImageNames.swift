@@ -43,6 +43,16 @@ struct ImageNames {
         static let ShopInActivate = "ShopInActivate"
     }
     
+    struct ChatViewController {
+        static let cancelMatch = "cancelMatch"
+        static let more = "more"
+        static let sendGray = "sendGray"
+        static let sendGreen = "sendGreen"
+        static let siren = "siren"
+        static let write = "write"
+        static let closeBig = "closeBig"
+    }
+    
     struct NearByViewController {
         static let emptyLeaf = "emptyLeaf"
         static let refresh = "refresh"
