@@ -50,3 +50,7 @@ HobbySearchVc 완성하였다. 이제 코드들을 네트워크 통신 콜들을
 2/7일 일지
 왜인지 모르겠지만 친구 요청하기 화면에서 autolayout error가 나고 있다 이유를 알아보자
 Attempted to call -cellForRowAtIndexPath: 
+
+
+2/9일 일지
+지도에서 어노테이션이 계속 중복되서 만들어지는 이슈 있음
