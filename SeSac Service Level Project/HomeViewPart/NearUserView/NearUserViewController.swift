@@ -15,7 +15,6 @@ class NearUserViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("hll")
             viewModel.onqueueCall{
                 if self.viewModel.queueDB.count > 0 {
                     self.view = self.mainView
@@ -24,7 +23,62 @@ class NearUserViewController: UIViewController {
                     self.view = self.emptyView
                 }
             }
+        startTimer()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let timer = mTimer {
+            if(timer.isValid){
+                timer.invalidate()
+            }
+        }
+    }
+    
+    var mTimer : Timer?
+    
+    func startTimer() {
+        if let timer = mTimer {
+            //timer 객체가 nil 이 아닌경우에는 invalid 상태에만 시작한다
+            if !timer.isValid {
+                /** 1초마다 timerCallback함수를 호출하는 타이머 */
+                mTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
+            }
+        }else{
+            //timer 객체가 nil 인 경우에 객체를 생성하고 타이머를 시작한다
+            mTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
+        }
+    }
+            
+    @objc func timerCallback(){
+
+        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
+            if statusCode == 200 {
+                if UserInfo.current.matched == 1 {
+                    UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                    self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        let vc = ChattingViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }else {
+                    print("not matched state")
+                    
+                }
+            }else {
+
+            }
+        }
+        viewModel.onqueueCall{
+            if self.viewModel.queueDB.count > 0 {
+                self.view = self.mainView
+                self.mainView.tableView.reloadData()
+            }else{
+                self.view = self.emptyView
+            }
+        }
+   }
 
     lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
     
@@ -104,6 +158,9 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
                 HomeApiService.acceptRequest(idToken: idToken, otherUid: uid) { error, statusCode2 in
                     if statusCode2 == 200 {
                         UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                        HomeApiService.myQueueState(idToken: idToken) { error, statusCode2 in
+                            
+                        }
                         self.view.makeToast("상대방도 취미 함께 하기를 요청했습니다. 채팅방으로 이동합니다")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             let vc = ChattingViewController()

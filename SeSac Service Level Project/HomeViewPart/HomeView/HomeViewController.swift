@@ -52,26 +52,26 @@ class HomeViewController: UIViewController {
 //        UserDefaults.standard.set(0, forKey: "CurrentUserState")
         
         updateCurrentUserState()
-//        FireBaseService.getIdToken {
-//            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-//                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
-//                    if error == nil {
-//                        if statusCode == 200 {
-//                            return
-//                        }
-//                    }else {
-//                        if statusCode == 401 {
-//                            self.view.makeToast("나중에 다시 시도해 주세요")
-//                        }else if statusCode == 500 {
-//                            self.view.makeToast("서버 에러")
-//                        }else if statusCode == 501 {
-//                            self.view.makeToast("사용자 에러")
-//                        }
-//                    }
-//                }
-//
-//            }
-//        }
+        FireBaseService.getIdToken {
+            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+                    if error == nil {
+                        if statusCode == 200 {
+                            return
+                        }
+                    }else {
+                        if statusCode == 401 {
+                            self.view.makeToast("나중에 다시 시도해 주세요")
+                        }else if statusCode == 500 {
+                            self.view.makeToast("서버 에러")
+                        }else if statusCode == 501 {
+                            self.view.makeToast("사용자 에러")
+                        }
+                    }
+                }
+
+            }
+        }
     }
 
     var initial = true

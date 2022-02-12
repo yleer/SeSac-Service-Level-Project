@@ -19,11 +19,8 @@ class DeleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+    
         view.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
-        
-//        view.isOpaque = true
         view.addSubview(mainView)
         mainView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -49,7 +46,6 @@ class DeleteViewController: UIViewController {
     @objc func confurmButtonClicked() {
         
         switch mainView.viewType {
-
         case .basic:
             buttonForBasic()
         case .request:
@@ -76,6 +72,29 @@ class DeleteViewController: UIViewController {
                     }
                 } else {
                     self.completion?(statusCode, self.uid)
+                }
+            }
+        case .dodge:
+//            let a = idToken
+//            let b = uid
+            print("..",idToken!, uid!, "//")
+            HomeApiService.dodge(idToken: idToken!, otherUid: uid!) { error, statusCode in
+//                print(statusCode)
+                if let error = error {
+                    switch error {
+                    case .firebaseTokenError(let errorContent):
+                        FireBaseService.getIdToken(completion: nil)
+                    case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                        self.view.makeToast(errorContent)
+                    }
+                    self.completion?(statusCode, self.uid)
+                } else {
+                    if statusCode == 200 {
+                        self.completion?(statusCode, self.uid)
+                    }else {
+                        self.completion?(statusCode, self.uid)
+                    }
+                    
                 }
             }
         }

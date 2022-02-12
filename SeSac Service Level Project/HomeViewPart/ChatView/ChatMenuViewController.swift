@@ -47,17 +47,60 @@ class ChatMenuViewController: UIViewController {
                 make.width.equalToSuperview().offset(-32)
             }
         }
+        addTargets()
         
-        mainView.cancelButton.addTarget(self, action: #selector(dismissButtonClicked), for: .touchUpInside)
+        
         mainView.layer.cornerRadius = 20
         
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
     }
     
+    var completion: (() -> Void)?
+    
+    
+    func addTargets() {
+        mainView.cancelButton.addTarget(self, action: #selector(dismissButtonClicked), for: .touchUpInside)
+        mainView.confirmButton.addTarget(self, action: #selector(confirmButtonClicked), for: .touchUpInside)
+    }
+    
     @objc func dismissButtonClicked() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func confirmButtonClicked() {
+        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        switch menuType {
+        case .report:
+            
+            HomeApiService.report(idToken: idToken, otherUid: UserInfo.current.matchedUid!, report: viewModel.selectedItems, comment: mainView.textView.text) { error, statusCode in
+                if statusCode == 200 {
+                    self.dismiss(animated: true, completion: nil)
+                }else {
+                    print(statusCode, "error when report")
+                }
+                
+            }
+        case .review:
+            
+            HomeApiService.review(idToken: idToken, otherUid: UserInfo.current.matchedUid!, reputation: viewModel.selectedItems, comment: mainView.textView.text) { error, statusCode in
+                if statusCode == 200 {
+                    UserDefaults.standard.set(0, forKey: "CurrentUserState")
+                    UserInfo.current.matched = 0
+                    self.dismiss(animated: true, completion: nil)
+                    self.completion?()
+                }else {
+                    print(statusCode, "error when review")
+                }
+            }
+            
+            
+        case .none:
+            print("what is this?")
+        }
+        
+    }
+    
 }
 
 extension ChatMenuViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -68,7 +111,12 @@ extension ChatMenuViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ManageCollectionViewCell.identifier, for: indexPath) as? ManageCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.titleLabel.text = viewModel.cellForItemAt(indexPath: indexPath, type: menuType)
+        if viewModel.selectedItems[indexPath.item] == 0 {
+            cell.configureForeCellForItem(title: viewModel.cellForItemAt(indexPath: indexPath, type: menuType), selected: false)
+        }else {
+            cell.configureForeCellForItem(title: viewModel.cellForItemAt(indexPath: indexPath, type: menuType), selected: true)
+        }
+        
         return cell
     }
     
@@ -83,6 +131,19 @@ extension ChatMenuViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ManageCollectionViewCell else { return }
+        let selected = viewModel.selectedItems[indexPath.item]
+        if selected == 0 {
+            cell.configureForeCellForItem(title: cell.titleLabel.text!, selected: true)
+            viewModel.selectedItems[indexPath.item] = 1
+            cell.layer.borderWidth = 0
+        }else {
+            cell.configureForeCellForItem(title: cell.titleLabel.text!, selected: false)
+            viewModel.selectedItems[indexPath.item] = 0
+        }
     }
     
 }

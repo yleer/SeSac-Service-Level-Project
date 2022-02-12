@@ -36,6 +36,7 @@
 		8867835927AE4F830017520C /* NearUserEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835827AE4F820017520C /* NearUserEmptyView.swift */; };
 		8867835C27AE7BC00017520C /* RecivedRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835B27AE7BC00017520C /* RecivedRequestViewModel.swift */; };
 		8867835E27AE7BE50017520C /* NearUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867835D27AE7BE50017520C /* NearUserViewModel.swift */; };
+		887503EF27B63C5200315084 /* ChatApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887503EE27B63C5200315084 /* ChatApiService.swift */; };
 		88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D4D279BADDD00E8FCD4 /* String + extensions.swift */; };
 		88820D51279BB20000E8FCD4 /* Calendar + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D50279BB20000E8FCD4 /* Calendar + extensions.swift */; };
 		88820D53279BC03600E8FCD4 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D52279BC03600E8FCD4 /* EndPoints.swift */; };
@@ -136,6 +137,7 @@
 		8867835827AE4F820017520C /* NearUserEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserEmptyView.swift; sourceTree = "<group>"; };
 		8867835B27AE7BC00017520C /* RecivedRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecivedRequestViewModel.swift; sourceTree = "<group>"; };
 		8867835D27AE7BE50017520C /* NearUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUserViewModel.swift; sourceTree = "<group>"; };
+		887503EE27B63C5200315084 /* ChatApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApiService.swift; sourceTree = "<group>"; };
 		88820D4D279BADDD00E8FCD4 /* String + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + extensions.swift"; sourceTree = "<group>"; };
 		88820D50279BB20000E8FCD4 /* Calendar + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar + extensions.swift"; sourceTree = "<group>"; };
 		88820D52279BC03600E8FCD4 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
@@ -271,10 +273,10 @@
 		8858132C27A9173B0059F72D /* HomeViewPart */ = {
 			isa = PBXGroup;
 			children = (
+				8858132D27A917750059F72D /* NearUserPageMenuController.swift */,
 				881B50CA27B557AD0067B5DE /* ChatView */,
 				88C94ACA27A2BFBF000A01E1 /* HobbySearchView */,
 				88C94AC527A27723000A01E1 /* HomeView */,
-				8858132D27A917750059F72D /* NearUserPageMenuController.swift */,
 				8867835A27AE7B260017520C /* ReceivedRequestView */,
 				8858133C27A94D000059F72D /* NearUserView */,
 				880CE7EA27B409B9002AF244 /* ReviewView */,
@@ -317,6 +319,7 @@
 				885F0170279A7F770049856B /* ApiData.swift */,
 				88820D52279BC03600E8FCD4 /* EndPoints.swift */,
 				8867835627AE487C0017520C /* HomeApiService.swift */,
+				887503EE27B63C5200315084 /* ChatApiService.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				880CE7F027B40BF5002AF244 /* NoReviewVIew.swift in Sources */,
 				88EA1B562797B40700307111 /* VerifiyPhoneNumberViewController.swift in Sources */,
 				880CE7EC27B409C6002AF244 /* ReviewView.swift in Sources */,
+				887503EF27B63C5200315084 /* ChatApiService.swift in Sources */,
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				881B50CC27B557CF0067B5DE /* ChatMenuView.swift in Sources */,

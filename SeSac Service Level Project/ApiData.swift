@@ -60,6 +60,12 @@ class UserInfo {
     static let current = UserInfo()
     var user: User?
     var onqueueParameter: FindRequestParameter?
+    var matchedUid: String?
+    var matchedNick: String?
+    var matched: Int?
+    var dodged: Int?
+    var reviewed: Int?
+    
 }
 
 

@@ -21,4 +21,6 @@ class ChatMenuViewModel {
             return reviewLists[indexPath.item]
         }
     }
+    
+    var selectedItems = [0,0,0,0,0,0]
 }
