@@ -58,3 +58,5 @@ Attempted to call -cellForRowAtIndexPath:
 2/12일 일지
 api 통신 함수 후에 특정 부분이 실행이 계속 안되는 문제가 있었음. 1시간 정도 왜 안되나 고민한거 같음. 결국 찾아본 결과 completion을 깜박하고 호출을 하지 않아 실행이 안되었던것.
 
+2/13일 일지
+api 통신으로 json을 파싱할때, 현재 사용자 상태에 따라 json 값의 변화가 있다. (예를 들어 review 가 없을수도 있고, 있을 수도 있다) -> 이때 codable안에 값이 있을 수도 있고, 없을 수도 있는 값을 optional로 처리하면 decoding error를 처리할수있다
