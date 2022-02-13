@@ -5,12 +5,13 @@
 //  Created by Yundong Lee on 2022/01/29.
 //
 
-import Foundation
 import UIKit
+import Toast
 
 class ChattingViewController: UIViewController {
     
     let mainView = ChatView()
+    let viewModel = ChattingViewModel()
     
     override func loadView() {
         super.loadView()
@@ -22,15 +23,50 @@ class ChattingViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkCurrentState()
+    }
+    
+    @objc func sendButtonClicked() {
+        checkCurrentState()
+    }
+    
+    private func checkCurrentState() {
+        viewModel.myState { error, statusCode in
+            if statusCode == 200 {
+                if UserInfo.current.matched == 1 {
+                    self.title = UserInfo.current.matchedNick
+                }else {
+                    return
+                }
+                
+                if UserInfo.current.dodged == 1 || UserInfo.current.reviewed == 1 {
+                    self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
+                }else {
+                 return
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        title =
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageNames.ChatViewController.more), style: .plain, target: self, action: #selector(showExtraButtonClicked))
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageNames.ChatViewController.more), style: .plain, target: self, action: #selector(showExtraButtonClicked))
         addTargets()
+        
+        
     }
     
+   
+}
+
+
+
+// ChattingViewController Menu
+extension ChattingViewController {
     func addTargets() {
         mainView.reportButton.addTarget(self, action: #selector(reportButtonClicked), for: .touchUpInside)
         mainView.cancelButton.addTarget(self, action: #selector(cancelButtonnClicked), for: .touchUpInside)

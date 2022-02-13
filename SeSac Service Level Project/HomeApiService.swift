@@ -106,27 +106,26 @@ class HomeApiService {
                     let decoder = JSONDecoder()
                     do {
                         let result = try decoder.decode(UserMatchingState.self, from: value)
-                        print(result.matchedUid)
                         UserInfo.current.dodged = result.dodged
                         UserInfo.current.matchedNick = result.matchedNick
                         UserInfo.current.reviewed = result .reviewed
                         UserInfo.current.matched = result.matched
                         UserInfo.current.matchedUid = result.matchedUid
                         completion(nil, statusCode)
+//                        print("well done, \(result)")
                     }catch {
                         print("user info decoding error : ", error)
                         completion(nil, statusCode)
                     }
                 }else if statusCode == 201 {
                     // 매칭 대기 상태가 아닌 상태, 매칭이 되지 않아 종료된 상태 -> toast 필요
-                    
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 401 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 406 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }else if statusCode == 500 {
-                    print(statusCode)
+                    completion(nil, statusCode)
                 }
               
             case .failure(let error):

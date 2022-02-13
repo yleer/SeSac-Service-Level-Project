@@ -45,6 +45,7 @@
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
+		88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */; };
 		88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */; };
 		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
 		88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */; };
@@ -145,6 +146,7 @@
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoAgeRangeCell.swift; sourceTree = "<group>"; };
 		88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
 		88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUpdateData.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				881B50CB27B557CF0067B5DE /* ChatMenuView.swift */,
 				881B50CD27B5580D0067B5DE /* ChatMenuViewController.swift */,
 				881B50CF27B562050067B5DE /* ChatMenuViewModel.swift */,
+				88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -752,6 +755,7 @@
 				88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */,
 				8867835927AE4F830017520C /* NearUserEmptyView.swift in Sources */,
 				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
+				88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */,
 				885F0171279A7F770049856B /* ApiData.swift in Sources */,
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,
 				88C94ACC27A2BFD0000A01E1 /* HobbySearchView.swift in Sources */,
