@@ -57,10 +57,18 @@ class ChattingViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageNames.ChatViewController.more), style: .plain, target: self, action: #selector(showExtraButtonClicked))
         addTargets()
         
+        mainView.chatTextView.delegate = self
         
     }
     
    
+}
+
+
+extension ChattingViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+//        mainView.fitTextViewSize()
+    }
 }
 
 
@@ -71,6 +79,24 @@ extension ChattingViewController {
         mainView.reportButton.addTarget(self, action: #selector(reportButtonClicked), for: .touchUpInside)
         mainView.cancelButton.addTarget(self, action: #selector(cancelButtonnClicked), for: .touchUpInside)
         mainView.reviewButton.addTarget(self, action: #selector(reviewButtonClicked), for: .touchUpInside)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        print("Hello")
+        var keyboardHeight: CGFloat = 0
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRect.height
+        }
+        mainView.setUpKeyBoardConstraints(keyBoardHeight: keyboardHeight)
+    }
+    
+    @objc func keyboardWillHide() {
+        print("Hello")
+        mainView.setUpConstraints()
     }
     
     @objc func reportButtonClicked() {

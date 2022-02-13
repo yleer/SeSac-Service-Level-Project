@@ -92,7 +92,7 @@ class NearUserViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         addTargets()
-        
+        mainView.tableView.register(ManageMyInfoPersonalInfoCell.self, forCellReuseIdentifier: ManageMyInfoPersonalInfoCell.identifier)
         mainView.tableView.rowHeight = UITableView.automaticDimension
     }
     
@@ -193,11 +193,14 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.colletionView.delegate = self
             cell.colletionView.dataSource = self
+            
             cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
-            cell.nameLabel.text = viewModel.queueDB[indexPath.row - 1].nick
+            cell.nameLabel.text = viewModel.queueDB[indexPath.row / 3 ].nick
             cell.infoCellType = .hobby
-            cell.colletionView.tag = (indexPath.row - 1) * 3
-            cell.wantHobbies.tag = (indexPath.row - 1) * 3 + 1
+            
+            cell.colletionView.tag = (indexPath.row / 3) * 2
+            cell.wantHobbies.tag = (indexPath.row / 3) * 2 + 1
+            
             cell.wantHobbies.delegate = self
             cell.wantHobbies.dataSource = self
             cell.moreButtonForReview.isHidden = true
@@ -220,6 +223,21 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
         isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
         mainView.tableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row % 3 == 1{
+            
+            guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0)) as? ManageMyInfoPersonalInfoCell else {
+                return
+            }
+            
+            cell.full = !cell.full
+            isFull[indexPath.row / 3] = !isFull[indexPath.row / 3]
+            mainView.tableView.reloadData()
+            
+            
+        }
+    }
 }
 
 
@@ -229,6 +247,7 @@ extension NearUserViewController: UICollectionViewDelegate, UICollectionViewData
             return 6
         }else {
             print("this?")
+//            (indexPath.row / 3) * 2 + 1
             return viewModel.queueDB[(collectionView.tag - 1) / 2].hf.count
         }
 
@@ -238,9 +257,10 @@ extension NearUserViewController: UICollectionViewDelegate, UICollectionViewData
         if collectionView.tag % 2 == 0  {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ManageCollectionViewCell.identifier, for: indexPath) as? ManageCollectionViewCell else { return UICollectionViewCell() }
 
-            cell.configureForeCellForItem(title: viewModel.cellForItemAt(indexPath: indexPath), selected: viewModel.queueDB[collectionView.tag].reputation[indexPath.row] > 0)
+            cell.configureForeCellForItem(title: viewModel.cellForItemAt(indexPath: indexPath), selected: viewModel.queueDB[collectionView.tag / 2].reputation[indexPath.row] > 0)
             return cell
-        }else {
+        }
+        else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SizingCell.identifier, for: indexPath) as? SizingCell else { return UICollectionViewCell() }
             cell.cellType = .defaultType
             cell.hobbyLabel.text = viewModel.queueDB[(collectionView.tag - 1) / 2].hf[indexPath.item]

@@ -19,6 +19,8 @@ class ChatView: UIView {
     let cancelButton = UIButton()
     let reviewButton = UIButton()
     
+    let chatTextView = UITextView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -28,12 +30,26 @@ class ChatView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    var amountOfLinesToBeShown: CGFloat = 3
+    lazy var maxHeight: CGFloat = chatTextView.font?.lineHeight ?? 4 * amountOfLinesToBeShown
     
+    func fitTextViewSize(bottom: CGFloat) {
+
+        let a = chatTextView.sizeThatFits(CGSize(width: chatTextView.frame.size.width, height: maxHeight))
+        chatTextView.snp.removeConstraints()
+        chatTextView.snp.makeConstraints { make in
+            make.width.equalTo(343)
+            make.height.equalTo(a.height)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-bottom)
+            make.centerX.equalToSuperview()
+        }
+    }
     
     func setUp() {
         backgroundColor = .white
         addSubview(tableView)
         addSubview(moreView)
+        addSubview(chatTextView)
         
         moreView.backgroundColor = .gray
         moreView.addSubview(stack)
@@ -72,12 +88,37 @@ class ChatView: UIView {
         reportButton.titleLabel?.font = UIFont(name: FontNames.medium, size: 14)
         reviewButton.titleLabel?.font = UIFont(name: FontNames.medium, size: 14)
         reviewButton.backgroundColor = .green
-        print(reviewButton.frame)
 
+        chatTextView.backgroundColor = .blue
+        tableView.backgroundColor = .green
 
     }
     
+    func setUpKeyBoardConstraints(keyBoardHeight: CGFloat) {
+        tableView.snp.removeConstraints()
+        chatTextView.snp.removeConstraints()
+        
+        tableView.snp.makeConstraints { make in
+//            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.equalTo(safeAreaLayoutGuide)
+            make.trailing.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(safeAreaLayoutGuide).offset(-keyBoardHeight)
+        }
+        bringSubviewToFront(chatTextView)
+        chatTextView.snp.makeConstraints { make in
+            make.width.equalTo(343)
+            make.height.equalTo(100)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16 - keyBoardHeight)
+            make.centerX.equalToSuperview()
+        }
+//        fitTextViewSize()
+    }
+   
     func setUpConstraints() {
+        tableView.snp.removeConstraints()
+        chatTextView.snp.removeConstraints()
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(safeAreaLayoutGuide)
         }
@@ -91,6 +132,14 @@ class ChatView: UIView {
         stack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        chatTextView.snp.makeConstraints { make in
+            make.width.equalTo(343)
+            make.height.equalTo(52)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(16)
+            make.centerX.equalToSuperview()
+        }
+//        fitTextViewSize()
         
     }
 
