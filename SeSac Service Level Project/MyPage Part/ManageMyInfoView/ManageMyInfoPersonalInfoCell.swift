@@ -101,7 +101,7 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     
     private func setUp() {
         self.layer.cornerRadius = 15

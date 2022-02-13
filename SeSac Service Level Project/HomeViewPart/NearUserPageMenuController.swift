@@ -52,12 +52,12 @@ class NearUserPageMenuController: UIViewController {
         let lat = UserInfo.current.onqueueParameter?.lat
         let long = UserInfo.current.onqueueParameter?.long
         
-        guard let idToken = UserDefaults.standard.string(forKey: "idToken"), let region = region, let lat = lat, let long = long else { return }
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue), let region = region, let lat = lat, let long = long else { return }
         HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
             print(statusCode)
             if statusCode == 200 {
                 if UserInfo.current.matched == 1 {
-                    UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                    UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                     self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         let vc = ChattingViewController()
@@ -126,7 +126,7 @@ class NearUserPageMenuController: UIViewController {
     
     @objc func stopMathcingButtonClicked() {
         FireBaseService.getIdToken {
-            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                 HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
                     if let error = error {
                         switch error {
@@ -135,7 +135,7 @@ class NearUserPageMenuController: UIViewController {
                         }
                     }else {
                         if statusCode == 200 {
-                            UserDefaults.standard.set(0, forKey: "CurrentUserState")
+                            UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                             self.navigationController?.popToRootViewController(animated: true)
                             
                         }else if statusCode == 201 {

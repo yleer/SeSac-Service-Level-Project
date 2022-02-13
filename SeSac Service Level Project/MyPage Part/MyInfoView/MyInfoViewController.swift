@@ -30,7 +30,7 @@ final class MyInfoViewController: UIViewController {
     
     func getInfo() {
         FireBaseService.getIdToken {
-            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                 ApiService.getUserInfo(idToken: idToken) { error, statusCode in
                     
                     guard let error = error else {
@@ -95,7 +95,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
         else {
             
             FireBaseService.getIdToken {
-                if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                     ApiService.getUserInfo(idToken: idToken) { error, statusCode in
                         
                         print(idToken)

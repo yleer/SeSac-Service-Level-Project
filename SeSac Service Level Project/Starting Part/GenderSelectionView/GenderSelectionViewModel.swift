@@ -13,7 +13,7 @@ class GenderSelectionViewModel {
 
     func getUserInfo(completion: @escaping (String?, Bool) -> Void) {
         
-        guard let phone = UserDefaults.standard.string(forKey: "userPhoneNumber"), let fcmToken = UserDefaults.standard.string(forKey: "fcmToken"), let nick = UserDefaults.standard.string(forKey: "nickName"), let age = UserDefaults.standard.string(forKey: "age"), let email = UserDefaults.standard.string(forKey: "email"), let idToken = UserDefaults.standard.string(forKey: "idToken") else {
+        guard let phone = UserDefaults.standard.string(forKey: UserDefaults.myKey.userPhoneNumber.rawValue), let fcmToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.fcmToken.rawValue), let nick = UserDefaults.standard.string(forKey: UserDefaults.myKey.nickName.rawValue), let age = UserDefaults.standard.string(forKey: UserDefaults.myKey.age.rawValue), let email = UserDefaults.standard.string(forKey: UserDefaults.myKey.email.rawValue), let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else {
             return
         }
 

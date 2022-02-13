@@ -102,7 +102,8 @@ class DeleteViewController: UIViewController {
     }
     
     private func buttonForBasic() {
-        let idToekn = UserDefaults.standard.string(forKey: "idToken")
+        
+        let idToekn = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue)
         ApiService.deleteUser(idToken: idToekn!) { error, statusCode in
             if let error = error {
                 switch error {

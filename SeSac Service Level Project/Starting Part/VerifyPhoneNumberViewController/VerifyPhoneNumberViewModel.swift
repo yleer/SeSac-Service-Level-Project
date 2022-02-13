@@ -76,7 +76,8 @@ final class VerifyPhoneNumberViewModel {
                 return
             }
             
-                if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            
+                if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                     ApiService.getUserInfo(idToken: idToken) { error, statusCode in
                         print(error, statusCode,"from check")
                         if error == nil {

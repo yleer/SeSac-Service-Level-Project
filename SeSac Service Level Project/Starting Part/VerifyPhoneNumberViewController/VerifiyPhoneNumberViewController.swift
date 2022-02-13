@@ -58,7 +58,7 @@ final class VerifiyPhoneNumberViewController: UIViewController {
     @objc func resendButtonCliked() {
         // 재전송 성공 alert 보여주자 .
         view.endEditing(true)
-        if let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") {
+        if let phoneNumber = UserDefaults.standard.string(forKey: UserDefaults.myKey.userPhoneNumber.rawValue) {
             FireBaseService.sendMessage(phoneNumber: phoneNumber)
             viewModel.testMain()
         }

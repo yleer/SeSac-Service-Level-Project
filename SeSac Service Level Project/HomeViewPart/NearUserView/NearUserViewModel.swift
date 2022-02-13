@@ -17,7 +17,7 @@ class NearUserViewModel {
         let lat = UserInfo.current.onqueueParameter?.lat
         let long = UserInfo.current.onqueueParameter?.long
         FireBaseService.getIdToken {
-            if let idToken = UserDefaults.standard.string(forKey: "idToken"), let region = region, let lat = lat, let long = long {
+            if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue), let region = region, let lat = lat, let long = long {
                 HomeApiService.onqueue(idToken: idToken, region: region, lat: lat, long: long) { error, statusCode, data in
                     if let data = data {
                         self.queueDB = data.fromQueueDB

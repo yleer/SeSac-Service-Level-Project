@@ -29,7 +29,7 @@ class HomeViewModel {
     }
     
     func checkCurrentState() {
-        let stateNum = UserDefaults.standard.integer(forKey: "CurrentUserState")
+        let stateNum = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
         if stateNum == 0 {
             currentUserState = .basic
         }else if stateNum == 1 {
@@ -55,7 +55,7 @@ class HomeViewModel {
     }
     
     func getNeighborHobbies(completion: @escaping () -> Void) {
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
             
             ApiService.onqueue(idToken: idToken, region: region , lat: defaultCoordinate.0, long: defaultCoordinate.1 ) { error, statusCode, data in
                 guard let data = data else {

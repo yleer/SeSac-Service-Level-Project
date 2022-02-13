@@ -50,7 +50,7 @@ class ChattingViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     @objc func cancelButtonnClicked() {
-        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         let vc = DeleteViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.mainView.viewType = .dodge
@@ -63,7 +63,7 @@ class ChattingViewController: UIViewController {
             if statusCode == 200 {
                 HomeApiService.stopFinding(idToken: idToken) { _, statusCode2 in
                     if statusCode2 == 200 {
-                        UserDefaults.standard.set(0, forKey: "CurrentUserState")
+                        UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                         UserInfo.current.matched = 0
                     }
                 }

@@ -69,7 +69,7 @@ class ManageMyInfoViewController: UIViewController {
     @objc func navButtonClicked() {
         print(viewModel.updatedData.value)
  
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
             let user = viewModel.updatedData.value
             ApiService.updateUserInfo(searchable: user.searchable, min: user.ageMin, max: user.ageMax, gender: user.gender, hobby: user.hobby, idToken: idToken) { error, statusCode in
                 if let error = error {

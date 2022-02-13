@@ -52,11 +52,11 @@ class NearUserViewController: UIViewController {
             
     @objc func timerCallback(){
 
-        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
             if statusCode == 200 {
                 if UserInfo.current.matched == 1 {
-                    UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                    UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                     self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         let vc = ChattingViewController()
@@ -103,7 +103,7 @@ class NearUserViewController: UIViewController {
     
     
     @objc func changeHobbyButtonClicked() {
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
             HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
                 if let error = error {
                     switch error {
@@ -113,7 +113,7 @@ class NearUserViewController: UIViewController {
                 }else {
                     
                     if statusCode == 200 {
-                        UserDefaults.standard.set(0, forKey: "CurrentUserState")
+                        UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                         self.navigationController?.popToRootViewController(animated: true)
                         
                     }else if statusCode == 201 {
@@ -148,7 +148,7 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = DeleteViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.mainView.viewType = .request
-        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         vc.idToken = idToken
         vc.completion = { statusCode, uid in
             if statusCode == 200 {
@@ -157,7 +157,7 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             }else if statusCode == 201 {
                 HomeApiService.acceptRequest(idToken: idToken, otherUid: uid) { error, statusCode2 in
                     if statusCode2 == 200 {
-                        UserDefaults.standard.set(2, forKey: "CurrentUserState")
+                        UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                         HomeApiService.myQueueState(idToken: idToken) { error, statusCode2 in
                             
                         }
@@ -167,8 +167,6 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }
-                    
-                        
                 }
                 
             }else if statusCode == 202 {
@@ -246,7 +244,6 @@ extension NearUserViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SizingCell.identifier, for: indexPath) as? SizingCell else { return UICollectionViewCell() }
             cell.cellType = .defaultType
             cell.hobbyLabel.text = viewModel.queueDB[(collectionView.tag - 1) / 2].hf[indexPath.item]
-
             return cell
         }
     }
@@ -256,17 +253,12 @@ extension NearUserViewController: UICollectionViewDelegate, UICollectionViewData
             return CGSize(width: collectionView.frame.width / 2 - 8, height: 32)
         }else {
             return CGSize(width: collectionView.frame.width / 2 - 8, height: 32)
-//            return UICollectionViewFlowLayout.automaticSize
-//            layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
-
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         8
     }
-
-
 }
 
 

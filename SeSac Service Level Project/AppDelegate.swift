@@ -63,7 +63,7 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("FCM Toekn : ", fcmToken!)
         if let fcmToken = fcmToken {
-            UserDefaults.standard.set(fcmToken, forKey: "fcmToken")
+            UserDefaults.standard.set(fcmToken, forKey: UserDefaults.myKey.fcmToken.rawValue)
         }
     }
 }

@@ -13,5 +13,9 @@ extension UserDefaults {
         case age
         case authVerificationID
         case idToken
+        case userPhoneNumber
+        case nickName
+        case fcmToken
+        case CurrentUserState
     }
 }

@@ -32,7 +32,8 @@ final class RegisterViewModel {
     
     func getInternationalPhoneNum() -> String {
         let num = String(phoneNumber.value.dropFirst())
-        UserDefaults.standard.set("+82" + num, forKey: "userPhoneNumber")
+        UserDefaults.standard.set("+82" + num, forKey: UserDefaults.myKey.userPhoneNumber.rawValue)
+        
         return "+82" + num
     }
     

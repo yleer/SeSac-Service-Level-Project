@@ -61,7 +61,7 @@ class HobbySearchViewController: UIViewController {
     @objc func findButtonCilcked() {
         
         FireBaseService.getIdToken {
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
             ApiService.requestToFindFriends(idToken: idToken, parameter: self.viewModel.requestParameter!) { error, statusCode in
                 if let error = error {
                     // error handler
@@ -70,7 +70,7 @@ class HobbySearchViewController: UIViewController {
                     if statusCode == 200 {
                         // 화면 전환 해야 됨
                         // 화면(1_3_near_user & 1_4_accept)으로 전환합니다.
-                        UserDefaults.standard.set(1, forKey: "CurrentUserState")
+                        UserDefaults.standard.set(1, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                         let vc = NearUserPageMenuController()
                         self.navigationController?.pushViewController(vc, animated: true)
                         print("성공")

@@ -69,7 +69,7 @@ class ChatMenuViewController: UIViewController {
     }
     
     @objc func confirmButtonClicked() {
-        guard let idToken = UserDefaults.standard.string(forKey: "idToken") else { return }
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         switch menuType {
         case .report:
             
@@ -85,7 +85,7 @@ class ChatMenuViewController: UIViewController {
             
             HomeApiService.review(idToken: idToken, otherUid: UserInfo.current.matchedUid!, reputation: viewModel.selectedItems, comment: mainView.textView.text) { error, statusCode in
                 if statusCode == 200 {
-                    UserDefaults.standard.set(0, forKey: "CurrentUserState")
+                    UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                     UserInfo.current.matched = 0
                     self.dismiss(animated: true, completion: nil)
                     self.completion?()

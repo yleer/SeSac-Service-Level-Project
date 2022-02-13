@@ -22,7 +22,8 @@ class BirthViewModel {
     var allowed = false{
         didSet{
             if allowed {
-                UserDefaults.standard.set("\(bornDate.value)", forKey: "age")
+                
+                UserDefaults.standard.set("\(bornDate.value)", forKey: UserDefaults.myKey.age.rawValue)
             }
         }
     }

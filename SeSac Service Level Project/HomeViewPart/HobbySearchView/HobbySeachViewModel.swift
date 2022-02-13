@@ -28,7 +28,7 @@ class HobbySeachViewModel {
     
 
     func getNeighborHobbies(completion: @escaping () -> Void) {
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
             ApiService.onqueue(idToken: idToken, region: requestParameter.region, lat: requestParameter.lat, long: requestParameter.long) { error, statusCode, data in
                 guard let data = data else { return }
         

@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         addTargets()
         FireBaseService.getIdToken {
-            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                 print(idToken)
                 HomeApiService.myQueueState(idToken: idToken) { err, int in
                     print("helo")
@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
         
         updateCurrentUserState()
         FireBaseService.getIdToken {
-            if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+            if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                 ApiService.getUserInfo(idToken: idToken) { error, statusCode in
                     if error == nil {
                         if statusCode == 200 {

@@ -36,7 +36,8 @@ class GenderSelectionViewController: UIViewController {
     }
     
     @objc func addTapped() {
-        let idToekn = UserDefaults.standard.string(forKey: "idToken")
+        
+        let idToekn = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue)
         ApiService.deleteUser(idToken: idToekn!) { error, statusCode in
                 print(error)
             print(statusCode)
