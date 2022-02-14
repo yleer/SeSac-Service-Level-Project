@@ -7,6 +7,25 @@
 
 import Foundation
 
+struct ChatData: Codable {
+    let payload: [Payload]
+}
+
+// MARK: - Payload
+struct Payload: Codable {
+    let id: String
+    let v: Int
+    let to, from, chat, createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case v = "__v"
+        case to, from, chat, createdAt
+    }
+}
+
+
+
 
 struct UserMatchingState: Codable {
     let dodged, matched, reviewed: Int

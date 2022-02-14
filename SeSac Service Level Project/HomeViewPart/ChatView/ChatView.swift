@@ -18,8 +18,9 @@ class ChatView: UIView {
     let reportButton = UIButton()
     let cancelButton = UIButton()
     let reviewButton = UIButton()
-    
+    let grayView = UIView()
     let chatTextView = UITextView()
+    let sendButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,15 +34,26 @@ class ChatView: UIView {
     var amountOfLinesToBeShown: CGFloat = 3
     lazy var maxHeight: CGFloat = chatTextView.font?.lineHeight ?? 4 * amountOfLinesToBeShown
     
-    func fitTextViewSize(bottom: CGFloat) {
+    func fitTextViewSize(bottom: CGFloat, up: Bool) {
 
         let a = chatTextView.sizeThatFits(CGSize(width: chatTextView.frame.size.width, height: maxHeight))
         chatTextView.snp.removeConstraints()
         chatTextView.snp.makeConstraints { make in
             make.width.equalTo(343)
             make.height.equalTo(a.height)
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-bottom)
             make.centerX.equalToSuperview()
+            
+            if up {
+                make.bottom.equalToSuperview().offset(-bottom - 16)
+            }else {
+                make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
+            }
+        }
+        
+        sendButton.snp.makeConstraints { make in
+            make.centerY.equalTo(chatTextView)
+            make.size.equalTo(20)
+            make.trailing.equalToSuperview().offset(-14)
         }
     }
     
@@ -51,7 +63,13 @@ class ChatView: UIView {
         addSubview(moreView)
         addSubview(chatTextView)
         
-        moreView.backgroundColor = .gray
+        addSubview(grayView)
+        addSubview(sendButton)
+        
+        sendButton.setImage(UIImage(named: ImageNames.ChatViewController.sendGray), for: .normal)
+        
+        grayView.backgroundColor = .gray
+        
         moreView.addSubview(stack)
         
         stack.addArrangedSubview(reportButton)
@@ -63,13 +81,16 @@ class ChatView: UIView {
          
         reportButton.setImage(UIImage(named:ImageNames.ChatViewController.siren), for: .normal)
         reportButton.setTitle("새싹 신고", for: .normal)
+        reportButton.setTitleColor(.black, for: .normal)
+        cancelButton.setTitleColor(.black, for: .normal)
+        reviewButton.setTitleColor(.black, for: .normal)
         
         cancelButton.setImage(UIImage(named:ImageNames.ChatViewController.cancelMatch), for: .normal)
         cancelButton.setTitle("약속 취소", for: .normal)
         
         reviewButton.setImage(UIImage(named:ImageNames.ChatViewController.write), for: .normal)
         reviewButton.setTitle("리뷰 등록", for: .normal)
-        
+        chatTextView.font = UIFont(name: FontNames.regular, size: 14)
 
         reviewButton.imageEdgeInsets = .init(top: 0, left: 45, bottom: 25, right: 0)
 
@@ -87,16 +108,18 @@ class ChatView: UIView {
         cancelButton.titleLabel?.font = UIFont(name: FontNames.medium, size: 14)
         reportButton.titleLabel?.font = UIFont(name: FontNames.medium, size: 14)
         reviewButton.titleLabel?.font = UIFont(name: FontNames.medium, size: 14)
-        reviewButton.backgroundColor = .green
+        reviewButton.backgroundColor = .white
 
-        chatTextView.backgroundColor = .blue
-        tableView.backgroundColor = .green
+        chatTextView.backgroundColor = .gray1
+        tableView.backgroundColor = .white
+        tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
 
     }
     
     func setUpKeyBoardConstraints(keyBoardHeight: CGFloat) {
         tableView.snp.removeConstraints()
         chatTextView.snp.removeConstraints()
+        sendButton.setImage(UIImage(named: ImageNames.ChatViewController.sendGreen), for: .normal)
         
         tableView.snp.makeConstraints { make in
 //            make.edges.equalTo(safeAreaLayoutGuide)
@@ -109,19 +132,25 @@ class ChatView: UIView {
         chatTextView.snp.makeConstraints { make in
             make.width.equalTo(343)
             make.height.equalTo(100)
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16 - keyBoardHeight)
+            make.bottom.equalToSuperview().offset(-keyBoardHeight)
             make.centerX.equalToSuperview()
         }
-//        fitTextViewSize()
+        fitTextViewSize(bottom:keyBoardHeight, up: true)
     }
    
     func setUpConstraints() {
         tableView.snp.removeConstraints()
         chatTextView.snp.removeConstraints()
         
+        sendButton.setImage(UIImage(named: ImageNames.ChatViewController.sendGray), for: .normal)
+        
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.equalTo(safeAreaLayoutGuide)
+            make.trailing.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalTo(chatTextView.snp.top).offset(-16)
         }
+        
         
         moreView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
@@ -132,6 +161,12 @@ class ChatView: UIView {
         stack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        grayView.snp.makeConstraints { make in
+            make.top.equalTo(moreView.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
         
         chatTextView.snp.makeConstraints { make in
             make.width.equalTo(343)
@@ -139,8 +174,7 @@ class ChatView: UIView {
             make.bottom.equalTo(safeAreaLayoutGuide).offset(16)
             make.centerX.equalToSuperview()
         }
-//        fitTextViewSize()
+        fitTextViewSize(bottom:1, up: true)
         
     }
-
 }

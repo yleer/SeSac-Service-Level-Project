@@ -45,6 +45,11 @@
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
+		88AA5F3227BA31160036D36F /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AA5F3127BA31150036D36F /* ChatTableViewCell.swift */; };
+		88AA5F3427BA64090036D36F /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AA5F3327BA64090036D36F /* RealmData.swift */; };
+		88AA5F3727BA64680036D36F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3627BA64680036D36F /* Realm */; };
+		88AA5F3927BA64680036D36F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3827BA64680036D36F /* RealmSwift */; };
+		88AA5F3C27BA79440036D36F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3B27BA79440036D36F /* SocketIO */; };
 		88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */; };
 		88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */; };
 		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
@@ -146,6 +151,8 @@
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		88AA5F3127BA31150036D36F /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		88AA5F3327BA64090036D36F /* RealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
 		88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoAgeRangeCell.swift; sourceTree = "<group>"; };
 		88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
@@ -217,12 +224,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88AA5F3927BA64680036D36F /* RealmSwift in Frameworks */,
+				88AA5F3727BA64680036D36F /* Realm in Frameworks */,
 				8819F734279D8CF10075F656 /* RxSwift in Frameworks */,
 				88820D56279BDC8600E8FCD4 /* Toast in Frameworks */,
 				885F016E279A7C630049856B /* Alamofire in Frameworks */,
 				8819F732279D8CF10075F656 /* RxCocoa in Frameworks */,
 				E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */,
 				88F0281427954A9200390168 /* SnapKit in Frameworks */,
+				88AA5F3C27BA79440036D36F /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +266,7 @@
 				88CC7EF7279E63C900828537 /* ImageNames.swift */,
 				883C8B8A27A041DD007BCA20 /* ColorNames.swift */,
 				883C8B8C27A04330007BCA20 /* FontNames.swift */,
+				88AA5F3327BA64090036D36F /* RealmData.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -269,6 +280,7 @@
 				881B50CD27B5580D0067B5DE /* ChatMenuViewController.swift */,
 				881B50CF27B562050067B5DE /* ChatMenuViewModel.swift */,
 				88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */,
+				88AA5F3127BA31150036D36F /* ChatTableViewCell.swift */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -584,6 +596,9 @@
 				88820D55279BDC8600E8FCD4 /* Toast */,
 				8819F731279D8CF10075F656 /* RxCocoa */,
 				8819F733279D8CF10075F656 /* RxSwift */,
+				88AA5F3627BA64680036D36F /* Realm */,
+				88AA5F3827BA64680036D36F /* RealmSwift */,
+				88AA5F3B27BA79440036D36F /* SocketIO */,
 			);
 			productName = "SeSac Service Level Project";
 			productReference = 88F027F92795495A00390168 /* SeSac Service Level Project.app */;
@@ -618,6 +633,8 @@
 				885F016C279A7C630049856B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				88820D54279BDC8600E8FCD4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				8819F730279D8CF10075F656 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				88AA5F3527BA64680036D36F /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				88AA5F3A27BA79430036D36F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 88F027FA2795495A00390168 /* Products */;
 			projectDirPath = "";
@@ -707,6 +724,7 @@
 				88DCEA4127A190DF00BDB530 /* HomeView.swift in Sources */,
 				88DE49F42796D801003D5958 /* CommonTextFieldView.swift in Sources */,
 				88CC7EF0279E4FD300828537 /* MyInfoView.swift in Sources */,
+				88AA5F3227BA31160036D36F /* ChatTableViewCell.swift in Sources */,
 				889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */,
 				88F90CF62798EC2000E518DC /* BirthView.swift in Sources */,
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
@@ -753,6 +771,7 @@
 				88DE49F22796B864003D5958 /* Observable.swift in Sources */,
 				88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */,
 				88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */,
+				88AA5F3427BA64090036D36F /* RealmData.swift in Sources */,
 				8867835927AE4F830017520C /* NearUserEmptyView.swift in Sources */,
 				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
 				88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */,
@@ -1018,6 +1037,22 @@
 				kind = branch;
 			};
 		};
+		88AA5F3527BA64680036D36F /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		88AA5F3A27BA79430036D36F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		88F0281227954A9200390168 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1048,6 +1083,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 88820D54279BDC8600E8FCD4 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		88AA5F3627BA64680036D36F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88AA5F3527BA64680036D36F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		88AA5F3827BA64680036D36F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88AA5F3527BA64680036D36F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		88AA5F3B27BA79440036D36F /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88AA5F3A27BA79430036D36F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
 		};
 		88F0281327954A9200390168 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

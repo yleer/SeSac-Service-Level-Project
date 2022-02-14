@@ -88,6 +88,42 @@ class HomeApiService {
         }
         
     }
+    
+    static func getChatHistory(idToken: String, otherUid: String, date: String, completion: @escaping (APIError?, Int, ChatData?) -> Void) {
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        let url = "http://test.monocoding.com:35484/chat/\(otherUid)?lastchatDate=\(date)"
+        
+        AF.request(
+            url,
+            method: .get,
+            headers: headers
+        ).responseData { response in
+            switch response.result {
+            case .success(let value):
+                guard let statusCode = response.response?.statusCode else { return }
+                if statusCode == 200{
+                    let decoder = JSONDecoder()
+                    do {
+                        let result = try decoder.decode(ChatData.self, from: value)
+  
+                        completion(nil, statusCode, result)
+                    }catch {
+                        print("chat info decoding error : ", error)
+                        completion(nil, statusCode, nil)
+                    }
+                }else if statusCode == 401 {
+                    completion(nil, statusCode, nil)
+                }else if statusCode == 406 {
+                    completion(nil, statusCode, nil)
+                }else if statusCode == 500 {
+                    completion(nil, statusCode, nil)
+                }
+              
+            case .failure(let error):
+                print("what kind of error", error)
+            }
+        }
+    }
 
     
     static func myQueueState(idToken: String, completion: @escaping (APIError?, Int) -> Void) {

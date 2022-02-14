@@ -12,6 +12,9 @@ class ChattingViewController: UIViewController {
     
     let mainView = ChatView()
     let viewModel = ChattingViewModel()
+    var datas = ["hee","wow", "dsfgsdfg asdfas qweqwe dafs asdf asdf asdf qwe q qwe a vvadf qew", "s dhh", "asdf "]
+    
+    var keyboardHeight: CGFloat = 0
     
     override func loadView() {
         super.loadView()
@@ -26,10 +29,22 @@ class ChattingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkCurrentState()
+        viewModel.loadFromRealm()
+        mainView.tableView.reloadData()
+        
+        // socket 연결
     }
-    
-    @objc func sendButtonClicked() {
-        checkCurrentState()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageNames.ChatViewController.more), style: .plain, target: self, action: #selector(showExtraButtonClicked))
+        addTargets()
+        
+        mainView.chatTextView.delegate = self
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.rowHeight = UITableView.automaticDimension
+        
     }
     
     private func checkCurrentState() {
@@ -40,7 +55,6 @@ class ChattingViewController: UIViewController {
                 }else {
                     return
                 }
-                
                 if UserInfo.current.dodged == 1 || UserInfo.current.reviewed == 1 {
                     self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
                 }else {
@@ -50,43 +64,75 @@ class ChattingViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageNames.ChatViewController.more), style: .plain, target: self, action: #selector(showExtraButtonClicked))
-        addTargets()
-        
-        mainView.chatTextView.delegate = self
-        
+}
+
+extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.firstLoadData?.count ?? 0
     }
     
-   
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier, for: indexPath) as? ChatTableViewCell, let realmData = viewModel.firstLoadData else {
+            print("not good")
+            return UITableViewCell() }
+        
+        if indexPath.row % 2 == 0{
+            cell.chatLabel.text = realmData[indexPath.row].message
+            cell.chatType = .opponentChat
+        }else {
+            cell.chatType = .myChat
+            cell.chatLabel.text = realmData[indexPath.row].message
+        }
+        return cell
+    }
+    
+    
 }
 
 
 extension ChattingViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-//        mainView.fitTextViewSize()
+        mainView.fitTextViewSize(bottom: keyboardHeight, up: true)
     }
 }
 
 
 
-// ChattingViewController Menu
+
+
+// ChattingViewController Menu AddTargets
 extension ChattingViewController {
     func addTargets() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard(sender:))))
         mainView.reportButton.addTarget(self, action: #selector(reportButtonClicked), for: .touchUpInside)
         mainView.cancelButton.addTarget(self, action: #selector(cancelButtonnClicked), for: .touchUpInside)
         mainView.reviewButton.addTarget(self, action: #selector(reviewButtonClicked), for: .touchUpInside)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        mainView.sendButton.addTarget(self, action: #selector(touchButtonClicked), for: .touchUpInside)
 
     }
     
+    @objc func sendButtonClicked() {
+        checkCurrentState()
+    }
+    
+    
+    @objc func touchButtonClicked() {
+        datas.append(mainView.chatTextView.text!)
+        mainView.tableView.reloadData()
+    }
+    
+    @objc func hideKeyBoard(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            mainView.chatTextView.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
+    
     @objc func keyboardWillShow(_ sender: Notification) {
-        print("Hello")
-        var keyboardHeight: CGFloat = 0
+        
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRect = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRect.height
@@ -95,7 +141,6 @@ extension ChattingViewController {
     }
     
     @objc func keyboardWillHide() {
-        print("Hello")
         mainView.setUpConstraints()
     }
     
@@ -154,6 +199,12 @@ extension ChattingViewController {
     
     
     @objc func showExtraButtonClicked() {
-        self.mainView.moreView.isHidden = self.mainView.moreView.isHidden ? false : true
+        if self.mainView.moreView.isHidden {
+            self.mainView.moreView.isHidden = false
+            mainView.grayView.isHidden = false
+        }else {
+            self.mainView.moreView.isHidden = true
+            mainView.grayView.isHidden = true
+        }
     }
 }

@@ -22,6 +22,9 @@ enum EndPoint {
     case dodge
     case report
     case review
+    
+    case getChat
+//    {baseURL}/chat/{from}?lastchatDate={lastchatDate}
 }
 
 extension EndPoint {
@@ -56,6 +59,9 @@ extension EndPoint {
             return .makeEndPoint("/user/report")
         case .review:
             return .makeEndPoint("queue/rate/")
+            
+        case .getChat:
+            return .makeEndPoint("/chat/{from}?lastchatDate={lastchatDate}")
         }
         
     }
