@@ -14,18 +14,18 @@ class SocketIOManager: NSObject {
     
     // 서버와 메시지를  주고 받기 위한 클래스
     var manger: SocketManager!
-    
+ 
     // 클라이언트 소켓
     var socket: SocketIOClient!
     
     override init() {
         super.init()
-        
         let url = URL(string: "http://test.monocoding.com:35484")!
         
         manger = SocketManager(socketURL: url, config: [
             .log(true),
-            .compress
+            .compress,
+            .reconnects(true)
         ])
         
         socket = manger.defaultSocket // "/" 로 된 룸
@@ -48,7 +48,7 @@ class SocketIOManager: NSObject {
         // 데이터 수신 -> 디코딩 -> 모델에 추가 -> UI upload
         socket.on("chat") { dataArray, ack in
             print("SESAC RECIEVED", dataArray,ack)
-            
+
             let data = dataArray[0] as! NSDictionary
             let v = data["__v"] as! Int
             let id = data["_id"] as! String
@@ -56,9 +56,9 @@ class SocketIOManager: NSObject {
             let from = data["from"] as! String
             let to = data["to"] as! String
             let createdAt = data["createdAt"] as! String
-            
+
             print("CHECK ", chat,createdAt)
-            
+
             // 데이터 보내기 (소케에서 받아온 데이터 다른 vc로)
             NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["id": id, "v": v, "to": to, "from": from, "chat": chat, "createdAt": createdAt])
         }
@@ -66,9 +66,17 @@ class SocketIOManager: NSObject {
     
     
     func establishConnection() {
-        print("socket connect?")
+//        print("socket connect?")
         socket.connect()
-        print(socket.status, "socket status")
+//        print(socket.status, "socket status")
+//
+//        self.socket.on("connect") { ( dataArray, ack) -> Void in
+//                print("connected to external server")
+//        }
+//        socket.on(clientEvent: .connect) { data, ack in
+//            print("Socket is connected", data, ack)
+//        }
+//        self.socket.connect()
     }
     
     func closeConnection() {

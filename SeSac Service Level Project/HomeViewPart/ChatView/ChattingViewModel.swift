@@ -38,7 +38,7 @@ final class ChattingViewModel {
             HomeApiService.sendMessage(idToken: idToken, otherUid: uid, message: message) { error, statusCode, chatData in
                 if let chatData = chatData, statusCode == 200 {
                     self.addChatToRealm(chat: chatData.chat, createdAt: chatData.createdAt, to: chatData.to, from: chatData.from, completion: completion)
-                    self.loadFromRealm(completion: completion)
+//                    self.loadFromRealm(completion: completion)
                 }
             }
         }
@@ -46,7 +46,6 @@ final class ChattingViewModel {
     }
     
     func addChatToRealm(chat: String, createdAt: String, to: String, from: String, completion: @escaping () -> Void) {
-        print(localRealm.configuration.fileURL)
         let task = ChatRealmData(to: to, from: from, message: chat, createdAt: createdAt)
         try! localRealm.write {
             localRealm.add(task)

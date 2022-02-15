@@ -13,6 +13,7 @@ class ChattingViewController: UIViewController {
     
     let mainView = ChatView()
     let viewModel = ChattingViewModel()
+    let socketManager = SocketIOManager()
         
     var keyboardHeight: CGFloat = 0
     
@@ -28,13 +29,14 @@ class ChattingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        SocketIOManager.shared.establishConnection()
         self.mainView.moreView.isHidden = true
         mainView.grayView.isHidden = true
         checkCurrentState()
         loadDataFromRealm()
         
         // socket 연결
+        SocketIOManager.shared.establishConnection()
+//        socketManager.establishConnection()
     }
     
     private func loadDataFromRealm() {
@@ -143,13 +145,6 @@ extension ChattingViewController {
         viewModel.sendChatToServer(message: mainView.chatTextView.text) {
             self.mainView.tableView.reloadData()
         }
-        
-    
-
-        SocketIOManager.shared.socket.emit("chat", ["chat" : mainView.chatTextView.text, "to": UserInfo.current.matchedUid!,"from": UserInfo.current.user?.uid, "createdAt": "22"]) {
-            print("Hello world im socket emit")
-        }
-
     }
     
     
@@ -232,8 +227,6 @@ extension ChattingViewController {
     
     
     @objc func showExtraButtonClicked() {
-//        self.mainView.moreView.isHidden = true
-//        mainView.grayView.isHidden = true
         if self.mainView.moreView.isHidden {
             self.mainView.moreView.isHidden = false
             mainView.grayView.isHidden = false

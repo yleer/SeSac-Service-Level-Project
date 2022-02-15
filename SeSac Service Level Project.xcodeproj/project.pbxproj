@@ -49,8 +49,8 @@
 		88AA5F3427BA64090036D36F /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AA5F3327BA64090036D36F /* RealmData.swift */; };
 		88AA5F3727BA64680036D36F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3627BA64680036D36F /* Realm */; };
 		88AA5F3927BA64680036D36F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3827BA64680036D36F /* RealmSwift */; };
-		88AA5F3C27BA79440036D36F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3B27BA79440036D36F /* SocketIO */; };
 		88AA5F3E27BA7B070036D36F /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AA5F3D27BA7B070036D36F /* SocketIOManager.swift */; };
+		88B04EEC27BBC5B600580610 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 88B04EEB27BBC5B600580610 /* SocketIO */; };
 		88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */; };
 		88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */; };
 		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
@@ -234,7 +234,7 @@
 				8819F732279D8CF10075F656 /* RxCocoa in Frameworks */,
 				E6D7CE2D16D92203805233D5 /* Pods_SeSac_Service_Level_Project.framework in Frameworks */,
 				88F0281427954A9200390168 /* SnapKit in Frameworks */,
-				88AA5F3C27BA79440036D36F /* SocketIO in Frameworks */,
+				88B04EEC27BBC5B600580610 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,7 +601,7 @@
 				8819F733279D8CF10075F656 /* RxSwift */,
 				88AA5F3627BA64680036D36F /* Realm */,
 				88AA5F3827BA64680036D36F /* RealmSwift */,
-				88AA5F3B27BA79440036D36F /* SocketIO */,
+				88B04EEB27BBC5B600580610 /* SocketIO */,
 			);
 			productName = "SeSac Service Level Project";
 			productReference = 88F027F92795495A00390168 /* SeSac Service Level Project.app */;
@@ -637,7 +637,7 @@
 				88820D54279BDC8600E8FCD4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				8819F730279D8CF10075F656 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				88AA5F3527BA64680036D36F /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				88AA5F3A27BA79430036D36F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				88B04EEA27BBC5B600580610 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 88F027FA2795495A00390168 /* Products */;
 			projectDirPath = "";
@@ -1049,12 +1049,12 @@
 				kind = branch;
 			};
 		};
-		88AA5F3A27BA79430036D36F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		88B04EEA27BBC5B600580610 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 15.2.0;
 			};
 		};
 		88F0281227954A9200390168 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -1098,9 +1098,9 @@
 			package = 88AA5F3527BA64680036D36F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
-		88AA5F3B27BA79440036D36F /* SocketIO */ = {
+		88B04EEB27BBC5B600580610 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 88AA5F3A27BA79430036D36F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = 88B04EEA27BBC5B600580610 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 		88F0281327954A9200390168 /* SnapKit */ = {
