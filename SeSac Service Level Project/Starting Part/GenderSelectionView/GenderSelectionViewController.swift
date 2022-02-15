@@ -20,12 +20,8 @@ class GenderSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindings()
         addTargets()
-        
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,21 +33,11 @@ class GenderSelectionViewController: UIViewController {
     
     @objc func addTapped() {
         
-        let idToekn = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue)
-        ApiService.deleteUser(idToken: idToekn!) { error, statusCode in
+        guard let idToekn = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        ApiService.deleteUser(idToken: idToekn) { error, statusCode in
                 print(error)
             print(statusCode)
         }
-    }
-    
-    func bindings() {
-//        viewModel.phoneNumber.bind { text in
-//            self.mainView.phoneNumberView.textField.text = text
-//        }
-//        viewModel.selectedGender.bind { gender in
-//            <#code#>
-//        }
-        
     }
     
     func addTargets() {

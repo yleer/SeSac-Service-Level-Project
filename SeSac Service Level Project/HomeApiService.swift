@@ -11,7 +11,7 @@ import Alamofire
 
 class HomeApiService {
     
-    static func acceptRequest(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
+    static func acceptRequest(idToken: String, otherUid: String, completion: ((APIError?, Int) -> Void)?) {
         let headers: HTTPHeaders = ["idtoken": idToken]
         let p: Parameters = [
             "otheruid": otherUid
@@ -23,28 +23,19 @@ class HomeApiService {
             headers: headers
         ).responseData { response in
             switch response.result {
-            case .success(let value):
+            case .success(_):
                 guard let statusCode = response.response?.statusCode else { return }
-                
-                print(statusCode)
-                
-                
                 if statusCode == 200{
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
                 }else if statusCode == 201 {
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
                 }else if statusCode == 202 {
-                    completion(nil, statusCode)
-                }else if statusCode == 401 {
-                    completion(nil, statusCode)
-                }else if statusCode == 406 {
-                    completion(nil, statusCode)
-                }else if statusCode == 500 {
-                    completion(nil, statusCode)
-                }else if statusCode == 501 {
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
+                }else if statusCode == 203 {
+                    completion?(nil, statusCode)
+                }else {
+                    ApiService.handleErrorCodes(statusCode: statusCode, completion: completion)
                 }
-              
             case .failure(let error):
                 print("what kind of error", error)
             }
@@ -98,7 +89,7 @@ class HomeApiService {
         }
     }
     
-    static func requestFriend(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
+    static func requestFriend(idToken: String, otherUid: String, completion:  ((APIError?, Int) -> Void)?) {
         let headers: HTTPHeaders = ["idtoken": idToken]
         let p: Parameters = [
             "otheruid": otherUid
@@ -110,25 +101,18 @@ class HomeApiService {
             headers: headers
         ).responseData { response in
             switch response.result {
-            case .success(let value):
+            case .success(_):
                 guard let statusCode = response.response?.statusCode else { return }
                 print(statusCode)
                 if statusCode == 200{
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
                 }else if statusCode == 201 {
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
                 }else if statusCode == 202 {
-                    completion(nil, statusCode)
-                }else if statusCode == 401 {
-                    completion(nil, statusCode)
-                }else if statusCode == 406 {
-                    completion(nil, statusCode)
-                }else if statusCode == 500 {
-                    completion(nil, statusCode)
-                }else if statusCode == 501 {
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
+                }else {
+                    ApiService.handleErrorCodes(statusCode: statusCode, completion: completion)
                 }
-              
             case .failure(let error):
                 print("what kind of error", error)
             }
@@ -173,7 +157,7 @@ class HomeApiService {
     }
 
     
-    static func myQueueState(idToken: String, completion: @escaping (APIError?, Int) -> Void) {
+    static func myQueueState(idToken: String, completion: ((APIError?, Int) -> Void)?) {
         
         let headers: HTTPHeaders = ["idtoken": idToken]
 
@@ -194,30 +178,25 @@ class HomeApiService {
                         UserInfo.current.reviewed = result .reviewed
                         UserInfo.current.matched = result.matched
                         UserInfo.current.matchedUid = result.matchedUid
-                        completion(nil, statusCode)
+                        completion?(nil, statusCode)
 //                        print("well done, \(result)")
                     }catch {
                         print("user info decoding error : ", error)
-                        completion(nil, statusCode)
+                        completion?(nil, statusCode)
                     }
                 }else if statusCode == 201 {
                     // 매칭 대기 상태가 아닌 상태, 매칭이 되지 않아 종료된 상태 -> toast 필요
-                    completion(nil, statusCode)
-                }else if statusCode == 401 {
-                    completion(nil, statusCode)
-                }else if statusCode == 406 {
-                    completion(nil, statusCode)
-                }else if statusCode == 500 {
-                    completion(nil, statusCode)
+                    completion?(nil, statusCode)
+                }else {
+                    ApiService.handleErrorCodes(statusCode: statusCode, completion: completion)
                 }
-              
             case .failure(let error):
                 print("what kind of error", error)
             }
         }
     }
     
-    static func stopFinding(idToken: String, completion: @escaping (APIError?, Int) -> Void) {
+    static func stopFinding(idToken: String, completion: ((APIError?, Int) -> Void)?) {
         let headers: HTTPHeaders = ["idtoken": idToken]
         AF.request(
             EndPoint.requestToFindFirends.url,
@@ -229,17 +208,12 @@ class HomeApiService {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 if statusCode == 200{
-                   completion(nil, statusCode)
+                   completion?(nil, statusCode)
                 }else if statusCode == 201 {
-                    completion(nil, statusCode)
-                }else if statusCode == 401 {
-                    completion(.firebaseTokenError(errorContent: "FCM 갱신해주세요"), statusCode)
-                }else if statusCode == 406 {
-                    completion(.alreadyWithdrawl(errorContent: "이미 탈되된 회원입니다"), statusCode)
-                }else if statusCode == 500 {
-                    completion(.serverError(errorContent: "서버에 문제가 있습니다"), statusCode)
+                    completion?(nil, statusCode)
+                }else{
+                    ApiService.handleErrorCodes(statusCode: statusCode, completion: completion)
                 }
-              
             case .failure(let error):
                 print("what kind of error", error)
             }

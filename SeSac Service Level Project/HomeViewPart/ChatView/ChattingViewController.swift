@@ -78,18 +78,31 @@ class ChattingViewController: UIViewController {
     
     private func checkCurrentState() {
         viewModel.myState { error, statusCode in
-            if statusCode == 200 {
-                if UserInfo.current.matched == 1 {
-                    self.title = UserInfo.current.matchedNick
-                }else {
-                    return
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.checkCurrentState()
+                case .serverError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    self.view.makeToast(errorContent)
+                default:
+                    break
                 }
-                if UserInfo.current.dodged == 1 || UserInfo.current.reviewed == 1 {
-                    self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
-                }else {
-                 return
+            }else {
+                if statusCode == 200 {
+                    if UserInfo.current.matched == 1 {
+                        self.title = UserInfo.current.matchedNick
+                    }else {
+                        return
+                    }
+                    if UserInfo.current.dodged == 1 || UserInfo.current.reviewed == 1 {
+                        self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
+                    }else {
+                     return
+                    }
                 }
+                // 채팅이 성사된 이후이기 때문에 201 처리 필요 없음.
             }
+            
         }
     }
     

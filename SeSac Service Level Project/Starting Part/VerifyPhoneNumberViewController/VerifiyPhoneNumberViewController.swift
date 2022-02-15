@@ -71,7 +71,6 @@ final class VerifiyPhoneNumberViewController: UIViewController {
                 self.view.makeToast("잠시 후 다시 실행해 주세요")
             }
             else {
-                print(statusCode, "check state")
                 if statusCode! == 200 {
                     // 홈 화면으로 이동
                     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }

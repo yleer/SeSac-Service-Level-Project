@@ -223,17 +223,17 @@ class ApiService {
         }
     }
     
-    static func handleErrorCodes(statusCode: Int, completion: @escaping (APIError?, Int) -> Void) {
+    static func handleErrorCodes(statusCode: Int, completion: ((APIError?, Int) -> Void)?) {
         switch statusCode {
         case 401:
             FireBaseService.getIdToken(completion: nil)
-            completion(.firebaseTokenError(errorContent: "에러가 발생했습니다. 잠시 후 다시 실행해주세요."), statusCode)
+            completion?(.firebaseTokenError(errorContent: "에러가 발생했습니다. 잠시 후 다시 실행해주세요."), statusCode)
         case 406:
-            completion(.alreadyWithdrawl(errorContent: "이미 탈퇴된 회원"), statusCode)
+            completion?(.alreadyWithdrawl(errorContent: "이미 탈퇴된 회원"), statusCode)
         case 500:
-            completion(.serverError(errorContent: "서버에 문제가 있습니다"), statusCode)
+            completion?(.serverError(errorContent: "서버에 문제가 있습니다"), statusCode)
         case 501:
-            completion(.clientError(errorContent: "클라이언트 오류"), statusCode)
+            completion?(.clientError(errorContent: "클라이언트 오류"), statusCode)
         default:
             print(statusCode)
         }

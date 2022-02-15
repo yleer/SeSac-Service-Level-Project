@@ -43,60 +43,75 @@ class DeleteViewController: UIViewController {
     
     var completion: ((Int, String) -> Void)?
     
+    private func updateIdToken() {
+        self.idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue)
+    }
+    
+    private func buttonForRequest() {
+        HomeApiService.requestFriend(idToken: idToken, otherUid: uid) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.updateIdToken()
+                    self.buttonForRequest()
+                case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    self.view.makeToast(errorContent)
+                }
+            }else {
+                self.completion?(statusCode, self.uid)
+            }
+        }
+    }
+    
+    private func buttonForAccept() {
+        HomeApiService.acceptRequest(idToken: idToken, otherUid:uid) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.updateIdToken()
+                    self.buttonForAccept()
+                case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    self.view.makeToast(errorContent)
+                }
+            } else {
+                self.completion?(statusCode, self.uid)
+            }
+        }
+    }
+    
+    private func buttonForDodge() {
+        HomeApiService.dodge(idToken: idToken!, otherUid: uid!) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.updateIdToken()
+                    self.buttonForDodge()
+                case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    self.view.makeToast(errorContent)
+                }
+                self.completion?(statusCode, self.uid)
+            } else {
+                self.completion?(statusCode, self.uid)
+            }
+        }
+    }
+    
+    
     @objc func confurmButtonClicked() {
         
         switch mainView.viewType {
         case .basic:
             buttonForBasic()
         case .request:
-            HomeApiService.requestFriend(idToken: idToken, otherUid: uid) { error, statusCode in
-                if let error = error {
-                    switch error {
-                    case .firebaseTokenError(let errorContent):
-                        FireBaseService.getIdToken(completion: nil)
-                    case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
-                        self.view.makeToast(errorContent)
-                    }
-                }else {
-                    self.completion?(statusCode, self.uid)
-                }
-            }
+            buttonForRequest()
         case .accept:
-            HomeApiService.acceptRequest(idToken: idToken, otherUid:uid) { error, statusCode in
-                if let error = error {
-                    switch error {
-                    case .firebaseTokenError(let errorContent):
-                        FireBaseService.getIdToken(completion: nil)
-                    case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
-                        self.view.makeToast(errorContent)
-                    }
-                } else {
-                    self.completion?(statusCode, self.uid)
-                }
-            }
+            buttonForAccept()
         case .dodge:
-//            let a = idToken
-//            let b = uid
-            print("..",idToken!, uid!, "//")
-            HomeApiService.dodge(idToken: idToken!, otherUid: uid!) { error, statusCode in
-//                print(statusCode)
-                if let error = error {
-                    switch error {
-                    case .firebaseTokenError(let errorContent):
-                        FireBaseService.getIdToken(completion: nil)
-                    case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
-                        self.view.makeToast(errorContent)
-                    }
-                    self.completion?(statusCode, self.uid)
-                } else {
-                    if statusCode == 200 {
-                        self.completion?(statusCode, self.uid)
-                    }else {
-                        self.completion?(statusCode, self.uid)
-                    }
-                    
-                }
-            }
+            buttonForDodge()
+            
         }
         self.dismiss(animated: true, completion: nil)
     }

@@ -107,7 +107,10 @@ class NearUserViewController: UIViewController {
             HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
                 if let error = error {
                     switch error {
-                    case .firebaseTokenError(let errorContent), .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    case .firebaseTokenError(let errorContent):
+                        self.view.makeToast(errorContent)
+                        self.changeHobbyButtonClicked()
+                    case.serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
                         self.view.makeToast(errorContent)
                     }
                 }else {
