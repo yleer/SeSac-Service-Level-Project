@@ -77,7 +77,10 @@ final class VerifiyPhoneNumberViewController: UIViewController {
                 print(statusCode, "check state")
                 if statusCode! == 200 {
                     // 홈 화면으로 이동
-                    self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                    
+                    windowScene.windows.first?.rootViewController = MainTabBarController()
+                    windowScene.windows.first?.makeKeyAndVisible()
                     
                 }else {
                     self.navigationController?.pushViewController(NickNameViewController(), animated: true)

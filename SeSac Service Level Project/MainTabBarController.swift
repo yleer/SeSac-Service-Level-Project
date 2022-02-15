@@ -43,5 +43,24 @@ class MainTabBarController: UITabBarController {
 
 
         viewControllers = [homeVC, sessacShopVC, sesacFriendsVC, myPageNavController]
-       }
+        
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        
+        ApiService.getUserInfo(idToken: idToken) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.view.makeToast(errorContent)
+                    guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+                    ApiService.getUserInfo(idToken: idToken) { _, _ in
+                        print("good")
+                    }
+                case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                self.view.makeToast(errorContent)
+                }
+            }else {
+                print("check")
+            }
+        }
+    }
 }

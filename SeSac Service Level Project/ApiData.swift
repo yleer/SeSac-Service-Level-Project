@@ -94,7 +94,7 @@ class UserInfo {
 struct User: Codable {
     let _id: String
     let __v: Int
-    let uid, phoneNumber, email, FCMtoken: String
+    var uid, phoneNumber, email, FCMtoken: String
     let nick, birth: String
     let gender: Int
     let comment: [String]

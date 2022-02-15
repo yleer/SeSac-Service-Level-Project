@@ -17,6 +17,30 @@ enum APIError: Error {
 
 class ApiService {
     
+    // MARK: update fcm
+    
+    static func updateFcm(idToken: String, fcmToken: String, completion: @escaping (APIError?, Int) -> Void) {
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        
+        let p: Parameters = [
+            "FCMtoken": fcmToken
+        ]
+        
+        AF.request(EndPoint.update_fcm_token.url, method: .put, parameters: p, headers: headers).responseData { response in
+            switch response.result {
+            case .success(_):
+                guard let statusCode = response.response?.statusCode else { return }
+                if statusCode == 200 {
+                    completion(nil, 200)
+                }else {
+                    handleErrorCodes(statusCode: statusCode, completion: completion)
+                }
+            case .failure(let error):
+                print("error", error)
+            }
+        }
+    }
+    
     // MARK: Get
     static func getUserInfo(idToken: String, completion: @escaping (APIError?, Int) -> Void) {
         let headers: HTTPHeaders = ["idtoken": idToken]
@@ -28,8 +52,13 @@ class ApiService {
                     let decoder = JSONDecoder()
                     do {
                         let result = try decoder.decode(User.self, from: value)
-                        print(result)
-                        UserInfo.current.user = result
+                        if let fcm = UserDefaults.standard.string(forKey: UserDefaults.myKey.fcmToken.rawValue) {
+                            if result.FCMtoken != fcm {
+                                ApiService.updateFcm(idToken: idToken, fcmToken: fcm, completion: completion)
+                            }
+                            UserInfo.current.user = result
+                            UserInfo.current.user?.FCMtoken = fcm
+                        }
                     }catch {
                         print("user info decoding error : ", error)
                     }

@@ -13,6 +13,7 @@ enum EndPoint {
     case withdraw
     case updateFcmToken
     case updateMypage
+    case update_fcm_token
     
     case requestToFindFirends
     case onqueue
@@ -62,6 +63,10 @@ extension EndPoint {
             
         case .getChat:
             return .makeEndPoint("/chat/{from}?lastchatDate={lastchatDate}")
+            
+            
+        case .update_fcm_token:
+            return .makeEndPoint("/user/update_fcm_token")
         }
         
     }
