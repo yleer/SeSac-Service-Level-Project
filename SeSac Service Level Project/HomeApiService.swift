@@ -51,6 +51,53 @@ class HomeApiService {
         }
     }
     
+    static func sendMessage(idToken: String, otherUid: String, message: String, completion: @escaping (APIError?, Int, Payload?) -> Void) {
+        let headers: HTTPHeaders = ["idtoken": idToken]
+        let p: Parameters = [
+            "chat": message
+        ]
+        
+        let url = "http://test.monocoding.com:35484/chat/\(otherUid)"
+        
+        AF.request(
+            url,
+            method: .post,
+            parameters: p,
+            headers: headers
+        ).responseData { response in
+            switch response.result {
+            case .success(let value):
+                guard let statusCode = response.response?.statusCode else { return }
+                print(statusCode, "from sending chat")
+                
+                if statusCode == 200{
+                    let decoder = JSONDecoder()
+                    do {
+                        let result = try decoder.decode(Payload.self, from: value)
+                        print(result, "send completed")
+                        completion(nil, statusCode, result)
+                    }catch {
+                        print("Payload info decoding error : ", error)
+                        completion(nil, statusCode, nil)
+                    }
+                }else if statusCode == 201 {
+                    
+                }else if statusCode == 401 {
+                    completion(nil, statusCode, nil)
+                }else if statusCode == 406 {
+                    completion(nil, statusCode, nil)
+                }else if statusCode == 500 {
+                    completion(nil, statusCode, nil)
+                }else if statusCode == 501 {
+                    completion(nil, statusCode, nil)
+                }
+              
+            case .failure(let error):
+                print("what kind of error", error)
+            }
+        }
+    }
+    
     static func requestFriend(idToken: String, otherUid: String, completion: @escaping (APIError?, Int) -> Void) {
         let headers: HTTPHeaders = ["idtoken": idToken]
         let p: Parameters = [

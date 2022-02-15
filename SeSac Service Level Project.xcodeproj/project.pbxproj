@@ -50,6 +50,7 @@
 		88AA5F3727BA64680036D36F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3627BA64680036D36F /* Realm */; };
 		88AA5F3927BA64680036D36F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3827BA64680036D36F /* RealmSwift */; };
 		88AA5F3C27BA79440036D36F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 88AA5F3B27BA79440036D36F /* SocketIO */; };
+		88AA5F3E27BA7B070036D36F /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AA5F3D27BA7B070036D36F /* SocketIOManager.swift */; };
 		88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */; };
 		88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */; };
 		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
@@ -153,6 +154,7 @@
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		88AA5F3127BA31150036D36F /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		88AA5F3327BA64090036D36F /* RealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
+		88AA5F3D27BA7B070036D36F /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		88B0A88327B8D3D800186BB8 /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		88B5CE9E279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMyInfoAgeRangeCell.swift; sourceTree = "<group>"; };
 		88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				88820D52279BC03600E8FCD4 /* EndPoints.swift */,
 				8867835627AE487C0017520C /* HomeApiService.swift */,
 				887503EE27B63C5200315084 /* ChatApiService.swift */,
+				88AA5F3D27BA7B070036D36F /* SocketIOManager.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				883C8B8D27A04330007BCA20 /* FontNames.swift in Sources */,
 				88DCEA3727A0F9D500BDB530 /* MainTabBarController.swift in Sources */,
 				88D26C4C27A5631C00D956B8 /* HomeViewModel.swift in Sources */,
+				88AA5F3E27BA7B070036D36F /* SocketIOManager.swift in Sources */,
 				88F028012795495A00390168 /* RegisterViewController.swift in Sources */,
 				88C94ACE27A2E7B0000A01E1 /* SizingCell.swift in Sources */,
 				88F90D0B279909F400E518DC /* GenderSelectionViewModel.swift in Sources */,

@@ -33,54 +33,77 @@ final class ChattingViewModel {
     var firstLoadData: Results<ChatRealmData>?
     
     
-    func addChatToRealm(chat: String, createdAt: String, to: String, from: String) {
+    func sendChatToServer(message: String, completion: @escaping () -> Void) {
+        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
+            HomeApiService.sendMessage(idToken: idToken, otherUid: uid, message: message) { error, statusCode, chatData in
+                if let chatData = chatData, statusCode == 200 {
+                    self.addChatToRealm(chat: chatData.chat, createdAt: chatData.createdAt, to: chatData.to, from: chatData.from, completion: completion)
+                    self.loadFromRealm(completion: completion)
+                }
+            }
+        }
+        
+    }
+    
+    private func addChatToRealm(chat: String, createdAt: String, to: String, from: String, completion: @escaping () -> Void) {
+        print(localRealm.configuration.fileURL)
         let task = ChatRealmData(to: to, from: from, message: chat, createdAt: createdAt)
         try! localRealm.write {
             localRealm.add(task)
         }
+        loadFromRealm(completion: completion)
     }
     
-    func loadFromRealm() {
-        firstLoadData = localRealm.objects(ChatRealmData.self)
+    func initalLoadFromRealm(completion: @escaping () -> Void) {
+        loadFromRealm(completion: {
+            print("hl")
+        })
+        if firstLoadData?.count == 0  {
+            getChatHistory(date: "2000-01-01T00:00:00.000Z", completion: completion)
+        }else {
+            getChatHistory(date: firstLoadData!.last!.createdAt, completion: completion)
+        }
+    }
+    
+    func loadFromRealm(completion: @escaping () -> Void) {
+        self.firstLoadData = self.localRealm.objects(ChatRealmData.self)
         if let data = firstLoadData {
-            firstLoadData = data.where{
-                $0.to.equals(uid)
+            self.firstLoadData = data.where{
+                $0.to.equals(self.uid) || $0.to.equals(UserInfo.current.user!.uid)
             }
+            completion()
         }
+        
     }
+
     
-    private func checkLastMessage(completion: @escaping (String) -> Void) {
-        if let firstLoadData = firstLoadData {
-            if firstLoadData.count > 0 {
-                getChatHistory(date: firstLoadData.last!.createdAt, completion: completion)
-            }else {
-                getChatHistory(date: "2000-01-01T00:00:00.000Z",completion: completion)
-            }
-        }
-    }
-    
-    private func getChatHistory(date: String, completion: @escaping (String) -> Void) {
+    private func getChatHistory(date: String, completion: @escaping () -> Void) {
         guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         HomeApiService.getChatHistory(idToken: idToken, otherUid: uid, date: date) { error, statusCode, chatData in
             if statusCode == 200 {
                 if let chatData = chatData {
                     for chat in chatData.payload {
-                        self.addChatToRealm(chat: chat.chat, createdAt: chat.createdAt, to: chat.to, from: chat.from)
+                        self.addChatToRealm(chat: chat.chat, createdAt: chat.createdAt, to: chat.to, from: chat.from, completion: completion)
                     }
+                    print("shold work happend", statusCode, chatData)
                     
-                    self.loadFromRealm()
                 }
             }else {
+                print("some error happend", statusCode)
                 switch error! {
                     
                 case .firebaseTokenError(errorContent: let errorContent):
-                    completion(errorContent)
+                    print("hello")
+//                    completion(errorContent)
                 case .serverError(errorContent: let errorContent):
-                    completion(errorContent)
+                    print("hello")
+//                    completion(errorContent)
                 case .clientError(errorContent: let errorContent):
-                    completion(errorContent)
+                    print("hello")
+//                    completion(errorContent)
                 case .alreadyWithdrawl(errorContent: let errorContent):
-                    completion(errorContent)
+                    print("hello")
+//                    completion(errorContent)
                 }
             }
         }

@@ -71,7 +71,8 @@ class ChatView: UIView {
         grayView.backgroundColor = .gray
         
         moreView.addSubview(stack)
-        
+//        stack.isHidden = true
+        moreView.isHidden = true
         stack.addArrangedSubview(reportButton)
         stack.addArrangedSubview(cancelButton)
         stack.addArrangedSubview(reviewButton)

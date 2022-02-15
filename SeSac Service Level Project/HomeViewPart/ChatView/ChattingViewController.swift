@@ -28,11 +28,19 @@ class ChattingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.mainView.moreView.isHidden = true
+        mainView.grayView.isHidden = true
         checkCurrentState()
-        viewModel.loadFromRealm()
-        mainView.tableView.reloadData()
+        loadDataFromRealm()
         
         // socket 연결
+    }
+    
+    private func loadDataFromRealm() {
+        viewModel.initalLoadFromRealm {
+            self.mainView.tableView.reloadData()
+        }
+        mainView.tableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -75,13 +83,11 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier, for: indexPath) as? ChatTableViewCell, let realmData = viewModel.firstLoadData else {
             print("not good")
             return UITableViewCell() }
-        
-        if indexPath.row % 2 == 0{
-            cell.chatLabel.text = realmData[indexPath.row].message
-            cell.chatType = .opponentChat
-        }else {
+        cell.chatLabel.text = realmData[indexPath.row].message
+        if realmData[indexPath.row].from == UserInfo.current.user?.uid {
             cell.chatType = .myChat
-            cell.chatLabel.text = realmData[indexPath.row].message
+        }else {
+            cell.chatType = .opponentChat
         }
         return cell
     }
@@ -110,12 +116,14 @@ extension ChattingViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        mainView.sendButton.addTarget(self, action: #selector(touchButtonClicked), for: .touchUpInside)
+        mainView.sendButton.addTarget(self, action: #selector(sendButtonClicked), for: .touchUpInside)
 
     }
     
     @objc func sendButtonClicked() {
-        checkCurrentState()
+        viewModel.sendChatToServer(message: mainView.chatTextView.text) {
+            self.mainView.tableView.reloadData()
+        }
     }
     
     
@@ -199,6 +207,8 @@ extension ChattingViewController {
     
     
     @objc func showExtraButtonClicked() {
+//        self.mainView.moreView.isHidden = true
+//        mainView.grayView.isHidden = true
         if self.mainView.moreView.isHidden {
             self.mainView.moreView.isHidden = false
             mainView.grayView.isHidden = false
