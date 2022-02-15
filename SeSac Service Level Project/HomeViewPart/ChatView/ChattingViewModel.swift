@@ -45,7 +45,7 @@ final class ChattingViewModel {
         
     }
     
-    private func addChatToRealm(chat: String, createdAt: String, to: String, from: String, completion: @escaping () -> Void) {
+    func addChatToRealm(chat: String, createdAt: String, to: String, from: String, completion: @escaping () -> Void) {
         print(localRealm.configuration.fileURL)
         let task = ChatRealmData(to: to, from: from, message: chat, createdAt: createdAt)
         try! localRealm.write {

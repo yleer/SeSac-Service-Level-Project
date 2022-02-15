@@ -7,13 +7,13 @@
 
 import UIKit
 import Toast
+import Alamofire
 
 class ChattingViewController: UIViewController {
     
     let mainView = ChatView()
     let viewModel = ChattingViewModel()
-    var datas = ["hee","wow", "dsfgsdfg asdfas qweqwe dafs asdf asdf asdf qwe q qwe a vvadf qew", "s dhh", "asdf "]
-    
+        
     var keyboardHeight: CGFloat = 0
     
     override func loadView() {
@@ -28,6 +28,7 @@ class ChattingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        SocketIOManager.shared.establishConnection()
         self.mainView.moreView.isHidden = true
         mainView.grayView.isHidden = true
         checkCurrentState()
@@ -53,6 +54,24 @@ class ChattingViewController: UIViewController {
         mainView.tableView.dataSource = self
         mainView.tableView.rowHeight = UITableView.automaticDimension
         
+        // socket에서 데이터 받아올때 notification으로 데이터 전달해서 그거 받는거 연결.
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage), name: NSNotification.Name("getMessage"), object: nil)
+        
+    }
+    
+ 
+    @objc func getMessage(notification: NSNotification) {
+        let v = notification.userInfo!["__v"] as! Int
+        let id = notification.userInfo!["_id"] as! String
+        let chat = notification.userInfo!["chat"] as! String
+        let from = notification.userInfo!["from"] as! String
+        let to = notification.userInfo!["to"] as! String
+        let createdAt = notification.userInfo!["createdAt"] as! String
+        
+        viewModel.addChatToRealm(chat: chat, createdAt: createdAt, to: to, from: from) {
+            self.mainView.tableView.reloadData()
+            self.mainView.tableView.scrollToRow(at: IndexPath(row: self.viewModel.firstLoadData!.count - 1, section: 0), at: .bottom, animated: true)
+        }
     }
     
     private func checkCurrentState() {
@@ -124,11 +143,17 @@ extension ChattingViewController {
         viewModel.sendChatToServer(message: mainView.chatTextView.text) {
             self.mainView.tableView.reloadData()
         }
+        
+    
+
+        SocketIOManager.shared.socket.emit("chat", ["chat" : mainView.chatTextView.text, "to": UserInfo.current.matchedUid!,"from": UserInfo.current.user?.uid, "createdAt": "22"]) {
+            print("Hello world im socket emit")
+        }
+
     }
     
     
     @objc func touchButtonClicked() {
-        datas.append(mainView.chatTextView.text!)
         mainView.tableView.reloadData()
     }
     
