@@ -69,6 +69,7 @@ final class VerifyPhoneNumberViewModel {
     }
     
     func verifyCodeFromFireBase(completion: @escaping (Error?, Int?) -> Void) {
+        print(verifyCode.value)
         FireBaseService.verifyCodeFromFirebase(verificationCode: verifyCode.value) { authResult, error in
             if let error = error {
                 print("eeror", error)
@@ -76,7 +77,7 @@ final class VerifyPhoneNumberViewModel {
                 return
             }
             
-            
+            FireBaseService.getIdToken {
                 if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                     ApiService.getUserInfo(idToken: idToken) { error, statusCode in
                         print(error, statusCode,"from check")
@@ -89,7 +90,6 @@ final class VerifyPhoneNumberViewModel {
                             }else if statusCode == 406 {
                                 completion(nil, 406)
                             }
-                            
                         }else {
                             if statusCode == 401 {
                                 completion(APIError.firebaseTokenError(errorContent: "나중에 다시 시도해 주세요"),401)
@@ -102,10 +102,11 @@ final class VerifyPhoneNumberViewModel {
                             }
                         }
                     }
-
+                }else{
+                    
                 }
             }
-            
+        }
     }
 }
     

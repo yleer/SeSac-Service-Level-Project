@@ -40,7 +40,7 @@ final class VerifiyPhoneNumberViewController: UIViewController {
     }
     
     @objc func timeDone() {
-        self.view.makeToast("전화번호 인증 실패")
+//        self.view.makeToast("전화번호 인증 실패")
     }
     
     
@@ -67,13 +67,10 @@ final class VerifiyPhoneNumberViewController: UIViewController {
     @objc func verifyButtonClicked() {
         viewModel.verifyCodeFromFireBase { error, statusCode in
             if let error = error {
-                if let _ = error as? APIError {
-                    self.view.makeToast("잠시 후 다시 실행해 주세요")
-                }else {
-                    self.view.makeToast("전화번호 인증 실패")
-                }
-                
-            }else {
+                print(error, "좀")
+                self.view.makeToast("잠시 후 다시 실행해 주세요")
+            }
+            else {
                 print(statusCode, "check state")
                 if statusCode! == 200 {
                     // 홈 화면으로 이동
