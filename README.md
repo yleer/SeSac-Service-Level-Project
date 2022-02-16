@@ -27,7 +27,6 @@ https://stackoverflow.com/questions/29882775/resignfirstresponder-vs-endediting-
 오늘은 /queue콜을 보내기 위해 alamofire를 통해 post콜을 보내려 했다. 하지만 평소에 사용하던 post콜과는 달리 계속 client 에러가 발생하였다. 
 <img width="225" alt="스크린샷 2022-01-30 오후 11 58 08" src="https://user-images.githubusercontent.com/48948578/151704965-a6b390f4-a70b-43db-b747-a4f8a048b084.png">
 이 사진은 파라메터로 받는 명시된 값이다.
-
 <img width="485" alt="스크린샷 2022-01-30 오후 11 59 35" src="https://user-images.githubusercontent.com/48948578/151705007-5af79589-b2ea-4349-b85f-fc7ec7a989e5.png">
 평소와 같이 파라메터에 대응하는 구조체를 만들어 post 콜을 보냈는데 계속 에러가 발생하였다. 
 
@@ -63,3 +62,5 @@ api 통신으로 json을 파싱할때, 현재 사용자 상태에 따라 json �
 
 2/15일 일지
 한 화면 화면씩 만들다 보니 전체적으로 실행했을때 오류 나는 부분들이 생겼다. 문제 다 해결 하자 . 한 화면 - 다른 화면 전환 간 전환시 문제 알아보자
+
+보이는 런타임 에러들은 모두 해결. -> 땜빵식으로 해결 해서 코드가 좀 더럽긴 함. 
