@@ -12,14 +12,17 @@ class RecivedReqiestViewController: UIViewController {
     let viewModel = ReceivedRequestViewModel()
     let mainView = NearUserView()
     let emptyView = NearUserEmptyView()
+    var mTimer : Timer?
+    lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
     
-//    var idToken: String!
+    var idToken: String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         changeMainView()
         startTimer()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let timer = mTimer {
@@ -29,7 +32,23 @@ class RecivedReqiestViewController: UIViewController {
         }
     }
     
-    var mTimer : Timer?
+    override func loadView() {
+        super.loadView()
+        self.view = emptyView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        addTargets()
+        mainView.tableView.rowHeight = UITableView.automaticDimension
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        self.idToken = idToken
+    }
+}
+
+extension RecivedReqiestViewController {
     
     func startTimer() {
         if let timer = mTimer {
@@ -43,88 +62,32 @@ class RecivedReqiestViewController: UIViewController {
             mTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
         }
     }
-            
-    @objc func timerCallback(){
-
-        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+    
+    @objc func timerCallback() {
+        checkMyState()
+        changeMainView()
+   }
+    
+    
+    func checkMyState() {
         HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
             if statusCode == 200 {
                 if UserInfo.current.matched == 1 {
                     UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                    self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                    self.view.makeToast("\(String(describing: UserInfo.current.matchedNick))님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         let vc = ChattingViewController()
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
-                }else {
-                    print("not matched state")
-                    
                 }
-            }else {
-
+            }else if statusCode == 201 {
+                self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다")
+                UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
-        changeMainView()
-   }
-    
-    lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
-    
-    override func loadView() {
-        super.loadView()
-        self.view = emptyView
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        addTargets()
-        mainView.tableView.rowHeight = UITableView.automaticDimension
-    }
-    
-    private func addTargets() {
-        emptyView.changeHobbyButton.addTarget(self, action: #selector(changeHobbyButtonClicked), for: .touchUpInside)
-        emptyView.refreshButton.addTarget(self, action: #selector(refreshButtonClicked), for: .touchUpInside)
-    }
-    
-    @objc func changeHobbyButtonClicked() {
-
-        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
-            HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
-                if let error = error {
-                    switch error {
-                    case .firebaseTokenError(let errorContent):
-                        self.view.makeToast(errorContent)
-                        self.changeHobbyButtonClicked()
-                    case.serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
-                        self.view.makeToast(errorContent)
-                    }
-                }else {
-                    if statusCode == 200 {
-                        UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }else if statusCode == 201 {
-                        self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!")
-                    }
-                    
-                }
-            }
-        }
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func refreshButtonClicked() {
-        print("hello")
-        if let idToken = UserDefaults.standard.string(forKey: "idToken") {
-           
             
-            HomeApiService.myQueueState(idToken: idToken) { error, Code in
-                print(Code)
-            }
-        }
-        changeMainView()
-    }
-    
     private func changeMainView() {
         viewModel.onqueueCall {
             if self.viewModel.queueDB.count > 0 {
@@ -137,7 +100,43 @@ class RecivedReqiestViewController: UIViewController {
     }
 }
 
+// MARK: AddTargets
+extension RecivedReqiestViewController {
+    
+    private func addTargets() {
+        emptyView.changeHobbyButton.addTarget(self, action: #selector(changeHobbyButtonClicked), for: .touchUpInside)
+        emptyView.refreshButton.addTarget(self, action: #selector(refreshButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func changeHobbyButtonClicked() {
+        HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.changeHobbyButtonClicked()
+                case.serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    self.view.makeToast(errorContent)
+                }
+            }else {
+                if statusCode == 200 {
+                    UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+                    self.navigationController?.popToRootViewController(animated: true)
+                }else if statusCode == 201 {
+                    self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!")
+                }
+                
+            }
+        }
+    }
+    
+    @objc func refreshButtonClicked() {
+        checkMyState()
+        changeMainView()
+    }
+}
 
+// MARK: Table View Part
 extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.queueDB.count * 3
@@ -147,39 +146,22 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         let vc = DeleteViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.mainView.viewType = .accept
-        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         vc.idToken = idToken
-        
+        vc.otherUid = viewModel.queueDB[sender.tag / 3].uid
         vc.completion = { statusCode, uid in
             if statusCode == 200 {
-                HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
-                    if let error = error {
-                        switch error {
-                        case .firebaseTokenError(errorContent: let errorContent):
-                            self.view.makeToast(errorContent)
-                            self.acceptRequestButtonTapped(sender)
-                        case .serverError(errorContent: let errorContent), .clientError(errorContent: let errorContent), .alreadyWithdrawl(errorContent: let errorContent):
-                            self.view.makeToast(errorContent)
-                        }
-                    }else {
-                        UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                        
-                        let vc = ChattingViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
+                UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+                let vc = ChattingViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }else if statusCode == 201 {
                 self.view.makeToast("상대방이 이미 다른 사람과 취미를 함께하는 중입니다")
             }else if statusCode == 202 {
                 self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다")
             }else if statusCode == 203 {
                 self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요")
-                self.viewModel.onqueueCall {
-                    self.mainView.tableView.reloadData()
-                }
+                self.checkMyState()
             }
         }
-        vc.uid = viewModel.queueDB[sender.tag / 3].uid
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -233,6 +215,8 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
+
+// MARK: Collection View Part
 extension RecivedReqiestViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag % 2 == 0  {

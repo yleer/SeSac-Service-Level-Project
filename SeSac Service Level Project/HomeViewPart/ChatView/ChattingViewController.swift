@@ -205,7 +205,7 @@ extension ChattingViewController {
         if UserInfo.current.dodged == 0 {
             vc.mainView.subTitle.text = "상대방이 약속을 취소했기 때문에 패널티가 부과되지 않습니다"
         }
-        vc.uid = UserInfo.current.matchedUid
+        vc.otherUid = UserInfo.current.matchedUid
         vc.idToken = idToken
         vc.completion = { statusCode, uid in
             if statusCode == 200 {

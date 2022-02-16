@@ -12,6 +12,10 @@ class NearUserViewController: UIViewController {
     let viewModel = NearUserViewModel()
     let mainView = NearUserView()
     let emptyView = NearUserEmptyView()
+    var mTimer : Timer?
+    lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
+    
+    var idToken: String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,7 +32,24 @@ class NearUserViewController: UIViewController {
         }
     }
     
-    var mTimer : Timer?
+    override func loadView() {
+        super.loadView()
+        self.view = emptyView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        addTargets()
+        mainView.tableView.register(ManageMyInfoPersonalInfoCell.self, forCellReuseIdentifier: ManageMyInfoPersonalInfoCell.identifier)
+        mainView.tableView.rowHeight = UITableView.automaticDimension
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        self.idToken = idToken
+    }
+}
+
+extension NearUserViewController {
     
     func startTimer() {
         if let timer = mTimer {
@@ -44,23 +65,24 @@ class NearUserViewController: UIViewController {
     }
             
     @objc func timerCallback(){
-
-        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        print(UserInfo.current.matched)
         HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
             if statusCode == 200 {
-                if UserInfo.current.matched == 1 {
-                    UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                    self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        let vc = ChattingViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                if let matched = UserInfo.current.matched {
+                    print("matched berofre in", matched)
+                    if matched == 1{
+                        UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+                        self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            let vc = ChattingViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }else {
+                        print("not matched state ", statusCode)
                     }
-                }else {
-                    print("not matched state")
-                    
                 }
             }else {
-
+                print("not able to get user state", statusCode)
             }
         }
         changeMainView()
@@ -77,21 +99,9 @@ class NearUserViewController: UIViewController {
         }
     }
 
-    lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
+}
     
-    override func loadView() {
-        super.loadView()
-        self.view = emptyView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        addTargets()
-        mainView.tableView.register(ManageMyInfoPersonalInfoCell.self, forCellReuseIdentifier: ManageMyInfoPersonalInfoCell.identifier)
-        mainView.tableView.rowHeight = UITableView.automaticDimension
-    }
+extension NearUserViewController {
     
     func addTargets() {
         emptyView.changeHobbyButton.addTarget(self, action: #selector(changeHobbyButtonClicked), for: .touchUpInside)
@@ -100,29 +110,28 @@ class NearUserViewController: UIViewController {
     
     
     @objc func changeHobbyButtonClicked() {
-        if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
-            HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
-                if let error = error {
-                    switch error {
-                    case .firebaseTokenError(let errorContent):
-                        self.view.makeToast(errorContent)
-                        self.changeHobbyButtonClicked()
-                    case.serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
-                        self.view.makeToast(errorContent)
-                    }
-                }else {
-                    
-                    if statusCode == 200 {
-                        UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                        self.navigationController?.popToRootViewController(animated: true)
-                        
-                    }else if statusCode == 201 {
-                        self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!")
-                    }
-                    
+        HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.changeHobbyButtonClicked()
+                case.serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
+                    self.view.makeToast(errorContent)
                 }
+            }else {
+                
+                if statusCode == 200 {
+                    UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+                    self.navigationController?.popToRootViewController(animated: true)
+                    
+                }else if statusCode == 201 {
+                    self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!")
+                }
+                
             }
         }
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -141,34 +150,33 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = DeleteViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.mainView.viewType = .request
-        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
         vc.idToken = idToken
+        vc.otherUid = viewModel.queueDB[sender.tag / 3].uid
         vc.completion = { statusCode, uid in
             if statusCode == 200 {
                 self.view.makeToast("취미 함께 하기 요청을 보냈습니다")
                 self.mainView.tableView.reloadData()
             }else if statusCode == 201 {
-                HomeApiService.acceptRequest(idToken: idToken, otherUid: uid) { error, statusCode2 in
+                HomeApiService.acceptRequest(idToken: self.idToken, otherUid: uid) { error, statusCode2 in
                     if statusCode2 == 200 {
                         UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                        HomeApiService.myQueueState(idToken: idToken) { error, statusCode2 in
-                            
-                        }
                         self.view.makeToast("상대방도 취미 함께 하기를 요청했습니다. 채팅방으로 이동합니다")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            let vc = ChattingViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                        HomeApiService.myQueueState(idToken: self.idToken) { error, statusCode3 in
+                            if statusCode3 == 200 {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    let vc = ChattingViewController()
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                            }
                         }
+                        
                     }
                 }
-                
             }else if statusCode == 202 {
                 self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다")
             }
         }
-        vc.uid = viewModel.queueDB[sender.tag / 3].uid
         self.present(vc, animated: true, completion: nil)
-        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

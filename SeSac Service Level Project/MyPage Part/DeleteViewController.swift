@@ -43,7 +43,7 @@ class DeleteViewController: UIViewController {
 
     
     var idToken: String!
-    var uid: String!
+    var otherUid: String!
     
     var completion: ((Int, String) -> Void)?
     
@@ -52,7 +52,7 @@ class DeleteViewController: UIViewController {
     }
     
     private func buttonForRequest() {
-        HomeApiService.requestFriend(idToken: idToken, otherUid: uid) { error, statusCode in
+        HomeApiService.requestFriend(idToken: idToken, otherUid: otherUid) { error, statusCode in
             if let error = error {
                 switch error {
                 case .firebaseTokenError(let errorContent):
@@ -62,14 +62,15 @@ class DeleteViewController: UIViewController {
                 case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
                     self.view.makeToast(errorContent)
                 }
-            }else {
-                self.completion?(statusCode, self.uid)
             }
+            self.completion?(statusCode, self.otherUid)
         }
+        
     }
+
     
     private func buttonForAccept() {
-        HomeApiService.acceptRequest(idToken: idToken, otherUid: uid) { error, statusCode in
+        HomeApiService.acceptRequest(idToken: idToken, otherUid: otherUid) { error, statusCode in
             if let error = error {
                 switch error {
                 case .firebaseTokenError(let errorContent):
@@ -80,13 +81,14 @@ class DeleteViewController: UIViewController {
                     self.view.makeToast(errorContent)
                 }
             } else {
-                self.completion?(statusCode, self.uid)
+                UserInfo.current.matchedUid = self.otherUid
+                self.completion?(statusCode, self.otherUid)
             }
         }
     }
     
     private func buttonForDodge() {
-        HomeApiService.dodge(idToken: idToken!, otherUid: uid!) { error, statusCode in
+        HomeApiService.dodge(idToken: idToken!, otherUid: otherUid!) { error, statusCode in
             if let error = error {
                 switch error {
                 case .firebaseTokenError(let errorContent):
@@ -96,9 +98,9 @@ class DeleteViewController: UIViewController {
                 case .serverError(let errorContent), .clientError(let errorContent), .alreadyWithdrawl(let errorContent):
                     self.view.makeToast(errorContent)
                 }
-                self.completion?(statusCode, self.uid)
+                self.completion?(statusCode, self.otherUid)
             } else {
-                self.completion?(statusCode, self.uid)
+                self.completion?(statusCode, self.otherUid)
             }
         }
     }

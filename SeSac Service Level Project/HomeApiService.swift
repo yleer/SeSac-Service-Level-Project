@@ -185,8 +185,10 @@ class HomeApiService {
                     }
                 }else if statusCode == 201 {
                     // 매칭 대기 상태가 아닌 상태, 매칭이 되지 않아 종료된 상태 -> toast 필요
+                    print("this is the problem1")
                     completion?(nil, statusCode)
                 }else {
+                    print("this is the problem2")
                     ApiService.handleErrorCodes(statusCode: statusCode, completion: completion)
                 }
             case .failure(let error):

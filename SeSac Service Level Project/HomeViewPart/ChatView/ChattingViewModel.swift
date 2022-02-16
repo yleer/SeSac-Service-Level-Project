@@ -21,8 +21,22 @@ final class ChattingViewModel {
     }
     
     init() {
-        guard let uid = UserInfo.current.matchedUid else { return }
-        self.uid = uid
+        self.uid = UserInfo.current.matchedUid
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(errorContent: let errorContent):
+                    print(errorContent)
+                    HomeApiService.myQueueState(idToken: idToken, completion: nil)
+                case .serverError(errorContent: let errorContent), .clientError(errorContent: let errorContent), .alreadyWithdrawl(errorContent: let errorContent):
+                    print(errorContent)
+                }
+            }else {
+                // 매칭된 상태이기 때문에 201번 코드 무시
+                self.uid = UserInfo.current.matchedUid
+            }
+        }
     }
     
     
