@@ -15,14 +15,7 @@ class NearUserViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            viewModel.onqueueCall{
-                if self.viewModel.queueDB.count > 0 {
-                    self.view = self.mainView
-                    self.mainView.tableView.reloadData()
-                }else{
-                    self.view = self.emptyView
-                }
-            }
+        changeMainView()
         startTimer()
     }
     
@@ -70,6 +63,10 @@ class NearUserViewController: UIViewController {
 
             }
         }
+        changeMainView()
+   }
+    
+    private func changeMainView() {
         viewModel.onqueueCall{
             if self.viewModel.queueDB.count > 0 {
                 self.view = self.mainView
@@ -78,7 +75,7 @@ class NearUserViewController: UIViewController {
                 self.view = self.emptyView
             }
         }
-   }
+    }
 
     lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
     
@@ -130,14 +127,7 @@ class NearUserViewController: UIViewController {
     }
     
     @objc func refreshButtonClicked() {
-        viewModel.onqueueCall{
-            if self.viewModel.queueDB.count > 0 {
-                self.view = self.mainView
-                self.mainView.tableView.reloadData()
-            }else{
-                self.view = self.emptyView
-            }
-        }
+        changeMainView()
     }
 }
 

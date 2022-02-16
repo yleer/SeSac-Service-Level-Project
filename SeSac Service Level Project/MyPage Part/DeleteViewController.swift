@@ -22,6 +22,8 @@ class DeleteViewController: UIViewController {
     
         view.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
         view.addSubview(mainView)
+        
+        idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue)
         mainView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
@@ -31,6 +33,8 @@ class DeleteViewController: UIViewController {
         
         mainView.cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
         mainView.deleteButton.addTarget(self, action: #selector(confurmButtonClicked), for: .touchUpInside)
+        
+        
     }
     
     @objc func cancelButtonClicked() {
@@ -65,7 +69,7 @@ class DeleteViewController: UIViewController {
     }
     
     private func buttonForAccept() {
-        HomeApiService.acceptRequest(idToken: idToken, otherUid:uid) { error, statusCode in
+        HomeApiService.acceptRequest(idToken: idToken, otherUid: uid) { error, statusCode in
             if let error = error {
                 switch error {
                 case .firebaseTokenError(let errorContent):

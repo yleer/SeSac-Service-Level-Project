@@ -13,16 +13,11 @@ class RecivedReqiestViewController: UIViewController {
     let mainView = NearUserView()
     let emptyView = NearUserEmptyView()
     
+//    var idToken: String!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.onqueueCall {
-            if self.viewModel.queueDB.count > 0 {
-                self.view = self.mainView
-                self.mainView.tableView.reloadData()
-            }else{
-                self.view = self.emptyView
-            }
-        }
+        changeMainView()
         startTimer()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,14 +64,7 @@ class RecivedReqiestViewController: UIViewController {
 
             }
         }
-        viewModel.onqueueCall{
-            if self.viewModel.queueDB.count > 0 {
-                self.view = self.mainView
-                self.mainView.tableView.reloadData()
-            }else{
-                self.view = self.emptyView
-            }
-        }
+        changeMainView()
    }
     
     lazy var isFull = Array(repeating: false, count: viewModel.queueDB.count)
@@ -134,6 +122,10 @@ class RecivedReqiestViewController: UIViewController {
                 print(Code)
             }
         }
+        changeMainView()
+    }
+    
+    private func changeMainView() {
         viewModel.onqueueCall {
             if self.viewModel.queueDB.count > 0 {
                 self.view = self.mainView
@@ -160,14 +152,22 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         
         vc.completion = { statusCode, uid in
             if statusCode == 200 {
-                UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                
-                HomeApiService.myQueueState(idToken: idToken) { error, statusCode2 in
-                    
+                HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
+                    if let error = error {
+                        switch error {
+                        case .firebaseTokenError(errorContent: let errorContent):
+                            self.view.makeToast(errorContent)
+                            self.acceptRequestButtonTapped(sender)
+                        case .serverError(errorContent: let errorContent), .clientError(errorContent: let errorContent), .alreadyWithdrawl(errorContent: let errorContent):
+                            self.view.makeToast(errorContent)
+                        }
+                    }else {
+                        UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+                        
+                        let vc = ChattingViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
-                
-                let vc = ChattingViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
             }else if statusCode == 201 {
                 self.view.makeToast("상대방이 이미 다른 사람과 취미를 함께하는 중입니다")
             }else if statusCode == 202 {

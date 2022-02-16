@@ -179,7 +179,6 @@ class HomeApiService {
                         UserInfo.current.matched = result.matched
                         UserInfo.current.matchedUid = result.matchedUid
                         completion?(nil, statusCode)
-//                        print("well done, \(result)")
                     }catch {
                         print("user info decoding error : ", error)
                         completion?(nil, statusCode)
