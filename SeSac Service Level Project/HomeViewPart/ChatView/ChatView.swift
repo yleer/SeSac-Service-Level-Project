@@ -152,7 +152,6 @@ class ChatView: UIView {
             make.bottom.equalTo(chatTextView.snp.top).offset(-16)
         }
         
-        
         moreView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(72)
@@ -162,6 +161,7 @@ class ChatView: UIView {
         stack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         grayView.snp.makeConstraints { make in
             make.top.equalTo(moreView.snp.bottom)
             make.leading.equalToSuperview()
@@ -176,6 +176,5 @@ class ChatView: UIView {
             make.centerX.equalToSuperview()
         }
         fitTextViewSize(bottom:1, up: true)
-        
     }
 }

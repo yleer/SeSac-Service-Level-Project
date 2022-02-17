@@ -260,7 +260,7 @@ class ManageMyInfoPersonalInfoCell: UITableViewCell {
         waitingForeReiview.snp.makeConstraints { make in
             make.top.equalTo(sesacReviewLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-16).priority(750)
         }
     }
 }

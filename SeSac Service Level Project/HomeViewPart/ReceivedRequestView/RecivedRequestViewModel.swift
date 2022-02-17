@@ -20,6 +20,7 @@ class ReceivedRequestViewModel {
                 HomeApiService.onqueue(idToken: idToken, region: region, lat: lat, long: long) { error, statusCode, data in
                     if let data = data {
                         self.queueDB = data.fromQueueDBRequested
+                        print(self.queueDB, "checking onque call in rece")
                         
                     }
                     completion()

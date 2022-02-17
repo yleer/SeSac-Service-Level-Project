@@ -146,12 +146,11 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func requestButtonTapped(_ sender: UIButton) {
-
         let vc = DeleteViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.mainView.viewType = .request
         vc.idToken = idToken
-        vc.otherUid = viewModel.queueDB[sender.tag / 3].uid
+        vc.otherUid = viewModel.queueDB[sender.tag].uid
         vc.completion = { statusCode, uid in
             if statusCode == 200 {
                 self.view.makeToast("취미 함께 하기 요청을 보냈습니다")
@@ -185,7 +184,8 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cellType = .requestButton
             cell.checkButtonState()
             cell.button.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
-            cell.tag = indexPath.row
+            cell.button.tag = indexPath.row / 3
+            
             return cell
             
         }else if indexPath.row % 3 == 1 {
@@ -195,7 +195,7 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             cell.colletionView.delegate = self
             cell.colletionView.dataSource = self
             
-            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
+//            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
             cell.nameLabel.text = viewModel.queueDB[indexPath.row / 3 ].nick
             cell.infoCellType = .hobby
             
@@ -216,14 +216,14 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
-    @objc func moreButtonClicked(_ sedner: UIButton) {
-        guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ManageMyInfoPersonalInfoCell else {
-            return
-        }
-        cell.full = !cell.full
-        isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
-        mainView.tableView.reloadData()
-    }
+//    @objc func moreButtonClicked(_ sedner: UIButton) {
+//        guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: sedner.tag)) as? ManageMyInfoPersonalInfoCell else {
+//            return
+//        }
+//        cell.full = !cell.full
+//        isFull[indexPath.row / 3] = !isFull[indexPath.row / 3]
+//        mainView.tableView.reloadData()
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row % 3 == 1{
@@ -231,10 +231,13 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0)) as? ManageMyInfoPersonalInfoCell else {
                 return
             }
-            
+            print("before",cell.nameLabel.text, cell.full)
             cell.full = !cell.full
-            isFull[indexPath.row / 3] = !isFull[indexPath.row / 3]
-            mainView.tableView.reloadData()
+            print("after",cell.nameLabel.text, cell.full)
+//            isFull[indexPath.row / 3] = !isFull[indexPath.row / 3]
+//            mainView.tableView.reloadData()
+            mainView.tableView.reloadRows(at: [indexPath], with: .automatic)
+            
             
             
         }

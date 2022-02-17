@@ -359,6 +359,7 @@ class HomeApiService {
                 if statusCode == 200 {
                     let decoder = JSONDecoder()
                     let data = try! decoder.decode(OnqueueData.self, from: value)
+                    print(data.fromQueueDBRequested)
                     completion?(nil, statusCode, data)
                 }else {
                     switch statusCode {

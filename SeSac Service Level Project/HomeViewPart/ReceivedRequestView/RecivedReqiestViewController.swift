@@ -147,7 +147,7 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         vc.modalPresentationStyle = .overFullScreen
         vc.mainView.viewType = .accept
         vc.idToken = idToken
-        vc.otherUid = viewModel.queueDB[sender.tag / 3].uid
+        vc.otherUid = viewModel.queueDB[sender.tag].uid
         vc.completion = { statusCode, uid in
             if statusCode == 200 {
                 UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
@@ -171,7 +171,7 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
             cell.cellType = .confirmButton
             cell.checkButtonState()
             cell.button.addTarget(self, action: #selector(acceptRequestButtonTapped), for: .touchUpInside)
-            cell.tag = indexPath.row
+            cell.button.tag = indexPath.row / 3
             return cell
             
         }else if indexPath.row % 3 == 1 {
@@ -180,11 +180,11 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
 
             cell.colletionView.delegate = self
             cell.colletionView.dataSource = self
-            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
-            cell.nameLabel.text = viewModel.queueDB[indexPath.row - 1].nick
+//            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
+            cell.nameLabel.text = viewModel.queueDB[indexPath.row / 3].nick
             cell.infoCellType = .hobby
-            cell.colletionView.tag = (indexPath.row - 1) * 3
-            cell.wantHobbies.tag = (indexPath.row - 1) * 3 + 1
+            cell.colletionView.tag = (indexPath.row / 3) * 2
+            cell.wantHobbies.tag = (indexPath.row / 3) * 2 + 1
             cell.wantHobbies.delegate = self
             cell.wantHobbies.dataSource = self
             cell.moreButtonForReview.addTarget(self, action: #selector(reviewButtonClicked), for: .touchUpInside)
@@ -205,13 +205,30 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func moreButtonClicked(_ sedner: UIButton) {
-        guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ManageMyInfoPersonalInfoCell else {
-            return
+//    @objc func moreButtonClicked(_ sedner: UIButton) {
+//        guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ManageMyInfoPersonalInfoCell else {
+//            return
+//        }
+//        cell.full = !cell.full
+//        isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
+//        mainView.tableView.reloadData()
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row % 3 == 1{
+            
+            guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0)) as? ManageMyInfoPersonalInfoCell else {
+                return
+            }
+            
+            cell.full = !cell.full
+            print("before", isFull)
+            isFull[indexPath.row / 3] = !isFull[indexPath.row / 3]
+            print("after", isFull)
+            mainView.tableView.reloadData()
+            
+            
         }
-        cell.full = !cell.full
-        isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
-        mainView.tableView.reloadData()
     }
 }
 
