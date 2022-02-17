@@ -36,21 +36,21 @@ class ChattingViewController: UIViewController {
         
         // socket 연결
         SocketIOManager.shared.establishConnection()
-//        socketManager.establishConnection()
+        self.scorollTableViewToBottom()
     }
     
     private func loadDataFromRealm() {
         viewModel.initalLoadFromRealm {
             self.mainView.tableView.reloadData()
+           
         }
-        mainView.tableView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageNames.ChatViewController.more), style: .plain, target: self, action: #selector(showExtraButtonClicked))
         addTargets()
-        
+        self.tabBarController?.tabBar.isHidden = true
         mainView.chatTextView.delegate = self
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
@@ -58,18 +58,24 @@ class ChattingViewController: UIViewController {
         
         // socket에서 데이터 받아올때 notification으로 데이터 전달해서 그거 받는거 연결.
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage), name: NSNotification.Name("getMessage"), object: nil)
-        
     }
     
- 
+    private func scorollTableViewToBottom() {
+        guard let lastIndex = viewModel.firstLoadData?.count else { return }
+        
+        if lastIndex == 0 {
+            return
+        }else {
+            mainView.tableView.scrollToRow(at: IndexPath(row: lastIndex - 1 , section: 0), at: .bottom, animated: false)
+        }
+    }
+
     @objc func getMessage(notification: NSNotification) {
-        let v = notification.userInfo!["__v"] as! Int
-        let id = notification.userInfo!["_id"] as! String
         let chat = notification.userInfo!["chat"] as! String
         let from = notification.userInfo!["from"] as! String
         let to = notification.userInfo!["to"] as! String
         let createdAt = notification.userInfo!["createdAt"] as! String
-        
+
         viewModel.addChatToRealm(chat: chat, createdAt: createdAt, to: to, from: from) {
             self.mainView.tableView.reloadData()
             self.mainView.tableView.scrollToRow(at: IndexPath(row: self.viewModel.firstLoadData!.count - 1, section: 0), at: .bottom, animated: true)
@@ -115,9 +121,15 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier, for: indexPath) as? ChatTableViewCell, let realmData = viewModel.firstLoadData else {
-            print("not good")
             return UITableViewCell() }
         cell.chatLabel.text = realmData[indexPath.row].message
+        
+
+        let firstIndex = realmData[indexPath.row].createdAt.firstIndex(of: "T")
+        let first = realmData[indexPath.row].createdAt.index(after: firstIndex!)
+        let second = realmData[indexPath.row].createdAt.index(first, offsetBy: 4)
+        cell.timeLabel.text = String(realmData[indexPath.row].createdAt[first...second])
+        
         if realmData[indexPath.row].from == UserInfo.current.user?.uid {
             cell.chatType = .myChat
         }else {
@@ -125,8 +137,6 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-    
-    
 }
 
 

@@ -34,6 +34,7 @@ class SocketIOManager: NSObject {
         // 소켓 연결 메서드
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket is connected", data, ack)
+            self.socket.emit("changesocketid", UserInfo.current.user!.uid)
         }
         
         socket.on(clientEvent: .disconnect) { data, ask in
@@ -60,7 +61,7 @@ class SocketIOManager: NSObject {
             print("CHECK ", chat,createdAt)
 
             // 데이터 보내기 (소케에서 받아온 데이터 다른 vc로)
-            NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["id": id, "v": v, "to": to, "from": from, "chat": chat, "createdAt": createdAt])
+            NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["_id": id, "__v": v, "to": to, "from": from, "chat": chat, "createdAt": createdAt])
         }
     }
     
