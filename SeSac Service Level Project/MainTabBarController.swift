@@ -16,13 +16,12 @@ class MainTabBarController: UITabBarController {
         self.tabBar.backgroundColor = .white
 
         let homeVC = UINavigationController(rootViewController: HomeViewController())
-//        let homeVC = HomeViewController()
-        homeVC.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.HomeActiviate)
-        homeVC.tabBarItem.image = UIImage(named: ImageNames.TabBarController.HomeInActivate)
+        homeVC.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.ShopActivate)
+        homeVC.tabBarItem.image = UIImage(named: ImageNames.TabBarController.ShopInActivate)
         homeVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)
         
-        let sessacShopVC = UIViewController()
-        sessacShopVC.view.backgroundColor = .white
+        
+        let sessacShopVC = UINavigationController(rootViewController: AppPurchaseViewController())
         sessacShopVC.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.HomeActiviate)
         sessacShopVC.tabBarItem.image = UIImage(named: ImageNames.TabBarController.HomeInActivate)
         sessacShopVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)

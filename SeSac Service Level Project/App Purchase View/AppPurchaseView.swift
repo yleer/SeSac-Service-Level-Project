@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import Parchment
 import SnapKit
 
 class AppPurchaseView: UIView {
+    
+    let currentBackgroundImage = UIImageView()
+    let saveButton = UIButton()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -16,6 +21,10 @@ class AppPurchaseView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func setUp() {
+        addSubview(currentBackgroundImage)
     }
     
 }

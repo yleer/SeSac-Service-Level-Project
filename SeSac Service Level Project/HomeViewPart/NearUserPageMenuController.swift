@@ -12,11 +12,6 @@ import Toast
 
 class NearUserPageMenuController: UIViewController {
         
-    override func loadView() {
-        super.loadView()
-    }
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

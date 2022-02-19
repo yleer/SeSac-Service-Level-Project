@@ -44,6 +44,8 @@
 		88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D57279C090C00E8FCD4 /* FirebaseService.swift */; };
 		8883903727C0B77900C92F77 /* AppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */; };
 		8883903A27C0B7F400C92F77 /* AppPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903927C0B7F400C92F77 /* AppPurchaseView.swift */; };
+		8883903C27C0BFD000C92F77 /* SeSacPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903B27C0BFD000C92F77 /* SeSacPurchaseViewController.swift */; };
+		8883903E27C0BFF100C92F77 /* BackgroundPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903D27C0BFF100C92F77 /* BackgroundPurchaseViewController.swift */; };
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
@@ -153,6 +155,8 @@
 		88820D57279C090C00E8FCD4 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchaseViewController.swift; sourceTree = "<group>"; };
 		8883903927C0B7F400C92F77 /* AppPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchaseView.swift; sourceTree = "<group>"; };
+		8883903B27C0BFD000C92F77 /* SeSacPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacPurchaseViewController.swift; sourceTree = "<group>"; };
+		8883903D27C0BFF100C92F77 /* BackgroundPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPurchaseViewController.swift; sourceTree = "<group>"; };
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -371,6 +375,8 @@
 			children = (
 				8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */,
 				8883903927C0B7F400C92F77 /* AppPurchaseView.swift */,
+				8883903B27C0BFD000C92F77 /* SeSacPurchaseViewController.swift */,
+				8883903D27C0BFF100C92F77 /* BackgroundPurchaseViewController.swift */,
 			);
 			path = "App Purchase View";
 			sourceTree = "<group>";
@@ -748,6 +754,7 @@
 				885F016B279A7C380049856B /* ApiService.swift in Sources */,
 				88CC7EED279E4FC000828537 /* MyInfoViewController.swift in Sources */,
 				88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */,
+				8883903C27C0BFD000C92F77 /* SeSacPurchaseViewController.swift in Sources */,
 				880CE7E927B4099D002AF244 /* ReviewViewController.swift in Sources */,
 				8867835E27AE7BE50017520C /* NearUserViewModel.swift in Sources */,
 				8858133027A917970059F72D /* NearUserView.swift in Sources */,
@@ -801,6 +808,7 @@
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
 				88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */,
+				8883903E27C0BFF100C92F77 /* BackgroundPurchaseViewController.swift in Sources */,
 				881B50D027B562050067B5DE /* ChatMenuViewModel.swift in Sources */,
 				8858133E27A94D4A0059F72D /* RecivedReqiestViewController.swift in Sources */,
 				88CC7EF8279E63C900828537 /* ImageNames.swift in Sources */,

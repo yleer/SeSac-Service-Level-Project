@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        UserDefaults.standard.set(0, forKey: "CurrentUserState")
+        self.tabBarController?.tabBar.isHidden = false
         
         updateCurrentUserState()
         FireBaseService.getIdToken {
