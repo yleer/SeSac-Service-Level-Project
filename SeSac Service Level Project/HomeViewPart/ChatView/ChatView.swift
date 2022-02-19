@@ -44,9 +44,9 @@ class ChatView: UIView {
             make.centerX.equalToSuperview()
             
             if up {
-                make.bottom.equalToSuperview().offset(-bottom - 16)
+                make.bottom.equalToSuperview().offset(-bottom - 8)
             }else {
-                make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
+                make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
             }
         }
         
@@ -111,7 +111,9 @@ class ChatView: UIView {
         reviewButton.titleLabel?.font = UIFont(name: FontNames.medium, size: 14)
         reviewButton.backgroundColor = .white
 
-        chatTextView.backgroundColor = .green
+        chatTextView.backgroundColor = .gray2
+
+        chatTextView.layer.cornerRadius = 15
         tableView.backgroundColor = .white
         tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
 
@@ -138,7 +140,7 @@ class ChatView: UIView {
             make.centerX.equalToSuperview()
         }
         fitTextViewSize(bottom:keyBoardHeight, up: true)
-        chatTextView.backgroundColor = .green
+        
     }
    
     func setUpConstraints() {
@@ -175,8 +177,8 @@ class ChatView: UIView {
             make.width.equalTo(343)
             make.height.equalTo(300)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-16 - 80)
+            make.bottom.equalToSuperview().offset(-500)
         }
-        fitTextViewSize(bottom:1, up: true)
+        fitTextViewSize(bottom:1, up: false)
     }
 }

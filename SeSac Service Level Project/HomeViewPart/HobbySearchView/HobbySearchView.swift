@@ -31,10 +31,7 @@ class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
        return attributes
    }
 }
-//"<SnapKit.LayoutConstraint:0x6000022efc00@SizingCell.swift#71 UILabel:0x7fee631bda10.height == 32.0>",
-//"<SnapKit.LayoutConstraint:0x6000022edc20@SizingCell.swift#74 UILabel:0x7fee631bda10.top == UIView:0x7fee631c5600.top + 5.0>",
-//"<SnapKit.LayoutConstraint:0x6000022eff60@SizingCell.swift#75 UILabel:0x7fee631bda10.bottom == UIView:0x7fee631c5600.bottom - 5.0>",
-//"<NSLayoutConstraint:0x6000025b31b0 'UIView-Encapsulated-Layout-Height' UIView:0x7fee631c5600.height == 50   (active)>"
+
 class HobbySearchView: UIView {
     
     let findFreindsButton = InActiveButton()

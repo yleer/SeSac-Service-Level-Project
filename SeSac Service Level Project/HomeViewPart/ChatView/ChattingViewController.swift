@@ -37,12 +37,12 @@ class ChattingViewController: UIViewController {
         // socket 연결
         SocketIOManager.shared.establishConnection()
         self.scorollTableViewToBottom()
+        print(viewModel.firstLoadData?.count)
     }
     
     private func loadDataFromRealm() {
         viewModel.initalLoadFromRealm {
             self.mainView.tableView.reloadData()
-           
         }
     }
 
@@ -61,11 +61,13 @@ class ChattingViewController: UIViewController {
     }
     
     private func scorollTableViewToBottom() {
-        guard let lastIndex = viewModel.firstLoadData?.count else { return }
         
+        print(viewModel.firstLoadData?.count)
+        guard let lastIndex = viewModel.firstLoadData?.count else { return }
         if lastIndex == 0 {
             return
         }else {
+            print("scrooling inddex", viewModel.firstLoadData?.count)
             mainView.tableView.scrollToRow(at: IndexPath(row: lastIndex - 1 , section: 0), at: .bottom, animated: false)
         }
     }
@@ -166,7 +168,11 @@ extension ChattingViewController {
     
     @objc func sendButtonClicked() {
         viewModel.sendChatToServer(message: mainView.chatTextView.text) {
-            self.mainView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.mainView.tableView.reloadData()
+                self.scorollTableViewToBottom()
+                self.mainView.chatTextView.text = ""
+            }
         }
     }
     

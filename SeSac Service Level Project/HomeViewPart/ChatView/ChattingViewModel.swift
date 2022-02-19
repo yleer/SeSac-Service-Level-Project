@@ -84,6 +84,7 @@ final class ChattingViewModel {
             self.firstLoadData = data.where{
                 $0.to.equals(self.uid) || $0.to.equals(UserInfo.current.user!.uid)
             }
+            print(firstLoadData?.count)
             completion()
         }
         

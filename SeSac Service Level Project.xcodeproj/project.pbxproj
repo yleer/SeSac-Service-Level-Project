@@ -42,6 +42,7 @@
 		88820D53279BC03600E8FCD4 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D52279BC03600E8FCD4 /* EndPoints.swift */; };
 		88820D56279BDC8600E8FCD4 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 88820D55279BDC8600E8FCD4 /* Toast */; };
 		88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D57279C090C00E8FCD4 /* FirebaseService.swift */; };
+		8883903727C0B77900C92F77 /* AppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */; };
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
@@ -149,6 +150,7 @@
 		88820D50279BB20000E8FCD4 /* Calendar + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar + extensions.swift"; sourceTree = "<group>"; };
 		88820D52279BC03600E8FCD4 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		88820D57279C090C00E8FCD4 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchaseViewController.swift; sourceTree = "<group>"; };
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -362,6 +364,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8883903827C0B78000C92F77 /* App Purchase View */ = {
+			isa = PBXGroup;
+			children = (
+				8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */,
+			);
+			path = "App Purchase View";
+			sourceTree = "<group>";
+		};
 		889EBAD32798372F006C1A6E /* NickNamView */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +529,7 @@
 				88F0280A2795495E00390168 /* Info.plist */,
 				8858132C27A9173B0059F72D /* HomeViewPart */,
 				88DCEA3627A0F9D500BDB530 /* MainTabBarController.swift */,
+				8883903827C0B78000C92F77 /* App Purchase View */,
 			);
 			path = "SeSac Service Level Project";
 			sourceTree = "<group>";
@@ -776,6 +787,7 @@
 				88F90D0D27990A0100E518DC /* GenderSelectionView.swift in Sources */,
 				88B5CE9F279FB76E00E17F09 /* ManageMyInfoAgeRangeCell.swift in Sources */,
 				88AA5F3427BA64090036D36F /* RealmData.swift in Sources */,
+				8883903727C0B77900C92F77 /* AppPurchaseViewController.swift in Sources */,
 				8867835927AE4F830017520C /* NearUserEmptyView.swift in Sources */,
 				88CC7EF4279E56DD00828537 /* MyInfoSettingCell.swift in Sources */,
 				88B0A88427B8D3D800186BB8 /* ChattingViewModel.swift in Sources */,
