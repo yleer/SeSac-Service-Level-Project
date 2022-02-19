@@ -69,4 +69,33 @@ struct ImageNames {
         static let close_small = "close_small"
     }
     
+    
+    struct AppPurchaseViewController {
+        static let back1 = "back_1"
+        static let back2 = "back_2"
+        static let back3 = "back_3"
+        static let back4 = "back_4"
+        static let back5 = "back_5"
+        static let back6 = "back_6"
+        static let back7 = "back_7"
+        static let back8 = "back_8"
+        
+        static let background1 = "background_1"
+        static let background2 = "background_2"
+        static let background3 = "background_3"
+        static let background4 = "background_4"
+        static let background5 = "background_5"
+        static let background6 = "background_6"
+        static let background7 = "background_7"
+        static let background8 = "background_8"
+        
+        static let img = "img"
+        static let img1 = "img-1"
+        static let img2 = "img-2"
+        static let img3 = "img-3"
+        static let img4 = "img-4"
+        
+        
+    }
+    
 }

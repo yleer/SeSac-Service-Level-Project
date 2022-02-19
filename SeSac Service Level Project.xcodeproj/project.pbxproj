@@ -43,6 +43,7 @@
 		88820D56279BDC8600E8FCD4 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 88820D55279BDC8600E8FCD4 /* Toast */; };
 		88820D58279C090C00E8FCD4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88820D57279C090C00E8FCD4 /* FirebaseService.swift */; };
 		8883903727C0B77900C92F77 /* AppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */; };
+		8883903A27C0B7F400C92F77 /* AppPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883903927C0B7F400C92F77 /* AppPurchaseView.swift */; };
 		889EBAD227983714006C1A6E /* NickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD127983714006C1A6E /* NickNameViewController.swift */; };
 		889EBAD527983746006C1A6E /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD427983746006C1A6E /* NickNameView.swift */; };
 		889EBAD727983755006C1A6E /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889EBAD627983755006C1A6E /* NickNameViewModel.swift */; };
@@ -151,6 +152,7 @@
 		88820D52279BC03600E8FCD4 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		88820D57279C090C00E8FCD4 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchaseViewController.swift; sourceTree = "<group>"; };
+		8883903927C0B7F400C92F77 /* AppPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchaseView.swift; sourceTree = "<group>"; };
 		889EBAD127983714006C1A6E /* NickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewController.swift; sourceTree = "<group>"; };
 		889EBAD427983746006C1A6E /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		889EBAD627983755006C1A6E /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				8883903627C0B77900C92F77 /* AppPurchaseViewController.swift */,
+				8883903927C0B7F400C92F77 /* AppPurchaseView.swift */,
 			);
 			path = "App Purchase View";
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				88820D4E279BADDD00E8FCD4 /* String + extensions.swift in Sources */,
 				88EA1B5B2797B45300307111 /* VerifyPhoneNumberViewModel.swift in Sources */,
 				881B50CC27B557CF0067B5DE /* ChatMenuView.swift in Sources */,
+				8883903A27C0B7F400C92F77 /* AppPurchaseView.swift in Sources */,
 				883C8B8B27A041DD007BCA20 /* ColorNames.swift in Sources */,
 				88DCEA3B27A12A6200BDB530 /* UIColor + extensions.swift in Sources */,
 				88F0281727954AC800390168 /* RegisterView.swift in Sources */,
