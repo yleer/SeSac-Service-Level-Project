@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 final class BackgroundPurchaseViewController: UIViewController {
     
@@ -25,32 +26,70 @@ final class BackgroundPurchaseViewController: UIViewController {
         super.viewDidLoad()
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        reload()
+    }
+    
+    var product: SKProduct?
+    var products: [SKProduct] = []
+    
+    @objc func reload() {
+        products = []
+        
+        mainView.tableView.reloadData()
+        
+        BackgroundProducts.store.requestProducts{ [weak self] success, products in
+          guard let self = self else { return }
+          if success {
+            self.products = products!
+            
+              DispatchQueue.main.async {
+                  self.mainView.tableView.reloadData()
+              }
+          }
+        }
     }
 }
 
 extension BackgroundPurchaseViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRowAt
+        return products.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BackGroundTableViewCell.identifier, for: indexPath) as? BackGroundTableViewCell else { return UITableViewCell() }
-        
         let row = indexPath.row
         
-        cell.backGroundImage.image = UIImage(named: viewModel.backGroundInfo.backgroundImageNames[row])
-        
-        cell.layer.cornerRadius = 50
-        cell.title.text = viewModel.backGroundInfo.backgroundTitles[row]
-        cell.subTitle.text = viewModel.backGroundInfo.backgroundSubTitles[row]
-        
+        if indexPath.row == 0 {
+            cell.title.text = viewModel.backGroundInfo.backgroundTitles[row]
+            cell.subTitle.text = viewModel.backGroundInfo.backgroundSubTitles[row]
+            cell.price.setTitle(viewModel.backGroundInfo.prices[row], for: .normal)
+        }else {
+            cell.title.text = products[row - 1].localizedTitle
+            cell.subTitle.text = products[row - 1].localizedDescription
+            cell.price.setTitle("\(products[row - 1].price)", for: .normal)
+        }
         
         let priceData = viewModel.setPriceLabel(item: row)
-        
-        cell.price.setTitle(priceData.0, for: .normal)
         cell.price.stateOfButton = priceData.1
-        cell.price.addTarget(self, action: #selector(priceButtonClicked), for: .touchUpInside)
+        
+        if cell.price.titleLabel?.text == "0" {
+            cell.price.setTitle("보유", for: .normal)
+        }
+        
         cell.price.tag = row
+        cell.backGroundImage.image = UIImage(named: viewModel.backGroundInfo.backgroundImageNames[row])
+        
+        
+        
+        
+        
+//        let priceData = viewModel.setPriceLabel(item: row)
+        
+        
+//        cell.price.setTitle(priceData.0, for: .normal)
+//        cell.price.stateOfButton = priceData.1
+        cell.price.addTarget(self, action: #selector(priceButtonClicked), for: .touchUpInside)
+        
         return cell
         
     }
