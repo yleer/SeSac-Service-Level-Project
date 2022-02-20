@@ -58,7 +58,18 @@ class BackGroundViewModel {
     
     let backGroundInfo = BackGroundData()
     
+    var purchasedList = UserInfo.current.user?.backgroundCollection
+    
     var numberOfRowAt: Int {
         backGroundInfo.backgroundImageNames.count
+    }
+    
+    func setPriceLabel(item: Int) -> (String, ButtonState) {
+        guard let list = purchasedList else { return ("", .cancel)}
+        if list.contains(item) {
+            return ("보유중", .inActive)
+        }else {
+            return (backGroundInfo.prices[item], .fill)
+        }
     }
 }

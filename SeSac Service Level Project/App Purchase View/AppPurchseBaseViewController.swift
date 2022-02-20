@@ -9,9 +9,19 @@ import UIKit
 import SnapKit
 import Parchment
 
+enum SeSacImages: Int {
+    case first = 0
+    case second = 1
+    case third = 2
+    case fourth = 3
+    case fivth = 4
+    
+}
+
 final class AppPurchseBaseViewController: UIViewController {
     
     let currentBackgroundImage = UIImageView()
+    let sessacImage = UIImageView()
     let saveButton = UIButton()
     var pagingViewController = PagingViewController()
 
@@ -21,6 +31,63 @@ final class AppPurchseBaseViewController: UIViewController {
         setUp()
         setUpParchment()
         setUpConstraints()
+        
+        let c = UserInfo.current.user!.sesac
+        
+        if c == 0 {
+            sessacImage.image = UIImage(named: ImageNames.AppPurchaseViewController.img)
+        }else if c == 1 {
+            sessacImage.image = UIImage(named: ImageNames.AppPurchaseViewController.img1)
+        }else if c == 2 {
+            sessacImage.image = UIImage(named: ImageNames.AppPurchaseViewController.img2)
+        }else if c == 3 {
+            sessacImage.image = UIImage(named: ImageNames.AppPurchaseViewController.img3)
+        }else if c == 4 {
+            sessacImage.image = UIImage(named: ImageNames.AppPurchaseViewController.img4)
+        }
+        
+        let back = UserInfo.current.user!.background
+        
+        if back == 0 {
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background1)
+        }else if back == 1{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background2)
+        }else if back == 2{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background3)
+        }else if back == 3{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background4)
+        }else if back == 4{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background5)
+        }else if back == 5{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background6)
+        }else if back == 6{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background7)
+        }else if back == 7{
+            currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background8)
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getShopInfo()
+    }
+    
+    private func getShopInfo() {
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        ShopApiService.getMyShopInfo(idToken: idToken) { error, statusCode in
+            if let error = error {
+                switch error {
+                case .firebaseTokenError(errorContent: let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.getShopInfo()
+                case .serverError(errorContent: let errorContent), .clientError(errorContent: let errorContent), .alreadyWithdrawl(errorContent: let errorContent):
+                    self.view.makeToast(errorContent)
+                }
+            }else {
+                print("success")
+            }
+        }
     }
     
     private func setUp() {
@@ -28,6 +95,7 @@ final class AppPurchseBaseViewController: UIViewController {
         title = "새싹샵"
         
         self.view.addSubview(currentBackgroundImage)
+        currentBackgroundImage.addSubview(sessacImage)
         currentBackgroundImage.addSubview(saveButton)
         saveButton.backgroundColor = .black
         
@@ -44,6 +112,12 @@ final class AppPurchseBaseViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-12)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
             make.height.equalTo(175)
+        }
+        
+        sessacImage.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.size.equalTo(160)
+            make.centerX.equalToSuperview()
         }
         
         saveButton.snp.makeConstraints { make in

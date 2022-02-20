@@ -19,7 +19,6 @@ final class SeSacPurchaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
     }
@@ -27,7 +26,6 @@ final class SeSacPurchaseViewController: UIViewController {
 
 extension SeSacPurchaseViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(viewModel.numberOfRowAt, "check")
         return viewModel.numberOfRowAt
     }
     
@@ -39,10 +37,17 @@ extension SeSacPurchaseViewController: UICollectionViewDelegate, UICollectionVie
         cell.sesacImage.image = UIImage(named: viewModel.sessacInfo.sesacImageNames[row])
         cell.tilte.text = viewModel.sessacInfo.sesacTitles[row]
         cell.subTitle.text = viewModel.sessacInfo.sesacSubTitles[row]
-        cell.price.setTitle(viewModel.sessacInfo.prices[row], for: .normal)
-        cell.price.stateOfButton = .fill
+        
+        
+        let priceData = viewModel.setPriceLabel(item: row)
+        cell.price.setTitle(priceData.0, for: .normal)
+        cell.price.stateOfButton = priceData.1
+        
+        
         cell.price.addTarget(self, action: #selector(priceButtonClicked), for: .touchUpInside)
         cell.price.tag = row
+        
+        
         return cell
     }
     

@@ -7,6 +7,31 @@
 
 import Foundation
 
+
+struct User: Codable {
+    let _id: String
+    let __v: Int
+    var uid, phoneNumber, email, FCMtoken: String
+    let nick, birth: String
+    let gender: Int
+    let comment: [String]
+    let reputation: [Int]
+    let hobby: String
+    let sesac: Int
+    let sesacCollection: [Int]
+    let background: Int
+    let backgroundCollection: [Int]
+    let purchaseToken, transactionId, reviewedBefore: [String]
+    let reportedNum: Int
+    let reportedUser: [String]
+    let dodgeNum, ageMin, ageMax: Int
+    let searchable: Int
+    let createdAt: String
+}
+
+
+
+
 struct ChatData: Codable {
     let payload: [Payload]
 }
@@ -91,24 +116,4 @@ class UserInfo {
 }
 
 
-struct User: Codable {
-    let _id: String
-    let __v: Int
-    var uid, phoneNumber, email, FCMtoken: String
-    let nick, birth: String
-    let gender: Int
-    let comment: [String]
-    let reputation: [Int]
-    let hobby: String
-    let sesac: Int
-    let sesacCollection: [Int]
-    let background: Int
-    let backgroundCollection: [Int]
-    let purchaseToken, transactionId, reviewedBefore: [String]
-    let reportedNum: Int
-    let reportedUser: [String]
-    let dodgeNum, ageMin, ageMax: Int
-    let searchable: Int
-    let createdAt: String
-}
 

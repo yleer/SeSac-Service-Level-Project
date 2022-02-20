@@ -65,6 +65,8 @@
 		88B5CEA1279FBB2700E17F09 /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */; };
 		88B5CEA3279FC3FA00E17F09 /* MyPageUpdateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */; };
 		88B5CEA5279FF3AA00E17F09 /* MangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */; };
+		88BDB01827C2119700479468 /* ShopApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BDB01727C2119700479468 /* ShopApiService.swift */; };
+		88BDB01A27C2181900479468 /* AppPurchaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BDB01927C2181900479468 /* AppPurchaseViewModel.swift */; };
 		88C94AC727A2A621000A01E1 /* SeSacAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */; };
 		88C94AC927A2BFAB000A01E1 /* HobbySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */; };
 		88C94ACC27A2BFD0000A01E1 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C94ACB27A2BFD0000A01E1 /* HobbySearchView.swift */; };
@@ -178,6 +180,8 @@
 		88B5CEA0279FBB2700E17F09 /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
 		88B5CEA2279FC3FA00E17F09 /* MyPageUpdateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUpdateData.swift; sourceTree = "<group>"; };
 		88B5CEA4279FF3A900E17F09 /* MangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangeCollectionViewCell.swift; sourceTree = "<group>"; };
+		88BDB01727C2119700479468 /* ShopApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopApiService.swift; sourceTree = "<group>"; };
+		88BDB01927C2181900479468 /* AppPurchaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchaseViewModel.swift; sourceTree = "<group>"; };
 		88C94AC427A2705B000A01E1 /* SeSac Service Level Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SeSac Service Level Project.entitlements"; sourceTree = "<group>"; };
 		88C94AC627A2A621000A01E1 /* SeSacAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacAnnotation.swift; sourceTree = "<group>"; };
 		88C94AC827A2BFAB000A01E1 /* HobbySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				8867835627AE487C0017520C /* HomeApiService.swift */,
 				887503EE27B63C5200315084 /* ChatApiService.swift */,
 				88AA5F3D27BA7B070036D36F /* SocketIOManager.swift */,
+				88BDB01727C2119700479468 /* ShopApiService.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 				8883903627C0B77900C92F77 /* AppPurchseBaseViewController.swift */,
 				8883904127C0C36C00C92F77 /* SeSacPurchase Part */,
 				8883904227C0C37800C92F77 /* Background Purchase Part */,
+				88BDB01927C2181900479468 /* AppPurchaseViewModel.swift */,
 			);
 			path = "App Purchase View";
 			sourceTree = "<group>";
@@ -840,6 +846,7 @@
 				885F0171279A7F770049856B /* ApiData.swift in Sources */,
 				88F90D062798FE3F00E518DC /* EmailViewModel.swift in Sources */,
 				88C94ACC27A2BFD0000A01E1 /* HobbySearchView.swift in Sources */,
+				88BDB01827C2119700479468 /* ShopApiService.swift in Sources */,
 				88F90D15279988EE00E518DC /* GenderCustomButtonView.swift in Sources */,
 				88F90D13279921A400E518DC /* BirthDateView.swift in Sources */,
 				88DCEA3527A0F9C700BDB530 /* HomeViewController.swift in Sources */,
@@ -860,6 +867,7 @@
 				88820D51279BB20000E8FCD4 /* Calendar + extensions.swift in Sources */,
 				8883904827C0C45600C92F77 /* BackGroundTableViewCell.swift in Sources */,
 				8819F72E279D86EE0075F656 /* Enums.swift in Sources */,
+				88BDB01A27C2181900479468 /* AppPurchaseViewModel.swift in Sources */,
 				8819F72C279D85840075F656 /* Userdefault + extension.swift in Sources */,
 				880CE7EE27B40B1D002AF244 /* ReviewCell.swift in Sources */,
 			);

@@ -19,12 +19,10 @@ final class BackgroundPurchaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("back purchase")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("w")
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
     }
@@ -46,8 +44,11 @@ extension BackgroundPurchaseViewController: UITableViewDataSource, UITableViewDe
         cell.title.text = viewModel.backGroundInfo.backgroundTitles[row]
         cell.subTitle.text = viewModel.backGroundInfo.backgroundSubTitles[row]
         
-        cell.price.setTitle(viewModel.backGroundInfo.prices[row], for: .normal)
-        cell.price.stateOfButton = .fill
+        
+        let priceData = viewModel.setPriceLabel(item: row)
+        
+        cell.price.setTitle(priceData.0, for: .normal)
+        cell.price.stateOfButton = priceData.1
         cell.price.addTarget(self, action: #selector(priceButtonClicked), for: .touchUpInside)
         cell.price.tag = row
         return cell
@@ -61,6 +62,4 @@ extension BackgroundPurchaseViewController: UITableViewDataSource, UITableViewDe
     @objc func priceButtonClicked(_ sender: UIButton) {
         print("price button clicked", sender.tag)
     }
-    
-    
 }

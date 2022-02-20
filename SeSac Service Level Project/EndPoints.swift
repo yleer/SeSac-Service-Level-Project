@@ -26,6 +26,12 @@ enum EndPoint {
     
     case getChat
 //    {baseURL}/chat/{from}?lastchatDate={lastchatDate}
+    
+    
+    
+    case shopMyInfo
+    case shopIos
+    case updateShop
 }
 
 extension EndPoint {
@@ -67,6 +73,14 @@ extension EndPoint {
             
         case .update_fcm_token:
             return .makeEndPoint("/user/update_fcm_token")
+            
+        case .shopMyInfo:
+            return .makeEndPoint("/user/shop/myinfo")
+            
+        case .shopIos:
+            return .makeEndPoint("/user/shop/ios")
+        case .updateShop:
+            return .makeEndPoint("/user/update/shop")
         }
         
     }
