@@ -9,16 +9,12 @@ import UIKit
 import SnapKit
 import Parchment
 
-final class AppPurchaseViewController: UIViewController {
+final class AppPurchseBaseViewController: UIViewController {
     
     let currentBackgroundImage = UIImageView()
     let saveButton = UIButton()
     var pagingViewController = PagingViewController()
-    
-    override func loadView() {
-        super.loadView()
-        
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,11 +53,15 @@ final class AppPurchaseViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        pagingViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(currentBackgroundImage.snp.bottom).offset(11)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-        }
+
+        pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+          pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+          pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            pagingViewController.view.topAnchor.constraint(equalTo: currentBackgroundImage.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     
@@ -89,12 +89,13 @@ final class AppPurchaseViewController: UIViewController {
         
         addChild(pagingViewController)
         view.addSubview(pagingViewController.view)
+        pagingViewController.didMove(toParent: self)
     }
     
 }
 
 
-extension AppPurchaseViewController: PagingViewControllerDelegate, PagingViewControllerSizeDelegate {
+extension AppPurchseBaseViewController: PagingViewControllerDelegate, PagingViewControllerSizeDelegate {
     
     func pagingViewController(_: PagingViewController, widthForPagingItem pagingItem: PagingItem, isSelected: Bool) -> CGFloat {
         return 200

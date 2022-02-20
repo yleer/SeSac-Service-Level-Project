@@ -21,7 +21,7 @@ class MainTabBarController: UITabBarController {
         homeVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)
         
         
-        let sessacShopVC = UINavigationController(rootViewController: AppPurchaseViewController())
+        let sessacShopVC = UINavigationController(rootViewController: AppPurchseBaseViewController())
         sessacShopVC.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.HomeActiviate)
         sessacShopVC.tabBarItem.image = UIImage(named: ImageNames.TabBarController.HomeInActivate)
         sessacShopVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)
