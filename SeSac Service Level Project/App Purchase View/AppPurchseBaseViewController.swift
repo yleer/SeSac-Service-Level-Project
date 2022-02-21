@@ -22,8 +22,21 @@ final class AppPurchseBaseViewController: UIViewController {
     
     let currentBackgroundImage = UIImageView()
     let sessacImage = UIImageView()
-    let saveButton = UIButton()
+    let saveButton = InActiveButton()
     var pagingViewController = PagingViewController()
+    
+    @objc func saveButtonClicked() {
+        print("Hello world")
+        guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
+        
+        print(idToken)
+        
+        let se = UserInfo.current.user!.sesac
+        let back = UserInfo.current.user!.background
+        ShopApiService.updateMyState(idToken: idToken, sesac: se, background: back) { error, statusCode in
+            print(statusCode)
+        }
+    }
 
     
     override func viewDidLoad() {
@@ -31,6 +44,8 @@ final class AppPurchseBaseViewController: UIViewController {
         setUp()
         setUpParchment()
         setUpConstraints()
+        
+        saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
         
         let c = UserInfo.current.user!.sesac
         
@@ -96,12 +111,15 @@ final class AppPurchseBaseViewController: UIViewController {
         
         self.view.addSubview(currentBackgroundImage)
         currentBackgroundImage.addSubview(sessacImage)
-        currentBackgroundImage.addSubview(saveButton)
+        self.view.addSubview(saveButton)
         saveButton.backgroundColor = .black
         
         currentBackgroundImage.image = UIImage(named: ImageNames.AppPurchaseViewController.background2)
         
         currentBackgroundImage.layer.cornerRadius = 15
+        
+        saveButton.stateOfButton = .fill
+        saveButton.setTitle("저장하기", for: .normal)
         
     }
     
@@ -121,8 +139,10 @@ final class AppPurchseBaseViewController: UIViewController {
         }
         
         saveButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(13)
-            make.trailing.equalToSuperview().offset(-13)
+            make.top.equalTo(currentBackgroundImage.snp.top).offset(13)
+            make.trailing.equalTo(currentBackgroundImage.snp.trailing).offset(-13)
+//            make.top.equalToSuperview().offset(13)
+//            make.trailing.equalToSuperview().offset(-13)
             make.width.equalTo(80)
             make.height.equalTo(40)
         }

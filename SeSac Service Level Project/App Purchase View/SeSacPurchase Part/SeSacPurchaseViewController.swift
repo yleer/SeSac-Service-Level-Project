@@ -17,33 +17,30 @@ final class SeSacPurchaseViewController: UIViewController {
         super.loadView()
         self.view = mainView
     }
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        print("noti called")
+      reload()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         reload()
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseNotification(_:)),
+                                               name: .IAPHelperPurchaseNotification,
+                                               object: nil)
     }
     
     var product: SKProduct?
     var products: [SKProduct] = []
-    
-    func recepitValidation(transaction: SKPaymentTransaction, productIdentifier: String) {
-        let recipitFileUrl = Bundle.main.appStoreReceiptURL
-        let reciptData = try? Data(contentsOf: recipitFileUrl!)
-        let reciptString = reciptData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-        print(reciptString)
-        
-        SKPaymentQueue.default().finishTransaction(transaction)
-        
-    }
-    
-    
+
+
     @objc func reload() {
         products = []
         
         mainView.collectionView.reloadData()
-        
+        RazeFaceProducts.store.purchaseCompleteHandler = reload
         RazeFaceProducts.store.requestProducts{ [weak self] success, products in
           guard let self = self else { return }
           if success {
@@ -98,6 +95,15 @@ extension SeSacPurchaseViewController: UICollectionViewDelegate, UICollectionVie
         return CGSize(width: collectionView.frame.width / 2 - 10, height: 280)
     }
     @objc func priceButtonClicked(_ sender: UIButton) {
+        
+        guard let button = sender as? InActiveButton else { return }
+        
+        if button.stateOfButton == .inActive {
+            view.makeToast("이미 구매한 상품입니다")
+        }else {
+            let itemToBuy = products[sender.tag - 1]
+            RazeFaceProducts.store.buyProduct(itemToBuy)
+        }
         print("price button clicked", sender.tag)
     }
 }

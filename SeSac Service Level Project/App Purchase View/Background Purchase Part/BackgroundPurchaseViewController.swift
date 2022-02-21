@@ -27,25 +27,37 @@ final class BackgroundPurchaseViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         reload()
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseNotification(_:)),
+                                               name: .IAPHelperPurchaseNotification,
+                                               object: nil)
+   }
+    
+                                            
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        viewModel.purchasedList = UserInfo.current.user?.backgroundCollection
+        reload()
     }
+                                               
+                                               
     
     var product: SKProduct?
     var products: [SKProduct] = []
+                                               
     
+    
+    // App Store에서 상품 정보 request -> tableview reload
     @objc func reload() {
         products = []
         
-        mainView.tableView.reloadData()
-        
         BackgroundProducts.store.requestProducts{ [weak self] success, products in
           guard let self = self else { return }
+            // app store에서 상품 정보 가져오기 성공하면
           if success {
             self.products = products!
-            
               DispatchQueue.main.async {
                   self.mainView.tableView.reloadData()
               }
-          }
+           }
         }
     }
 }
@@ -76,18 +88,11 @@ extension BackgroundPurchaseViewController: UITableViewDataSource, UITableViewDe
             cell.price.setTitle("보유", for: .normal)
         }
         
+        
         cell.price.tag = row
         cell.backGroundImage.image = UIImage(named: viewModel.backGroundInfo.backgroundImageNames[row])
         
-        
-        
-        
-        
-//        let priceData = viewModel.setPriceLabel(item: row)
-        
-        
-//        cell.price.setTitle(priceData.0, for: .normal)
-//        cell.price.stateOfButton = priceData.1
+    
         cell.price.addTarget(self, action: #selector(priceButtonClicked), for: .touchUpInside)
         
         return cell
@@ -99,6 +104,14 @@ extension BackgroundPurchaseViewController: UITableViewDataSource, UITableViewDe
     }
     
     @objc func priceButtonClicked(_ sender: UIButton) {
+        guard let button = sender as? InActiveButton else { return }
+        
+        if button.stateOfButton == .inActive {
+            view.makeToast("이미 구매한 상품입니다")
+        }else {
+            let itemToBuy = products[sender.tag - 1]
+            BackgroundProducts.store.buyProduct(itemToBuy)
+        }
         print("price button clicked", sender.tag)
     }
 }
