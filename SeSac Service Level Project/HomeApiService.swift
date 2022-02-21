@@ -186,6 +186,7 @@ class HomeApiService {
                 }else if statusCode == 201 {
                     // 매칭 대기 상태가 아닌 상태, 매칭이 되지 않아 종료된 상태 -> toast 필요
                     print("this is the problem1")
+                    UserDefaults.standard.set(0, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
                     completion?(nil, statusCode)
                 }else {
                     print("this is the problem2")

@@ -204,16 +204,7 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         vc.reviews = self.viewModel.queueDB[sender.tag - 1].reviews
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-//    @objc func moreButtonClicked(_ sedner: UIButton) {
-//        guard let cell = mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ManageMyInfoPersonalInfoCell else {
-//            return
-//        }
-//        cell.full = !cell.full
-//        isFull[sedner.tag - 1] = !isFull[sedner.tag - 1]
-//        mainView.tableView.reloadData()
-//    }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row % 3 == 1{
             

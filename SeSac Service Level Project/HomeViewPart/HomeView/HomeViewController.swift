@@ -142,6 +142,11 @@ class HomeViewController: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .waiting:
                     let vc = NearUserPageMenuController()
+                    
+               
+            
+                    let par = FindRequestParameter(type: 2, region: UserDefaults.standard.integer(forKey: "region"), lat: UserDefaults.standard.double(forKey: "lat"), long: UserDefaults.standard.double(forKey: "long"), hf: [])
+                    UserInfo.current.onqueueParameter = par
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .matched:
                     self.navigationController?.pushViewController(ChattingViewController(), animated: true)
@@ -164,7 +169,15 @@ class HomeViewController: UIViewController {
     private func makeCurrentInfo() -> FindRequestParameter {
         
         let region = Int(String(Int((draggableAnnotation.coordinate.latitude + 90) * 100)) + String(Int((draggableAnnotation.coordinate.longitude + 180) * 100)))!
-        return FindRequestParameter(type: 2, region: region, lat: draggableAnnotation.coordinate.latitude, long: draggableAnnotation.coordinate.longitude, hf: [])
+        
+        
+        UserDefaults.standard.set(region, forKey: "region")
+        UserDefaults.standard.set(draggableAnnotation.coordinate.latitude, forKey: "lat")
+        UserDefaults.standard.set(draggableAnnotation.coordinate.longitude, forKey: "long")
+        let par = FindRequestParameter(type: 2, region: region, lat: draggableAnnotation.coordinate.latitude, long: draggableAnnotation.coordinate.longitude, hf: [])
+        UserInfo.current.onqueueParameter = par
+        
+        return par
     }
     
     
@@ -204,6 +217,7 @@ class HomeViewController: UIViewController {
     
     
     @objc func genderButtonClicked(_ sender: UIButton) {
+        print(UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue))
         
         updateCurrentUserState()
         mainView.mapView.removeAnnotations(friendsAnnotations)

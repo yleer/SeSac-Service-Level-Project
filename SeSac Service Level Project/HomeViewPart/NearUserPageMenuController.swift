@@ -59,6 +59,7 @@ class NearUserPageMenuController: UIViewController {
         FireBaseService.getIdToken {
             if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
                 HomeApiService.stopFinding(idToken: idToken) { error, statusCode in
+                    print("some error in stop ", statusCode, error)
                     if let error = error {
                         switch error {
                         case .firebaseTokenError(let errorContent):
