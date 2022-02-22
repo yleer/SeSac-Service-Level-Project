@@ -26,9 +26,40 @@ class ManageMyInfoViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         configureNavBar()
+        addTargets()
+    }
+    
+    private func addTargets() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCancelPush),
+                                               name: .cancelPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReqeustPush),
+                                               name: .requestPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAcceptPush),
+                                               name: .acceptPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleChatPush),
+                                               name: .chatPush,
+                                               object: nil)
+    }
+    
+    @objc func handleCancelPush() {}
+    @objc func handleChatPush() {}
+    @objc func handleAcceptPush() {}
+    @objc func handleReqeustPush() {
+        let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+        if userState == 0 || userState == 2 {
+            self.tabBarController?.selectedIndex = 0
+        }else if userState == 1 {
+            self.tabBarController?.selectedIndex = 0
+            let vc = NearUserPageMenuController()
+            vc.isSecond = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     @objc func handleTap(sender: UITapGestureRecognizer) {

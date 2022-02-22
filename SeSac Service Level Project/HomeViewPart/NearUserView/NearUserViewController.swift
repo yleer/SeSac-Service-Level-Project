@@ -106,6 +106,26 @@ extension NearUserViewController {
     func addTargets() {
         emptyView.changeHobbyButton.addTarget(self, action: #selector(changeHobbyButtonClicked), for: .touchUpInside)
         emptyView.refreshButton.addTarget(self, action: #selector(refreshButtonClicked), for: .touchUpInside)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCancelPush),
+                                               name: .cancelPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReqeustPush),
+                                               name: .requestPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAcceptPush),
+                                               name: .acceptPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleChatPush),
+                                               name: .chatPush,
+                                               object: nil)
+    }
+    
+    @objc func handleCancelPush() {}
+    @objc func handleChatPush() {}
+    @objc func handleAcceptPush() {}
+    @objc func handleReqeustPush() {
+        guard let vc = self.parent as? NearUserPageMenuController else { return }
+        vc.isSecond = true
     }
     
     

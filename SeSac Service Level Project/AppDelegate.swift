@@ -120,10 +120,26 @@ extension AppDelegate:  UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print(response)
         let userInfo = response.notification.request.content.userInfo
-        print("is ths ", userInfo)
+        
+        guard let aps = userInfo["aps"] as? [String: Any] else {
+            print("not good ")
+            return
+        }
+        
+        let alertDic = aps["alert"] as? [String: String]
+        print(alertDic, "alert")
+        let a = alertDic!["body"]
         
         
-        NotificationCenter.default.post(name: .home, object: nil)
+        if a == "님이 취미 함께하기를 요청했습니다." {
+            NotificationCenter.default.post(name: .requestPush, object: nil)
+        }else if a == "님이 취미 함께하기를 수락하셨습니다." {
+            NotificationCenter.default.post(name: .acceptPush, object: nil)
+        }else if a == "상대방이 약속을 취소하였습니다" {
+            NotificationCenter.default.post(name: .cancelPush, object: nil)
+        }else {
+            NotificationCenter.default.post(name: .chatPush, object: nil)
+        }
         completionHandler()
         }
     
@@ -131,15 +147,11 @@ extension AppDelegate:  UNUserNotificationCenterDelegate {
 }
 
 extension NSNotification.Name {
-    static let home = NSNotification.Name("Home")
+    static let cancelPush = NSNotification.Name("cancel")
+    static let requestPush = NSNotification.Name("request")
+    static let acceptPush = NSNotification.Name("accept")
+    static let chatPush = NSNotification.Name("chat")
 }
-
-
-
-//님이 취미 함께하기를 요청했습니다.
-//님이 취미 함께하기를 수락하셨습니다.
-//상대방이 약속을 취소하였습니다
-//else
 
 
 

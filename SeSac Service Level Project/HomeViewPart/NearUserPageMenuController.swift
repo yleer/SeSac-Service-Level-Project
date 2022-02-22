@@ -11,6 +11,10 @@ import Parchment
 import Toast
 
 class NearUserPageMenuController: UIViewController {
+    
+    var pagingViewController = PagingViewController()
+    var isSecond = false
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,7 @@ class NearUserPageMenuController: UIViewController {
         firstViewController.title = "주변 새싹"
         secondViewController.title = "받은 요청"
         
-        let pagingViewController = PagingViewController(viewControllers: [
+        pagingViewController = PagingViewController(viewControllers: [
             firstViewController,
           secondViewController
         ])
@@ -53,6 +57,11 @@ class NearUserPageMenuController: UIViewController {
           pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
           pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
+        
+        if isSecond {
+            pagingViewController.select(index: 1)
+            isSecond = false
+        }
     }
     
     @objc func stopMathcingButtonClicked() {

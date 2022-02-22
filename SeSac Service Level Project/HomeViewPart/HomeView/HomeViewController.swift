@@ -7,6 +7,7 @@
 
 import UIKit
 import Toast
+import Parchment
 import MapKit
 
 class HomeViewController: UIViewController {
@@ -118,8 +119,42 @@ class HomeViewController: UIViewController {
         mainView.maleButton.addTarget(self, action: #selector(genderButtonClicked), for: .touchUpInside)
         mainView.femaleButton.addTarget(self, action: #selector(genderButtonClicked), for: .touchUpInside)
         mainView.currentLocationButton.addTarget(self, action: #selector(findMyPlaceButtonClciked), for: .touchUpInside)
-        
         mainView.bottomFloatingButton.addTarget(self, action: #selector(touchedFloatingButton), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCancelPush),
+                                               name: .cancelPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReqeustPush),
+                                               name: .requestPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAcceptPush),
+                                               name: .acceptPush,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleChatPush),
+                                               name: .chatPush,
+                                               object: nil)
+    }
+    
+    
+    @objc func handleCancelPush() {}
+    @objc func handleChatPush() {}
+    @objc func handleAcceptPush() {}
+    @objc func handleReqeustPush() {
+        let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+        if userState == 0 || userState == 2 {
+            print("skip")
+        }else if userState == 1 {
+            let vc = NearUserPageMenuController()
+            updateDataToUserInfo()
+            
+            vc.isSecond = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func updateDataToUserInfo() {
+        let par = FindRequestParameter(type: 2, region: UserDefaults.standard.integer(forKey: "region"), lat: UserDefaults.standard.double(forKey: "lat"), long: UserDefaults.standard.double(forKey: "long"), hf: [])
+        UserInfo.current.onqueueParameter = par
     }
     
     @objc func touchedFloatingButton() {
@@ -137,16 +172,11 @@ class HomeViewController: UIViewController {
                     vc.viewModel.requestParameter = parameter
                     UserInfo.current.onqueueParameter = parameter
                     
-                    
-                    
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .waiting:
                     let vc = NearUserPageMenuController()
-                    
-               
             
-                    let par = FindRequestParameter(type: 2, region: UserDefaults.standard.integer(forKey: "region"), lat: UserDefaults.standard.double(forKey: "lat"), long: UserDefaults.standard.double(forKey: "long"), hf: [])
-                    UserInfo.current.onqueueParameter = par
+                    updateDataToUserInfo()
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .matched:
                     self.navigationController?.pushViewController(ChattingViewController(), animated: true)

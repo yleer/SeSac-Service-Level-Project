@@ -54,6 +54,20 @@ class HobbySearchViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard(sender:))))
         
         mainView.findFreindsButton.addTarget(self, action: #selector(findButtonCilcked), for: .touchUpInside)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReqeustPush),
+                                               name: .requestPush,
+                                               object: nil)
+    }
+    // MARK: Notification
+    @objc func handleReqeustPush() {
+        let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+        if userState == 0 || userState == 2 {
+            self.navigationController?.popViewController(animated: true)
+        }else if userState == 1 {
+            let vc = NearUserPageMenuController()
+            vc.isSecond = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     
