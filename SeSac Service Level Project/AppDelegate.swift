@@ -49,15 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed to register to remote: \(error)")
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-        let token = tokenParts.joined()
-        print("Device Token: \(token)")
-    }
 
     // MARK: UISceneSession Lifecycle
 
@@ -88,4 +79,89 @@ extension AppDelegate: MessagingDelegate {
 
 extension AppDelegate:  UNUserNotificationCenterDelegate {
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed to register to remote: \(error)")
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+    }
+    // Receive displayed notifications for iOS 10 devices.
+      func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                  willPresent notification: UNNotification,
+                                  withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+                                    -> Void) {
+        let userInfo = notification.request.content.userInfo
+
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print full message.
+          
+          
+          guard let aps = userInfo["aps"] as? [String: Any] else {
+              print("not good ")
+              return
+          }
+          
+          let alertDic = aps["alert"] as? [String: String]
+          
+          print(alertDic, "alert")
+//        print(userInfo, "this?is")
+
+          
+          
+          
+        // Change this to your preferred presentation option
+        completionHandler([[.alert, .sound]])
+      }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print(response)
+        let userInfo = response.notification.request.content.userInfo
+        print("is ths ", userInfo)
+        
+        
+        NotificationCenter.default.post(name: .home, object: nil)
+        completionHandler()
+        }
+    
+
 }
+
+extension NSNotification.Name {
+    static let home = NSNotification.Name("Home")
+}
+
+
+
+//님이 취미 함께하기를 요청했습니다.
+//님이 취미 함께하기를 수락하셨습니다.
+//상대방이 약속을 취소하였습니다
+//else
+
+
+
+//aps : {
+//    "mutable-content" : "1",
+//    "category" : "1",
+//    "alert" : {
+//      "title" : "우우오",
+//      "body" : "안녕하세요. 스쿠버다이빙 좋아하시는 것 같아 연락했어요."
+//    },
+
+//[AnyHashable("gcm.message_id"): 1645507328721611,
+// AnyHashable("Nick"): 박은,
+// AnyHashable("google.c.sender.id"): 355153590205,
+// AnyHashable("google.c.a.e"): 1,
+// AnyHashable("google.c.fid"): cgTpk-9sh01WvKY0s0SjqA,
+// AnyHashable("aps"): {
+//    alert =     {
+//        body = "\Ub2d8\Uc774 \Ucde8\Ubbf8 \Ud568\Uaed8\Ud558\Uae30\Ub97c \Uc694\Uccad\Ud588\Uc2b5\Ub2c8\Ub2e4.";
+//        title = "\Ubc15\Uc740";
+//    };
+//    "content-available" = 1;
+//    "mutable-content" = 1;
+//},
+// AnyHashable("hobbyRequest"): hobbyRequest]
