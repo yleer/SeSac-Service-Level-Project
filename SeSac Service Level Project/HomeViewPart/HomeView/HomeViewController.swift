@@ -137,7 +137,15 @@ class HomeViewController: UIViewController {
     
     
     @objc func handleCancelPush() {}
-    @objc func handleChatPush() {}
+    @objc func handleChatPush() {
+        let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+        if userState == 0 || userState == 1 {
+            print("skip")
+        }else if userState == 2 {
+            let vc = ChattingViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     @objc func handleAcceptPush() {}
     @objc func handleReqeustPush() {
         let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
