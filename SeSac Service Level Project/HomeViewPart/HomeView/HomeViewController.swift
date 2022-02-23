@@ -102,7 +102,20 @@ class HomeViewController: UIViewController {
         viewModel.getNeighborHobbies {
 //            self.friendsAnnotations = []
             for friend in self.viewModel.nearFriends {
-                let annotation = SeSacAnnotation(discipline: "a", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
+                var annotation = SeSacAnnotation(discipline: "0", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img)!)
+                if friend.sesac == 0 {
+                    annotation = SeSacAnnotation(discipline: "1", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img)!)
+                }else if friend.sesac == 1 {
+                    annotation = SeSacAnnotation(discipline: "2", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img1)!)
+                }else if friend.sesac == 2 {
+                    annotation = SeSacAnnotation(discipline: "3", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img2)!)
+                }else if friend.sesac == 3 {
+                    annotation = SeSacAnnotation(discipline: "4", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img3)!)
+                }else if friend.sesac ==  4{
+                    annotation = SeSacAnnotation(discipline: "5", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img4)!)
+                }
+                
+                
                 
                 self.friendsAnnotations.append(annotation)
             }
@@ -307,13 +320,8 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: MKMapViewDelegate {
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("mark selected", view.isDraggable)
-    }
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
+
         guard let annotation = annotation as? SeSacAnnotation else {
             let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
             view.isDraggable = true
@@ -321,13 +329,32 @@ extension HomeViewController: MKMapViewDelegate {
             view.image = UIImage(named: "Draggable")
           return view
         }
-        
-        
-        
+
         let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
-        view.image = UIImage(named: "sesacFace1")
+        if annotation.discipline == "1" {
+            view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img))
+        }else if annotation.discipline == "2"{
+            view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img1))
+        }else if annotation.discipline == "3"{
+            view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img2))
+        }else if annotation.discipline == "4"{
+            view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img3))
+        }else if annotation.discipline == "5"{
+            view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img4))
+        }
         return view
       }
+    
+    private func resizeImage(originalImage: UIImage?) -> UIImage? {
+        let pinImage = originalImage
+        let size = CGSize(width: 80, height: 80)
+        UIGraphicsBeginImageContext(size)
+        
+        pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        return resizedImage
+    }
 
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
@@ -344,13 +371,6 @@ extension HomeViewController: MKMapViewDelegate {
             view.image = UIImage(named: "Draggable")
         }
     }
-    
-    
-//    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-//        print(mapView.centerCoordinate)
-//    }
-    
-
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
