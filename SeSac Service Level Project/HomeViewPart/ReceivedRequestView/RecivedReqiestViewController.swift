@@ -165,6 +165,42 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         self.present(vc, animated: true, completion: nil)
     }
     
+    
+    private func getBackGroundImage(num: Int) -> UIImage? {
+        if num == 0 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background1)
+        }else if num == 1 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background2)
+        }else if num == 2 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background3)
+        }else if num == 3 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background4)
+        }else if num == 4 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background5)
+        }else if num == 5 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background6)
+        }else if num == 6 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background7)
+        }else {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background8)
+        }
+        
+    }
+    
+    private func getSeSacImage(num: Int) -> UIImage? {
+        if num == 0 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img)
+        }else if num == 1 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img1)
+        }else if num == 2 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img2)
+        }else if num == 3 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img3)
+        }else {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img4)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 3 == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ManageMyInfoImageCell.identifier, for: indexPath) as? ManageMyInfoImageCell else { return UITableViewCell() }
@@ -172,6 +208,9 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
             cell.checkButtonState()
             cell.button.addTarget(self, action: #selector(acceptRequestButtonTapped), for: .touchUpInside)
             cell.button.tag = indexPath.row / 3
+            
+            cell.profileImage.image = getBackGroundImage(num: viewModel.queueDB[indexPath.row / 3].background)
+            cell.sesacImage.image = getSeSacImage(num: viewModel.queueDB[indexPath.row / 3].sesac)
             return cell
             
         }else if indexPath.row % 3 == 1 {
