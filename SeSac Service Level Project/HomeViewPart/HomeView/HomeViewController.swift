@@ -16,7 +16,6 @@ class HomeViewController: UIViewController {
     let viewModel = HomeViewModel()
     
     var friendsAnnotations: [SeSacAnnotation] = []
-    var draggableAnnotation = MKPointAnnotation()
   
     lazy var defaultCoordinate = CLLocationCoordinate2D(latitude: viewModel.defaultCoordinate.0, longitude: viewModel.defaultCoordinate.1) 
     let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
@@ -32,7 +31,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         locationManager.delegate = self
         mainView.mapView.delegate = self
-        draggableAnnotation.title = "h"
         // 현재 유저에 맞게 위치 설정.
         locationManager.requestWhenInUseAuthorization()
         addTargets()
@@ -146,7 +144,16 @@ class HomeViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    @objc func handleAcceptPush() {}
+    @objc func handleAcceptPush() {
+        let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
+        if userState == 0 || userState == 2 {
+            print("skip")
+        }else if userState == 1 {
+            let vc = ChattingViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
     @objc func handleReqeustPush() {
         let userState = UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue)
         if userState == 0 || userState == 2 {
@@ -205,14 +212,13 @@ class HomeViewController: UIViewController {
     
     // MARK: 기본 상태일때 취미 검색화면으로 넘어갈때 정보 넘겨주는 것
     private func makeCurrentInfo() -> FindRequestParameter {
-        
-        let region = Int(String(Int((draggableAnnotation.coordinate.latitude + 90) * 100)) + String(Int((draggableAnnotation.coordinate.longitude + 180) * 100)))!
+        let region = Int(String(Int((mainView.mapView.centerCoordinate.latitude + 90) * 100)) + String(Int((mainView.mapView.centerCoordinate.longitude + 180) * 100)))!
         
         
         UserDefaults.standard.set(region, forKey: "region")
-        UserDefaults.standard.set(draggableAnnotation.coordinate.latitude, forKey: "lat")
-        UserDefaults.standard.set(draggableAnnotation.coordinate.longitude, forKey: "long")
-        let par = FindRequestParameter(type: 2, region: region, lat: draggableAnnotation.coordinate.latitude, long: draggableAnnotation.coordinate.longitude, hf: [])
+        UserDefaults.standard.set(mainView.mapView.centerCoordinate.latitude, forKey: "lat")
+        UserDefaults.standard.set(mainView.mapView.centerCoordinate.longitude, forKey: "long")
+        let par = FindRequestParameter(type: 2, region: region, lat: mainView.mapView.centerCoordinate.latitude, long: mainView.mapView.centerCoordinate.longitude, hf: [])
         UserInfo.current.onqueueParameter = par
         
         return par
@@ -315,6 +321,9 @@ extension HomeViewController: MKMapViewDelegate {
             view.image = UIImage(named: "Draggable")
           return view
         }
+        
+        
+        
         let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
         view.image = UIImage(named: "sesacFace1")
         return view
@@ -323,7 +332,6 @@ extension HomeViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
 
-        print(draggableAnnotation.coordinate)
         if (newState == MKAnnotationView.DragState.ending){
             let droppedAt = view.annotation?.coordinate
             print("dropped at : ", droppedAt?.latitude ?? 0.0, droppedAt?.longitude ?? 0.0);
@@ -336,6 +344,11 @@ extension HomeViewController: MKMapViewDelegate {
             view.image = UIImage(named: "Draggable")
         }
     }
+    
+    
+//    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+//        print(mapView.centerCoordinate)
+//    }
     
 
 }
@@ -351,10 +364,6 @@ extension HomeViewController: CLLocationManagerDelegate {
             viewModel.defaultCoordinate = (Double(coordinate.latitude) , Double(coordinate.longitude))
 //            locationManager.stopUpdatingLocation()
             if initial {
-                print("hello wor", defaultCoordinate)
-                mainView.mapView.removeAnnotation(draggableAnnotation)
-                draggableAnnotation.coordinate = defaultCoordinate
-                mainView.mapView.addAnnotation(draggableAnnotation)
                 initial = false
             }
             locationManager.stopUpdatingLocation()

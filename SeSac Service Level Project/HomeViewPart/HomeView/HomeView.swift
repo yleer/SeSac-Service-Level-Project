@@ -23,6 +23,7 @@ class HomeView: UIView {
     let maleButton = InActiveButton()
     let femaleButton = InActiveButton()
     let bottomFloatingButton = UIButton()
+    let myAnnotation = UIImageView()
     
     let currentLocationButton = InActiveButton()
     
@@ -62,8 +63,10 @@ class HomeView: UIView {
         addSubview(buttonsStack)
         addSubview(currentLocationButton)
         addSubview(bottomFloatingButton)
+        mapView.addSubview(myAnnotation)
         setUpButtons()
             
+        myAnnotation.image = UIImage(named: "Draggable")
         selected = .all
     }
     
@@ -102,6 +105,11 @@ class HomeView: UIView {
     func setUpConstraints() {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        myAnnotation.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.size.equalTo(30)
         }
         
         buttonsStack.snp.makeConstraints { make in
