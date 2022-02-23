@@ -65,14 +65,13 @@ extension NearUserViewController {
     }
             
     @objc func timerCallback(){
-        print(UserInfo.current.matched)
         HomeApiService.myQueueState(idToken: idToken) { error, statusCode in
             if statusCode == 200 {
                 if let matched = UserInfo.current.matched {
                     print("matched berofre in", matched)
                     if matched == 1{
                         UserDefaults.standard.set(2, forKey: UserDefaults.myKey.CurrentUserState.rawValue)
-                        self.view.makeToast("\(UserInfo.current.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                        self.view.makeToast("\(UserInfo.current.matchedNick!)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             let vc = ChattingViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
@@ -238,6 +237,7 @@ extension NearUserViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row % 3 == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ManageMyInfoImageCell.identifier, for: indexPath) as? ManageMyInfoImageCell else { return UITableViewCell() }
             cell.cellType = .requestButton
+            cell.button.setTitle("요청하기", for: .normal)
             cell.checkButtonState()
             cell.button.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
             cell.button.tag = indexPath.row / 3

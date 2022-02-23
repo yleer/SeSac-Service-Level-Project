@@ -16,8 +16,8 @@ class HomeViewController: UIViewController {
     let viewModel = HomeViewModel()
     
     var friendsAnnotations: [SeSacAnnotation] = []
-  
-    lazy var defaultCoordinate = CLLocationCoordinate2D(latitude: viewModel.defaultCoordinate.0, longitude: viewModel.defaultCoordinate.1) 
+    
+    lazy var defaultCoordinate = CLLocationCoordinate2D(latitude: viewModel.defaultCoordinate.0, longitude: viewModel.defaultCoordinate.1)
     let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
     
     let locationManager = CLLocationManager()
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         super.loadView()
         self.view = mainView
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -40,10 +40,10 @@ class HomeViewController: UIViewController {
                 HomeApiService.myQueueState(idToken: idToken) { err, int in
                     print("helo")
                 }
-
+                
             }
         }
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,11 +68,11 @@ class HomeViewController: UIViewController {
                         }
                     }
                 }
-
+                
             }
         }
     }
-
+    
     var initial = true
     
     private func updateCurrentUserState() {
@@ -100,9 +100,11 @@ class HomeViewController: UIViewController {
         mainView.mapView.removeAnnotations(self.friendsAnnotations)
         
         viewModel.getNeighborHobbies {
-//            self.friendsAnnotations = []
+            //            self.friendsAnnotations = []
             for friend in self.viewModel.nearFriends {
                 var annotation = SeSacAnnotation(discipline: "0", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img)!)
+                
+                
                 if friend.sesac == 0 {
                     annotation = SeSacAnnotation(discipline: "1", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img)!)
                 }else if friend.sesac == 1 {
@@ -122,7 +124,7 @@ class HomeViewController: UIViewController {
             self.mainView.mapView.addAnnotations(self.friendsAnnotations)
         }
     }
-   
+    
     
     
     func addTargets() {
@@ -203,7 +205,7 @@ class HomeViewController: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .waiting:
                     let vc = NearUserPageMenuController()
-            
+                    
                     updateDataToUserInfo()
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .matched:
@@ -217,7 +219,7 @@ class HomeViewController: UIViewController {
                     self.navigationController?.pushViewController(viewCont, animated: false)
                 }
             }
-
+            
         }else {
             self.view.makeToast("위치 권한을 허용해주세요")
         }
@@ -273,63 +275,76 @@ class HomeViewController: UIViewController {
     }
     
     
-    @objc func genderButtonClicked(_ sender: UIButton) {
-        print(UserDefaults.standard.integer(forKey: UserDefaults.myKey.CurrentUserState.rawValue))
+    private func createAnnotation(data: FromQueueDB) {
         
-        updateCurrentUserState()
+        if data.sesac == 0 {
+            let annotation = SeSacAnnotation(discipline: "1", coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img)!)
+            
+            self.friendsAnnotations.append(annotation)
+        }else if data.sesac == 1 {
+            let annotation = SeSacAnnotation(discipline: "2", coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img1)!)
+            self.friendsAnnotations.append(annotation)
+        }else if data.sesac == 2 {
+            let annotation = SeSacAnnotation(discipline: "3", coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img2)!)
+            self.friendsAnnotations.append(annotation)
+        }else if data.sesac == 3 {
+            let annotation = SeSacAnnotation(discipline: "4", coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img3)!)
+            self.friendsAnnotations.append(annotation)
+        }else if data.sesac == 4 {
+            let annotation = SeSacAnnotation(discipline: "5", coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.long), image2: UIImage(named: ImageNames.AppPurchaseViewController.img4)!)
+            self.friendsAnnotations.append(annotation)
+        }
+    }
+    
+    
+    @objc func genderButtonClicked(_ sender: UIButton) {
         mainView.mapView.removeAnnotations(friendsAnnotations)
+        self.friendsAnnotations = []
+        
         if let title = sender.titleLabel?.text{
             if title == "전체" {
                 mainView.selected = .all
+                print(viewModel.nearFriends.count , "how many ?")
+                for friend in viewModel.nearFriends {
+                    print("this is all", friend.lat, friend.long)
+                    self.createAnnotation(data: friend)
+                }
                 mainView.mapView.addAnnotations(friendsAnnotations)
-//                mainView.mapView.removeAnnotations(friendsAnnotations)
+                
             }else if title == "남자"{
                 mainView.selected = .male
-                mainView.mapView.removeAnnotations(friendsAnnotations)
-//                self.friendsAnnotations = []
-                for friend in viewModel.nearFriends {
-                    if friend.gender == 1 {
-                        let annotation = SeSacAnnotation(discipline: "A", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
-                        self.friendsAnnotations.append(annotation)
-                    }
+                print(viewModel.maleFriends.count , "how many male?")
+                for friend in viewModel.maleFriends {
+                    print("this is male", friend.lat,friend.long)
+                    self.createAnnotation(data: friend)
                 }
+                mainView.mapView.addAnnotations(friendsAnnotations)
             }else {
+                print(viewModel.femaleFriends.count , "how many female?")
                 mainView.selected = .female
-                mainView.mapView.removeAnnotations(friendsAnnotations)
-//                self.friendsAnnotations = []
-                for friend in viewModel.nearFriends {
-                    if friend.gender == 0 {
-                        let annotation = SeSacAnnotation(discipline: "a", coordinate: CLLocationCoordinate2D(latitude: friend.lat, longitude: friend.long), image2: UIImage(named: "sesacFace1")!)
-                        self.friendsAnnotations.append(annotation)
-                    }
+                for friend in viewModel.femaleFriends {
+                    print("this is female", friend.nick)
+                    self.createAnnotation(data: friend)
                 }
+                self.mainView.mapView.addAnnotations(friendsAnnotations)
             }
-            print(friendsAnnotations, "checking")
-            
-            
-            for co in friendsAnnotations {
-                print(co.coordinate)
-            }
-            print("/////")
-            
-            
-            self.mainView.mapView.addAnnotations(friendsAnnotations)
-            self.mainView.mapView.reloadInputViews()
         }
     }
 }
 
+
+
 extension HomeViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-
+        
         guard let annotation = annotation as? SeSacAnnotation else {
             let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
             view.isDraggable = true
             view.pinTintColor = .red
             view.image = UIImage(named: "Draggable")
-          return view
+            return view
         }
-
+        
         let view =  MKPinAnnotationView(annotation: annotation, reuseIdentifier: "SeSacAn1notation")
         if annotation.discipline == "1" {
             view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img))
@@ -343,7 +358,7 @@ extension HomeViewController: MKMapViewDelegate {
             view.image = resizeImage(originalImage: UIImage(named: ImageNames.AppPurchaseViewController.img4))
         }
         return view
-      }
+    }
     
     private func resizeImage(originalImage: UIImage?) -> UIImage? {
         let pinImage = originalImage
@@ -355,10 +370,10 @@ extension HomeViewController: MKMapViewDelegate {
         
         return resizedImage
     }
-
+    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-
+        
         if (newState == MKAnnotationView.DragState.ending){
             let droppedAt = view.annotation?.coordinate
             print("dropped at : ", droppedAt?.latitude ?? 0.0, droppedAt?.longitude ?? 0.0);
@@ -374,7 +389,7 @@ extension HomeViewController: MKMapViewDelegate {
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
-
+    
     // 위치 허용하면 업데이트 된 위치( 현재 위치)로 지도 cetner 설정.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("updating")
@@ -382,7 +397,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             defaultCoordinate = coordinate
             updateCurrentUserState()
             viewModel.defaultCoordinate = (Double(coordinate.latitude) , Double(coordinate.longitude))
-//            locationManager.stopUpdatingLocation()
+            //            locationManager.stopUpdatingLocation()
             if initial {
                 initial = false
             }

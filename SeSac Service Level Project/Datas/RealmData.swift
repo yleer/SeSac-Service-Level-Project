@@ -15,10 +15,10 @@ class ChatRealmData: Object {
     @Persisted var createdAt: String
     
     convenience init(to: String,from: String, message: String, createdAt: String) {
-           self.init()
-            self.to = to
+        self.init()
+        self.to = to
         self.from = from
-            self.message = message
-            self.createdAt = createdAt
-       }
+        self.message = message
+        self.createdAt = createdAt
+    }
 }

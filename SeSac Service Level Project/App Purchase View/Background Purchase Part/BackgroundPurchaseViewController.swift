@@ -43,7 +43,7 @@ final class BackgroundPurchaseViewController: UIViewController {
     var product: SKProduct?
     var products: [SKProduct] = []
                                                
-    
+    var changeBackgroundCompletion: ((Int) -> Void)?
     
     // App Store에서 상품 정보 request -> tableview reload
     @objc func reload() {
@@ -97,6 +97,10 @@ extension BackgroundPurchaseViewController: UITableViewDataSource, UITableViewDe
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        changeBackgroundCompletion?(indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

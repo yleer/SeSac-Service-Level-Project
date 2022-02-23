@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum UserState {
     case basic
@@ -18,6 +19,8 @@ class HomeViewModel {
     
     var defaultCoordinate: (Double,Double) = (37.51818789942772, 126.88541765534976)
     var nearFriends: [FromQueueDB] = []
+    var maleFriends: [FromQueueDB] = []
+    var femaleFriends: [FromQueueDB] = []
     
     var region: Int  {
         let region = Int(String(Int((defaultCoordinate.0 + 90) * 100)) + String(Int((defaultCoordinate.1 + 180) * 100)))!
@@ -59,12 +62,22 @@ class HomeViewModel {
             
             HomeApiService.onqueue(idToken: idToken, region: region , lat: defaultCoordinate.0, long: defaultCoordinate.1 ) { error, statusCode, data in
                 guard let data = data else {
-                    print("no data from onque in home view", error, statusCode)
+                    print("no data from onque in home view", statusCode)
                     return
                 }
                 self.nearFriends = data.fromQueueDB + data.fromQueueDBRequested
-                completion()
                 
+                self.femaleFriends = []
+                self.maleFriends = []
+                for friend in self.nearFriends {
+                    if friend.gender == 0 {
+                        self.femaleFriends.append(friend)
+                    }else if friend.gender == 1 {
+                        self.maleFriends.append(friend)
+                    }
+                }
+               
+                completion()
             }
         }
     }

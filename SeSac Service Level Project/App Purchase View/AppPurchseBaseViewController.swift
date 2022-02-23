@@ -24,17 +24,28 @@ final class AppPurchseBaseViewController: UIViewController {
     let sessacImage = UIImageView()
     let saveButton = InActiveButton()
     var pagingViewController = PagingViewController()
+    var currentSelectedItems = (0,0)
     
     @objc func saveButtonClicked() {
-        print("Hello world")
         guard let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) else { return }
-        
-        print(idToken)
-        
-        let se = UserInfo.current.user!.sesac
-        let back = UserInfo.current.user!.background
-        ShopApiService.updateMyState(idToken: idToken, sesac: se, background: back) { error, statusCode in
-            print(statusCode)
+        print("saveButton clicked")
+        ShopApiService.updateMyState(idToken: idToken, sesac: currentSelectedItems.0, background: currentSelectedItems.1) { error, statusCode in
+            print("statusCode: ", statusCode)
+            if statusCode == 200 {
+                self.view.makeToast("성공적으로 변경되었습니다")
+            }else if statusCode == 201 {
+                self.view.makeToast("보유하지 않은 아이템이 선택되었습니다")
+            }else {
+                switch error! {
+                    
+                case .firebaseTokenError(errorContent: let errorContent):
+                    self.view.makeToast(errorContent)
+                    self.saveButtonClicked()
+                case .serverError(errorContent: let errorContent), .clientError(errorContent: let errorContent), .alreadyWithdrawl(errorContent: let errorContent):
+                    self.view.makeToast(errorContent)
+                }
+                
+            }
         }
     }
 
@@ -96,6 +107,7 @@ final class AppPurchseBaseViewController: UIViewController {
         
         addTargets()
         
+        currentSelectedItems = (UserInfo.current.user!.sesac, UserInfo.current.user!.background)
         let c = UserInfo.current.user!.sesac
         
         if c == 0 {
@@ -207,14 +219,54 @@ final class AppPurchseBaseViewController: UIViewController {
         ])
     }
     
+    private func getBackGroundImage(num: Int) -> UIImage? {
+        currentSelectedItems = (currentSelectedItems.0, num)
+        if num == 0 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background1)
+        }else if num == 1 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background2)
+        }else if num == 2 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background3)
+        }else if num == 3 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background4)
+        }else if num == 4 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background5)
+        }else if num == 5 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background6)
+        }else if num == 6 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background7)
+        }else {
+            return UIImage(named: ImageNames.AppPurchaseViewController.background8)
+        }
+        
+    }
     
+    private func getSeSacImage(num: Int) -> UIImage? {
+        currentSelectedItems = (num, currentSelectedItems.1)
+        if num == 0 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img)
+        }else if num == 1 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img1)
+        }else if num == 2 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img2)
+        }else if num == 3 {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img3)
+        }else {
+            return UIImage(named: ImageNames.AppPurchaseViewController.img4)
+        }
+    }
     private func setUpParchment() {
         let firstViewController = SeSacPurchaseViewController()
         let secondViewController = BackgroundPurchaseViewController()
         
         firstViewController.title = "새싹"
         secondViewController.title = "배경"
-        
+        firstViewController.changeSeSacCompletion = { num in
+            self.sessacImage.image = self.getSeSacImage(num: num)
+        }
+        secondViewController.changeBackgroundCompletion = { num in
+            self.currentBackgroundImage.image = self.getBackGroundImage(num: num)
+        }
         
         pagingViewController = PagingViewController(viewControllers: [
             firstViewController,

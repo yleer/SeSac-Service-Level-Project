@@ -34,6 +34,7 @@ final class SeSacPurchaseViewController: UIViewController {
     
     var product: SKProduct?
     var products: [SKProduct] = []
+    var changeSeSacCompletion: ((Int) -> Void)?
 
 
     @objc func reload() {
@@ -94,6 +95,12 @@ extension SeSacPurchaseViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2 - 10, height: 280)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        changeSeSacCompletion?(indexPath.item)
+    }
+    
     @objc func priceButtonClicked(_ sender: UIButton) {
         
         guard let button = sender as? InActiveButton else { return }

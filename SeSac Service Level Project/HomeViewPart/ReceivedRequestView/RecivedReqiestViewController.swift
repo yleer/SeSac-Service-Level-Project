@@ -205,6 +205,7 @@ extension RecivedReqiestViewController: UITableViewDelegate, UITableViewDataSour
         if indexPath.row % 3 == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ManageMyInfoImageCell.identifier, for: indexPath) as? ManageMyInfoImageCell else { return UITableViewCell() }
             cell.cellType = .confirmButton
+            cell.button.setTitle("수락하기", for: .normal)
             cell.checkButtonState()
             cell.button.addTarget(self, action: #selector(acceptRequestButtonTapped), for: .touchUpInside)
             cell.button.tag = indexPath.row / 3

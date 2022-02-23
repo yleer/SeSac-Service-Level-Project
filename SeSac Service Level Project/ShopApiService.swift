@@ -20,11 +20,13 @@ class ShopApiService {
         AF.request(
             EndPoint.updateShop.url,
             method: .post,
-            parameters: p
+            parameters: p,
+            headers: headers
         ).responseData { response in
             switch response.result {
-            case .success(let value):
+            case .success(_):
                 guard let statusCode = response.response?.statusCode else { return }
+                print(statusCode)
                 if statusCode == 200{
                     completion?(nil, statusCode)
                 }else if statusCode == 201 {
