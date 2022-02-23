@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
             
             locationManager.startUpdatingLocation()
             mainView.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude), latitudinalMeters: 700, longitudinalMeters: 700), animated: false)
-            
+//            self.viewModel.defaultCoordinate = defaultCoordinate
         @unknown default:
             print("not coverd yet")
         }
@@ -298,37 +298,40 @@ class HomeViewController: UIViewController {
     
     
     @objc func genderButtonClicked(_ sender: UIButton) {
+        
         mainView.mapView.removeAnnotations(friendsAnnotations)
         self.friendsAnnotations = []
-        
-        if let title = sender.titleLabel?.text{
-            if title == "전체" {
-                mainView.selected = .all
-                print(viewModel.nearFriends.count , "how many ?")
-                for friend in viewModel.nearFriends {
-                    print("this is all", friend.lat, friend.long)
-                    self.createAnnotation(data: friend)
+        viewModel.getNeighborHobbies {
+            if let title = sender.titleLabel?.text{
+                if title == "전체" {
+                    self.mainView.selected = .all
+                    print(self.viewModel.nearFriends.count , "how many ?")
+                    for friend in self.viewModel.nearFriends {
+                        print("this is all", friend.lat, friend.long)
+                        self.createAnnotation(data: friend)
+                    }
+                    self.mainView.mapView.addAnnotations(self.friendsAnnotations)
+                    
+                }else if title == "남자"{
+                    self.mainView.selected = .male
+                    print(self.viewModel.maleFriends.count , "how many male?")
+                    for friend in self.viewModel.maleFriends {
+                        print("this is male", friend.lat,friend.long)
+                        self.createAnnotation(data: friend)
+                    }
+                    self.mainView.mapView.addAnnotations(self.friendsAnnotations)
+                }else {
+                    print(self.viewModel.femaleFriends.count , "how many female?")
+                    self.mainView.selected = .female
+                    for friend in self.viewModel.femaleFriends {
+                        print("this is female", friend.nick)
+                        self.createAnnotation(data: friend)
+                    }
+                    self.mainView.mapView.addAnnotations(self.friendsAnnotations)
                 }
-                mainView.mapView.addAnnotations(friendsAnnotations)
-                
-            }else if title == "남자"{
-                mainView.selected = .male
-                print(viewModel.maleFriends.count , "how many male?")
-                for friend in viewModel.maleFriends {
-                    print("this is male", friend.lat,friend.long)
-                    self.createAnnotation(data: friend)
-                }
-                mainView.mapView.addAnnotations(friendsAnnotations)
-            }else {
-                print(viewModel.femaleFriends.count , "how many female?")
-                mainView.selected = .female
-                for friend in viewModel.femaleFriends {
-                    print("this is female", friend.nick)
-                    self.createAnnotation(data: friend)
-                }
-                self.mainView.mapView.addAnnotations(friendsAnnotations)
             }
         }
+        
     }
 }
 
@@ -386,6 +389,10 @@ extension HomeViewController: MKMapViewDelegate {
             view.image = UIImage(named: "Draggable")
         }
     }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        viewModel.defaultCoordinate = (Double(mapView.centerCoordinate.latitude), Double(mapView.centerCoordinate.longitude))
+    }
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -397,7 +404,6 @@ extension HomeViewController: CLLocationManagerDelegate {
             defaultCoordinate = coordinate
             updateCurrentUserState()
             viewModel.defaultCoordinate = (Double(coordinate.latitude) , Double(coordinate.longitude))
-            //            locationManager.stopUpdatingLocation()
             if initial {
                 initial = false
             }

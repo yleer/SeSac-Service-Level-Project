@@ -59,7 +59,7 @@ class HomeViewModel {
     
     func getNeighborHobbies(completion: @escaping () -> Void) {
         if let idToken = UserDefaults.standard.string(forKey: UserDefaults.myKey.idToken.rawValue) {
-            
+            print("checking", region, defaultCoordinate)
             HomeApiService.onqueue(idToken: idToken, region: region , lat: defaultCoordinate.0, long: defaultCoordinate.1 ) { error, statusCode, data in
                 guard let data = data else {
                     print("no data from onque in home view", statusCode)
