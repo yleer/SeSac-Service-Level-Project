@@ -305,26 +305,19 @@ class HomeViewController: UIViewController {
             if let title = sender.titleLabel?.text{
                 if title == "전체" {
                     self.mainView.selected = .all
-                    print(self.viewModel.nearFriends.count , "how many ?")
                     for friend in self.viewModel.nearFriends {
-                        print("this is all", friend.lat, friend.long)
                         self.createAnnotation(data: friend)
                     }
                     self.mainView.mapView.addAnnotations(self.friendsAnnotations)
-                    
                 }else if title == "남자"{
                     self.mainView.selected = .male
-                    print(self.viewModel.maleFriends.count , "how many male?")
                     for friend in self.viewModel.maleFriends {
-                        print("this is male", friend.lat,friend.long)
                         self.createAnnotation(data: friend)
                     }
                     self.mainView.mapView.addAnnotations(self.friendsAnnotations)
                 }else {
-                    print(self.viewModel.femaleFriends.count , "how many female?")
                     self.mainView.selected = .female
                     for friend in self.viewModel.femaleFriends {
-                        print("this is female", friend.nick)
                         self.createAnnotation(data: friend)
                     }
                     self.mainView.mapView.addAnnotations(self.friendsAnnotations)
@@ -379,7 +372,6 @@ extension HomeViewController: MKMapViewDelegate {
         
         if (newState == MKAnnotationView.DragState.ending){
             let droppedAt = view.annotation?.coordinate
-            print("dropped at : ", droppedAt?.latitude ?? 0.0, droppedAt?.longitude ?? 0.0);
             view.setDragState(.none, animated: true)
             view.image = UIImage(named: "Draggable")
         }
