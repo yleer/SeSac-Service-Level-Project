@@ -65,6 +65,7 @@ class SizingCell: UICollectionViewCell {
     func setUpConstraints() {
         hobbyLabel.snp.removeConstraints()
         deleteButton.snp.removeConstraints()
+        
         hobbyLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             
@@ -73,9 +74,9 @@ class SizingCell: UICollectionViewCell {
             
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
-            
         }
-        print(hobbyLabel.frame)
+        
+//        print(hobbyLabel.frame)
         
         deleteButton.isHidden = false
         deleteButton.snp.makeConstraints { make in

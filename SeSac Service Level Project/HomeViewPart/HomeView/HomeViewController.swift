@@ -43,7 +43,6 @@ class HomeViewController: UIViewController {
                 
             }
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -324,7 +323,6 @@ class HomeViewController: UIViewController {
                 }
             }
         }
-        
     }
 }
 

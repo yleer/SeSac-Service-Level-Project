@@ -41,7 +41,7 @@ class HobbySearchViewController: UIViewController {
         
         mainView.secondCollectionView.delegate = self
         mainView.secondCollectionView.dataSource = self
-        
+        self.navigationController?.navigationBar.tintColor = .black
         searchBar.placeholder = "띄어쓰기로 복수 입력이 가능해요"
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar

@@ -10,6 +10,7 @@ import SnapKit
 
 
 class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
+    
    let cellSpacing: CGFloat = 8
 
    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -23,7 +24,7 @@ class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
        attributes?.forEach { layoutAttribute in
            if layoutAttribute.frame.origin.y >= maxY {
                leftMargin = sectionInset.left
-           }
+       }
            layoutAttribute.frame.origin.x = leftMargin
            leftMargin += layoutAttribute.frame.width + cellSpacing
            maxY = max(layoutAttribute.frame.maxY, maxY)
@@ -58,8 +59,6 @@ class HobbySearchView: UIView {
 //        let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 //        layout.estimatedItemSize = CGSize(width: UICollectionViewFlowLayout.automaticSize.width, height: 32)
-        
-        
         
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8

@@ -10,7 +10,7 @@ import UIKit
 class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = .black
         self.tabBar.tintColor = UIColor(named: ColorNames.brandGreen)
         self.tabBar.unselectedItemTintColor = UIColor(named: ColorNames.gray6)
         self.tabBar.backgroundColor = .white
@@ -31,8 +31,6 @@ class MainTabBarController: UITabBarController {
         sesacFriendsVC.tabBarItem.selectedImage = UIImage(named: ImageNames.TabBarController.FriendActivate)
         sesacFriendsVC.tabBarItem.image = UIImage(named: ImageNames.TabBarController.FriendInActivate)
         sesacFriendsVC.tabBarItem.imageInsets = UIEdgeInsets(top: 9.5, left: 0, bottom: -2.5, right: 0)
-        
-//        let myPageNavController = UINavigationController(rootViewController: MyInfoViewController())
         
         let myPageNavController = UINavigationController(rootViewController: MyInfoViewController())
 //        myPageNavController.view.backgroundColor = .white
